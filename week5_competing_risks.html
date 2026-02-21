@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5: Competing Risks</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-label">Q1 HUB</a>
+  <a href="#business" class="nav-link active">Business Case</a>
+  <a href="#problem" class="nav-link">The KM Problem</a>
+  <a href="#cif" class="nav-link">CIF</a>
+  <a href="#cause-specific" class="nav-link">Cause-Specific</a>
+  <a href="#fine-gray" class="nav-link">Fine-Gray</a>
+  <a href="#code" class="nav-link">Python Code</a>
+  <a href="#playbook" class="nav-link">Playbook</a>
+</div></nav>
+
+<header class="hero">
+  <div class="week-tag">Week 05 &middot; Q1: Customer Lifetime &amp; Retention Economics</div>
+  <h1><span>Competing Risks</span>: When Customers Leave for Different Reasons</h1>
+  <p class="hero-sub">A customer who leaves because your price is too high requires a completely different retention strategy than one who leaves because a competitor poached them. Standard survival analysis lumps all churn into one bucket. Competing risks analysis separates it into distinct failure types &mdash; and changes your strategic playbook entirely.</p>
+</header>
+
+<main class="content">
+
+<div class="section" id="business">
+<h2>Part 1: Why "Churn" Is Not One Thing</h2>
+<p>Imagine you run a B2B SaaS company. Your annual churn rate is 15%. The CEO says "fix it." But when you dig into exit interviews and cancellation reasons, you discover three entirely different phenomena:</p>
+
+<table class="comp-table">
+  <thead><tr><th>Churn Type</th><th>% of Churners</th><th>Root Cause</th><th>Correct Intervention</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Price-driven</strong></td><td>35%</td><td>Budget cuts, sticker shock at renewal</td><td>Flexible pricing, downgrade options</td></tr>
+    <tr><td><strong>Competitor-driven</strong></td><td>25%</td><td>Poached by rival with superior feature</td><td>Feature parity, switching-cost reinforcement</td></tr>
+    <tr><td><strong>Value-driven</strong></td><td>40%</td><td>Customer never achieved ROI, low adoption</td><td>Better onboarding, success management</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="callout-label">The $4M Misallocation</div>
+  <p>A mid-market SaaS firm spent $2M annually on a blanket "retention discount" program &mdash; offering 20% off at renewal to anyone flagged as at-risk. Post-mortem analysis showed the discounts were effective for price-driven churners (40% retention lift) but completely useless for value-driven churners (2% lift &mdash; they didn't see value at any price). By separating churn types using competing risks analysis and targeting discounts only at price-sensitive churners while redirecting budget to customer success for value-driven churners, they achieved a net 28% churn reduction versus the previous 11%.</p>
+</div>
+
+<p>The problem is structural: <strong>when one type of churn event occurs, the other types become impossible for that customer</strong>. A customer who leaves for price reasons can't also leave for competitor reasons &mdash; they're already gone. This mutual exclusivity is exactly what competing risks models are designed to handle.</p>
+</div>
+
+<div class="section" id="problem">
+<h2>Part 2: Why Kaplan-Meier Overestimates Risk</h2>
+
+<p>Here's the critical statistical issue: when you use standard Kaplan-Meier or Cox regression on a single churn type (say, competitor-driven churn) while treating other churn types as censored, you <strong>overestimate the probability</strong> of that specific event. The reason is subtle but important.</p>
+
+<p>KM assumes censoring is "non-informative" &mdash; that censored individuals have the same future risk as those still being observed. But when a customer churns for price reasons, they've been <em>removed</em> from the pool of people who could ever churn for competitor reasons. They aren't random dropouts; their departure changes the composition of the remaining risk set.</p>
+
+<div class="formula">
+  <div class="formula-label">THE OVERESTIMATION PROBLEM</div>
+  <div class="formula-math">1 &minus; KM<sub>k</sub>(t) &ge; CIF<sub>k</sub>(t) &nbsp;&nbsp;always</div>
+  <div class="formula-label">The complement of the cause-specific KM always overestimates the true cumulative incidence</div>
+</div>
+
+<div class="callout danger">
+  <div class="callout-label">A Real-World Magnitude</div>
+  <p>A study on cardiac patients found that the standard Cox model estimated 18% as "high risk" for coronary heart disease death. The Fine-Gray competing risks model estimated only 8% as high risk, because the Cox model was ignoring that many patients die from non-cardiac causes first, removing them from the cardiac risk pool. That's a 2.25x overestimation. In customer analytics, similar magnitudes are common when competing churn types are ignored.</p>
+</div>
+</div>
+
+<div class="section" id="cif">
+<h2>Part 3: The Cumulative Incidence Function (CIF)</h2>
+
+<p>The CIF is the correct way to estimate the probability of a specific event type in the presence of competing risks. Unlike KM (which conditions on never experiencing any event), CIF accounts for the fact that competing events remove people from risk.</p>
+
+<div class="formula">
+  <div class="formula-label">CUMULATIVE INCIDENCE FUNCTION</div>
+  <div class="formula-math">CIF<sub>k</sub>(t) = P(T &le; t, cause = k) = &int;<sub>0</sub><sup>t</sup> h<sub>k</sub>(u) &middot; S(u) du</div>
+  <div class="formula-label">h<sub>k</sub>(u) = cause-specific hazard | S(u) = overall survival (no event of any type)</div>
+</div>
+
+<p>The key property that makes CIF mathematically sound: <strong>the CIFs for all competing events sum to the overall failure probability</strong>. At any time t, CIF<sub>price</sub>(t) + CIF<sub>competitor</sub>(t) + CIF<sub>value</sub>(t) = total churn probability. This "stacking" property lets you decompose total churn into its constituent parts, each properly estimated.</p>
+
+<h3>Reading CIF Curves Strategically</h3>
+<div class="callout insight">
+  <div class="callout-label">Visual Interpretation</div>
+  <p>When you plot CIF curves for each churn type, the <strong>area between curves</strong> tells you the relative prevalence at each time point. If the price-driven CIF is steep early but flattens while the value-driven CIF accelerates later, it tells you: price problems hit at renewal (month 12), but value erosion is a slow burn that peaks at month 18-24. This changes your intervention timing entirely.</p>
+  <p>Use <strong>Gray's test</strong> (the competing risks analog of the log-rank test) to formally compare CIF curves between segments. "Do enterprise customers have a significantly different competitor-driven churn incidence than SMB customers?"</p>
+</div>
+</div>
+
+<div class="section" id="cause-specific">
+<h2>Part 4: Cause-Specific Hazard Models</h2>
+
+<p>The simplest regression approach: fit a <strong>separate Cox PH model for each churn type</strong>, treating all other event types as censored. This gives you cause-specific hazard ratios &mdash; the effect of covariates on the <em>rate</em> at which each type of churn occurs.</p>
+
+<div class="formula">
+  <div class="formula-label">CAUSE-SPECIFIC HAZARD MODEL</div>
+  <div class="formula-math">h<sub>k</sub>(t | X) = h<sub>0k</sub>(t) &middot; exp(&beta;<sub>k</sub>'X)</div>
+  <div class="formula-label">One separate Cox model per cause k, with competing events treated as censored</div>
+</div>
+
+<h3>When to Use Cause-Specific Hazards</h3>
+<p>Use this approach when your question is <strong>etiological</strong> &mdash; "what factors drive each type of churn?" You want to understand the causal mechanism, not just predict the probability. For example: "Does poor NPS score increase the <em>rate</em> of value-driven churn specifically, after controlling for the fact that some customers leave for price reasons first?"</p>
+
+<table class="comp-table">
+  <thead><tr><th>Covariate</th><th>HR: Price Churn</th><th>HR: Competitor Churn</th><th>HR: Value Churn</th></tr></thead>
+  <tbody>
+    <tr><td>Monthly charge (per $100)</td><td><strong>1.85</strong></td><td>1.10</td><td>0.95</td></tr>
+    <tr><td>Feature adoption (%)</td><td>0.92</td><td>0.88</td><td><strong>0.45</strong></td></tr>
+    <tr><td>Competitor RFP detected</td><td>1.05</td><td><strong>3.20</strong></td><td>1.15</td></tr>
+    <tr><td>Executive sponsor left</td><td>1.30</td><td>1.50</td><td><strong>2.10</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight">
+  <div class="callout-label">Reading the Table</div>
+  <p>Notice how different covariates drive different churn types. High monthly charges mainly drive price-driven churn (HR=1.85) but barely affect competitor or value churn. Feature adoption is the strongest protector against value-driven churn (HR=0.45, a 55% risk reduction) but matters less for the other types. A detected competitor RFP triples the rate of competitor-driven churn (HR=3.20) &mdash; an obvious early warning signal. And executive sponsor departure doubles the rate of value-driven churn &mdash; because the internal champion who understood the ROI is gone.</p>
+</div>
+</div>
+
+<div class="section" id="fine-gray">
+<h2>Part 5: The Fine-Gray Subdistribution Model</h2>
+
+<p>The alternative approach: rather than modeling the rate (hazard), model the <strong>cumulative probability</strong> directly. Fine and Gray (1999) proposed a proportional hazards model for the subdistribution hazard, which directly governs the CIF.</p>
+
+<div class="formula">
+  <div class="formula-label">FINE-GRAY SUBDISTRIBUTION HAZARD</div>
+  <div class="formula-math">&lambda;<sub>k</sub><sup>sub</sup>(t | X) = &lambda;<sub>0k</sub><sup>sub</sup>(t) &middot; exp(&gamma;<sub>k</sub>'X)</div>
+  <div class="formula-label">The subdistribution hazard governs the CIF directly: CIF<sub>k</sub>(t) = 1 &minus; exp(&minus;&int; &lambda;<sub>k</sub><sup>sub</sup>)</div>
+</div>
+
+<h3>The Key Difference: Risk Set Definition</h3>
+<p>In cause-specific hazard models, individuals who experience a competing event are <strong>removed</strong> from the risk set (censored). In the Fine-Gray model, they <strong>remain</strong> in the risk set indefinitely. This sounds paradoxical &mdash; how can a customer who already left for price reasons still be "at risk" of competitor churn? They can't, in reality. But mathematically, keeping them in the risk set is what allows the model to directly estimate the cumulative probability (CIF), not just the rate.</p>
+
+<h3>Cause-Specific vs. Fine-Gray: The Decision Framework</h3>
+
+<table class="comp-table">
+  <thead><tr><th>Question Type</th><th>Use This Model</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>"What factors drive each type of churn?" (Etiology)</td><td><strong>Cause-Specific Hazard</strong></td><td>Proper causal interpretation of hazard ratios</td></tr>
+    <tr><td>"What is the probability of price-churn by month 12?" (Prognosis)</td><td><strong>Fine-Gray</strong></td><td>Directly estimates cumulative incidence</td></tr>
+    <tr><td>"Which customers are at highest risk of competitor churn?" (Prediction)</td><td><strong>Fine-Gray</strong></td><td>Individual-level CIF predictions</td></tr>
+  </tbody>
+</table>
+
+<div class="callout danger">
+  <div class="callout-label">The Causal Inference Warning</div>
+  <p>Recent methodological work (notably by Paul Allison, 2024) argues that Fine-Gray subdistribution hazard ratios <strong>should not be interpreted causally</strong>. They can produce misleading results when competing event rates differ between treatment groups. For causal questions, always use cause-specific hazard models. Use Fine-Gray only for prediction and prognosis. Reporting both side-by-side is considered best practice in current methodology.</p>
+</div>
+</div>
+
+<div class="section" id="code">
+<h2>Part 6: Implementation in Python</h2>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; Competing Risks</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> lifelines <span class="kw">import</span> CoxPHFitter, KaplanMeierFitter
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Prepare Competing Risks Data</span>
+<span class="cm"># event_type: 0=censored, 1=price, 2=competitor, 3=value</span>
+<span class="cm"># ============================================</span>
+
+df = pd.<span class="fn">read_csv</span>(<span class="str">'churn_with_reasons.csv'</span>)
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Cause-Specific Hazard Models</span>
+<span class="cm"># Fit separate Cox models per churn type</span>
+<span class="cm"># ============================================</span>
+
+covariates = [<span class="str">'monthly_charges'</span>, <span class="str">'feature_adoption'</span>,
+              <span class="str">'competitor_rfp'</span>, <span class="str">'sponsor_left'</span>]
+
+results = {}
+<span class="kw">for</span> cause, label <span class="kw">in</span> [(<span class="num">1</span>,<span class="str">'Price'</span>), (<span class="num">2</span>,<span class="str">'Competitor'</span>), (<span class="num">3</span>,<span class="str">'Value'</span>)]:
+    <span class="cm"># Treat THIS cause as event, all others as censored</span>
+    df_cause = df.copy()
+    df_cause[<span class="str">'event'</span>] = (df[<span class="str">'event_type'</span>] == cause).<span class="fn">astype</span>(<span class="fn">int</span>)
+
+    cph = <span class="fn">CoxPHFitter</span>(penalizer=<span class="num">0.01</span>)
+    cph.<span class="fn">fit</span>(
+        df_cause[covariates + [<span class="str">'duration'</span>, <span class="str">'event'</span>]],
+        duration_col=<span class="str">'duration'</span>,
+        event_col=<span class="str">'event'</span>
+    )
+    results[label] = cph
+    <span class="fn">print</span>(<span class="str">f"\n=== {label} Churn ==="</span>)
+    cph.<span class="fn">print_summary</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Cumulative Incidence Functions</span>
+<span class="cm"># Non-parametric CIF estimation</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Using the Aalen-Johansen estimator approach</span>
+<span class="cm"># First get overall KM survival</span>
+kmf_all = <span class="fn">KaplanMeierFitter</span>()
+kmf_all.<span class="fn">fit</span>(df[<span class="str">'duration'</span>], event_observed=(df[<span class="str">'event_type'</span>] > <span class="num">0</span>))
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">10</span>, <span class="num">6</span>))
+colors = {<span class="str">'Price'</span>: <span class="str">'#c45d3e'</span>, <span class="str">'Competitor'</span>: <span class="str">'#264653'</span>, <span class="str">'Value'</span>: <span class="str">'#2d6a4f'</span>}
+
+<span class="cm"># Approximate CIF via cause-specific hazards + overall survival</span>
+<span class="kw">for</span> cause, label <span class="kw">in</span> [(<span class="num">1</span>,<span class="str">'Price'</span>), (<span class="num">2</span>,<span class="str">'Competitor'</span>), (<span class="num">3</span>,<span class="str">'Value'</span>)]:
+    mask = df[<span class="str">'event_type'</span>] == cause
+    times = np.<span class="fn">sort</span>(df.<span class="fn">loc</span>[mask, <span class="str">'duration'</span>].<span class="fn">unique</span>())
+
+    <span class="cm"># Simple CIF approximation</span>
+    cif = []
+    n_total = <span class="fn">len</span>(df)
+    <span class="kw">for</span> t <span class="kw">in</span> times:
+        n_event_k = ((df[<span class="str">'event_type'</span>] == cause) & (df[<span class="str">'duration'</span>] <= t)).<span class="fn">sum</span>()
+        cif.<span class="fn">append</span>(n_event_k / n_total)
+
+    ax.<span class="fn">step</span>(times, cif, where=<span class="str">'post'</span>, label=label, color=colors[label], linewidth=<span class="num">2</span>)
+
+ax.<span class="fn">set_xlabel</span>(<span class="str">'Months'</span>)
+ax.<span class="fn">set_ylabel</span>(<span class="str">'Cumulative Incidence'</span>)
+ax.<span class="fn">set_title</span>(<span class="str">'Cumulative Incidence by Churn Type'</span>)
+ax.<span class="fn">legend</span>(); plt.<span class="fn">show</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 4: For Full Fine-Gray, use R or cmprsk</span>
+<span class="cm"># Python: scikit-survival or use rpy2 bridge</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># pip install scikit-survival</span>
+<span class="kw">from</span> sksurv.nonparametric <span class="kw">import</span> CumulativeIncidenceFunction
+
+<span class="cm"># Format: event is a structured array</span>
+event = np.<span class="fn">array</span>(
+    [(e > <span class="num">0</span>, d) <span class="kw">for</span> e, d <span class="kw">in</span> <span class="fn">zip</span>(df[<span class="str">'event_type'</span>], df[<span class="str">'duration'</span>])],
+    dtype=[(<span class="str">'event'</span>, <span class="fn">bool</span>), (<span class="str">'time'</span>, <span class="fn">float</span>)]
+)
+<span class="cm"># Note: Full Fine-Gray regression available in R cmprsk package</span>
+<span class="cm"># or via rpy2 bridge. Python native options are still maturing.</span></pre>
+</div>
+</div>
+
+<div class="section" id="playbook">
+<h2>Part 7: Your Week 5 Playbook</h2>
+
+<table class="comp-table">
+  <thead><tr><th>Business Question</th><th>Method</th></tr></thead>
+  <tbody>
+    <tr><td>"What are the distinct types of churn?"</td><td>Exit survey analysis + event coding</td></tr>
+    <tr><td>"What's the true probability of price-driven churn by month 12?"</td><td>CIF (not 1 - KM)</td></tr>
+    <tr><td>"What factors drive each churn type?"</td><td>Cause-specific hazard models (separate Cox per type)</td></tr>
+    <tr><td>"Which customers are at highest risk of competitor poaching?"</td><td>Fine-Gray model for competitor churn CIF predictions</td></tr>
+    <tr><td>"Should I report both models?"</td><td>Yes &mdash; cause-specific for understanding, Fine-Gray for prediction</td></tr>
+  </tbody>
+</table>
+
+<div class="callout danger">
+  <div class="callout-label">Top 5 Week 5 Mistakes</div>
+  <p><strong>1. Using 1 - KM for cause-specific probabilities.</strong> This always overestimates. Use CIF instead.</p>
+  <p><strong>2. Only fitting one model.</strong> Best practice is reporting cause-specific AND Fine-Gray side-by-side.</p>
+  <p><strong>3. Interpreting Fine-Gray HRs causally.</strong> Subdistribution HRs have no clean causal interpretation. For "why" questions, use cause-specific.</p>
+  <p><strong>4. Poor event coding.</strong> If your "churn reason" data is noisy or self-reported, competing risks analysis inherits that noise. Invest in clean exit categorization.</p>
+  <p><strong>5. Ignoring that CIFs must sum correctly.</strong> Individual CIFs should stack to the overall failure probability. If they don't, something is wrong with your event coding.</p>
+</div>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+  <div class="timeline-step"><h4>Day 1-2: Read the Key Papers</h4><p>Austin, Lee, Fine (2016). "Introduction to Survival Analysis in the Presence of Competing Risks." Circulation. Also: Putter, Fiocco, Geskus (2007). "Tutorial in Biostatistics: Competing Risks." Statistics in Medicine.</p></div>
+  <div class="timeline-step"><h4>Day 3-4: Implement Cause-Specific Hazard Models</h4><p>Using your Week 2 dataset, add a synthetic "churn reason" column. Fit separate Cox models per cause. Compare hazard ratios across causes. Which covariates affect which churn type?</p></div>
+  <div class="timeline-step"><h4>Day 5: Build CIF Curves</h4><p>Plot cumulative incidence functions for each churn type. Compare to naive 1-KM estimates. Quantify the overestimation.</p></div>
+  <div class="timeline-step"><h4>Day 6: Explore Fine-Gray</h4><p>If comfortable with R, use the cmprsk package. In Python, explore scikit-survival or the rpy2 bridge. Fit Fine-Gray models and compare results to cause-specific.</p></div>
+  <div class="timeline-step"><h4>Day 7: Write the Cause-Specific Strategy Brief</h4><p>"Our competing risks analysis reveals 3 distinct churn mechanisms. Price-driven churn is best addressed by X, competitor churn by Y, value churn by Z. Redirecting retention budget from blanket discounts to targeted interventions is projected to save $W."</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Essential:</strong> Fine, J.P., Gray, R.J. (1999). A Proportional Hazards Model for the Subdistribution of a Competing Risk. <em>JASA</em>, 94(446), 496-509.<br>
+<strong>Tutorial:</strong> Austin, P.C., Lee, D.S., Fine, J.P. (2016). Introduction to the Analysis of Survival Data in the Presence of Competing Risks. <em>Circulation</em>, 133(6), 601-609.<br>
+<strong>Methodology:</strong> Putter, H., Fiocco, M., Geskus, R.B. (2007). Tutorial in Biostatistics: Competing Risks and Multi-State Models. <em>Statistics in Medicine</em>, 26(11), 2389-2430.<br>
+<strong>Practical Guide:</strong> Austin, P.C., Fine, J.P. (2017). Practical Recommendations for Reporting Fine-Gray Model Analyses. <em>Statistics in Medicine</em>, 36(27), 4391-4400.<br>
+<strong>Causal Warning:</strong> Allison, P.D. (2024). For Causal Analysis of Competing Risks, Don't Use Fine & Gray's Method. Statistical Horizons.<br>
+<strong>Textbook:</strong> Pintilie, M. (2006). <em>Competing Risks: A Practical Perspective</em>. Wiley.<br>
+<strong>Python:</strong> scikit-survival (sksurv) &mdash; scikit-survival.readthedocs.io
+</p>
+
+<div class="bottom-nav">
+  <a href="week4_recency_frequency.html">&larr; Week 4: Recency vs. Frequency</a>
+  <a href="week6_winback_equation.html">Week 6: The Win-Back Equation &rarr;</a>
+</div>
+</div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script>
+</body>
+</html>

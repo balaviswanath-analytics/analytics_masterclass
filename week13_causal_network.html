@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 13: Causal Network Analysis</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q1 HUB</a><a href="#business" class="nav-link active">Peer Effects</a><a href="#problem" class="nav-link">Identification</a><a href="#iv" class="nav-link">IV Approach</a><a href="#code" class="nav-link">Python Code</a><a href="#capstone" class="nav-link">Q1 Capstone</a></div></nav>
+<header class="hero"><div class="week-tag">Week 13 &middot; Q1 Capstone</div><h1>The <span>Reference Customer</span> Effect: Causal Network Analysis</h1><p class="hero-sub">When one customer churns, their contacts churn at 2x the baseline rate. Is this because churn is contagious, or because connected customers share the same risk factors? This week introduces instrumental variables for peer effects and serves as the Q1 capstone &mdash; synthesizing all 13 weeks into one integrated system.</p></header>
+<main class="content">
+
+<div class="section" id="business"><h2>Part 1: When Customers Influence Each Other</h2>
+<p>A B2B SaaS platform notices something alarming: when a "reference customer" (featured in case studies) churns, other customers in that reference customer's network begin churning at elevated rates. The reference customer might only contribute $200K in annual revenue. But their indirect value &mdash; influence on prospects, peer validation, referral pipeline &mdash; could be worth $8M in influenced revenue. Standard CLV models completely miss this <strong>network CLV</strong>.</p>
+<h3>Three Types of Network Effects in Churn</h3>
+<table class="comp-table"><thead><tr><th>Effect</th><th>Mechanism</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Contagion</strong></td><td>One customer's behavior directly influences another's</td><td>Colleague tells you they switched; you consider switching too</td></tr>
+<tr><td><strong>Homophily</strong></td><td>Connected customers share characteristics driving similar behavior</td><td>Companies in the same industry face the same budget pressures</td></tr>
+<tr><td><strong>Common exposure</strong></td><td>Connected customers exposed to same external shocks</td><td>Competitor launches a feature that attracts an entire vertical</td></tr>
+</tbody></table></div>
+
+<div class="section" id="problem"><h2>Part 2: The Identification Problem</h2>
+<p>The fundamental challenge: in observational data, you cannot directly distinguish contagion from homophily. Manski (1993) formalized this as the <strong>"reflection problem"</strong>.</p>
+<div class="formula"><div class="formula-label">MANSKI'S REFLECTION PROBLEM</div><div class="formula-math">Y<sub>i</sub> = &alpha; + &beta; &middot; Y&#x0304;<sub>peers</sub> + &gamma; &middot; X&#x0304;<sub>peers</sub> + &delta; &middot; X<sub>i</sub> + &epsilon;<sub>i</sub></div><div class="formula-label">&beta; = endogenous peer effect (contagion) | &gamma; = contextual peer effect (homophily) | Cannot separate without instruments</div></div>
+<div class="callout danger"><div class="callout-label">Why Naive Correlations Fail</div><p>You observe that customers connected to churners churn at 2x baseline. This could mean: (a) churn is contagious (&beta; > 0), (b) connected customers share risk factors (&gamma; > 0), or (c) both. A naive regression of "did i churn" on "did i's contacts churn" captures all mechanisms and overstates the true peer effect. To isolate the causal effect, you need an instrumental variable.</p></div></div>
+
+<div class="section" id="iv"><h2>Part 3: Instrumental Variables for Peer Effects</h2>
+<p>An <strong>instrumental variable (IV)</strong> must be: (1) correlated with the suspected cause (peer's churn), (2) affect the outcome only through that cause, and (3) uncorrelated with unobserved confounders.</p>
+<table class="comp-table"><thead><tr><th>Instrument Candidate</th><th>Logic</th><th>Strength</th></tr></thead><tbody>
+<tr><td>Peer's contract expiry date</td><td>Exogenous timing shock triggering peer's churn</td><td>Strong if dates set independently</td></tr>
+<tr><td>Random service outage in peer's region</td><td>Exogenous shock to peer's satisfaction</td><td>Strong natural experiment</td></tr>
+<tr><td>Peer's acquisition channel</td><td>Affects peer quality; shouldn't directly affect your behavior</td><td>Moderate</td></tr>
+</tbody></table>
+<div class="callout insight"><div class="callout-label">The Two-Stage Approach (2SLS)</div>
+<p><strong>Stage 1:</strong> Regress peer's churn on instrument(s) + covariates. Get predicted (exogenous) peer churn.</p>
+<p><strong>Stage 2:</strong> Regress your churn on <em>predicted</em> peer churn + your covariates. The coefficient is the causal peer effect, purged of homophily.</p></div>
+<h3>Network-Adjusted CLV</h3>
+<div class="formula"><div class="formula-label">NETWORK CLV</div><div class="formula-math">CLV<sub>network</sub> = CLV<sub>direct</sub> + &sum;<sub>j &isin; neighbors</sub> &beta; &middot; CLV<sub>j</sub></div><div class="formula-label">&beta; = causal peer effect from 2SLS | For reference customers, network CLV can be 5-20x direct CLV</div></div></div>
+
+<div class="section" id="code"><h2>Part 4: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; IV Peer Effects</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> networkx <span class="kw">as</span> nx
+<span class="kw">from</span> linearmodels.iv <span class="kw">import</span> IV2SLS
+
+<span class="cm"># === Build Customer Network ===</span>
+edges = pd.<span class="fn">read_csv</span>(<span class="str">'customer_connections.csv'</span>)
+G = nx.<span class="fn">from_pandas_edgelist</span>(edges, <span class="str">'cust_a'</span>, <span class="str">'cust_b'</span>)
+customers = pd.<span class="fn">read_csv</span>(<span class="str">'customers.csv'</span>, index_col=<span class="str">'id'</span>)
+
+<span class="cm"># === Peer Variables ===</span>
+<span class="kw">for</span> cid <span class="kw">in</span> customers.index:
+    nbrs = <span class="fn">list</span>(G.<span class="fn">neighbors</span>(cid)) <span class="kw">if</span> cid <span class="kw">in</span> G <span class="kw">else</span> []
+    <span class="kw">if</span> nbrs:
+        customers.<span class="fn">loc</span>[cid, <span class="str">'peer_churn'</span>] = customers.<span class="fn">loc</span>[
+            customers.index.<span class="fn">isin</span>(nbrs), <span class="str">'churned'</span>].<span class="fn">mean</span>()
+        customers.<span class="fn">loc</span>[cid, <span class="str">'peer_expiry'</span>] = customers.<span class="fn">loc</span>[
+            customers.index.<span class="fn">isin</span>(nbrs), <span class="str">'contract_expiring'</span>].<span class="fn">mean</span>()
+    <span class="kw">else</span>:
+        customers.<span class="fn">loc</span>[cid, <span class="str">'peer_churn'</span>] = <span class="num">0</span>
+        customers.<span class="fn">loc</span>[cid, <span class="str">'peer_expiry'</span>] = <span class="num">0</span>
+
+<span class="cm"># === 2SLS IV Regression ===</span>
+model = <span class="fn">IV2SLS</span>(
+    dependent=customers[<span class="str">'churned'</span>],
+    exog=customers[[<span class="str">'monthly_charges'</span>, <span class="str">'tenure'</span>, <span class="str">'nps'</span>]],
+    endog=customers[[<span class="str">'peer_churn'</span>]],
+    instruments=customers[[<span class="str">'peer_expiry'</span>]]
+)
+res = model.<span class="fn">fit</span>()
+<span class="fn">print</span>(res.<span class="fn">summary</span>)
+peer_effect = res.params[<span class="str">'peer_churn'</span>]
+
+<span class="cm"># === Network-Adjusted CLV ===</span>
+customers[<span class="str">'n_connections'</span>] = [G.<span class="fn">degree</span>(c) <span class="kw">if</span> c <span class="kw">in</span> G <span class="kw">else</span> <span class="num">0</span>
+                              <span class="kw">for</span> c <span class="kw">in</span> customers.index]
+customers[<span class="str">'network_clv'</span>] = (
+    customers[<span class="str">'direct_clv'</span>] +
+    customers[<span class="str">'n_connections'</span>] * peer_effect *
+    customers[<span class="str">'direct_clv'</span>].<span class="fn">mean</span>()
+)
+<span class="fn">print</span>(customers.<span class="fn">nlargest</span>(<span class="num">10</span>, <span class="str">'network_clv'</span>)[
+    [<span class="str">'direct_clv'</span>, <span class="str">'network_clv'</span>, <span class="str">'n_connections'</span>]])</pre></div></div>
+
+<div class="section" id="capstone"><h2>Part 5: Q1 Capstone &mdash; The Complete Engine</h2>
+<div class="callout insight"><div class="callout-label">13 Weeks. One Integrated System.</div>
+<p><strong>Weeks 1-4 (Foundation):</strong> Survival curves (KM), churn drivers (Cox PH), churn segments (LCA), probabilistic CLV (BG/NBD + Gamma-Gamma).</p>
+<p><strong>Weeks 5-8 (Diagnostics):</strong> Competing risks, win-back ROI, cohort economics, frailty models for hidden heterogeneity.</p>
+<p><strong>Weeks 9-13 (Mastery):</strong> Switching costs, AFT time predictions, contractual vs. non-contractual model selection, reactivation windows, and causal network effects.</p></div>
+
+<h3>The Q1 Deliverable Checklist</h3>
+<table class="comp-table"><thead><tr><th>#</th><th>Deliverable</th><th>Source</th></tr></thead><tbody>
+<tr><td>1</td><td>Customer-level P(Alive) and 12-month CLV</td><td>Weeks 1, 4</td></tr>
+<tr><td>2</td><td>Churn driver model with actionable hazard ratios</td><td>Week 2</td></tr>
+<tr><td>3</td><td>Churn segmentation (trial-and-bail, poached whale, etc.)</td><td>Week 3</td></tr>
+<tr><td>4</td><td>Cause-specific churn analysis with targeted interventions</td><td>Week 5</td></tr>
+<tr><td>5</td><td>Win-back target list with ROI projections</td><td>Week 6</td></tr>
+<tr><td>6</td><td>Cohort health dashboard with NRR tracking</td><td>Week 7</td></tr>
+<tr><td>7</td><td>Frailty-corrected hazard ratios + heterogeneity diagnosis</td><td>Week 8</td></tr>
+<tr><td>8</td><td>Switching cost index and lock-in vs. loyalty segmentation</td><td>Week 9</td></tr>
+<tr><td>9</td><td>Time-to-second-purchase early warning system</td><td>Week 10</td></tr>
+<tr><td>10</td><td>Correct model class selection documentation</td><td>Week 11</td></tr>
+<tr><td>11</td><td>Automated reactivation trigger system</td><td>Week 12</td></tr>
+<tr><td>12</td><td>Network-adjusted CLV for high-influence customers</td><td>Week 13</td></tr>
+</tbody></table>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Read Manski and IV Foundations</h4><p>Manski, C.F. (1993). "Identification of Endogenous Social Effects." Review of Economic Studies. Also: Angrist, J.D. & Pischke, J.S. (2009). Mostly Harmless Econometrics, Chapters 4-5.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build Customer Network Graph</h4><p>Using CRM data (referrals, shared accounts, industry connections), build a customer network in NetworkX. Compute peer churn rates and identify potential instruments.</p></div>
+<div class="timeline-step"><h4>Day 5: Run 2SLS</h4><p>Implement the IV regression using linearmodels. Test instrument strength (first-stage F-stat > 10). Estimate the causal peer effect. Calculate network-adjusted CLV.</p></div>
+<div class="timeline-step"><h4>Day 6-7: Write the Q1 Capstone Report</h4><p>Synthesize all 13 weeks into a comprehensive customer analytics report. Include: executive summary, methodology map (which model for which question), key findings, and Q2 roadmap (Pricing, Promotion &amp; Revenue Optimization).</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Essential:</strong> Manski, C.F. (1993). Identification of Endogenous Social Effects. <em>Review of Economic Studies</em>, 60(3), 531-542.<br><strong>IV Methods:</strong> Angrist, J.D. & Pischke, J.S. (2009). <em>Mostly Harmless Econometrics</em>. Princeton University Press.<br><strong>Network Effects:</strong> Iyengar, R., Van den Bulte, C., Valente, T.W. (2011). Opinion Leadership and Social Contagion in New Product Diffusion. <em>Marketing Science</em>, 30(2), 195-212.<br><strong>Python:</strong> linearmodels (IV2SLS), NetworkX for graph analysis.</p>
+
+<div class="bottom-nav"><a href="week12_reactivation_windows.html">&larr; Week 12: Reactivation Windows</a><a href="index.html">Back to Q1 Hub &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

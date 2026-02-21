@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 10: Time-to-Second-Purchase</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q1 HUB</a><a href="#business" class="nav-link active">The Make-or-Break</a><a href="#aft" class="nav-link">AFT Models</a><a href="#distributions" class="nav-link">Distributions</a><a href="#interpretation" class="nav-link">Interpretation</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 10 &middot; Q1: Customer Lifetime &amp; Retention Economics</div><h1><span>Time-to-Second-Purchase</span>: The Make-or-Break Moment</h1><p class="hero-sub">The gap between a customer's first and second purchase is the single most predictive window for long-term value. This week you'll learn Accelerated Failure Time (AFT) models &mdash; a powerful alternative to Cox PH that directly models "how long until the next event" rather than hazard rates. The shift in perspective changes how you think about interventions.</p></header>
+<main class="content">
+<div class="section" id="business"><h2>Part 1: Why the Second Purchase Changes Everything</h2>
+<p>Here's an empirical pattern that holds across industries: customers who make a second purchase within a specific window become 3-5x more likely to become long-term, high-value customers. Miss that window, and the probability of ever seeing them again drops below 10%.</p>
+<table class="comp-table"><thead><tr><th>Days to 2nd Purchase</th><th>3-Year Retention Rate</th><th>3-Year CLV (Index)</th></tr></thead><tbody>
+<tr><td>0-14 days</td><td><strong>72%</strong></td><td>350</td></tr>
+<tr><td>15-30 days</td><td><strong>58%</strong></td><td>240</td></tr>
+<tr><td>31-60 days</td><td>38%</td><td>150</td></tr>
+<tr><td>61-90 days</td><td>22%</td><td>80</td></tr>
+<tr><td>90+ days (or never)</td><td>8%</td><td>30</td></tr>
+</tbody></table>
+<div class="callout"><div class="callout-label">The $2.4M Insight</div><p>An e-commerce company found that moving 10% of first-time buyers from the "31-60 day" window into the "15-30 day" window (via targeted post-purchase emails with personalized recommendations) increased 12-month revenue by $2.4M. The intervention cost $180K. That's a 13x ROI &mdash; and it was only possible because they modeled the time-to-second-purchase distribution and identified the critical window.</p></div>
+<p>This is where <strong>Accelerated Failure Time models</strong> shine. Instead of modeling the hazard rate (how likely is the event right now?), AFT models directly answer: "how long until the event?" This framing aligns perfectly with the business question: "when will this first-time buyer come back?"</p></div>
+
+<div class="section" id="aft"><h2>Part 2: Accelerated Failure Time Models &mdash; An Alternative to Cox</h2>
+<div class="formula"><div class="formula-label">THE AFT MODEL</div><div class="formula-math">log(T<sub>i</sub>) = &beta;<sub>0</sub> + &beta;<sub>1</sub>X<sub>1</sub> + ... + &beta;<sub>p</sub>X<sub>p</sub> + &sigma;&epsilon;</div><div class="formula-label">T = time to event | &sigma; = scale | &epsilon; ~ distribution (Weibull, log-normal, log-logistic)</div></div>
+<p>In plain English: the <strong>logarithm of survival time</strong> is a linear function of covariates plus random error. This is fundamentally different from Cox PH, which models the hazard multiplier. AFT models are parametric &mdash; you must choose a distribution for the error term &mdash; but in return you get a much more intuitive interpretation.</p>
+<h3>Cox PH vs. AFT: The Interpretation Difference</h3>
+<table class="comp-table"><thead><tr><th>Aspect</th><th>Cox PH</th><th>AFT</th></tr></thead><tbody>
+<tr><td>What it models</td><td>Hazard rate (instantaneous risk)</td><td>Survival time directly</td></tr>
+<tr><td>Coefficient interpretation</td><td>Hazard Ratio: "2x the rate of churn"</td><td><strong>Acceleration Factor: "half the time to event"</strong></td></tr>
+<tr><td>Parametric?</td><td>Semi-parametric (no distribution assumed)</td><td>Fully parametric (must choose distribution)</td></tr>
+<tr><td>Best for</td><td>"What increases risk?"</td><td><strong>"How much sooner/later does it happen?"</strong></td></tr>
+<tr><td>Intuitive for stakeholders?</td><td>HR = 1.5 &mdash; "50% higher risk" (vague)</td><td><strong>AF = 0.7 &mdash; "30% faster" (concrete)</strong></td></tr>
+</tbody></table>
+<div class="callout insight"><div class="callout-label">The Communication Advantage</div><p>Tell a product manager "low NPS customers have a hazard ratio of 1.8 for churn" and they nod politely. Tell them <strong>"low NPS customers reach their second purchase 40% slower, which means they fall outside the critical 30-day window"</strong> and they immediately understand the action: fix the post-purchase experience to accelerate the second transaction.</p></div></div>
+
+<div class="section" id="distributions"><h2>Part 3: Choosing the Right Distribution</h2>
+<table class="comp-table"><thead><tr><th>Distribution</th><th>Hazard Shape</th><th>Best For</th><th>lifelines Class</th></tr></thead><tbody>
+<tr><td><strong>Weibull</strong></td><td>Monotone (increasing or decreasing)</td><td>Default choice; includes Exponential as special case</td><td>WeibullAFTFitter</td></tr>
+<tr><td><strong>Log-Normal</strong></td><td>Inverted U (rises then falls)</td><td>Events that have a "peak risk" period then declining risk</td><td>LogNormalAFTFitter</td></tr>
+<tr><td><strong>Log-Logistic</strong></td><td>Inverted U (similar to log-normal but heavier tails)</td><td>When hazard increases early then decreases; closed-form CDF</td><td>LogLogisticAFTFitter</td></tr>
+</tbody></table>
+<h3>Model Selection: The AIC Tournament</h3>
+<p>Fit all three distributions. Compare AIC (Akaike Information Criterion). Lowest AIC wins. Also check: does the Weibull shape parameter &rho; suggest monotone hazard (if so, Weibull is appropriate) or non-monotone (consider log-logistic or log-normal)?</p>
+<div class="callout danger"><div class="callout-label">When Cox Still Wins</div><p>If you only care about <em>ranking</em> customers by risk (not predicting actual time), Cox PH is often sufficient and avoids the distribution assumption. AFT models are superior when: (a) you need to predict actual time-to-event, (b) the proportional hazards assumption fails, (c) you need to communicate findings in time units rather than risk ratios, or (d) you have frailty (Week 8) &mdash; AFT is more robust to omitted covariates than Cox.</p></div></div>
+
+<div class="section" id="interpretation"><h2>Part 4: Reading AFT Coefficients</h2>
+<p>In an AFT model, <strong>exp(&beta;)</strong> is the acceleration factor (also called time ratio). If exp(&beta;) = 1.5 for a covariate, a one-unit increase in that covariate multiplies the expected survival time by 1.5 (50% longer). If exp(&beta;) = 0.7, it reduces survival time by 30% (accelerates the event).</p>
+<table class="comp-table"><thead><tr><th>Covariate</th><th>&beta;</th><th>exp(&beta;) = Time Ratio</th><th>Business Translation</th></tr></thead><tbody>
+<tr><td>Post-purchase email sent</td><td>-0.35</td><td>0.70</td><td>Receiving the email <strong>accelerates</strong> 2nd purchase by 30%</td></tr>
+<tr><td>1st order value (per $50)</td><td>0.12</td><td>1.13</td><td>Higher 1st order = 13% longer to 2nd purchase (browsing, not committed)</td></tr>
+<tr><td>Mobile app user</td><td>-0.48</td><td>0.62</td><td>App users reach 2nd purchase 38% faster</td></tr>
+<tr><td>Discount used on 1st order</td><td>0.28</td><td>1.32</td><td>Discount buyers take 32% longer (deal-seekers wait for next promo)</td></tr>
+</tbody></table></div>
+
+<div class="section" id="code"><h2>Part 5: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; AFT Models</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">from</span> lifelines <span class="kw">import</span> (WeibullAFTFitter, LogNormalAFTFitter,
+                      LogLogisticAFTFitter)
+
+df = pd.<span class="fn">read_csv</span>(<span class="str">'first_to_second_purchase.csv'</span>)
+<span class="cm"># days_to_2nd: time from 1st to 2nd purchase</span>
+<span class="cm"># converted: 1=made 2nd purchase, 0=censored (still waiting)</span>
+
+covs = [<span class="str">'post_purchase_email'</span>, <span class="str">'first_order_value'</span>,
+        <span class="str">'mobile_app_user'</span>, <span class="str">'used_discount'</span>, <span class="str">'product_category_electronics'</span>]
+
+<span class="cm"># === AIC Tournament ===</span>
+models = {
+    <span class="str">'Weibull'</span>: <span class="fn">WeibullAFTFitter</span>(penalizer=<span class="num">0.01</span>),
+    <span class="str">'LogNormal'</span>: <span class="fn">LogNormalAFTFitter</span>(penalizer=<span class="num">0.01</span>),
+    <span class="str">'LogLogistic'</span>: <span class="fn">LogLogisticAFTFitter</span>(penalizer=<span class="num">0.01</span>),
+}
+
+<span class="kw">for</span> name, fitter <span class="kw">in</span> models.items():
+    fitter.<span class="fn">fit</span>(df[covs + [<span class="str">'days_to_2nd'</span>, <span class="str">'converted'</span>]],
+              duration_col=<span class="str">'days_to_2nd'</span>, event_col=<span class="str">'converted'</span>)
+    <span class="fn">print</span>(<span class="str">f"{name} AIC: {fitter.AIC_:.1f}"</span>)
+
+<span class="cm"># === Fit Best Model (assume Weibull wins) ===</span>
+best = models[<span class="str">'Weibull'</span>]
+best.<span class="fn">print_summary</span>()
+
+<span class="cm"># === Predict median time to 2nd purchase ===</span>
+new_customers = pd.<span class="fn">read_csv</span>(<span class="str">'new_first_buyers.csv'</span>)
+new_customers[<span class="str">'predicted_median_days'</span>] = best.<span class="fn">predict_median</span>(
+    new_customers[covs]
+)
+
+<span class="cm"># Flag at-risk: predicted > 30 days</span>
+at_risk = new_customers[new_customers[<span class="str">'predicted_median_days'</span>] > <span class="num">30</span>]
+<span class="fn">print</span>(<span class="str">f"At-risk first-buyers (predicted >30 days): {len(at_risk)}"</span>)
+<span class="fn">print</span>(<span class="str">"These need immediate post-purchase intervention"</span>)</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 6: Your Week 10 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th></tr></thead><tbody>
+<tr><td>"What's the critical window for 2nd purchase?"</td><td>KM curve of time-to-2nd-purchase; find the inflection point</td></tr>
+<tr><td>"Which factors accelerate or slow the 2nd purchase?"</td><td>AFT model coefficients (time ratios)</td></tr>
+<tr><td>"Which first-buyers are at risk of never returning?"</td><td>AFT predicted median > threshold &rarr; trigger intervention</td></tr>
+<tr><td>"Which distribution fits best?"</td><td>AIC tournament across Weibull, log-normal, log-logistic</td></tr>
+<tr><td>"Why not just use Cox?"</td><td>AFT gives time predictions; Cox gives risk rankings. Different questions.</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: AFT Theory</h4><p>Read Wei (1992). "The Accelerated Failure Time Model: A Useful Alternative to the Cox Regression Model." Statistics in Medicine. Also: lifelines AFT documentation.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build the AIC Tournament</h4><p>Using your transaction data, compute first-to-second purchase intervals. Fit all three AFT distributions. Compare AIC, plot fitted survival curves against KM.</p></div>
+<div class="timeline-step"><h4>Day 5: Predict and Intervene</h4><p>Score all current first-time buyers. Identify those predicted to exceed the critical window. Design the intervention trigger.</p></div>
+<div class="timeline-step"><h4>Day 6-7: Connect to CLV and Write Brief</h4><p>"Customers who convert within X days have Y% higher 3-year CLV. Our AFT model identifies Z at-risk first-buyers who need immediate intervention. Projected incremental revenue from intervention: $W."</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Essential:</strong> Wei, L.J. (1992). The Accelerated Failure Time Model. <em>Statistics in Medicine</em>, 11(14-15), 1871-1879.<br><strong>lifelines:</strong> WeibullAFTFitter, LogNormalAFTFitter, LogLogisticAFTFitter documentation.<br><strong>Application:</strong> Ascarza, E., Neslin, S.A., Netzer, O. et al. (2018). In Pursuit of Enhanced Customer Retention Management. <em>Customer Needs and Solutions</em>, 5, 65-81.</p>
+<div class="bottom-nav"><a href="week9_platinum_handcuffs.html">&larr; Week 9: Platinum Handcuffs</a><a href="week11_contractual_noncontractual.html">Week 11: Contractual vs. Non-Contractual &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

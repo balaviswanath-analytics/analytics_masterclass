@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 9: The Platinum Handcuffs</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q1 HUB</a><a href="#business" class="nav-link active">Business Case</a><a href="#switching" class="nav-link">Switching Costs</a><a href="#contract" class="nav-link">Contract Hazards</a><a href="#stratified" class="nav-link">Stratified Cox</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 09 &middot; Q1: Customer Lifetime &amp; Retention Economics</div><h1>The <span>Platinum Handcuffs</span>: Measuring Switching Costs</h1><p class="hero-sub">Some customers stay not because they love you, but because leaving is painful. Contracts, data lock-in, integration complexity, and retraining costs create invisible barriers to churn. This week you'll learn to measure these switching costs statistically, understand how contract terms modify hazard functions, and design strategies that convert forced retention into genuine loyalty.</p></header>
+<main class="content">
+<div class="section" id="business"><h2>Part 1: Lock-In Is Not Loyalty</h2>
+<p>A telecom company reports 92% retention among contract customers versus 65% among month-to-month. The VP of Sales declares contracts the silver bullet. But what happens at contract expiration? The 90-day window around renewal shows a hazard spike 4-6x higher than mid-contract periods. Those "retained" customers weren't loyal &mdash; they were locked in. And the moment the handcuffs come off, they bolt.</p>
+<div class="callout"><div class="callout-label">The Renewal Cliff (Revisited from Week 2)</div><p>In contractual businesses, the hazard function is not smooth. It exhibits <strong>periodic spikes</strong> at contract boundaries &mdash; 12 months, 24 months, 36 months. Between these points, churn is artificially suppressed by early termination fees. At these points, churn is artificially elevated because customers who wanted to leave earlier now can. Standard Cox PH models that assume smooth, proportional hazards will misestimate risk for contract customers.</p></div>
+<h3>A Taxonomy of Switching Costs</h3>
+<table class="comp-table"><thead><tr><th>Type</th><th>Definition</th><th>Example</th><th>Measurability</th></tr></thead><tbody>
+<tr><td><strong>Financial</strong></td><td>Direct monetary penalties for leaving</td><td>Early termination fees, setup costs lost</td><td>High (observable in contract terms)</td></tr>
+<tr><td><strong>Procedural</strong></td><td>Time and effort to switch</td><td>Data migration, re-integration, retraining staff</td><td>Medium (survey + usage data)</td></tr>
+<tr><td><strong>Relational</strong></td><td>Loss of accumulated relationship benefits</td><td>Loyalty points, customizations, trusted support rep</td><td>Medium (can proxy with tenure and interactions)</td></tr>
+<tr><td><strong>Psychological</strong></td><td>Uncertainty and risk aversion about alternatives</td><td>"Better the devil you know"</td><td>Low (survey-only)</td></tr>
+</tbody></table></div>
+
+<div class="section" id="switching"><h2>Part 2: Quantifying Switching Costs with Survival Data</h2>
+<p>You can't directly observe switching costs in most datasets. But you can <em>infer</em> them by comparing churn behavior of customers with different lock-in characteristics. The approach: use contract terms, integration depth, and data volume as proxies for switching costs, then measure their effect on the hazard function.</p>
+<h3>Proxy Variables for Switching Cost</h3>
+<table class="comp-table"><thead><tr><th>Proxy</th><th>Why It Works</th><th>Expected HR</th></tr></thead><tbody>
+<tr><td>Contract length (months remaining)</td><td>Longer remaining term = higher financial barrier</td><td>HR &lt; 1 (protective)</td></tr>
+<tr><td>API integrations count</td><td>More integrations = higher procedural cost to unwind</td><td>HR &lt; 1</td></tr>
+<tr><td>Data volume stored (GB)</td><td>More data = harder migration</td><td>HR &lt; 1</td></tr>
+<tr><td>Number of trained users</td><td>More users = larger retraining burden on switch</td><td>HR &lt; 1</td></tr>
+<tr><td>Custom configurations</td><td>Customizations are non-transferable; lost on switch</td><td>HR &lt; 1</td></tr>
+</tbody></table>
+<div class="callout insight"><div class="callout-label">The Integration Threshold</div><p>Analysis of a B2B SaaS company found a clear step-function in churn risk by API integration count: 0-1 integrations had 30% annual churn, 2-4 integrations had 12% annual churn, and 5+ integrations had just 4% annual churn. The effect was far stronger than contract length, NPS score, or any other predictor. The lesson: <strong>product-driven lock-in is more durable than contractual lock-in</strong> because it creates genuine switching costs that persist beyond any contract term.</p></div></div>
+
+<div class="section" id="contract"><h2>Part 3: The Contract Hazard Function</h2>
+<p>For contractual customers, the hazard function has a distinctive shape: near-zero during the contract term (only involuntary churn from bankruptcy or extreme dissatisfaction willing to pay the penalty), followed by a massive spike at the renewal window, then rapid decline for those who renew.</p>
+<div class="formula"><div class="formula-label">THE BATHTUB CURVE IN CONTRACTS</div><div class="formula-math">h(t) = h<sub>base</sub>(t) &middot; exp(&beta;'X) &middot; &phi;(t, contract)</div><div class="formula-label">&phi;(t, contract) = renewal window indicator &middot; amplification factor</div></div>
+<p>This violates the proportional hazards assumption (Week 2). Two solutions: stratified Cox by contract type, or time-varying covariates that track "months to next renewal."</p>
+<h3>The Time-to-Renewal Covariate</h3>
+<p>Create a time-varying covariate <code>months_to_renewal</code> that counts down from 12 (or 24) to 0. As this variable approaches zero, the hazard should spike. Include it in your Cox model alongside other covariates. This elegantly captures the renewal cliff without violating proportional hazards, because the covariate itself is changing over time.</p></div>
+
+<div class="section" id="stratified"><h2>Part 4: Stratified Cox for Contract Types</h2>
+<p>When you have fundamentally different contract structures (month-to-month vs. annual vs. multi-year), the baseline hazard shape is so different across groups that a single Cox model is inappropriate. <strong>Stratified Cox</strong> allows each contract type to have its own baseline hazard while sharing the same covariate effects.</p>
+<div class="formula"><div class="formula-label">STRATIFIED COX MODEL</div><div class="formula-math">h<sub>g</sub>(t | X) = h<sub>0g</sub>(t) &middot; exp(&beta;'X) &nbsp;&nbsp;for each stratum g</div><div class="formula-label">Each contract type g gets its own h<sub>0g</sub>(t) but shares &beta;</div></div>
+<div class="callout insight"><div class="callout-label">Strategic Implication</div><p>If the stratified model shows that covariate effects (&beta;) are consistent across strata but baseline hazards differ wildly, then contracts are modifying the <em>timing</em> of churn but not the <em>drivers</em>. Same things cause churn regardless of contract type &mdash; contracts just delay the inevitable. This means your retention strategy should be identical across contract types; only the urgency timeline differs.</p></div></div>
+
+<div class="section" id="code"><h2>Part 5: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; Contract Hazard Analysis</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> lifelines <span class="kw">import</span> CoxPHFitter, KaplanMeierFitter
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+df = pd.<span class="fn">read_csv</span>(<span class="str">'contract_customers.csv'</span>)
+
+<span class="cm"># === Stratified Cox by contract type ===</span>
+cph = <span class="fn">CoxPHFitter</span>(penalizer=<span class="num">0.01</span>)
+covs = [<span class="str">'monthly_charges'</span>, <span class="str">'api_integrations'</span>,
+        <span class="str">'data_volume_gb'</span>, <span class="str">'trained_users'</span>, <span class="str">'nps_score'</span>]
+cph.<span class="fn">fit</span>(
+    df[covs + [<span class="str">'tenure'</span>, <span class="str">'churned'</span>, <span class="str">'contract_type'</span>]],
+    duration_col=<span class="str">'tenure'</span>, event_col=<span class="str">'churned'</span>,
+    strata=[<span class="str">'contract_type'</span>]  <span class="cm"># separate baselines</span>
+)
+cph.<span class="fn">print_summary</span>()
+
+<span class="cm"># === KM curves by contract type ===</span>
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">10</span>,<span class="num">6</span>))
+<span class="kw">for</span> ctype <span class="kw">in</span> df[<span class="str">'contract_type'</span>].<span class="fn">unique</span>():
+    mask = df[<span class="str">'contract_type'</span>] == ctype
+    kmf = <span class="fn">KaplanMeierFitter</span>()
+    kmf.<span class="fn">fit</span>(df.<span class="fn">loc</span>[mask, <span class="str">'tenure'</span>],
+           df.<span class="fn">loc</span>[mask, <span class="str">'churned'</span>], label=ctype)
+    kmf.<span class="fn">plot_survival_function</span>(ax=ax)
+ax.<span class="fn">set_title</span>(<span class="str">'Survival by Contract Type'</span>)
+plt.<span class="fn">show</span>()
+
+<span class="cm"># === Switching Cost Score ===</span>
+df[<span class="str">'switching_cost_score'</span>] = (
+    df[<span class="str">'api_integrations'</span>].<span class="fn">rank</span>(pct=<span class="kw">True</span>) * <span class="num">0.3</span> +
+    df[<span class="str">'data_volume_gb'</span>].<span class="fn">rank</span>(pct=<span class="kw">True</span>) * <span class="num">0.3</span> +
+    df[<span class="str">'trained_users'</span>].<span class="fn">rank</span>(pct=<span class="kw">True</span>) * <span class="num">0.2</span> +
+    df[<span class="str">'contract_months_remaining'</span>].<span class="fn">rank</span>(pct=<span class="kw">True</span>) * <span class="num">0.2</span>
+)
+<span class="fn">print</span>(<span class="str">"Churn rate by switching cost quintile:"</span>)
+<span class="fn">print</span>(df.<span class="fn">groupby</span>(pd.<span class="fn">qcut</span>(df[<span class="str">'switching_cost_score'</span>],<span class="num">5</span>))[<span class="str">'churned'</span>].<span class="fn">mean</span>())</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 6: Your Week 9 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th></tr></thead><tbody>
+<tr><td>"Does the contract actually prevent churn or just delay it?"</td><td>Compare hazard at renewal window vs. mid-contract; stratified Cox</td></tr>
+<tr><td>"Which switching cost type matters most?"</td><td>Cox model with integration, data, training proxies; compare HRs</td></tr>
+<tr><td>"When should I start the renewal conversation?"</td><td>Hazard function shows the ramp-up; typically 60-90 days before expiry</td></tr>
+<tr><td>"How do I convert lock-in to loyalty?"</td><td>Increase product-driven switching costs (integrations, data) not just contractual</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Literature on Switching Costs</h4><p>Burnham, T.A., Frels, J.K., Mahajan, V. (2003). "Consumer Switching Costs: A Typology, Antecedents, and Consequences." JAMS. Also: Jones, Mothersbaugh, Beatty (2002). "Why Customers Stay." Journal of Business Research.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build Contract Hazard Analysis</h4><p>Using IBM Telco dataset, create time-to-renewal covariates. Fit stratified Cox by contract type. Visualize the renewal cliff hazard spike.</p></div>
+<div class="timeline-step"><h4>Day 5-6: Construct a Switching Cost Index</h4><p>Combine proxy variables into a composite switching cost score. Validate: does higher score predict lower churn? Segment customers into locked-in vs. genuinely loyal.</p></div>
+<div class="timeline-step"><h4>Day 7: Strategy Brief</h4><p>"X% of our retention is contract-driven (lock-in), Y% is product-driven. At-risk customers approaching renewal with low switching cost scores: [list]. Recommended: deepen integrations for these accounts before renewal."</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Essential:</strong> Burnham, T.A., Frels, J.K., Mahajan, V. (2003). Consumer Switching Costs. <em>JAMS</em>, 31(2), 109-126.<br><strong>Methodology:</strong> lifelines CoxPHFitter strata parameter documentation.<br><strong>Application:</strong> IBM Telco Customer Churn dataset (Kaggle).</p>
+<div class="bottom-nav"><a href="week8_frailty_models.html">&larr; Week 8: Frailty Models</a><a href="week10_second_purchase.html">Week 10: Time-to-Second-Purchase &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

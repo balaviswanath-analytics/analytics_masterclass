@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 6: The Win-Back Equation</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style>
+</head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q1 HUB</a><a href="#business" class="nav-link active">Business Case</a><a href="#framework" class="nav-link">Win-Back Math</a><a href="#model" class="nav-link">Reactivation Model</a><a href="#timing" class="nav-link">Timing Window</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+
+<header class="hero"><div class="week-tag">Week 06 &middot; Q1: Customer Lifetime &amp; Retention Economics</div>
+<h1>The <span>Win-Back</span> Equation: Should You Chase Lost Customers?</h1>
+<p class="hero-sub">The instinct to win back every lost customer is powerful &mdash; and often wrong. This week you'll build a rigorous cost-benefit framework that answers the question: for each churned customer, is the expected value of reactivation greater than the cost of trying? The answer changes everything about how you allocate retention and reacquisition budgets.</p></header>
+
+<main class="content">
+<div class="section" id="business">
+<h2>Part 1: The Win-Back Fallacy</h2>
+<p>Most companies treat win-back campaigns as a blanket activity: send a discount email to everyone who left in the last 6 months. The typical result? 3-8% response rate, with most reactivated customers churning again within 90 days. The campaign "works" in the sense that some people come back, but the ROI is often negative when you account for the discount cost, the second churn, and the opportunity cost of spending those dollars elsewhere.</p>
+
+<div class="callout"><div class="callout-label">The $600K Wake-Up Call</div>
+<p>An e-commerce retailer ran a "we miss you" campaign to 50,000 lapsed customers offering 25% off their next order. They reactivated 2,100 customers (4.2% rate). Sounds decent. But the average reactivated order was $45, the discount cost was $11.25 per order, campaign cost was $3 per contact, and 72% of reactivated customers never purchased again. Net ROI: <strong>-$420,000</strong> when you factor in full costs versus the CLV of the customers who actually stuck around. They would have been better off spending that budget on retaining at-risk customers who hadn't yet churned.</p></div>
+
+<h3>The Three Questions Before Any Win-Back</h3>
+<p>Before you spend a dollar on win-back, you need to answer three questions with data, not intuition:</p>
+<p><strong>1. What is the probability this specific customer will reactivate?</strong> (Logistic regression on churned customer features)</p>
+<p><strong>2. If reactivated, what is their expected second-life CLV?</strong> (Typically 40-60% of first-life CLV &mdash; reactivated customers rarely return to full engagement)</p>
+<p><strong>3. What does the win-back attempt cost?</strong> (Contact cost + offer/discount + staff time + opportunity cost)</p>
+</div>
+
+<div class="section" id="framework">
+<h2>Part 2: The Win-Back ROI Framework</h2>
+
+<div class="formula"><div class="formula-label">THE WIN-BACK DECISION RULE</div>
+<div class="formula-math">Win-Back Value = P(reactivate) &times; E[CLV<sub>2nd life</sub>] &times; margin &minus; Cost<sub>attempt</sub></div>
+<div class="formula-label">If Win-Back Value > 0, pursue. If negative, redirect budget elsewhere.</div></div>
+
+<h3>A Worked Example</h3>
+<table class="comp-table">
+  <thead><tr><th>Segment</th><th>P(Reactivate)</th><th>2nd-Life CLV</th><th>Margin</th><th>Cost/Attempt</th><th>Expected Value</th><th>Decision</th></tr></thead>
+  <tbody>
+    <tr><td>High-value, recent churn</td><td>18%</td><td>$800</td><td>40%</td><td>$25</td><td><strong>+$32.60</strong></td><td>Pursue</td></tr>
+    <tr><td>Medium-value, 6mo ago</td><td>8%</td><td>$400</td><td>40%</td><td>$25</td><td><strong>-$12.20</strong></td><td>Skip</td></tr>
+    <tr><td>Low-value, recent churn</td><td>12%</td><td>$150</td><td>40%</td><td>$15</td><td><strong>-$7.80</strong></td><td>Skip</td></tr>
+    <tr><td>High-value, 12mo ago</td><td>5%</td><td>$600</td><td>40%</td><td>$25</td><td><strong>-$13.00</strong></td><td>Skip</td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight"><div class="callout-label">The Brutal Truth</div>
+<p>In most businesses, only <strong>15-25% of churned customers are worth pursuing</strong>. These are typically high-CLV customers who churned recently and for addressable reasons (price, not value failure). The remaining 75-85% have negative expected win-back value &mdash; every dollar spent on them is destroyed. The elite analysts redirect that budget to retention (preventing churn before it happens), where ROI is 3-5x higher than reacquisition.</p></div>
+</div>
+
+<div class="section" id="model">
+<h2>Part 3: The Reactivation Probability Model</h2>
+
+<p>Use <strong>logistic regression</strong> on your churned customer base to predict who will respond to win-back attempts. The dependent variable is binary: 1 = reactivated (purchased again), 0 = stayed churned. Train on historical win-back campaigns.</p>
+
+<h3>Key Predictive Features</h3>
+<table class="comp-table">
+  <thead><tr><th>Feature Category</th><th>Examples</th><th>Expected Effect</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Recency of churn</strong></td><td>Days since last purchase</td><td>More recent = higher P(reactivate). Decays exponentially.</td></tr>
+    <tr><td><strong>First-life engagement</strong></td><td>Total purchases, tenure, frequency</td><td>Higher engagement = more "muscle memory" = higher reactivation</td></tr>
+    <tr><td><strong>Churn reason</strong></td><td>Price / competitor / value (from Week 5)</td><td>Price-driven most reactivatable; value-driven least</td></tr>
+    <tr><td><strong>Win-back offer type</strong></td><td>Discount %, free month, feature upgrade</td><td>Higher offer = higher response, but lower ROI per reactivation</td></tr>
+    <tr><td><strong>Channel of contact</strong></td><td>Email, phone, direct mail</td><td>Personal outreach (phone) highest response but highest cost</td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight"><div class="callout-label">The Decay Curve</div>
+<p>Reactivation probability decays roughly exponentially with time since churn. A typical pattern: 15-20% reactivation rate at 1 month post-churn, 8-12% at 3 months, 4-6% at 6 months, and below 2% after 12 months. This means <strong>timing is everything</strong> &mdash; waiting even 30 days can cut your success rate in half. The optimal win-back window is typically 14-45 days post-churn.</p></div>
+</div>
+
+<div class="section" id="timing">
+<h2>Part 4: The Optimal Timing Window</h2>
+
+<p>This is where survival analysis re-enters. Model the "time to reactivation" using KM curves on your historical win-back data. The hazard function tells you when the highest-density reactivation window is.</p>
+
+<h3>Second-Life CLV: The Discount Factor</h3>
+<p>Reactivated customers are NOT the same as never-churned customers. Research consistently shows that second-life CLV is 40-70% of first-life CLV. Why? The psychological commitment is weaker, they've proven they're willing to leave, and competitive awareness is higher. Always discount projected CLV for reactivated customers &mdash; using first-life CLV will massively overstate win-back ROI.</p>
+
+<h3>The "Let Them Go" Threshold</h3>
+<p>Use your logistic model to score every churned customer. Set a threshold where expected win-back value equals zero. Everyone above the threshold gets a win-back campaign; everyone below gets classified as "natural attrition" &mdash; accepted loss. This threshold typically sits at P(reactivate) = 10-15% for most businesses. Customers below this probability are better served by investing the budget in preventing the next customer from churning.</p>
+</div>
+
+<div class="section" id="code">
+<h2>Part 5: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; Win-Back Framework</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> cross_val_score
+<span class="kw">from</span> sklearn.calibration <span class="kw">import</span> CalibratedClassifierCV
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Build Reactivation Model</span>
+<span class="cm"># ============================================</span>
+
+churned = pd.<span class="fn">read_csv</span>(<span class="str">'churned_customers.csv'</span>)
+<span class="cm"># reactivated: 1 = came back, 0 = stayed gone</span>
+
+features = [<span class="str">'days_since_churn'</span>, <span class="str">'first_life_purchases'</span>,
+            <span class="str">'first_life_clv'</span>, <span class="str">'tenure_months'</span>,
+            <span class="str">'churn_reason_price'</span>, <span class="str">'churn_reason_competitor'</span>]
+
+X = churned[features]
+y = churned[<span class="str">'reactivated'</span>]
+
+<span class="cm"># Calibrated model (probabilities must be accurate!)</span>
+base_lr = <span class="fn">LogisticRegression</span>(C=<span class="num">0.1</span>, max_iter=<span class="num">1000</span>)
+model = <span class="fn">CalibratedClassifierCV</span>(base_lr, cv=<span class="num">5</span>)
+model.<span class="fn">fit</span>(X, y)
+
+<span class="cm"># Cross-validated AUC</span>
+auc = <span class="fn">cross_val_score</span>(base_lr, X, y, cv=<span class="num">5</span>, scoring=<span class="str">'roc_auc'</span>)
+<span class="fn">print</span>(<span class="str">f"AUC: {auc.mean():.3f} +/- {auc.std():.3f}"</span>)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Score & Apply Decision Rule</span>
+<span class="cm"># ============================================</span>
+
+new_churned = pd.<span class="fn">read_csv</span>(<span class="str">'recent_churners.csv'</span>)
+new_churned[<span class="str">'p_reactivate'</span>] = model.<span class="fn">predict_proba</span>(
+    new_churned[features]
+)[:, <span class="num">1</span>]
+
+<span class="cm"># Win-back value calculation</span>
+MARGIN = <span class="num">0.40</span>
+SECOND_LIFE_DISCOUNT = <span class="num">0.55</span>  <span class="cm"># 2nd-life CLV = 55% of 1st</span>
+COST_PER_ATTEMPT = <span class="num">25</span>
+
+new_churned[<span class="str">'expected_2nd_clv'</span>] = (
+    new_churned[<span class="str">'first_life_clv'</span>] * SECOND_LIFE_DISCOUNT
+)
+new_churned[<span class="str">'winback_value'</span>] = (
+    new_churned[<span class="str">'p_reactivate'</span>]
+    * new_churned[<span class="str">'expected_2nd_clv'</span>]
+    * MARGIN
+    - COST_PER_ATTEMPT
+)
+
+<span class="cm"># Decision: pursue only positive-value targets</span>
+pursue = new_churned[new_churned[<span class="str">'winback_value'</span>] > <span class="num">0</span>]
+skip = new_churned[new_churned[<span class="str">'winback_value'</span>] <= <span class="num">0</span>]
+
+<span class="fn">print</span>(<span class="str">f"Pursue: {len(pursue)} ({len(pursue)/len(new_churned)*100:.0f}%)"</span>)
+<span class="fn">print</span>(<span class="str">f"Skip:   {len(skip)} ({len(skip)/len(new_churned)*100:.0f}%)"</span>)
+<span class="fn">print</span>(<span class="str">f"Total expected value: ${pursue['winback_value'].sum():,.0f}"</span>)</pre>
+</div></div>
+
+<div class="section" id="playbook">
+<h2>Part 6: Your Week 6 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th></tr></thead><tbody>
+<tr><td>"Should we chase this churned customer?"</td><td>Win-Back Value formula (P(reactivate) x 2nd CLV x margin - cost)</td></tr>
+<tr><td>"What's the probability they'll come back?"</td><td>Calibrated logistic regression on historical win-back data</td></tr>
+<tr><td>"When should we make the attempt?"</td><td>KM curve of time-to-reactivation; optimal = 14-45 days post-churn</td></tr>
+<tr><td>"How much of the budget should go to win-back vs. retention?"</td><td>Compare marginal ROI: retention typically 3-5x better</td></tr>
+</tbody></table>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Build the Conceptual Framework</h4><p>Read Kumar, V. et al. (2015). "Revisiting the Satisfaction-Loyalty Relationship." Journal of Retailing. Understand why reactivated customers behave differently from never-churned ones.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build a Reactivation Probability Model</h4><p>Using historical churn and win-back data, train a calibrated logistic regression. Key: use CalibratedClassifierCV to ensure probabilities are reliable, not just rankings.</p></div>
+<div class="timeline-step"><h4>Day 5: Implement the Full ROI Framework</h4><p>Score all recent churners. Calculate win-back value. Determine what % are worth pursuing. Compare total budget under "pursue all" vs. "pursue only positive-value."</p></div>
+<div class="timeline-step"><h4>Day 6: Analyze Second-Life CLV</h4><p>Using your BG/NBD model from Weeks 1-4, fit separately on reactivated customers. Compare their projected CLV to never-churned customers. Quantify the second-life discount factor for your business.</p></div>
+<div class="timeline-step"><h4>Day 7: Write the Budget Reallocation Brief</h4><p>"Of our X churned customers, only Y% have positive win-back value. By pursuing only these targets and redirecting $Z from blanket campaigns to targeted retention, we project a net improvement of $W."</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Essential:</strong> Kumar, V., Bhagwat, Y., Zhang, X. (2015). Regaining Lost Customers. <em>Journal of Marketing</em>, 79(1), 34-55.<br>
+<strong>Framework:</strong> Thomas, J.S., Blattberg, R.C., Fox, E.J. (2004). Recapturing Lost Customers. <em>Journal of Marketing Research</em>, 41(1), 31-45.<br>
+<strong>Second-Life CLV:</strong> Ascarza, E. (2018). Retention Futility: Targeting High-Risk Customers Might Be Ineffective. <em>Journal of Marketing Research</em>, 55(1), 80-98.<br>
+<strong>Python:</strong> scikit-learn CalibratedClassifierCV, LogisticRegression
+</p>
+
+<div class="bottom-nav">
+<a href="week5_competing_risks.html">&larr; Week 5: Competing Risks</a>
+<a href="week7_cohort_economics.html">Week 7: Cohort Economics &rarr;</a>
+</div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script>
+</body></html>

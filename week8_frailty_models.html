@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 8: Frailty Models</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style>
+</head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q1 HUB</a><a href="#business" class="nav-link active">Why Averages Lie</a><a href="#concept" class="nav-link">Frailty Concept</a><a href="#gamma" class="nav-link">Gamma Frailty</a><a href="#shared" class="nav-link">Shared Frailty</a><a href="#selection" class="nav-link">Selection Bias</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+
+<header class="hero"><div class="week-tag">Week 08 &middot; Q1: Customer Lifetime &amp; Retention Economics</div>
+<h1>Customer Lifespan <span>Heterogeneity</span>: Why Averages Lie</h1>
+<p class="hero-sub">Your Cox model from Week 2 says tenure and support tickets predict churn. But two customers with identical covariates can have wildly different lifespans. Why? Because unobserved factors &mdash; personality, internal politics, a champion who quietly advocates for your product &mdash; create hidden heterogeneity that standard models miss entirely. Frailty models fix this blind spot.</p></header>
+
+<main class="content">
+
+<!-- PART 1 -->
+<div class="section" id="business">
+<h2>Part 1: The Problem with Averages</h2>
+
+<p>Consider two SaaS customers who look identical on paper: same industry (fintech), same plan tier (Enterprise), same usage metrics, same support ticket volume. Your Cox PH model predicts both have a 12-month survival probability of 70%. Yet one churns at month 4 and the other stays for 3 years. What happened?</p>
+
+<p>The honest answer: <strong>you're missing something</strong>. There are factors driving churn that aren't captured in your feature set. Maybe one company has an internal champion who fights to keep your product in budget meetings. Maybe the other has a new CTO who wants to rebuild everything in-house. These unmeasured variables create hidden variation that inflates your error bars and biases your hazard ratio estimates.</p>
+
+<div class="callout"><div class="callout-label">The Population Paradox</div>
+<p>Here's the counterintuitive consequence of ignoring heterogeneity: <strong>the observed population hazard rate can decline over time even when every individual's hazard rate is increasing</strong>. How? Because the "frail" individuals (those with high unmeasured risk) churn early, leaving behind an increasingly robust survivor population. You look at the aggregate data and think "great, churn rate is falling!" But it's not because customers are getting happier &mdash; it's because the unhappy ones have already left, and you're only observing the survivors.</p>
+<p>This is called <strong>selection bias among survivors</strong>, and it's one of the most common misinterpretations in customer analytics. Frailty models account for it explicitly.</p></div>
+
+<h3>What We've Built So Far &mdash; And What's Missing</h3>
+<table class="comp-table">
+  <thead><tr><th>Week</th><th>Model</th><th>What It Captures</th><th>What It Misses</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Kaplan-Meier / BG/NBD</td><td>Overall survival patterns</td><td>No covariates; assumes homogeneous population</td></tr>
+    <tr><td>2</td><td>Cox PH</td><td>Effect of observed covariates on hazard</td><td>Assumes all heterogeneity is captured by X</td></tr>
+    <tr><td>3</td><td>Latent Class Analysis</td><td>Unobserved segments</td><td>Discrete segments; doesn't model continuous variation</td></tr>
+    <tr><td><strong>8</strong></td><td><strong>Frailty Models</strong></td><td><strong>Continuous unobserved heterogeneity</strong></td><td><strong>This is the fix</strong></td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- PART 2 -->
+<div class="section" id="concept">
+<h2>Part 2: The Frailty Concept</h2>
+
+<p>A frailty is a random effect &mdash; an unobserved multiplicative factor that modifies an individual's hazard. Think of it as a "hidden vulnerability score." Some customers are inherently more fragile (Z &gt; 1, higher hazard) and some are inherently more robust (Z &lt; 1, lower hazard), for reasons your data doesn't capture.</p>
+
+<div class="formula"><div class="formula-label">THE FRAILTY MODEL</div>
+<div class="formula-math">h<sub>i</sub>(t | X<sub>i</sub>, Z<sub>i</sub>) = Z<sub>i</sub> &middot; h<sub>0</sub>(t) &middot; exp(&beta;'X<sub>i</sub>)</div>
+<div class="formula-label">Z<sub>i</sub> = individual frailty (unobserved) | E[Z] = 1 | Var(Z) = &theta;</div></div>
+
+<p>The model looks like a standard Cox model, but with one crucial addition: the random multiplier Z. A customer with Z = 2 faces double the baseline hazard; Z = 0.5 faces half. The variance &theta; of the frailty distribution measures the <strong>degree of unobserved heterogeneity</strong> in your population. When &theta; = 0 (no heterogeneity), the frailty model collapses to the standard Cox model. When &theta; is large, there's substantial hidden variation your observed covariates don't explain.</p>
+
+<div class="callout insight"><div class="callout-label">Frailty vs. Random Intercepts</div>
+<p>If you've worked with mixed-effects models (multilevel models, hierarchical linear models), frailty is the survival analysis equivalent of a random intercept. Just as a random intercept in a linear model captures group-level variation not explained by fixed effects, a frailty term captures individual-level variation in hazard not explained by observed covariates. The mathematical machinery is different (because we're in survival-land, not linear-land), but the conceptual goal is identical.</p></div>
+</div>
+
+<!-- PART 3 -->
+<div class="section" id="gamma">
+<h2>Part 3: The Gamma Frailty Model</h2>
+
+<p>The most common choice for the frailty distribution is the <strong>Gamma distribution</strong> with mean 1 and variance &theta;. Why gamma? Three practical reasons: it's mathematically tractable (closed-form marginal survival), it's always positive (hazard multipliers can't be negative), and its variance parameter has a direct interpretation as the degree of heterogeneity.</p>
+
+<div class="formula"><div class="formula-label">GAMMA FRAILTY DISTRIBUTION</div>
+<div class="formula-math">Z ~ Gamma(1/&theta;, 1/&theta;) &nbsp;&nbsp;&rArr;&nbsp;&nbsp; E[Z] = 1, &nbsp;Var(Z) = &theta;</div>
+<div class="formula-label">&theta; &rarr; 0: homogeneous population | &theta; &gt; 1: severe hidden heterogeneity</div></div>
+
+<h3>What Gamma Frailty Does to Hazard Ratios</h3>
+
+<p>This is the punchline most analysts miss: <strong>ignoring frailty biases your Cox regression hazard ratios toward the null</strong>. The coefficients you estimated in Week 2 are attenuated &mdash; the true effects are likely stronger than what standard Cox reports.</p>
+
+<div class="callout danger"><div class="callout-label">The Attenuation Problem</div>
+<p>A simulation study: true hazard ratio of a covariate is 2.0 (doubles the churn rate). Standard Cox with heterogeneity present estimates HR = 1.55. The gamma frailty model recovers HR = 1.95. Why the attenuation? Over time, the composition of the survivor population shifts. The "frail" individuals with the covariate churn early, leaving behind the robust ones. The Cox model sees this declining hazard and incorrectly concludes the covariate effect is weaker than it actually is.</p>
+<p>In customer analytics terms: if you found that "low feature adoption increases churn risk by 60%" using standard Cox, the true effect might be 90-120%. Your retention team is underestimating the urgency.</p></div>
+
+<h3>Interpreting the Frailty Variance</h3>
+<table class="comp-table">
+  <thead><tr><th>&theta; (Frailty Variance)</th><th>Interpretation</th><th>Practical Implication</th></tr></thead>
+  <tbody>
+    <tr><td>&theta; &lt; 0.1</td><td>Minimal unobserved heterogeneity</td><td>Standard Cox is adequate; your features capture most of the variation</td></tr>
+    <tr><td>&theta; = 0.1 &ndash; 0.5</td><td>Moderate heterogeneity</td><td>HR estimates from Cox are somewhat attenuated; frailty model preferred</td></tr>
+    <tr><td>&theta; = 0.5 &ndash; 1.0</td><td>Substantial heterogeneity</td><td>Significant unmeasured factors at play; invest in feature engineering</td></tr>
+    <tr><td>&theta; &gt; 1.0</td><td>Severe heterogeneity</td><td>Your model is missing something critical; revisit data collection strategy</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- PART 4 -->
+<div class="section" id="shared">
+<h2>Part 4: Shared Frailty &mdash; Group-Level Heterogeneity</h2>
+
+<p>Individual frailty captures customer-level hidden variation. <strong>Shared frailty</strong> captures group-level variation &mdash; all customers within a group (account, region, industry, sales rep) share a common frailty term. This models the intuition that some groups are inherently more churn-prone than others, for reasons beyond what group-level features capture.</p>
+
+<div class="formula"><div class="formula-label">SHARED FRAILTY MODEL</div>
+<div class="formula-math">h<sub>ij</sub>(t | X<sub>ij</sub>, Z<sub>j</sub>) = Z<sub>j</sub> &middot; h<sub>0</sub>(t) &middot; exp(&beta;'X<sub>ij</sub>)</div>
+<div class="formula-label">i = individual within group j | Z<sub>j</sub> = shared frailty for group j</div></div>
+
+<h3>Business Applications of Shared Frailty</h3>
+<table class="comp-table">
+  <thead><tr><th>Grouping Variable</th><th>What Shared Frailty Captures</th><th>Strategic Value</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Account Manager</strong></td><td>Unobserved quality differences between account managers</td><td>Identify which AMs have systematically higher or lower churn, controlling for customer mix</td></tr>
+    <tr><td><strong>Industry Vertical</strong></td><td>Industry-specific churn propensity beyond observed features</td><td>Set different retention targets and strategies by vertical</td></tr>
+    <tr><td><strong>Acquisition Channel</strong></td><td>Channel-specific quality not captured by demographics</td><td>Discover that "organic" customers are inherently stickier than "paid" even after controlling for features</td></tr>
+    <tr><td><strong>Geographic Region</strong></td><td>Regional effects (market maturity, competition, culture)</td><td>Adjust churn benchmarks by region; allocate retention resources proportionally</td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight"><div class="callout-label">The Account Manager Audit</div>
+<p>A B2B company fitted a shared frailty model grouped by account manager and discovered the frailty variance was &theta; = 0.82 &mdash; substantial. The empirical Bayes estimates of individual frailties ranged from Z = 0.4 (the best AM, whose customers churn at 40% of the baseline rate) to Z = 2.3 (the worst, whose customers churn at 230% of baseline). This variation persisted <em>after</em> controlling for portfolio size, customer tier, and industry. The insight: AM quality is a massive unmeasured driver of churn. The company restructured its coaching and assignment strategy, producing a 15% retention improvement within two quarters.</p></div>
+</div>
+
+<!-- PART 5 -->
+<div class="section" id="selection">
+<h2>Part 5: Selection Bias and the Survivorship Trap</h2>
+
+<p>Frailty models reveal a phenomenon that trips up analysts everywhere: <strong>the declining hazard paradox</strong>. Even when every individual's hazard is constant or increasing, the <em>observed</em> population hazard can decline over time because the composition of survivors changes.</p>
+
+<h3>A Worked Example</h3>
+<p>Suppose you have two hidden segments (you don't observe the segment label): "Fragile" (Z = 2, 40% of population) and "Robust" (Z = 0.5, 60% of population). The baseline monthly churn rate is 5%.</p>
+
+<table class="comp-table">
+  <thead><tr><th>Month</th><th>% Fragile Among Survivors</th><th>% Robust Among Survivors</th><th>Observed Population Hazard</th></tr></thead>
+  <tbody>
+    <tr><td>0</td><td>40%</td><td>60%</td><td>0.40(0.10) + 0.60(0.025) = <strong>5.5%</strong></td></tr>
+    <tr><td>6</td><td>28%</td><td>72%</td><td><strong>4.1%</strong></td></tr>
+    <tr><td>12</td><td>18%</td><td>82%</td><td><strong>3.3%</strong></td></tr>
+    <tr><td>24</td><td>8%</td><td>92%</td><td><strong>2.6%</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout danger"><div class="callout-label">The Misinterpretation</div>
+<p>Without a frailty model, you'd look at this data and conclude: "Our churn rate is improving! It dropped from 5.5% to 2.6% over 2 years." You'd credit your retention efforts, or your product improvements, or your customer success team. But none of that happened. The individual hazard rates never changed. The only thing that changed is <em>who's left</em>. The fragile customers churned out, leaving an increasingly robust survivor pool.</p>
+<p>This directly affects forecasting: if you project forward using the Month-24 hazard rate of 2.6%, you'll underestimate future churn because you're assuming the survivor population is representative of future cohorts. New cohorts will have the original 40/60 fragile/robust mix, and their churn rate will start back at 5.5%.</p></div>
+
+<h3>Implications for CLV Models</h3>
+<p>The survivorship trap directly impacts the CLV engine you built in Week 4. If your BG/NBD or Pareto/NBD model is fitted on long-tenured customers (survivors), the estimated buying rates and death rates are biased toward optimism &mdash; because you're fitting on the robust survivors, not the full population. The frailty variance parameter helps you gauge how severe this bias might be.</p>
+</div>
+
+<!-- PART 6 -->
+<div class="section" id="code">
+<h2>Part 6: Implementation in Python</h2>
+
+<div class="code-block"><div class="code-label">Python &middot; Frailty Models</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> lifelines <span class="kw">import</span> CoxPHFitter
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Standard Cox (Week 2 baseline)</span>
+<span class="cm"># ============================================</span>
+
+df = pd.<span class="fn">read_csv</span>(<span class="str">'customer_churn.csv'</span>)
+covariates = [<span class="str">'monthly_charges'</span>, <span class="str">'feature_adoption'</span>,
+              <span class="str">'support_tickets'</span>, <span class="str">'contract_months'</span>]
+
+cph_standard = <span class="fn">CoxPHFitter</span>(penalizer=<span class="num">0.01</span>)
+cph_standard.<span class="fn">fit</span>(
+    df[covariates + [<span class="str">'tenure'</span>, <span class="str">'churned'</span>]],
+    duration_col=<span class="str">'tenure'</span>, event_col=<span class="str">'churned'</span>
+)
+<span class="fn">print</span>(<span class="str">"=== Standard Cox PH ==="</span>)
+cph_standard.<span class="fn">print_summary</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Gamma Frailty Model (Individual)</span>
+<span class="cm"># lifelines supports frailty via penalized estimation</span>
+<span class="cm"># For full frailty: use R survival::coxph or PyMC</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Method A: lifelines robust variance (approximation)</span>
+cph_robust = <span class="fn">CoxPHFitter</span>(penalizer=<span class="num">0.01</span>)
+cph_robust.<span class="fn">fit</span>(
+    df[covariates + [<span class="str">'tenure'</span>, <span class="str">'churned'</span>]],
+    duration_col=<span class="str">'tenure'</span>, event_col=<span class="str">'churned'</span>,
+    robust=<span class="kw">True</span>  <span class="cm"># sandwich variance estimator</span>
+)
+<span class="fn">print</span>(<span class="str">"\n=== Robust Cox (sandwich variance) ==="</span>)
+cph_robust.<span class="fn">print_summary</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Shared Frailty via Cluster</span>
+<span class="cm"># Group by account_manager for shared frailty</span>
+<span class="cm"># ============================================</span>
+
+cph_shared = <span class="fn">CoxPHFitter</span>(penalizer=<span class="num">0.01</span>)
+cph_shared.<span class="fn">fit</span>(
+    df[covariates + [<span class="str">'tenure'</span>, <span class="str">'churned'</span>, <span class="str">'account_manager'</span>]],
+    duration_col=<span class="str">'tenure'</span>, event_col=<span class="str">'churned'</span>,
+    cluster_col=<span class="str">'account_manager'</span>,  <span class="cm"># shared frailty approx</span>
+    robust=<span class="kw">True</span>
+)
+<span class="fn">print</span>(<span class="str">"\n=== Shared Frailty (Account Manager) ==="</span>)
+cph_shared.<span class="fn">print_summary</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 4: Full Bayesian Frailty via PyMC</span>
+<span class="cm"># (Gold standard for frailty estimation)</span>
+<span class="cm"># ============================================</span>
+
+<span class="kw">import</span> pymc <span class="kw">as</span> pm
+<span class="kw">import</span> pytensor.tensor <span class="kw">as</span> pt
+
+<span class="kw">with</span> pm.<span class="fn">Model</span>() <span class="kw">as</span> frailty_model:
+    <span class="cm"># Priors for regression coefficients</span>
+    betas = pm.<span class="fn">Normal</span>(<span class="str">'betas'</span>, mu=<span class="num">0</span>, sigma=<span class="num">1</span>,
+                      shape=<span class="fn">len</span>(covariates))
+
+    <span class="cm"># Frailty variance (heterogeneity parameter)</span>
+    theta = pm.<span class="fn">HalfNormal</span>(<span class="str">'theta'</span>, sigma=<span class="num">1</span>)
+
+    <span class="cm"># Individual frailty terms</span>
+    Z = pm.<span class="fn">Gamma</span>(<span class="str">'Z'</span>, alpha=<span class="num">1</span>/theta, beta=<span class="num">1</span>/theta,
+                 shape=<span class="fn">len</span>(df))
+
+    <span class="cm"># Linear predictor with frailty</span>
+    X = df[covariates].values
+    log_hazard = pt.<span class="fn">dot</span>(X, betas) + pt.<span class="fn">log</span>(Z)
+
+    <span class="cm"># Exponential survival likelihood (simplified)</span>
+    lam = pt.<span class="fn">exp</span>(log_hazard)
+    obs = pm.<span class="fn">Exponential</span>(<span class="str">'obs'</span>, lam=lam,
+                         observed=df[<span class="str">'tenure'</span>].values)
+
+    <span class="cm"># Sample</span>
+    trace = pm.<span class="fn">sample</span>(<span class="num">2000</span>, tune=<span class="num">1000</span>, cores=<span class="num">2</span>)
+
+<span class="cm"># Posterior summary</span>
+<span class="fn">print</span>(pm.<span class="fn">summary</span>(trace, var_names=[<span class="str">'betas'</span>, <span class="str">'theta'</span>]))
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 5: Compare HR Estimates</span>
+<span class="cm"># ============================================</span>
+
+<span class="fn">print</span>(<span class="str">"\n=== Hazard Ratio Comparison ==="</span>)
+comparison = pd.<span class="fn">DataFrame</span>({
+    <span class="str">'Standard Cox'</span>: np.<span class="fn">exp</span>(cph_standard.params_),
+    <span class="str">'Robust Cox'</span>: np.<span class="fn">exp</span>(cph_robust.params_),
+}, index=covariates)
+<span class="fn">print</span>(comparison.<span class="fn">round</span>(<span class="num">3</span>))
+<span class="fn">print</span>(<span class="str">"\nIf frailty HRs are larger, standard Cox was attenuated."</span>)</pre>
+</div>
+</div>
+
+<!-- PART 7 -->
+<div class="section" id="playbook">
+<h2>Part 7: Your Week 8 Playbook</h2>
+
+<table class="comp-table">
+  <thead><tr><th>Question</th><th>Method</th></tr></thead>
+  <tbody>
+    <tr><td>"Are my Cox regression HRs attenuated?"</td><td>Fit frailty model; if &theta; > 0.1, yes &mdash; the true effects are stronger</td></tr>
+    <tr><td>"How much hidden variation exists?"</td><td>Frailty variance &theta;: small (<0.1) to severe (>1.0)</td></tr>
+    <tr><td>"Is declining churn real or a survivorship artifact?"</td><td>Frailty model separates true improvement from selection bias</td></tr>
+    <tr><td>"Do some account managers cause churn?"</td><td>Shared frailty by AM; extract empirical Bayes frailty estimates</td></tr>
+    <tr><td>"Should I collect more features?"</td><td>If &theta; is large, there's systematic variation you're missing &mdash; find new data sources</td></tr>
+  </tbody>
+</table>
+
+<div class="callout danger"><div class="callout-label">Top 5 Week 8 Mistakes</div>
+<p><strong>1. Ignoring frailty entirely.</strong> If unobserved heterogeneity exists (it almost always does), standard Cox HRs are biased toward the null. At minimum, test for it.</p>
+<p><strong>2. Confusing individual and shared frailty.</strong> Individual frailty captures person-level variation; shared frailty captures group-level. They answer different questions.</p>
+<p><strong>3. Over-interpreting a small &theta;.</strong> A frailty variance of 0.05 means your features capture most of the variation. Don't over-engineer the model.</p>
+<p><strong>4. Using frailty as a substitute for feature engineering.</strong> A large &theta; isn't the solution &mdash; it's the diagnosis. The solution is finding the unmeasured variables that drive the heterogeneity.</p>
+<p><strong>5. Forgetting the forecasting implication.</strong> If your cohort analysis (Week 7) shows declining churn, check whether it's genuine improvement or survivorship artifact before making projections.</p>
+</div>
+
+<h3>Connecting Week 8 to the Full Q1 Arc</h3>
+<div class="callout insight"><div class="callout-label">The Month 2 Synthesis</div>
+<p>Over Weeks 5-8, you've added four critical capabilities to your toolkit: <strong>competing risks</strong> (why customers leave for different reasons), <strong>win-back economics</strong> (whether to chase them), <strong>cohort analysis</strong> (is your growth real), and <strong>frailty models</strong> (what you can't see). Combined with the Month 1 foundation (KM, Cox, LCA, CLV), you now have a comprehensive customer analytics engine. The remaining 5 weeks of Q1 will add switching costs, time-to-second-purchase, contractual vs. non-contractual CLV, reactivation windows, and causal network effects.</p></div>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Read the Foundational Material</h4><p>Balan, T.A. & Putter, H. (2020). "A Tutorial on Frailty Models." Statistical Methods in Medical Research, 29(11), 3424-3454. Also: Vaupel, Manton, Stallard (1979). "The Impact of Heterogeneity in Individual Frailty on the Dynamics of Mortality." Demography, 16(3).</p></div>
+<div class="timeline-step"><h4>Day 3: Diagnose Your Week 2 Model</h4><p>Refit your Week 2 Cox PH model with robust=True and cluster_col on a grouping variable. Compare the standard errors. If they change substantially, heterogeneity is present.</p></div>
+<div class="timeline-step"><h4>Day 4: Fit a Shared Frailty Model</h4><p>Group customers by account manager (or channel, or region). Fit a shared frailty model. Extract the empirical Bayes frailty estimates. Which groups are "fragile" vs. "robust"?</p></div>
+<div class="timeline-step"><h4>Day 5: Demonstrate the Survivorship Paradox</h4><p>Simulate data with two hidden groups (fragile and robust). Show that the observed population hazard declines even when individual hazards are constant. Quantify the gap.</p></div>
+<div class="timeline-step"><h4>Day 6: Bayesian Frailty with PyMC</h4><p>Implement the full Bayesian frailty model from the code section. Extract posterior distributions for &theta; and individual Z values. Create a "frailty score" per customer.</p></div>
+<div class="timeline-step"><h4>Day 7: Write the Month 2 Synthesis</h4><p>"In Weeks 5-8, we extended our customer analytics engine with competing risks, win-back ROI, cohort diagnostics, and frailty-based heterogeneity correction. The frailty variance of &theta; = [X] suggests [Y]. Key recommendation: [Z]. Budget reallocation proposal: [details]."</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Tutorial:</strong> Balan, T.A. & Putter, H. (2020). A Tutorial on Frailty Models. <em>Statistical Methods in Medical Research</em>, 29(11), 3424-3454.<br>
+<strong>Original:</strong> Vaupel, J.W., Manton, K.G., Stallard, E. (1979). The Impact of Heterogeneity in Individual Frailty on the Dynamics of Mortality. <em>Demography</em>, 16(3), 439-454.<br>
+<strong>Textbook:</strong> Wienke, A. (2011). <em>Frailty Models in Survival Analysis</em>. CRC Press.<br>
+<strong>Selection Bias:</strong> Aalen, O.O., Borgan, O., Gjessing, H. (2008). <em>Survival and Event History Analysis</em>. Springer. Chapter 6.<br>
+<strong>Bayesian Approach:</strong> PyMC Examples Gallery: pymc.io/projects/examples &mdash; Frailty and Survival Regression Models.<br>
+<strong>Python:</strong> lifelines (CoxPHFitter with cluster_col, robust), PyMC for full Bayesian frailty.<br>
+<strong>R Alternative:</strong> survival::coxph(... + frailty(group, distribution="gamma"))
+</p>
+
+<div class="bottom-nav">
+<a href="week7_cohort_economics.html">&larr; Week 7: Cohort Economics</a>
+<a href="index.html">Back to Q1 Hub &rarr;</a>
+</div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script>
+</body></html>

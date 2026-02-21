@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4: Recency vs. Frequency</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}
+.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}
+.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}
+.content{max-width:900px;margin:0 auto;padding:0 24px 100px}
+.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}
+.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}
+.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}
+.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}
+.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}
+.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}
+strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}
+.demo-container{background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;margin:28px 0;box-shadow:0 4px 20px rgba(0,0,0,.04)}.demo-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:20px;color:var(--blue)}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-label">Q1 HUB</a>
+  <a href="#business" class="nav-link active">The Paradox</a>
+  <a href="#pareto" class="nav-link">Pareto/NBD</a>
+  <a href="#bgnbd-compare" class="nav-link">Model Comparison</a>
+  <a href="#gamma" class="nav-link">Gamma-Gamma</a>
+  <a href="#complete-clv" class="nav-link">Complete CLV</a>
+  <a href="#code" class="nav-link">Python Code</a>
+  <a href="#playbook" class="nav-link">Playbook</a>
+</div></nav>
+
+<header class="hero">
+  <div class="week-tag">Week 04 &middot; Q1: Customer Lifetime &amp; Retention Economics</div>
+  <h1>The <span>Recency-Frequency</span> Trade-off: Which Matters More?</h1>
+  <p class="hero-sub">Week 1 introduced BG/NBD. This week we go deeper into the full family of "buy till you die" models &mdash; the Pareto/NBD (the original) and the Gamma-Gamma model for monetary value. You'll build a complete CLV engine from scratch and master the diagnostics that separate amateurs from experts.</p>
+</header>
+
+<main class="content">
+
+<!-- ============ PART 1 ============ -->
+<div class="section" id="business">
+<h2>Part 1: The Recency-Frequency Paradox</h2>
+
+<p>Here's a question that trips up even experienced analysts. Who is more valuable &mdash; a customer who made 20 purchases over 2 years but hasn't bought in 8 months, or a customer who made 3 purchases but their last one was yesterday?</p>
+
+<p>Most RFM scoring systems rank the 20-purchase customer higher because of the massive frequency advantage. But probabilistic models tell a completely different story.</p>
+
+<div class="callout">
+  <div class="callout-label">The Paradox Explained</div>
+  <p><strong>Customer A:</strong> 20 purchases, last purchase 8 months ago, observed for 24 months. High frequency, low recency.</p>
+  <p><strong>Customer B:</strong> 3 purchases, last purchase 1 day ago, observed for 12 months. Low frequency, high recency.</p>
+  <p>The BG/NBD model calculates P(Alive) for Customer A at approximately <strong>0.15</strong> (85% chance they've churned) and for Customer B at approximately <strong>0.92</strong> (very likely still active). Why? Customer A's pattern screams "binge and burn" &mdash; they bought furiously and then stopped. The 8-month gap far exceeds their average inter-purchase time of ~5 weeks. Customer B's 3 purchases are spaced consistently, and the most recent is fresh.</p>
+</div>
+
+<h3>Why Traditional RFM Fails</h3>
+
+<table class="comp-table">
+  <thead><tr><th>Approach</th><th>How It Handles R vs. F</th><th>Fatal Flaw</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Simple RFM Scoring</strong></td><td>Assigns arbitrary points (R=5, F=5, M=5) and sums them</td><td>Treats R and F as independent; equal weighting is arbitrary</td></tr>
+    <tr><td><strong>Rule-Based</strong> ("Active if bought in 12 months")</td><td>Binary threshold on recency only</td><td>Same threshold for weekly and yearly buyers makes no sense</td></tr>
+    <tr><td><strong>BG/NBD / Pareto/NBD</strong></td><td>Models the joint distribution of R and F, conditional on individual buying rates</td><td>Correct &mdash; evaluates recency relative to each customer's personal rhythm</td></tr>
+  </tbody>
+</table>
+
+<p>The critical insight: <strong>recency must be evaluated relative to frequency</strong>. A customer who buys weekly and hasn't bought in 2 months is in trouble. A customer who buys quarterly and hasn't bought in 2 months is right on schedule. Probabilistic models capture this automatically; scoring systems do not.</p>
+
+<!-- Interactive Demo -->
+<div class="demo-container">
+  <div class="demo-title">Interactive: P(Alive) Calculator</div>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">Adjust a customer's profile to see how P(Alive) changes. Notice how recency dominates.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;">
+    <div>
+      <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Repeat Purchases <span id="freq-val" style="float:right;color:var(--accent);font-family:'JetBrains Mono',monospace;">5</span></label>
+      <input type="range" min="1" max="30" value="5" id="freq-slider" style="width:100%;accent-color:var(--accent);" oninput="calcPAlive()">
+    </div>
+    <div>
+      <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Recency (weeks) <span id="rec-val" style="float:right;color:var(--accent);font-family:'JetBrains Mono',monospace;">10</span></label>
+      <input type="range" min="1" max="52" value="10" id="rec-slider" style="width:100%;accent-color:var(--accent);" oninput="calcPAlive()">
+    </div>
+    <div>
+      <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Tenure (weeks) <span id="ten-val" style="float:right;color:var(--accent);font-family:'JetBrains Mono',monospace;">26</span></label>
+      <input type="range" min="4" max="104" value="26" id="ten-slider" style="width:100%;accent-color:var(--accent);" oninput="calcPAlive()">
+    </div>
+  </div>
+  <div style="text-align:center;padding:20px;background:var(--cream);border-radius:8px;">
+    <div style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Approximate P(Alive)</div>
+    <div id="palive-result" style="font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--accent2);margin:8px 0;">0.82</div>
+    <div id="palive-label" style="font-size:14px;color:#555;">Likely still active &mdash; recent purchase relative to buying rhythm</div>
+  </div>
+</div>
+</div>
+
+<!-- ============ PART 2 ============ -->
+<div class="section" id="pareto">
+<h2>Part 2: The Pareto/NBD Model &mdash; The Original</h2>
+
+<p>Before Fader and Hardie's BG/NBD (Week 1), Schmittlein, Morrison, and Colombo published the <strong>Pareto/NBD model</strong> in 1987. It was the original "counting your customers" framework and remains important for two reasons: it's the theoretical foundation for everything that followed, and in some settings it provides a better fit.</p>
+
+<h3>How Pareto/NBD Differs from BG/NBD</h3>
+
+<table class="comp-table">
+  <thead><tr><th>Aspect</th><th>BG/NBD (Week 1)</th><th>Pareto/NBD (Original)</th></tr></thead>
+  <tbody>
+    <tr><td>When can a customer "die"?</td><td>Only immediately after a purchase</td><td><strong>At any point in continuous time</strong></td></tr>
+    <tr><td>Dropout process</td><td>Geometric (discrete coin-flip after each buy)</td><td><strong>Exponential (continuous hazard)</strong></td></tr>
+    <tr><td>Estimation</td><td>Simple MLE, works in Excel</td><td>Complex numerical integration</td></tr>
+    <tr><td>Prediction accuracy</td><td>Very similar in most settings</td><td>Slightly better when dropout is truly continuous</td></tr>
+    <tr><td>Parameters</td><td>r, &alpha; (buying), a, b (dying)</td><td>r, &alpha; (buying), s, &beta; (dying)</td></tr>
+  </tbody>
+</table>
+
+<div class="formula">
+  <div class="formula-label">PARETO/NBD: THE DROPOUT PROCESS</div>
+  <div class="formula-math">Customer lifetime ~ Exponential(&mu;) &nbsp;&nbsp;where &mu; ~ Gamma(s, &beta;)</div>
+  <div class="formula-label">Marginal lifetime follows a Pareto (Type II) distribution &mdash; hence the name</div>
+</div>
+
+<p>In plain English: each customer has a personal "death rate" &mu; (how quickly they disengage). This rate varies across the population following a Gamma distribution. A customer with low &mu; sticks around for years; a customer with high &mu; drops off within weeks. The model learns the population-level distribution of these death rates from the aggregate data.</p>
+
+<div class="callout insight">
+  <div class="callout-label">When Pareto/NBD Beats BG/NBD</div>
+  <p>In businesses where customer "death" genuinely happens between purchases &mdash; not at a decision point after buying &mdash; Pareto/NBD is theoretically more appropriate. Think gym memberships (people stop going before they cancel), media subscriptions (reading declines before renewal), or app usage (engagement drops across weeks before formal churn). However, the practical difference is usually less than 5% in prediction accuracy, which is why BG/NBD dominates in industry &mdash; it's dramatically easier to implement.</p>
+</div>
+</div>
+
+<!-- ============ PART 3 ============ -->
+<div class="section" id="bgnbd-compare">
+<h2>Part 3: Head-to-Head &mdash; Choosing Your Model</h2>
+
+<p>Fader and Hardie (2005) directly compared both models on the classic CDNOW dataset (online CD retailer, 23,570 customers over 78 weeks). The results were remarkably close.</p>
+
+<table class="comp-table">
+  <thead><tr><th>Metric</th><th>BG/NBD</th><th>Pareto/NBD</th></tr></thead>
+  <tbody>
+    <tr><td>Calibration period fit (repeat transactions)</td><td>Slightly better</td><td>Very close</td></tr>
+    <tr><td>39-week holdout forecast</td><td>4% underforecast</td><td>2% underforecast</td></tr>
+    <tr><td>Individual-level prediction correlation</td><td>Nearly identical</td><td>Nearly identical</td></tr>
+    <tr><td>Computation time</td><td><strong>Seconds</strong></td><td>Minutes to hours</td></tr>
+    <tr><td>Parameter stability</td><td>Very stable</td><td>Occasionally unstable</td></tr>
+  </tbody>
+</table>
+
+<h3>The Decision Framework</h3>
+
+<div class="callout">
+  <div class="callout-label">Which Model Should You Use?</div>
+  <p><strong>Start with BG/NBD</strong> in all cases. It's faster, more stable, easier to explain, and gives nearly identical results to Pareto/NBD in 90%+ of real-world datasets.</p>
+  <p><strong>Switch to Pareto/NBD</strong> if: (a) your holdout validation shows BG/NBD consistently underperforms on your specific data, (b) your business model genuinely involves continuous-time dropout, or (c) you're publishing research and need to benchmark against the original formulation.</p>
+  <p><strong>Consider PyMC-Marketing Bayesian CLV</strong> if you want: uncertainty quantification on individual CLV estimates, the ability to incorporate prior domain knowledge, or more flexibility in model specification. This is the cutting edge.</p>
+</div>
+</div>
+
+<!-- ============ PART 4 ============ -->
+<div class="section" id="gamma">
+<h2>Part 4: The Gamma-Gamma Model &mdash; Putting Dollars on Transactions</h2>
+
+<p>BG/NBD and Pareto/NBD predict <em>how many</em> future transactions a customer will make. To calculate CLV, you also need <em>how much</em> each transaction is worth. Enter the Gamma-Gamma model.</p>
+
+<h3>The Model Structure</h3>
+
+<p>Each customer has a latent "true" average transaction value (&nu;). Observed transaction amounts vary randomly around this mean. Across the population, these true averages follow a Gamma distribution. The model learns the population parameters and then produces a <em>Bayesian-updated</em> estimate for each individual.</p>
+
+<div class="formula">
+  <div class="formula-label">GAMMA-GAMMA MODEL</div>
+  <div class="formula-math">z<sub>ij</sub> | &nu;<sub>i</sub> ~ Gamma(p, p/&nu;<sub>i</sub>) &nbsp;&nbsp;|&nbsp;&nbsp; &nu;<sub>i</sub> ~ Gamma(q, &gamma;)</div>
+  <div class="formula-label">z = transaction value | &nu; = true mean value | p, q, &gamma; = population parameters</div>
+</div>
+
+<h3>The Critical Independence Assumption</h3>
+
+<div class="callout danger">
+  <div class="callout-label">Check This BEFORE Using Gamma-Gamma</div>
+  <p>The model <strong>assumes monetary value is independent of purchase frequency</strong>. If frequent buyers also spend more (or less) per transaction, the assumption is violated and CLV estimates will be biased.</p>
+  <p><strong>How to check:</strong> Compute Pearson correlation between frequency and average monetary value.</p>
+  <p>|r| &lt; 0.15 &rarr; Safe to proceed</p>
+  <p>|r| 0.15 - 0.30 &rarr; Proceed with caution, note limitation</p>
+  <p>|r| &gt; 0.30 &rarr; Need an alternative (segment first, or use a monetary model that handles correlation)</p>
+</div>
+
+<h3>Bayesian Shrinkage in Action</h3>
+
+<p>A customer who made 1 purchase of $500 looks like a whale. But with only one observation, how confident are you? The Gamma-Gamma model says: "Given the population distribution and this single observation, the best estimate of their true average is probably closer to $320" (pulled toward the population mean). A customer with 15 purchases averaging $500 gets an estimate much closer to $500 because 15 observations provide strong evidence.</p>
+
+<table class="comp-table">
+  <thead><tr><th>Customer</th><th>Repeat Purchases</th><th>Observed Avg Spend</th><th>Gamma-Gamma Estimate</th><th>Shrinkage</th></tr></thead>
+  <tbody>
+    <tr><td>Alice</td><td>1</td><td>$500</td><td>$320</td><td>Strong (toward population mean of $250)</td></tr>
+    <tr><td>Bob</td><td>5</td><td>$500</td><td>$430</td><td>Moderate</td></tr>
+    <tr><td>Carol</td><td>15</td><td>$500</td><td>$485</td><td>Minimal (data dominates)</td></tr>
+    <tr><td>Dave</td><td>50</td><td>$500</td><td>$498</td><td>Nearly zero</td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight">
+  <div class="callout-label">Why This Matters Commercially</div>
+  <p>Without shrinkage, you'd overvalue low-frequency high-spenders and undervalue high-frequency moderate-spenders. This directly impacts acquisition budget allocation, loyalty tier assignment, and customer prioritization. Bayesian shrinkage is the "secret sauce" that makes probabilistic CLV more reliable than simple averages, especially for the long tail of customers who have limited purchase history.</p>
+</div>
+</div>
+
+<!-- ============ PART 5 ============ -->
+<div class="section" id="complete-clv">
+<h2>Part 5: Assembling the Complete CLV Engine</h2>
+
+<p>Now we bring everything from Weeks 1-4 together into a production-ready CLV system.</p>
+
+<div style="display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr;align-items:center;gap:8px;margin:24px 0;text-align:center;">
+  <div style="background:#fff;border:2px solid var(--accent);border-radius:10px;padding:16px;">
+    <div style="font-weight:700;color:var(--accent);font-size:14px;">BG/NBD or Pareto/NBD</div>
+    <div style="font-size:12px;margin-top:4px;">Expected future transactions</div>
+  </div>
+  <div style="font-size:20px;color:var(--muted);">&times;</div>
+  <div style="background:#fff;border:2px solid var(--accent2);border-radius:10px;padding:16px;">
+    <div style="font-weight:700;color:var(--accent2);font-size:14px;">Gamma-Gamma</div>
+    <div style="font-size:12px;margin-top:4px;">Expected value per transaction</div>
+  </div>
+  <div style="font-size:20px;color:var(--muted);">&times;</div>
+  <div style="background:#fff;border:2px solid var(--blue);border-radius:10px;padding:16px;">
+    <div style="font-weight:700;color:var(--blue);font-size:14px;">Discount Factor</div>
+    <div style="font-size:12px;margin-top:4px;">Time value of money</div>
+  </div>
+</div>
+
+<div class="formula">
+  <div class="formula-label">COMPLETE CLV FORMULA (DCF METHOD)</div>
+  <div class="formula-math">CLV<sub>i</sub> = &sum;<sub>t=1</sub><sup>T</sup> E[transactions<sub>i</sub> in t] &times; E[value<sub>i</sub> per txn] &times; (1 + d)<sup>&minus;t</sup></div>
+  <div class="formula-label">d = monthly discount rate &nbsp;|&nbsp; T = projection horizon</div>
+</div>
+
+<h3>Model Validation: The Holdout Test</h3>
+
+<p>The gold standard for validating CLV models is the <strong>calibration-holdout split</strong>. Split your transaction data at a point in time: fit the model on the first period (calibration), predict for the second period (holdout), and compare predictions to actuals.</p>
+
+<table class="comp-table">
+  <thead><tr><th>Validation Check</th><th>What to Compare</th><th>Good Result</th></tr></thead>
+  <tbody>
+    <tr><td>Aggregate transactions</td><td>Total predicted purchases vs. actual in holdout</td><td>Within 5-10% at aggregate level</td></tr>
+    <tr><td>Individual-level accuracy</td><td>Predicted vs. actual purchases per customer</td><td>MAE better than simple heuristics (e.g., "last period's count")</td></tr>
+    <tr><td>Frequency bin comparison</td><td>Group by calibration frequency, compare predicted vs. actual holdout transactions per group</td><td>Close tracking across all frequency bins</td></tr>
+    <tr><td>Conditional expectations</td><td>Plot predicted vs. actual for each recency/frequency cell</td><td>Diagonal pattern (predicted ~ actual)</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="callout-label">The lifetimes Calibration-Holdout Workflow</div>
+  <p>The lifetimes library has a built-in function for this: <code>calibration_and_holdout_data()</code>. It automatically splits your transaction data at a specified date, computes RFM summaries for both periods, and lets you compare model predictions against holdout actuals. This is the single most important diagnostic step in your CLV pipeline. <strong>Never deploy a CLV model without a holdout test.</strong></p>
+</div>
+
+<h3>From CLV to Business Decisions</h3>
+
+<table class="comp-table">
+  <thead><tr><th>Strategic Decision</th><th>How CLV Informs It</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Acquisition budget</strong></td><td>Max CAC = Margin CLV &times; target ROI. If CLV = $500 and margin = 40%, max CAC at 3:1 ROI = $67</td></tr>
+    <tr><td><strong>Retention investment</strong></td><td>Spend up to (CLV &times; P(churn) &times; P(intervention success)) to retain a customer</td></tr>
+    <tr><td><strong>Loyalty tier design</strong></td><td>Use CLV deciles as natural tier boundaries; top 10% are "Platinum"</td></tr>
+    <tr><td><strong>Revenue forecasting</strong></td><td>Sum individual CLV projections for company-level revenue forecast</td></tr>
+    <tr><td><strong>Customer health scoring</strong></td><td>Combine P(Alive), predicted transactions, and CLV into a composite health metric</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============ PART 6 ============ -->
+<div class="section" id="code">
+<h2>Part 6: Complete Production Code</h2>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; Full CLV Pipeline</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> lifelines <span class="kw">import</span> BetaGeoFitter, ParetoNBDFitter
+<span class="kw">from</span> lifelines <span class="kw">import</span> GammaGammaFitter
+<span class="kw">from</span> lifelines.utils <span class="kw">import</span> (
+    summary_data_from_transaction_data,
+    calibration_and_holdout_data
+)
+<span class="kw">from</span> lifelines.plotting <span class="kw">import</span> (
+    plot_frequency_recency_matrix,
+    plot_probability_alive_matrix,
+    plot_calibration_purchases_vs_holdout_purchases
+)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Load and Prepare Transaction Data</span>
+<span class="cm"># ============================================</span>
+
+txns = pd.<span class="fn">read_csv</span>(<span class="str">'transactions.csv'</span>, parse_dates=[<span class="str">'date'</span>])
+
+<span class="cm"># Full RFM summary</span>
+rfm = <span class="fn">summary_data_from_transaction_data</span>(
+    txns,
+    customer_id_col=<span class="str">'customer_id'</span>,
+    datetime_col=<span class="str">'date'</span>,
+    monetary_value_col=<span class="str">'revenue'</span>,
+    observation_period_end=<span class="str">'2026-01-31'</span>
+)
+
+<span class="cm"># Calibration-holdout split for validation</span>
+cal_hold = <span class="fn">calibration_and_holdout_data</span>(
+    txns,
+    customer_id_col=<span class="str">'customer_id'</span>,
+    datetime_col=<span class="str">'date'</span>,
+    calibration_period_end=<span class="str">'2025-09-30'</span>,
+    observation_period_end=<span class="str">'2026-01-31'</span>,
+    monetary_value_col=<span class="str">'revenue'</span>
+)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Fit BG/NBD (Primary Model)</span>
+<span class="cm"># ============================================</span>
+
+bgf = <span class="fn">BetaGeoFitter</span>(penalizer_coef=<span class="num">0.001</span>)
+bgf.<span class="fn">fit</span>(
+    cal_hold[<span class="str">'frequency_cal'</span>],
+    cal_hold[<span class="str">'recency_cal'</span>],
+    cal_hold[<span class="str">'T_cal'</span>]
+)
+<span class="fn">print</span>(<span class="str">"BG/NBD Parameters:"</span>)
+<span class="fn">print</span>(bgf.<span class="fn">summary</span>())
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Fit Pareto/NBD (Comparison)</span>
+<span class="cm"># ============================================</span>
+
+pnbd = <span class="fn">ParetoNBDFitter</span>(penalizer_coef=<span class="num">0.001</span>)
+pnbd.<span class="fn">fit</span>(
+    cal_hold[<span class="str">'frequency_cal'</span>],
+    cal_hold[<span class="str">'recency_cal'</span>],
+    cal_hold[<span class="str">'T_cal'</span>]
+)
+<span class="fn">print</span>(<span class="str">"\nPareto/NBD Parameters:"</span>)
+<span class="fn">print</span>(pnbd.<span class="fn">summary</span>())
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 4: Holdout Validation</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Compare predicted vs actual holdout purchases</span>
+fig, axes = plt.<span class="fn">subplots</span>(<span class="num">1</span>, <span class="num">2</span>, figsize=(<span class="num">14</span>, <span class="num">5</span>))
+
+<span class="cm"># BG/NBD validation</span>
+<span class="fn">plot_calibration_purchases_vs_holdout_purchases</span>(
+    bgf, cal_hold, ax=axes[<span class="num">0</span>],
+    n=<span class="num">90</span>  <span class="cm"># holdout period in days</span>
+)
+axes[<span class="num">0</span>].<span class="fn">set_title</span>(<span class="str">'BG/NBD: Calibration vs Holdout'</span>)
+
+<span class="cm"># Pareto/NBD validation</span>
+<span class="fn">plot_calibration_purchases_vs_holdout_purchases</span>(
+    pnbd, cal_hold, ax=axes[<span class="num">1</span>],
+    n=<span class="num">90</span>
+)
+axes[<span class="num">1</span>].<span class="fn">set_title</span>(<span class="str">'Pareto/NBD: Calibration vs Holdout'</span>)
+plt.<span class="fn">tight_layout</span>()
+plt.<span class="fn">show</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 5: Gamma-Gamma for Monetary Value</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Filter to repeat customers</span>
+rfm_repeat = rfm[rfm[<span class="str">'frequency'</span>] > <span class="num">0</span>]
+
+<span class="cm"># CHECK INDEPENDENCE ASSUMPTION</span>
+corr = rfm_repeat[[<span class="str">'frequency'</span>, <span class="str">'monetary_value'</span>]].<span class="fn">corr</span>()
+<span class="fn">print</span>(<span class="str">f"\nFreq-Monetary Correlation: {corr.iloc[0,1]:.3f}"</span>)
+<span class="fn">print</span>(<span class="str">"(Should be near 0 for Gamma-Gamma to work)"</span>)
+
+ggf = <span class="fn">GammaGammaFitter</span>(penalizer_coef=<span class="num">0.001</span>)
+ggf.<span class="fn">fit</span>(rfm_repeat[<span class="str">'frequency'</span>], rfm_repeat[<span class="str">'monetary_value'</span>])
+
+<span class="cm"># Expected average transaction value per customer</span>
+rfm_repeat[<span class="str">'expected_avg_value'</span>] = ggf.<span class="fn">conditional_expected_average_profit</span>(
+    rfm_repeat[<span class="str">'frequency'</span>],
+    rfm_repeat[<span class="str">'monetary_value'</span>]
+)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 6: Complete CLV Calculation</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Refit BG/NBD on full dataset (not cal-hold split)</span>
+bgf_full = <span class="fn">BetaGeoFitter</span>(penalizer_coef=<span class="num">0.001</span>)
+bgf_full.<span class="fn">fit</span>(rfm[<span class="str">'frequency'</span>], rfm[<span class="str">'recency'</span>], rfm[<span class="str">'T'</span>])
+
+<span class="cm"># 12-month CLV with 1% monthly discount rate (~12.7% annual)</span>
+rfm[<span class="str">'clv_12m'</span>] = ggf.<span class="fn">customer_lifetime_value</span>(
+    bgf_full,
+    rfm[<span class="str">'frequency'</span>],
+    rfm[<span class="str">'recency'</span>],
+    rfm[<span class="str">'T'</span>],
+    rfm[<span class="str">'monetary_value'</span>],
+    time=<span class="num">12</span>,           <span class="cm"># months</span>
+    discount_rate=<span class="num">0.01</span>  <span class="cm"># monthly</span>
+)
+
+<span class="cm"># P(Alive) for every customer</span>
+rfm[<span class="str">'p_alive'</span>] = bgf_full.<span class="fn">conditional_probability_alive</span>(
+    rfm[<span class="str">'frequency'</span>], rfm[<span class="str">'recency'</span>], rfm[<span class="str">'T'</span>]
+)
+
+<span class="cm"># Segment by CLV</span>
+rfm[<span class="str">'segment'</span>] = pd.<span class="fn">qcut</span>(
+    rfm[<span class="str">'clv_12m'</span>], <span class="num">5</span>,
+    labels=[<span class="str">'Bronze'</span>, <span class="str">'Silver'</span>, <span class="str">'Gold'</span>,
+            <span class="str">'Platinum'</span>, <span class="str">'Diamond'</span>]
+)
+
+<span class="cm"># Customer Health Score (composite)</span>
+rfm[<span class="str">'health_score'</span>] = (
+    rfm[<span class="str">'p_alive'</span>] * <span class="num">0.5</span> +
+    rfm[<span class="str">'clv_12m'</span>].<span class="fn">rank</span>(pct=<span class="kw">True</span>) * <span class="num">0.5</span>
+)
+
+<span class="fn">print</span>(<span class="str">"\n=== CLV Summary by Segment ==="</span>)
+<span class="fn">print</span>(rfm.<span class="fn">groupby</span>(<span class="str">'segment'</span>).<span class="fn">agg</span>(
+    customers=(<span class="str">'clv_12m'</span>, <span class="str">'count'</span>),
+    avg_clv=(<span class="str">'clv_12m'</span>, <span class="str">'mean'</span>),
+    avg_p_alive=(<span class="str">'p_alive'</span>, <span class="str">'mean'</span>),
+    total_clv=(<span class="str">'clv_12m'</span>, <span class="str">'sum'</span>)
+).<span class="fn">round</span>(<span class="num">2</span>))</pre>
+</div>
+</div>
+
+<!-- ============ PART 7 ============ -->
+<div class="section" id="playbook">
+<h2>Part 7: Your Week 4 Playbook</h2>
+
+<table class="comp-table">
+  <thead><tr><th>Business Question</th><th>Tool / Output</th></tr></thead>
+  <tbody>
+    <tr><td>"Is recency or frequency more predictive?"</td><td>BG/NBD P(Alive) matrix &mdash; shows recency dominates for active/dead classification</td></tr>
+    <tr><td>"Should I use BG/NBD or Pareto/NBD?"</td><td>Holdout validation comparison &mdash; pick whichever has lower aggregate forecast error</td></tr>
+    <tr><td>"What is this customer's expected spend?"</td><td>Gamma-Gamma conditional expected average profit</td></tr>
+    <tr><td>"What is the 12-month CLV for every customer?"</td><td>Combined BG/NBD + Gamma-Gamma CLV calculation</td></tr>
+    <tr><td>"How should I set my acquisition budget?"</td><td>Margin CLV per segment &div; target CAC:LTV ratio</td></tr>
+    <tr><td>"Is my CLV model any good?"</td><td>Calibration-holdout comparison plot</td></tr>
+  </tbody>
+</table>
+
+<h3>Common Pitfalls</h3>
+
+<div class="callout danger">
+  <div class="callout-label">Top 5 Week 4 Mistakes</div>
+  <p><strong>1. Deploying without holdout validation.</strong> A model that fits calibration data perfectly can still produce terrible forecasts. Always split and validate.</p>
+  <p><strong>2. Ignoring the Gamma-Gamma independence check.</strong> If frequency and monetary value are correlated (&gt;0.3), your CLV estimates are biased. Segment first or find an alternative monetary model.</p>
+  <p><strong>3. Using the wrong discount rate.</strong> A 1% monthly rate (~12.7% annual) is standard. Using your company's exact WACC is better. Using 0% (no discounting) vastly overstates long-horizon CLV.</p>
+  <p><strong>4. Treating CLV as deterministic.</strong> CLV is a probabilistic estimate with uncertainty. A customer with CLV = $500 might have a 95% confidence interval of [$200, $1,200]. For high-stakes decisions, consider Bayesian approaches (PyMC-Marketing) that give you full posterior distributions.</p>
+  <p><strong>5. Forgetting to convert revenue CLV to margin CLV.</strong> Revenue CLV is not profit. Multiply by gross margin % before making acquisition or retention budget decisions.</p>
+</div>
+
+<h3>Study Assignments</h3>
+
+<div class="timeline">
+  <div class="timeline-step">
+    <h4>Day 1-2: Read the Foundational Papers</h4>
+    <p>Schmittlein, Morrison, Colombo (1987). "Counting Your Customers: Who Are They and What Will They Do Next?" Management Science, 33(1). Then Fader, Hardie (2013). "The Gamma-Gamma Model of Monetary Value." brucehardie.com/notes/025/</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 3: Implement Both Models Head-to-Head</h4>
+    <p>Using the Online Retail dataset (UCI), fit both BG/NBD and Pareto/NBD. Compare parameter estimates, computation time, and holdout predictions. Document which model wins for your data.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 4: Build Complete CLV Pipeline</h4>
+    <p>Add Gamma-Gamma on top. Verify the independence assumption. Compute 6-month and 12-month CLV for all customers. Create a 5-tier segmentation based on CLV.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 5: Validation Deep-Dive</h4>
+    <p>Do a proper calibration-holdout split. Generate the comparison plots. Compute aggregate and individual-level error metrics. Benchmark against a naive model ("predict last period's count").</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 6: Build a Customer Health Dashboard</h4>
+    <p>Create a composite health score combining P(Alive), CLV, and predicted transactions. Build a simple dashboard showing: segment distribution, at-risk high-value customers, total company CLV forecast.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 7: Write the Week 1-4 Synthesis Brief</h4>
+    <p>This is your month-end deliverable. "Over the first 4 weeks, we've built a complete customer analytics engine: survival curves (KM), churn drivers (Cox PH), churn segments (LCA), and probabilistic CLV (BG/NBD + Gamma-Gamma). Our 12-month CLV forecast for the active customer base is $X. The top 20% of customers account for Y% of projected value. Recommended actions: ..."</p>
+  </div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Original Paper:</strong> Schmittlein, D.C., Morrison, D.G., Colombo, R. (1987). Counting Your Customers: Who Are They and What Will They Do Next? <em>Management Science</em>, 33(1), 1-24.<br>
+<strong>BG/NBD:</strong> Fader, P.S., Hardie, B.G.S., Lee, K.L. (2005). "Counting Your Customers" the Easy Way. <em>Marketing Science</em>, 24(2), 275-284.<br>
+<strong>Gamma-Gamma:</strong> Fader, P.S., Hardie, B.G.S. (2013). The Gamma-Gamma Model of Monetary Value. brucehardie.com/notes/025/<br>
+<strong>Comparison:</strong> Platzer, M. & Reutterer, T. (2016). Ticking Away the Moments: Timing Regularity Helps to Better Predict Customer Activity. <em>Marketing Science</em>, 35(5).<br>
+<strong>Bayesian Alternative:</strong> PyMC-Marketing CLV module. pymc-marketing.readthedocs.io<br>
+<strong>Textbook:</strong> Fader, P. (2020). <em>Customer Centricity</em>. Wharton Digital Press.<br>
+<strong>Practice Datasets:</strong> CDNOW (bundled with lifetimes), Online Retail (UCI ML Repository)
+</p>
+
+<div class="bottom-nav">
+  <a href="week3_churn_segmentation.html">&larr; Week 3: Churn Segmentation</a>
+  <a href="index.html">Back to Q1 Hub &rarr;</a>
+</div>
+</div>
+
+</main>
+
+<script>
+// Nav scroll highlighting
+const navLinks=document.querySelectorAll('.nav-link');const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});
+
+// P(Alive) interactive calculator (simplified approximation)
+function calcPAlive(){
+  const freq=parseInt(document.getElementById('freq-slider').value);
+  const rec=parseInt(document.getElementById('rec-slider').value);
+  const ten=parseInt(document.getElementById('ten-slider').value);
+  document.getElementById('freq-val').textContent=freq;
+  document.getElementById('rec-val').textContent=rec;
+  document.getElementById('ten-val').textContent=ten;
+
+  // Ensure tenure >= recency
+  if(ten<rec){document.getElementById('ten-slider').value=rec;document.getElementById('ten-val').textContent=rec;}
+  const T=Math.max(ten,rec);
+
+  // Simplified P(Alive) approximation
+  // Based on: if gap since last purchase >> average inter-purchase time, likely dead
+  const avgIPT=freq>0?rec/freq:T;  // average inter-purchase time
+  const gap=T-rec;  // time since last purchase
+  const gapRatio=gap/Math.max(avgIPT,1);
+
+  // Logistic-like decay: P(alive) ~ 1/(1+exp(k*(gapRatio-threshold)))
+  const k=2.5;
+  const threshold=1.5;
+  let pAlive=1/(1+Math.exp(k*(gapRatio-threshold)));
+
+  // Frequency bonus: more purchases = more confidence in rhythm
+  const freqAdj=Math.min(freq/10,0.3);
+  pAlive=Math.min(0.99,pAlive+freqAdj*(1-pAlive)*0.5);
+
+  // Very recent purchase bonus
+  if(gap<=2) pAlive=Math.max(pAlive,0.90);
+
+  pAlive=Math.max(0.01,Math.min(0.99,pAlive));
+
+  document.getElementById('palive-result').textContent=pAlive.toFixed(2);
+  document.getElementById('palive-result').style.color=pAlive>0.6?'#2d6a4f':pAlive>0.3?'#e9c46a':'#e63946';
+
+  let label='';
+  if(pAlive>0.8) label='Likely still active -- recent purchase relative to buying rhythm';
+  else if(pAlive>0.5) label='Uncertain -- could go either way, worth a retention nudge';
+  else if(pAlive>0.3) label='At risk -- gap since last purchase exceeds typical rhythm';
+  else label='Likely churned -- extended silence relative to historical buying pattern';
+  document.getElementById('palive-label').textContent=label;
+}
+calcPAlive();
+</script>
+</body>
+</html>

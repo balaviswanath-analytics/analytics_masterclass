@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 7: Cohort Economics</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style>
+</head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q1 HUB</a><a href="#business" class="nav-link active">The Growth Illusion</a><a href="#triangle" class="nav-link">Revenue Triangle</a><a href="#retention-curves" class="nav-link">Retention Curves</a><a href="#diagnostics" class="nav-link">Cohort Diagnostics</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+
+<header class="hero"><div class="week-tag">Week 07 &middot; Q1: Customer Lifetime &amp; Retention Economics</div>
+<h1><span>Cohort</span> Economics: The Truth Behind Your Growth Story</h1>
+<p class="hero-sub">Revenue is growing 30% year-over-year. The board is thrilled. But hidden beneath that topline number might be a terrifying truth: each successive cohort of customers is worse than the last, and your growth is an illusion fueled by acquisition spending. Cohort analysis is the X-ray that reveals the skeletal structure of your business.</p></header>
+
+<main class="content">
+<div class="section" id="business">
+<h2>Part 1: The Growth Illusion</h2>
+<p>Here's a scenario that plays out more often than most founders want to admit. Company XYZ reports 40% revenue growth. Investors celebrate. But look at the cohort-level data:</p>
+
+<table class="comp-table">
+  <thead><tr><th>Cohort (Signup Quarter)</th><th>Month 1 Revenue</th><th>Month 6 Revenue</th><th>Month 12 Revenue</th><th>12-Month Retention</th></tr></thead>
+  <tbody>
+    <tr><td>Q1 2024</td><td>$500K</td><td>$380K</td><td>$320K</td><td><strong>64%</strong></td></tr>
+    <tr><td>Q2 2024</td><td>$650K</td><td>$455K</td><td>$345K</td><td><strong>53%</strong></td></tr>
+    <tr><td>Q3 2024</td><td>$900K</td><td>$540K</td><td>$360K</td><td><strong>40%</strong></td></tr>
+    <tr><td>Q4 2024</td><td>$1.2M</td><td>$600K</td><td>???</td><td><strong>???</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout danger"><div class="callout-label">The Leaky Bucket</div>
+<p>Total revenue is growing because Q4's massive acquisition (1,200 new customers) overwhelms the decay from earlier cohorts. But look at the retention trajectory: 64% &rarr; 53% &rarr; 40%. Each new cohort is <strong>worse</strong> than the last. The company is acquiring lower-quality customers (possibly through broader targeting or aggressive discounting), and the bucket is leaking faster with each fill. If acquisition slows even slightly, the declining retention will cause total revenue to plateau or decline &mdash; and the board will be blindsided.</p></div>
+
+<p>This is why cohort analysis isn't optional. It's the only way to separate growth from acquisition (new customers pouring in) versus growth from retention (existing customers staying and spending). Healthy businesses have both. Fragile businesses have only the first.</p>
+</div>
+
+<div class="section" id="triangle">
+<h2>Part 2: The Cohort Revenue Triangle</h2>
+<p>The cohort triangle (also called a retention triangle or revenue triangle) is the fundamental visualization. Rows represent cohorts (grouped by signup month/quarter). Columns represent periods since signup. Each cell shows a metric: revenue, active customers, or retention rate.</p>
+
+<h3>Building the Triangle</h3>
+<table class="comp-table">
+  <thead><tr><th>Cohort</th><th>Month 0</th><th>Month 1</th><th>Month 2</th><th>Month 3</th><th>Month 6</th><th>Month 12</th></tr></thead>
+  <tbody>
+    <tr><td>Jan 2025</td><td>1,000</td><td>720</td><td>640</td><td>590</td><td>480</td><td>350</td></tr>
+    <tr><td>Feb 2025</td><td>1,100</td><td>770</td><td>660</td><td>600</td><td>470</td><td>&mdash;</td></tr>
+    <tr><td>Mar 2025</td><td>1,200</td><td>840</td><td>710</td><td>630</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>Apr 2025</td><td>1,300</td><td>910</td><td>740</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+<p style="font-size:13px;color:var(--muted);">Values = active customers. Blank cells = future (not yet observed).</p>
+
+<div class="callout insight"><div class="callout-label">Reading the Triangle</div>
+<p><strong>Read across rows</strong> to see how a single cohort decays over time. The shape tells you the retention curve.</p>
+<p><strong>Read down columns</strong> to compare cohort quality at the same lifecycle stage. Are Month-3 retention rates improving or declining across cohorts?</p>
+<p><strong>Read diagonals</strong> to see what happened at a specific calendar date. A diagonal dip might indicate a product issue or competitor launch that affected everyone simultaneously.</p></div>
+
+<h3>Three Critical Metrics Per Cohort</h3>
+<div class="formula"><div class="formula-label">COHORT METRICS</div>
+<div class="formula-math">Retention Rate<sub>t</sub> = Active<sub>t</sub> / Active<sub>0</sub></div>
+<div class="formula-math">Revenue Retention<sub>t</sub> = Revenue<sub>t</sub> / Revenue<sub>0</sub></div>
+<div class="formula-math">Net Revenue Retention (NRR) = (Revenue<sub>t</sub> + Expansion) / Revenue<sub>0</sub></div>
+<div class="formula-label">NRR > 100% means expansion revenue exceeds churn losses</div></div>
+
+<p><strong>Net Revenue Retention (NRR)</strong> is arguably the single most important metric in SaaS. NRR &gt; 100% means your existing customers are spending more over time than you're losing to churn. The best SaaS companies operate at 120-140% NRR, meaning even with zero new customer acquisition, revenue would grow 20-40% annually from the existing base alone.</p>
+</div>
+
+<div class="section" id="retention-curves">
+<h2>Part 3: Retention Curve Shapes &mdash; What They Tell You</h2>
+
+<table class="comp-table">
+  <thead><tr><th>Shape</th><th>Pattern</th><th>Diagnosis</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Steep early, then flat</strong></td><td>60% drop in month 1, then 2-3% monthly loss</td><td>Onboarding failure. Customers who survive month 1 are sticky.</td><td>Invest heavily in first-week experience, activation milestones.</td></tr>
+    <tr><td><strong>Linear decline</strong></td><td>Steady 5-8% loss every month</td><td>No "stickiness" point. Customers are always evaluating alternatives.</td><td>Build switching costs, deepen integration, loyalty mechanics.</td></tr>
+    <tr><td><strong>Concave (flattening)</strong></td><td>Moderate early drop, strong long-term retention</td><td>Healthy! Product-market fit is strong for core users.</td><td>Focus on getting more customers past the inflection point.</td></tr>
+    <tr><td><strong>Convex (accelerating)</strong></td><td>Slow start, but churn accelerates over time</td><td>Fatigue or contract cliff. Customers lose value over time.</td><td>Re-engagement programs, feature refreshes, value reinforcement.</td></tr>
+    <tr><td><strong>Smile curve</strong></td><td>Drop, flatten, then uptick</td><td>Reactivation! Some churned customers return.</td><td>This is actually great &mdash; strengthen the win-back loop (Week 6).</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="section" id="diagnostics">
+<h2>Part 4: Cohort Diagnostic Framework</h2>
+
+<h3>Are Newer Cohorts Better or Worse?</h3>
+<p>Compare retention rates at the same lifecycle stage across cohorts. If Month-6 retention is 55% for Jan cohort, 50% for Apr cohort, and 42% for Jul cohort, you have a <strong>cohort quality degradation problem</strong>. Common causes: broader acquisition targeting (reaching less-ideal customers), aggressive discounting (attracting deal-seekers), or product-market fit erosion.</p>
+
+<h3>Separating Cohort Effects from Period Effects</h3>
+<p>A diagonal dip in the triangle (all cohorts performing worse in the same calendar month) suggests a <strong>period effect</strong>: something external happened (competitor launch, seasonal slowdown, product outage). A row-by-row decline suggests a <strong>cohort effect</strong>: the customers themselves are changing.</p>
+
+<div class="callout"><div class="callout-label">The Board Presentation Framework</div>
+<p>When presenting cohort analysis to leadership, always show three things: (1) The topline growth curve (they already know this). (2) The cohort triangle underneath it, revealing the composition. (3) A "same-stage comparison" chart showing how Month-3 and Month-6 retention are trending across cohorts. If cohort quality is declining while topline grows, the message is: "We're growing, but the foundation is weakening. Without intervention, growth will stall in Q[X]."</p></div>
+</div>
+
+<div class="section" id="code">
+<h2>Part 5: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; Cohort Analysis</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">import</span> seaborn <span class="kw">as</span> sns
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Build Cohort Triangle from Transactions</span>
+<span class="cm"># ============================================</span>
+
+txns = pd.<span class="fn">read_csv</span>(<span class="str">'transactions.csv'</span>, parse_dates=[<span class="str">'date'</span>])
+
+<span class="cm"># Assign cohort (month of first purchase)</span>
+first_purchase = txns.<span class="fn">groupby</span>(<span class="str">'customer_id'</span>)[<span class="str">'date'</span>].<span class="fn">min</span>().<span class="fn">reset_index</span>()
+first_purchase.<span class="fn">columns</span> = [<span class="str">'customer_id'</span>, <span class="str">'cohort_date'</span>]
+first_purchase[<span class="str">'cohort'</span>] = first_purchase[<span class="str">'cohort_date'</span>].dt.<span class="fn">to_period</span>(<span class="str">'M'</span>)
+
+txns = txns.<span class="fn">merge</span>(first_purchase[[<span class="str">'customer_id'</span>, <span class="str">'cohort'</span>]], on=<span class="str">'customer_id'</span>)
+txns[<span class="str">'period'</span>] = txns[<span class="str">'date'</span>].dt.<span class="fn">to_period</span>(<span class="str">'M'</span>)
+txns[<span class="str">'cohort_age'</span>] = (txns[<span class="str">'period'</span>] - txns[<span class="str">'cohort'</span>]).<span class="fn">apply</span>(<span class="kw">lambda</span> x: x.n)
+
+<span class="cm"># Count active customers per cohort-age</span>
+cohort_data = txns.<span class="fn">groupby</span>([<span class="str">'cohort'</span>, <span class="str">'cohort_age'</span>])[<span class="str">'customer_id'</span>].<span class="fn">nunique</span>()
+cohort_data = cohort_data.<span class="fn">reset_index</span>()
+cohort_data.<span class="fn">columns</span> = [<span class="str">'cohort'</span>, <span class="str">'age'</span>, <span class="str">'customers'</span>]
+
+<span class="cm"># Pivot to triangle</span>
+cohort_sizes = cohort_data[cohort_data[<span class="str">'age'</span>] == <span class="num">0</span>].<span class="fn">set_index</span>(<span class="str">'cohort'</span>)[<span class="str">'customers'</span>]
+triangle = cohort_data.<span class="fn">pivot</span>(index=<span class="str">'cohort'</span>, columns=<span class="str">'age'</span>, values=<span class="str">'customers'</span>)
+
+<span class="cm"># Retention rate triangle</span>
+retention = triangle.<span class="fn">divide</span>(cohort_sizes, axis=<span class="num">0</span>)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Visualize as Heatmap</span>
+<span class="cm"># ============================================</span>
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">14</span>, <span class="num">8</span>))
+sns.<span class="fn">heatmap</span>(
+    retention.<span class="fn">iloc</span>[:<span class="num">12</span>, :<span class="num">12</span>],  <span class="cm"># first 12 cohorts, 12 months</span>
+    annot=<span class="kw">True</span>, fmt=<span class="str">'.0%'</span>,
+    cmap=<span class="str">'RdYlGn'</span>,
+    vmin=<span class="num">0</span>, vmax=<span class="num">1</span>,
+    linewidths=<span class="num">0.5</span>
+)
+ax.<span class="fn">set_title</span>(<span class="str">'Cohort Retention Triangle'</span>)
+ax.<span class="fn">set_xlabel</span>(<span class="str">'Months Since First Purchase'</span>)
+ax.<span class="fn">set_ylabel</span>(<span class="str">'Cohort (Signup Month)'</span>)
+plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Same-Stage Comparison</span>
+<span class="cm"># ============================================</span>
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">10</span>, <span class="num">5</span>))
+<span class="kw">for</span> age <span class="kw">in</span> [<span class="num">1</span>, <span class="num">3</span>, <span class="num">6</span>]:
+    vals = retention[age].<span class="fn">dropna</span>()
+    ax.<span class="fn">plot</span>(vals.index.<span class="fn">astype</span>(<span class="fn">str</span>), vals.values,
+           marker=<span class="str">'o'</span>, label=<span class="str">f'Month {age}'</span>)
+ax.<span class="fn">set_title</span>(<span class="str">'Cohort Quality Trend: Retention at Same Lifecycle Stage'</span>)
+ax.<span class="fn">set_ylabel</span>(<span class="str">'Retention Rate'</span>)
+ax.<span class="fn">legend</span>(); plt.<span class="fn">xticks</span>(rotation=<span class="num">45</span>)
+plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()</pre>
+</div></div>
+
+<div class="section" id="playbook">
+<h2>Part 6: Your Week 7 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Cohort Tool</th></tr></thead><tbody>
+<tr><td>"Is our growth healthy or an illusion?"</td><td>Cohort triangle: compare same-stage retention across cohorts</td></tr>
+<tr><td>"Are we acquiring worse customers?"</td><td>Month-3 and Month-6 retention trends by cohort vintage</td></tr>
+<tr><td>"Where do we lose people?"</td><td>Row-level retention curve shape analysis</td></tr>
+<tr><td>"Was the product change good?"</td><td>Before/after cohort comparison at same lifecycle stage</td></tr>
+<tr><td>"What's our NRR?"</td><td>Revenue retention triangle with expansion revenue</td></tr>
+</tbody></table>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Study Cohort Methodology</h4><p>Read Fader (2020). Customer Centricity, Chapter 4 on cohort-level thinking. Also: the a16z guide on SaaS metrics (a16z.com).</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build Your Cohort Triangle</h4><p>Using the Online Retail dataset, build a full retention triangle. Create both customer count and revenue versions. Visualize as heatmaps.</p></div>
+<div class="timeline-step"><h4>Day 5: Run Diagnostic Analysis</h4><p>Same-stage comparison across cohorts. Identify if quality is improving or declining. Diagnose the retention curve shape for each cohort.</p></div>
+<div class="timeline-step"><h4>Day 6: Connect to CLV</h4><p>Use your Week 4 CLV model to project the total lifetime value of each cohort. Compare: is the total cohort CLV growing or declining even as acquisition volume grows?</p></div>
+<div class="timeline-step"><h4>Day 7: Write the Board Presentation</h4><p>"While topline revenue grew X%, cohort-level analysis reveals Y. Same-stage retention is [improving/declining] at Z% per quarter. Projected impact on 12-month revenue if trend continues: $W."</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Essential:</strong> Fader, P. (2020). <em>Customer Centricity</em>, Chapters 3-4. Wharton Digital Press.<br>
+<strong>SaaS Metrics:</strong> Tunguz, T. (2016). <em>Winning with Data</em>. Wiley. Chapters on cohort analysis and SaaS unit economics.<br>
+<strong>Framework:</strong> Blattberg, R.C., Kim, B.D., Neslin, S.A. (2008). <em>Database Marketing: Analyzing and Managing Customers</em>. Springer. Chapters 10-12.<br>
+<strong>NRR Benchmark:</strong> Bessemer Venture Partners Cloud Index. bvp.com/atlas.<br>
+<strong>Python:</strong> pandas pivot_table + seaborn heatmap
+</p>
+
+<div class="bottom-nav">
+<a href="week6_winback_equation.html">&larr; Week 6: The Win-Back Equation</a>
+<a href="week8_frailty_models.html">Week 8: Frailty Models &rarr;</a>
+</div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script>
+</body></html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2: The Renewal Cliff</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}
+.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}
+.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}
+.content{max-width:900px;margin:0 auto;padding:0 24px 100px}
+.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}.section:nth-child(2){animation-delay:.1s}.section:nth-child(3){animation-delay:.2s}
+h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}
+.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}
+.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.code-block .op{color:#89dceb}
+.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}
+.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}
+.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 10px;border-radius:4px;background:var(--light-blue);color:var(--blue);font-weight:500;margin-right:6px;margin-bottom:6px}
+strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}
+.demo-container{background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;margin:28px 0;box-shadow:0 4px 20px rgba(0,0,0,.04)}.demo-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:20px;color:var(--blue)}
+.slider-group{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}@media(max-width:600px){.slider-group{grid-template-columns:1fr}}.slider-item label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}.slider-item input[type="range"]{width:100%;accent-color:var(--accent)}.slider-val{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);float:right}
+canvas{width:100%;max-height:320px;margin-top:8px}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-label">Q1 HUB</a>
+  <a href="#business" class="nav-link active">Business Case</a>
+  <a href="#model" class="nav-link">The Cox Model</a>
+  <a href="#hazard" class="nav-link">Hazard Ratios</a>
+  <a href="#timevarying" class="nav-link">Time-Varying</a>
+  <a href="#assumptions" class="nav-link">Assumptions</a>
+  <a href="#code" class="nav-link">Python Code</a>
+  <a href="#playbook" class="nav-link">Playbook</a>
+</div></nav>
+
+<header class="hero">
+  <div class="week-tag">Week 02 &middot; Q1: Customer Lifetime &amp; Retention Economics</div>
+  <h1>The <span>Renewal Cliff</span>: Predicting Contract Churn 90 Days Before It Happens</h1>
+  <p class="hero-sub">Last week you learned WHEN customers die (Kaplan-Meier) and WHETHER they're alive (BG/NBD). This week you learn WHY they die. The Cox Proportional Hazards model lets you identify which factors accelerate or decelerate churn &mdash; and build an early-warning system that flags at-risk contracts months in advance.</p>
+</header>
+
+<main class="content">
+
+<div class="section" id="business">
+<h2>Part 1: The Business Problem</h2>
+
+<p>You're the Head of Customer Success at a B2B SaaS company with 3,000 enterprise contracts. The CEO's question this time: <em>"Which contracts are we going to lose at renewal, and what can we do about it?"</em></p>
+
+<p>Last week's tools won't cut it here. Kaplan-Meier tells you the overall survival curve, but it doesn't tell you <em>why</em> certain customers churn faster. BG/NBD is designed for non-contractual settings where churn is invisible &mdash; but in B2B SaaS, you know exactly when a contract is up for renewal. You need a different weapon.</p>
+
+<h3>Why Kaplan-Meier Isn't Enough</h3>
+
+<p>KM curves can compare segments (e.g., enterprise vs. SMB), but they handle one variable at a time. In reality, churn is driven by dozens of factors simultaneously: product usage, support ticket volume, executive sponsor changes, competitive pricing, contract size, NPS scores, feature adoption. You need a model that evaluates all these factors together, controlling for confounders, and gives you a single interpretable metric for each factor's impact.</p>
+
+<div class="callout">
+  <div class="callout-label">The $2M Scenario</div>
+  <p>Imagine a telecom company with 500,000 subscribers, each on a 12 or 24-month contract. If usage drops by 30% in the 3 months before renewal, the churn probability triples. If a customer calls support more than 5 times per quarter, they're 2.1x more likely to leave. The Cox model quantifies these multipliers precisely &mdash; the <strong>hazard ratio</strong>. Now your retention team knows exactly which signals to monitor and when to intervene. One telecom client using this approach reduced contract churn by 18%, saving $2.3M in annual recurring revenue.</p>
+</div>
+
+<h3>The Transition: From "What" to "Why"</h3>
+
+<table class="comp-table">
+  <thead><tr><th>Capability</th><th>Week 1 (KM + BG/NBD)</th><th>Week 2 (Cox PH)</th></tr></thead>
+  <tbody>
+    <tr><td>What is the overall survival curve?</td><td>Yes (KM)</td><td>Yes (baseline hazard)</td></tr>
+    <tr><td>Is this customer still alive?</td><td>Yes (BG/NBD P(Alive))</td><td>Yes (individual survival)</td></tr>
+    <tr><td>WHY do customers churn?</td><td>No</td><td><strong>Yes &mdash; hazard ratios per factor</strong></td></tr>
+    <tr><td>What changes increase churn risk?</td><td>No</td><td><strong>Yes &mdash; time-varying covariates</strong></td></tr>
+    <tr><td>Which factors can we intervene on?</td><td>No</td><td><strong>Yes &mdash; actionable risk scoring</strong></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="section" id="model">
+<h2>Part 2: The Cox Proportional Hazards Model</h2>
+
+<p>Sir David Cox published this model in 1972. It remains the most widely used regression technique in survival analysis. What makes it special is that it's <strong>semi-parametric</strong>: it makes no assumption about the shape of the baseline hazard function (how churn risk changes over time in general), but it assumes that covariates have a <em>multiplicative</em> effect on that hazard.</p>
+
+<div class="formula">
+  <div class="formula-label">THE COX PROPORTIONAL HAZARDS MODEL</div>
+  <div class="formula-math">h(t | X) = h<sub>0</sub>(t) &middot; exp(&beta;<sub>1</sub>X<sub>1</sub> + &beta;<sub>2</sub>X<sub>2</sub> + ... + &beta;<sub>p</sub>X<sub>p</sub>)</div>
+  <div class="formula-label">h<sub>0</sub>(t) = baseline hazard &nbsp;|&nbsp; X = covariates &nbsp;|&nbsp; &beta; = learned coefficients</div>
+</div>
+
+<p>In plain English: the risk of churning at any time <em>t</em> equals a baseline risk (which can be any shape) multiplied by an exponential function of your risk factors. The beauty is that <strong>the baseline hazard cancels out</strong> when comparing two individuals &mdash; you only need to estimate the &beta; coefficients.</p>
+
+<h3>What Goes Into the Model</h3>
+
+<p>Your covariates (X variables) are the factors you believe might influence churn. In a typical B2B SaaS or telecom context:</p>
+
+<table class="comp-table">
+  <thead><tr><th>Category</th><th>Example Covariates</th><th>Expected Direction</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Usage</strong></td><td>Monthly active users, feature adoption rate, login frequency</td><td>Higher usage &rarr; lower churn (protective)</td></tr>
+    <tr><td><strong>Support</strong></td><td>Tickets filed, escalations, resolution time</td><td>More tickets &rarr; higher churn (risk)</td></tr>
+    <tr><td><strong>Financial</strong></td><td>Contract value, discount depth, payment delays</td><td>Bigger contracts &rarr; more switching cost &rarr; lower churn</td></tr>
+    <tr><td><strong>Relationship</strong></td><td>NPS score, executive sponsor changes, CSM engagement</td><td>Sponsor change &rarr; dramatically higher churn</td></tr>
+    <tr><td><strong>Competitive</strong></td><td>Competitor evaluation signals, RFP participation</td><td>Direct churn accelerator</td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight">
+  <div class="callout-label">The Model's Elegance</div>
+  <p>The Cox model estimates its parameters using <strong>partial likelihood</strong> &mdash; a method that only looks at the <em>ordering</em> of events, not their exact timing. At each moment someone churns, the model asks: "Among everyone still at risk, what covariate profile best explains why THIS person was the one to churn?" This is why it doesn't need to know the shape of h<sub>0</sub>(t) &mdash; it never directly estimates it. The partial likelihood approach also handles censoring naturally: customers who haven't churned yet contribute to the risk pool until their censoring time, then exit.</p>
+</div>
+</div>
+
+<div class="section" id="hazard">
+<h2>Part 3: Hazard Ratios &mdash; The Currency of Risk</h2>
+
+<p>The key output of the Cox model is the <strong>hazard ratio (HR)</strong> for each covariate. This is exp(&beta;), and it tells you the multiplicative effect on churn risk.</p>
+
+<div class="formula">
+  <div class="formula-label">INTERPRETING HAZARD RATIOS</div>
+  <div class="formula-math">HR = exp(&beta;) = multiplicative change in hazard per unit change in X</div>
+</div>
+
+<table class="comp-table">
+  <thead><tr><th>HR Value</th><th>Meaning</th><th>Business Translation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>HR = 1.0</strong></td><td>No effect</td><td>This factor doesn't influence churn</td></tr>
+    <tr><td><strong>HR = 1.5</strong></td><td>50% higher hazard</td><td>This factor INCREASES churn risk by 50%</td></tr>
+    <tr><td><strong>HR = 2.0</strong></td><td>Double the hazard</td><td>Doubles the chance of churning at any point</td></tr>
+    <tr><td><strong>HR = 0.7</strong></td><td>30% lower hazard</td><td>This factor PROTECTS against churn by 30%</td></tr>
+    <tr><td><strong>HR = 0.5</strong></td><td>Half the hazard</td><td>Cuts churn risk in half (strong protection)</td></tr>
+  </tbody>
+</table>
+
+<h3>A Real Example: Reading the Output</h3>
+
+<p>Suppose you fit a Cox model on telecom subscriber data and get these results:</p>
+
+<table class="comp-table">
+  <thead><tr><th>Covariate</th><th>&beta;</th><th>HR = exp(&beta;)</th><th>95% CI</th><th>p-value</th></tr></thead>
+  <tbody>
+    <tr><td>Has 2-year contract</td><td>-3.69</td><td><strong>0.025</strong></td><td>[0.02, 0.03]</td><td>&lt;0.001</td></tr>
+    <tr><td>Has partner/dependents</td><td>-0.20</td><td><strong>0.82</strong></td><td>[0.74, 0.91]</td><td>0.003</td></tr>
+    <tr><td>Monthly charges (per $10)</td><td>0.18</td><td><strong>1.20</strong></td><td>[1.15, 1.25]</td><td>&lt;0.001</td></tr>
+    <tr><td>Support tickets (&gt;5/qtr)</td><td>0.74</td><td><strong>2.10</strong></td><td>[1.82, 2.42]</td><td>&lt;0.001</td></tr>
+    <tr><td>Paperless billing</td><td>0.34</td><td><strong>1.40</strong></td><td>[1.25, 1.57]</td><td>&lt;0.001</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="callout-label">Reading This Like a Strategist</div>
+  <p><strong>Contract term is the most powerful lever.</strong> Customers on 2-year contracts have only 2.5% of the churn hazard compared to month-to-month. That's a 97.5% risk reduction. The business implication: incentivize longer contracts aggressively, even at a modest discount.</p>
+  <p><strong>Support tickets are a red flag.</strong> Customers with &gt;5 tickets per quarter are 2.1x more likely to churn. This is your early-warning signal. Set up an automated alert when a customer crosses 3 tickets in a quarter &mdash; that's the intervention window.</p>
+  <p><strong>Higher monthly charges increase churn.</strong> Each $10 increase raises churn risk by 20%. This doesn't mean "lower prices" &mdash; it means high-paying customers need proportionally more value demonstration.</p>
+  <p><strong>Paperless billing surprisingly increases churn.</strong> HR = 1.4. Why? These customers may be less "locked in" to established payment routines, or paperless billing correlates with lower engagement. Worth investigating further.</p>
+</div>
+
+<h3>Confidence Intervals &mdash; When to Trust the HR</h3>
+<p>Always check the 95% confidence interval. If it crosses 1.0 (e.g., [0.85, 1.15]), the effect is not statistically significant. The p-value tells you the same thing (p &lt; 0.05 = significant), but the CI gives you the range of plausible effect sizes, which is more useful for business decisions. A variable with HR = 1.5 and CI [1.1, 2.0] is much less precise than one with HR = 1.5 and CI [1.4, 1.6].</p>
+</div>
+
+<div class="section" id="timevarying">
+<h2>Part 4: Time-Varying Covariates &mdash; When Risk Changes Over Time</h2>
+
+<p>This is where the Cox model becomes truly powerful &mdash; and where most analysts stop short. In the basic model, covariates are measured once (at baseline). But in reality, customer behavior <em>changes</em> over time. Usage might drop gradually. Support tickets might spike. The executive sponsor might leave. These are <strong>time-varying covariates</strong>, and they require a special data format.</p>
+
+<h3>The Data Transformation</h3>
+
+<p>Instead of one row per customer, you create <strong>multiple rows per customer</strong>, each representing a time interval where the covariate values are constant. This is called the "counting process" or "start-stop" format.</p>
+
+<table class="comp-table">
+  <thead><tr><th>customer_id</th><th>start</th><th>stop</th><th>churned</th><th>usage_score</th><th>tickets_qtr</th></tr></thead>
+  <tbody>
+    <tr><td>A001</td><td>0</td><td>90</td><td>0</td><td>85</td><td>1</td></tr>
+    <tr><td>A001</td><td>90</td><td>180</td><td>0</td><td>72</td><td>3</td></tr>
+    <tr><td>A001</td><td>180</td><td>270</td><td>0</td><td>45</td><td>6</td></tr>
+    <tr><td>A001</td><td>270</td><td>320</td><td><strong>1</strong></td><td>28</td><td>8</td></tr>
+  </tbody>
+</table>
+
+<p>Look at Customer A001: usage steadily dropped from 85 to 28, while support tickets climbed from 1 to 8. The churn event happened at day 320. With time-varying covariates, the Cox model can pick up on this <em>trajectory</em> &mdash; it's not just the level of usage that matters, it's the trend. A customer at usage 45 who was previously at 85 is in much more danger than a customer who's always been at 45.</p>
+
+<div class="callout insight">
+  <div class="callout-label">The 90-Day Early Warning System</div>
+  <p>Here's the practical gold: if you update your Cox model monthly with fresh covariate values, you can generate a "churn risk score" for every customer that updates in real-time. When a customer's predicted hazard crosses a threshold (say, 2x the baseline), trigger a retention intervention. Companies using this approach commonly report <strong>15-25% reduction in preventable churn</strong> because they're catching the slide early, not reacting after the customer has already mentally checked out.</p>
+</div>
+
+<h3>When Time-Varying Covariates Are Essential</h3>
+
+<p>Use them when your covariates genuinely change over the customer lifecycle: usage metrics, billing behavior, support interactions, engagement scores. Don't use them for static demographics (age, industry, acquisition channel) &mdash; those are fine as baseline covariates.</p>
+</div>
+
+<div class="section" id="assumptions">
+<h2>Part 5: The Proportional Hazards Assumption &mdash; And What to Do When It Fails</h2>
+
+<p>The model's core assumption is right there in the name: <strong>proportional hazards</strong>. It means that the hazard ratio between any two individuals remains constant over time. If premium customers have half the churn risk of basic customers at month 1, they should still have half the risk at month 12.</p>
+
+<h3>Testing the Assumption</h3>
+
+<p>The standard test uses <strong>Schoenfeld residuals</strong>. After fitting the model, you plot scaled Schoenfeld residuals against time for each covariate. If the assumption holds, the plot should show a random scatter around zero (no trend). A clear upward or downward trend means the covariate's effect changes over time &mdash; the assumption is violated.</p>
+
+<p>In the lifelines Python library, this is beautifully simple:</p>
+
+<div class="code-block">
+  <div class="code-label">Python</div>
+<pre>cph.<span class="fn">check_assumptions</span>(df, p_value_threshold=<span class="num">0.05</span>, show_plots=<span class="kw">True</span>)
+<span class="cm"># Lifelines will automatically:</span>
+<span class="cm"># 1. Run the Schoenfeld residual test for each covariate</span>
+<span class="cm"># 2. Generate diagnostic plots</span>
+<span class="cm"># 3. Print warnings for any violations</span>
+<span class="cm"># 4. Suggest remedies</span></pre>
+</div>
+
+<h3>Three Fixes When the Assumption Fails</h3>
+
+<table class="comp-table">
+  <thead><tr><th>Fix</th><th>When to Use</th><th>How</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Stratification</strong></td><td>A categorical variable (e.g., contract type) has non-proportional hazards but you don't care about its HR</td><td>Fit separate baseline hazards per stratum: <code>strata=['contract_type']</code></td></tr>
+    <tr><td><strong>Time interaction</strong></td><td>A covariate's effect genuinely changes over time and you want to quantify how</td><td>Add X * log(t) as a covariate; significant interaction means effect changes over time</td></tr>
+    <tr><td><strong>Time-varying covariate</strong></td><td>The covariate itself changes over time (e.g., usage score)</td><td>Restructure data into start-stop format (covered in Part 4)</td></tr>
+  </tbody>
+</table>
+
+<div class="callout danger">
+  <div class="callout-label">The Common Trap</div>
+  <p>Many analysts ignore the proportional hazards check entirely, treating Cox regression like ordinary logistic regression. This can produce wildly misleading hazard ratios. If the assumption is violated for a key variable, your HR is essentially an "average" of a changing effect, which may not represent reality at any specific time point. <strong>Always run the diagnostic.</strong> In lifelines, it's literally one line of code.</p>
+</div>
+</div>
+
+<div class="section" id="code">
+<h2>Part 6: Implementation in Python</h2>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; Complete Cox PH Pipeline</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> lifelines <span class="kw">import</span> CoxPHFitter
+<span class="kw">from</span> lifelines <span class="kw">import</span> KaplanMeierFitter
+<span class="kw">from</span> lifelines.statistics <span class="kw">import</span> logrank_test
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Prepare Data</span>
+<span class="cm"># Required: duration column, event column, covariates</span>
+<span class="cm"># ============================================</span>
+
+df = pd.<span class="fn">read_csv</span>(<span class="str">'contracts.csv'</span>)
+
+<span class="cm"># Ensure binary event column (1 = churned, 0 = censored)</span>
+<span class="cm"># Duration = months from contract start to churn/censor</span>
+<span class="fn">print</span>(df[[<span class="str">'tenure_months'</span>, <span class="str">'churned'</span>, <span class="str">'monthly_charges'</span>,
+        <span class="str">'contract_type'</span>, <span class="str">'support_tickets'</span>]].<span class="fn">head</span>())
+
+<span class="cm"># Encode categoricals</span>
+df = pd.<span class="fn">get_dummies</span>(df, columns=[<span class="str">'contract_type'</span>], drop_first=<span class="kw">True</span>)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Fit the Cox PH Model</span>
+<span class="cm"># ============================================</span>
+
+cph = <span class="fn">CoxPHFitter</span>(penalizer=<span class="num">0.01</span>)  <span class="cm"># small penalty prevents overfitting</span>
+
+covariates = [<span class="str">'monthly_charges'</span>, <span class="str">'support_tickets'</span>,
+              <span class="str">'usage_score'</span>, <span class="str">'has_partner'</span>,
+              <span class="str">'contract_type_One year'</span>, <span class="str">'contract_type_Two year'</span>]
+
+cph.<span class="fn">fit</span>(
+    df[covariates + [<span class="str">'tenure_months'</span>, <span class="str">'churned'</span>]],
+    duration_col=<span class="str">'tenure_months'</span>,
+    event_col=<span class="str">'churned'</span>
+)
+
+cph.<span class="fn">print_summary</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Check Proportional Hazards Assumption</span>
+<span class="cm"># THIS IS NON-NEGOTIABLE</span>
+<span class="cm"># ============================================</span>
+
+cph.<span class="fn">check_assumptions</span>(
+    df[covariates + [<span class="str">'tenure_months'</span>, <span class="str">'churned'</span>]],
+    p_value_threshold=<span class="num">0.05</span>,
+    show_plots=<span class="kw">True</span>
+)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 4: Visualize Hazard Ratios (Forest Plot)</span>
+<span class="cm"># ============================================</span>
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">8</span>, <span class="num">5</span>))
+cph.<span class="fn">plot</span>(ax=ax)
+ax.<span class="fn">set_title</span>(<span class="str">'Hazard Ratios (95% CI)'</span>)
+ax.<span class="fn">axvline</span>(x=<span class="num">0</span>, color=<span class="str">'grey'</span>, linestyle=<span class="str">'--'</span>, alpha=<span class="num">0.5</span>)
+plt.<span class="fn">tight_layout</span>()
+plt.<span class="fn">show</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 5: Generate Individual Risk Scores</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Partial hazard = exp(beta * X) for each customer</span>
+df[<span class="str">'risk_score'</span>] = cph.<span class="fn">predict_partial_hazard</span>(
+    df[covariates]
+)
+
+<span class="cm"># Predict survival probability at specific times</span>
+<span class="cm"># "What's the probability this customer survives 12 more months?"</span>
+survival_12m = cph.<span class="fn">predict_survival_function</span>(
+    df[covariates].<span class="fn">iloc</span>[:<span class="num">5</span>]
+)
+
+<span class="cm"># Rank customers by risk</span>
+top_risk = df.<span class="fn">nlargest</span>(<span class="num">20</span>, <span class="str">'risk_score'</span>)[
+    [<span class="str">'customer_id'</span>, <span class="str">'risk_score'</span>, <span class="str">'tenure_months'</span>,
+     <span class="str">'support_tickets'</span>, <span class="str">'usage_score'</span>]
+]
+<span class="fn">print</span>(<span class="str">"Top 20 At-Risk Customers:"</span>)
+<span class="fn">print</span>(top_risk)</pre>
+</div>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; Time-Varying Covariates</div>
+<pre><span class="cm"># ============================================</span>
+<span class="cm"># TIME-VARYING COVARIATES: Start-Stop Format</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Data must have: customer_id, start, stop, event,</span>
+<span class="cm"># plus covariates that may change at each interval</span>
+
+<span class="cm"># Example: quarterly updated data</span>
+tv_df = pd.<span class="fn">read_csv</span>(<span class="str">'contracts_quarterly.csv'</span>)
+<span class="cm"># customer_id | start | stop | churned | usage | tickets</span>
+<span class="cm"># A001        | 0     | 90   | 0       | 85    | 1</span>
+<span class="cm"># A001        | 90    | 180  | 0       | 72    | 3</span>
+<span class="cm"># A001        | 180   | 270  | 1       | 45    | 6</span>
+
+ctv = <span class="fn">CoxPHFitter</span>()
+ctv.<span class="fn">fit</span>(
+    tv_df,
+    duration_col=<span class="str">'stop'</span>,
+    event_col=<span class="str">'churned'</span>,
+    start_col=<span class="str">'start'</span>,    <span class="cm"># enables interval format</span>
+    id_col=<span class="str">'customer_id'</span>  <span class="cm"># tracks individual customers</span>
+)
+
+ctv.<span class="fn">print_summary</span>()</pre>
+</div>
+
+<div class="callout insight">
+  <div class="callout-label">The Concordance Index</div>
+  <p>After fitting, check the <strong>concordance index (C-index)</strong> in the summary output. This is the survival analysis equivalent of AUC. It measures how often the model correctly ranks who churns first. C-index = 0.5 is random, 0.7+ is acceptable, 0.8+ is strong. For customer churn models, expect 0.65-0.80 depending on data quality and feature richness.</p>
+</div>
+</div>
+
+<div class="section" id="playbook">
+<h2>Part 7: Your Week 2 Playbook</h2>
+
+<table class="comp-table">
+  <thead><tr><th>Business Question</th><th>Cox Output to Use</th></tr></thead>
+  <tbody>
+    <tr><td>"What factors drive churn?"</td><td>Hazard ratios from model summary</td></tr>
+    <tr><td>"Which customers are at highest risk right now?"</td><td>predict_partial_hazard() &rarr; rank by risk score</td></tr>
+    <tr><td>"What's the probability this account survives 12 months?"</td><td>predict_survival_function() at t=12</td></tr>
+    <tr><td>"Is the effect of usage on churn constant over time?"</td><td>Schoenfeld residual test / check_assumptions()</td></tr>
+    <tr><td>"How much does switching to 2-year contracts help?"</td><td>HR for contract_type covariate</td></tr>
+  </tbody>
+</table>
+
+<h3>Common Pitfalls</h3>
+
+<div class="callout danger">
+  <div class="callout-label">Top 5 Week 2 Mistakes</div>
+  <p><strong>1. Skipping the PH assumption check.</strong> This is the most common error. Run <code>check_assumptions()</code> every time. Period.</p>
+  <p><strong>2. Including too many covariates.</strong> Rule of thumb: at least 10-15 events (churns) per covariate. With 200 churns, limit yourself to 13-20 variables. Overfitting makes hazard ratios unreliable.</p>
+  <p><strong>3. Confusing hazard ratio with probability.</strong> HR = 2.0 does NOT mean "twice as likely to churn." It means the instantaneous churn RATE is doubled. Over a long period, the cumulative effect depends on the baseline hazard shape.</p>
+  <p><strong>4. Using future information.</strong> With time-varying covariates, ensure the covariate value at time t was knowable BEFORE time t. Using data from after the event is "lookahead bias" and will produce impossibly good results.</p>
+  <p><strong>5. Ignoring multicollinearity.</strong> If monthly charges and contract value are highly correlated, their individual HRs become unstable. Check VIF or correlation matrices before fitting.</p>
+</div>
+
+<h3>Study Assignments</h3>
+
+<div class="timeline">
+  <div class="timeline-step">
+    <h4>Day 1-2: Read Cox (1972) and understand partial likelihood</h4>
+    <p>Cox, D.R. (1972). "Regression Models and Life Tables." JRSS-B, 34(2), 187-220. Focus on Sections 1-4. Also read the lifelines documentation on CoxPHFitter: lifelines.readthedocs.io</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 3-4: Implement on Telco Dataset</h4>
+    <p>Use the IBM Telco Customer Churn dataset (Kaggle). Fit a Cox model, interpret all hazard ratios, check assumptions, build KM curves by segment. Generate a "top 50 at-risk customers" list.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 5: Add Time-Varying Covariates</h4>
+    <p>Take your model from Days 3-4 and restructure the data to quarterly intervals. Add usage trends as time-varying covariates. Compare C-index with and without time-varying features.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 6: Build an Early Warning Dashboard</h4>
+    <p>Create a simple dashboard (even in a Jupyter notebook) showing: risk score distribution, top 20 at-risk accounts, key risk factors, and 90-day survival predictions for flagged customers.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 7: Write Your Executive Brief</h4>
+    <p>"Our Cox model (C-index: X) identified Y key churn drivers. The top 3 actionable factors are... By intervening on the top Z at-risk accounts, we estimate saving $W in ARR over the next 12 months."</p>
+  </div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Essential Paper:</strong> Cox, D.R. (1972). Regression Models and Life Tables. <em>Journal of the Royal Statistical Society, Series B</em>, 34(2), 187-220.<br>
+<strong>Time-Varying:</strong> Fisher, L.D., Lin, D.Y. (1999). Time-dependent covariates in the Cox proportional-hazards regression model. <em>Annual Review of Public Health</em>, 20, 145-157.<br>
+<strong>Telecom Application:</strong> Lu, J. (2002). Predicting customer churn in the telecommunications industry. <em>Journal of Targeting</em>, 10(3), 236-243.<br>
+<strong>Textbook:</strong> Kleinbaum, D.G., Klein, M. (2012). <em>Survival Analysis: A Self-Learning Text</em>. 3rd Ed., Springer.<br>
+<strong>Python:</strong> lifelines CoxPHFitter: lifelines.readthedocs.io<br>
+<strong>Practice Dataset:</strong> IBM Telco Customer Churn &mdash; kaggle.com/datasets/blastchar/telco-customer-churn
+</p>
+
+<div class="bottom-nav">
+  <a href="week1_the_3m_question.html">&larr; Week 1: The $3M Question</a>
+  <a href="week3_churn_segmentation.html">Week 3: Churn Segmentation &rarr;</a>
+</div>
+</div>
+</main>
+
+<script>
+const navLinks=document.querySelectorAll('.nav-link');const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});
+</script>
+</body>
+</html>

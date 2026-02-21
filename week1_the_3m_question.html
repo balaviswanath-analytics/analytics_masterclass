@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1: The $3M Question</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --cream: #faf8f4;
+  --accent: #c45d3e;
+  --accent2: #2d6a4f;
+  --muted: #8a8a8a;
+  --blue: #264653;
+  --gold: #e9c46a;
+  --light-blue: #e8f0f2;
+  --code-bg: #1e1e2e;
+  --border: #e0dcd4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 17px;
+  overflow-x: hidden;
+}
+
+/* Navigation */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 244, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow-x: auto;
+}
+.nav-label {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+.nav-link {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* Hero */
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 24px 60px;
+}
+.week-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.hero h1 span { color: var(--accent); }
+.hero-sub {
+  font-size: 20px;
+  color: var(--muted);
+  font-weight: 300;
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+/* Content container */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 64px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.2s; }
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--accent);
+  display: inline-block;
+}
+
+h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 32px 0 14px;
+  color: var(--blue);
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 10px;
+  color: var(--ink);
+}
+
+p { margin-bottom: 16px; }
+
+/* Callout boxes */
+.callout {
+  border-left: 4px solid var(--accent);
+  background: #fff;
+  padding: 20px 24px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.callout.insight {
+  border-left-color: var(--accent2);
+}
+.callout.danger {
+  border-left-color: #e63946;
+  background: #fef2f2;
+}
+.callout-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+.callout.insight .callout-label { color: var(--accent2); }
+.callout.danger .callout-label { color: #e63946; }
+
+/* Code blocks */
+.code-block {
+  background: var(--code-bg);
+  border-radius: 10px;
+  padding: 24px;
+  margin: 20px 0;
+  overflow-x: auto;
+  position: relative;
+}
+.code-block pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #cdd6f4;
+  white-space: pre;
+}
+.code-label {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #585b70;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.code-block .kw { color: #cba6f7; }
+.code-block .fn { color: #89b4fa; }
+.code-block .str { color: #a6e3a1; }
+.code-block .cm { color: #585b70; font-style: italic; }
+.code-block .num { color: #fab387; }
+.code-block .op { color: #89dceb; }
+
+/* Formula boxes */
+.formula {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+}
+.formula-math {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-style: italic;
+  color: var(--blue);
+  margin: 12px 0;
+  letter-spacing: 0.5px;
+}
+.formula-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Interactive demo */
+.demo-container {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 28px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.demo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--blue);
+}
+.slider-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+@media (max-width: 600px) {
+  .slider-group { grid-template-columns: 1fr; }
+}
+.slider-item label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.slider-item input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+.slider-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  float: right;
+}
+canvas {
+  width: 100%;
+  max-height: 320px;
+  margin-top: 8px;
+}
+
+/* Comparison table */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 15px;
+}
+.comp-table th {
+  background: var(--blue);
+  color: #fff;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+.comp-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.comp-table tr:nth-child(even) td {
+  background: #f9f7f3;
+}
+
+/* Timeline */
+.timeline {
+  border-left: 3px solid var(--border);
+  padding-left: 28px;
+  margin: 28px 0 28px 16px;
+}
+.timeline-step {
+  position: relative;
+  margin-bottom: 28px;
+}
+.timeline-step::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--cream);
+}
+.timeline-step h4 {
+  margin-top: 0;
+  font-size: 16px;
+}
+.timeline-step p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 0;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 24px;
+}
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+strong { font-weight: 600; }
+
+/* Tags */
+.tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: var(--light-blue);
+  color: var(--blue);
+  font-weight: 500;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 48px 0;
+}
+
+a { color: var(--accent); text-decoration: none; font-weight: 500; }
+a:hover { text-decoration: underline; }
+
+/* Bottom nav */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-top: 2px solid var(--border);
+  margin-top: 48px;
+}
+.bottom-nav a {
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-label">WK 01</span>
+    <a href="#business" class="nav-link active">The Business Case</a>
+    <a href="#survival" class="nav-link">Survival Analysis</a>
+    <a href="#kaplan" class="nav-link">Kaplan-Meier</a>
+    <a href="#bgnbd" class="nav-link">BG/NBD Model</a>
+    <a href="#clv" class="nav-link">CLV Projection</a>
+    <a href="#code" class="nav-link">Python Code</a>
+    <a href="#playbook" class="nav-link">Playbook</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="week-tag">Week 01 &middot; Q1: Customer Lifetime &amp; Retention Economics</div>
+  <h1>The <span>$3M</span> Question: When Will Your Best Customers Stop Buying?</h1>
+  <p class="hero-sub">You'll master the two foundational tools that every top customer analytics team uses: Kaplan-Meier survival curves and the BG/NBD probabilistic model. By the end of this week, you'll be able to calculate the probability that any customer is still "alive" and project their lifetime value.</p>
+</header>
+
+<main class="content">
+
+<!-- ============ SECTION 1: BUSINESS CASE ============ -->
+<div class="section" id="business">
+<h2>Part 1: The Business Problem</h2>
+
+<p>Imagine you're the VP of Analytics at an online fashion retailer. Your CEO walks into your office and says: <em>"We have 200,000 customers. How many of them are actually going to buy from us again? And what are they worth?"</em></p>
+
+<p>This sounds simple, but it's actually one of the hardest questions in business analytics. Here's why:</p>
+
+<h3>The "Silent Churn" Problem</h3>
+
+<p>In a subscription business (Netflix, Spotify), you know exactly when someone leaves &mdash; they cancel. But in a non-contractual business (Amazon, Zara, your local coffee shop), customers don't announce their departure. They just... stop showing up. The challenge: <strong>you can't tell the difference between a customer who has permanently left and one who is simply between purchases</strong>.</p>
+
+<div class="callout">
+  <div class="callout-label">The Core Question</div>
+  <p>Think about Customer A who bought 8 items in the first 3 months, then went silent for 6 months. And Customer B who bought 2 items spread evenly over 9 months, with their last purchase 2 months ago. <strong>Who is more likely to buy again?</strong></p>
+  <p>Your gut might say Customer A (they were so active!). But the data says Customer B. Customer A looks like a "binge and burn" &mdash; a rapid purchaser who likely churned. Customer B shows a slow, steady rhythm that's still in motion. This is exactly the kind of intuition that the BG/NBD model formalizes mathematically.</p>
+</div>
+
+<h3>Why This Matters Commercially</h3>
+
+<p>Getting this wrong has cascading consequences. If you overestimate how many customers are "alive," you'll overproject revenue, overspend on retention campaigns targeting dead customers, and misallocate acquisition budgets. If you underestimate, you'll neglect active customers and leave money on the table.</p>
+
+<p>A real-world example: a mid-size e-commerce company discovered that 40% of customers they were treating as "active" (because they'd purchased in the last 12 months) had actually already churned per the BG/NBD model. They were spending retention dollars on people who were never coming back. Redirecting that budget to genuinely at-risk customers saved them an estimated $3.2M annually in wasted marketing spend.</p>
+
+<h3>Two Tools, One Framework</h3>
+
+<p>This week, we'll master two complementary approaches:</p>
+
+<table class="comp-table">
+  <thead>
+    <tr><th>Method</th><th>What It Does</th><th>Best For</th><th>Limitation</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Kaplan-Meier</strong></td>
+      <td>Estimates the probability of "surviving" (remaining a customer) over time</td>
+      <td>Understanding overall retention curves, comparing customer segments</td>
+      <td>Works best when you can define a clear "death" event</td>
+    </tr>
+    <tr>
+      <td><strong>BG/NBD</strong></td>
+      <td>Calculates P(Alive) and predicts future purchases for individual customers</td>
+      <td>Non-contractual settings where churn is unobserved (e-commerce, retail)</td>
+      <td>Doesn't model monetary value (needs Gamma-Gamma pairing)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============ SECTION 2: SURVIVAL ANALYSIS FUNDAMENTALS ============ -->
+<div class="section" id="survival">
+<h2>Part 2: Survival Analysis &mdash; The Foundation</h2>
+
+<p>Survival analysis is a statistical discipline originally developed in medicine to answer the question: <em>How long until a patient dies?</em> We've borrowed it for business because the analogous question &mdash; <em>How long until a customer churns?</em> &mdash; has identical mathematical properties.</p>
+
+<h3>Three Concepts You Must Internalize</h3>
+
+<h4>1. The Survival Function S(t)</h4>
+<p>This is the probability that a customer "survives" (stays active) beyond time <em>t</em>. At time zero, everyone is alive: S(0) = 1. As time passes, S(t) decreases. The shape of this decrease tells you everything about your business's retention dynamics.</p>
+
+<div class="formula">
+  <div class="formula-label">THE SURVIVAL FUNCTION</div>
+  <div class="formula-math">S(t) = P(T > t) = probability of surviving past time t</div>
+  <div class="formula-label">Where T is the random variable representing "time until churn"</div>
+</div>
+
+<h4>2. The Hazard Function h(t)</h4>
+<p>This is the instantaneous risk of churning at time <em>t</em>, given that the customer has survived up to that point. Think of it as the "danger level" at each moment. A <strong>constant hazard</strong> means customers churn at the same rate regardless of how long they've been around. An <strong>increasing hazard</strong> means the longer they stay, the more likely they are to leave (fatigue). A <strong>decreasing hazard</strong> means loyalty builds over time &mdash; early survivors become increasingly sticky.</p>
+
+<div class="formula">
+  <div class="formula-label">THE HAZARD FUNCTION</div>
+  <div class="formula-math">h(t) = lim<sub>&Delta;t&rarr;0</sub> P(t &le; T &lt; t+&Delta;t | T &ge; t) / &Delta;t</div>
+  <div class="formula-label">"What's the probability of churning RIGHT NOW, given you haven't churned yet?"</div>
+</div>
+
+<div class="callout insight">
+  <div class="callout-label">Strategic Insight</div>
+  <p>The shape of your hazard function reveals your business model's retention DNA. SaaS products often show a <strong>"bathtub curve"</strong> &mdash; high early churn (trial/onboarding failures), low middle-period churn (happy users), and sometimes rising late-period churn (contract fatigue). E-commerce businesses typically show a <strong>decreasing hazard</strong> &mdash; the first 90 days are a danger zone, but customers who make it past that threshold become increasingly loyal.</p>
+</div>
+
+<h4>3. Censoring &mdash; The Concept That Makes Survival Analysis Special</h4>
+<p>Here's why you can't just use regular regression. In your customer database right now, many customers haven't churned <em>yet</em>. They might churn tomorrow, or they might buy from you for another 10 years. You don't know. In statistics, we call this <strong>right-censoring</strong> &mdash; you can observe the beginning of the story but not the ending.</p>
+
+<p>Consider three customers who all signed up on January 1st:</p>
+
+<div class="timeline">
+  <div class="timeline-step">
+    <h4>Customer A: Churned in Month 4</h4>
+    <p>Observed event. You know the exact "death" time. Duration = 4 months.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Customer B: Still active today (Month 9)</h4>
+    <p>Right-censored. All you know is they survived AT LEAST 9 months. Their actual lifetime is unknown but &ge; 9.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Customer C: Left your observation window in Month 6 (moved abroad)</h4>
+    <p>Right-censored for a different reason. They survived at least 6 months, but you lost track of them.</p>
+  </div>
+</div>
+
+<div class="callout danger">
+  <div class="callout-label">The Fatal Mistake</div>
+  <p>If you simply calculate "average customer lifetime" by averaging all durations, you get (4 + 9 + 6) / 3 = 6.3 months. But this <strong>dramatically underestimates</strong> true customer lifetime because you're treating Customer B's 9 months and Customer C's 6 months as their full lifetimes when they could continue much longer. Ignoring censoring is the single most common mistake analysts make with retention data. Kaplan-Meier and the BG/NBD model both handle censoring properly.</p>
+</div>
+</div>
+
+<!-- ============ SECTION 3: KAPLAN-MEIER ============ -->
+<div class="section" id="kaplan">
+<h2>Part 3: The Kaplan-Meier Estimator</h2>
+
+<p>Edward Kaplan and Paul Meier published their method in 1958. It remains, to this day, the most widely used non-parametric survival estimator in both medicine and business. Its elegance lies in its simplicity.</p>
+
+<h3>How It Works: Step-by-Step</h3>
+
+<p>The Kaplan-Meier estimator calculates the survival probability at each time point where an event (churn) occurs. The key insight: it only "counts" at moments when something happens, and it properly adjusts for the people who are censored in between.</p>
+
+<div class="formula">
+  <div class="formula-label">THE KAPLAN-MEIER ESTIMATOR</div>
+  <div class="formula-math">&Shat;(t) = &prod;<sub>t<sub>i</sub> &le; t</sub> (1 &minus; d<sub>i</sub> / n<sub>i</sub>)</div>
+  <div class="formula-label">d<sub>i</sub> = number who churned at time t<sub>i</sub> &nbsp;&nbsp;|&nbsp;&nbsp; n<sub>i</sub> = number at risk just before t<sub>i</sub></div>
+</div>
+
+<p>Let me walk through a concrete example. Suppose you have 10 customers and you observe them over 12 months:</p>
+
+<table class="comp-table">
+  <thead>
+    <tr><th>Month</th><th>At Risk (n<sub>i</sub>)</th><th>Churned (d<sub>i</sub>)</th><th>Censored</th><th>Survival Prob at t</th><th>Cumulative S(t)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>10</td><td>0</td><td>0</td><td>1.000</td><td><strong>1.000</strong></td></tr>
+    <tr><td>2</td><td>10</td><td>1</td><td>0</td><td>9/10 = 0.900</td><td><strong>0.900</strong></td></tr>
+    <tr><td>4</td><td>9</td><td>1</td><td>1*</td><td>8/9 = 0.889</td><td><strong>0.800</strong></td></tr>
+    <tr><td>6</td><td>7</td><td>0</td><td>0</td><td>7/7 = 1.000</td><td><strong>0.800</strong></td></tr>
+    <tr><td>8</td><td>7</td><td>2</td><td>0</td><td>5/7 = 0.714</td><td><strong>0.571</strong></td></tr>
+    <tr><td>10</td><td>5</td><td>1</td><td>1*</td><td>4/5 = 0.800</td><td><strong>0.457</strong></td></tr>
+    <tr><td>12</td><td>3</td><td>0</td><td>3*</td><td>3/3 = 1.000</td><td><strong>0.457</strong></td></tr>
+  </tbody>
+</table>
+<p style="font-size: 13px; color: var(--muted);">* Censored: customers still active at observation end or lost to follow-up</p>
+
+<p>Notice how the cumulative survival probability <strong>only drops at months where churns actually happen</strong> (months 2, 4, 8, 10). And notice how censored customers reduce the "at risk" pool but don't cause the curve to drop. This is the magic of KM &mdash; it uses all available information without bias.</p>
+
+<h3>Reading the KM Curve Like a Strategist</h3>
+
+<div class="callout insight">
+  <div class="callout-label">What the curve shape tells you</div>
+  <p><strong>Steep early drop, then flattening:</strong> You have an onboarding problem. Customers who survive the first 90 days tend to stick around. Action: invest heavily in first-purchase experience.</p>
+  <p><strong>Steady linear decline:</strong> Churn is constant regardless of tenure. This often indicates a competitive market where customers are always evaluating alternatives. Action: continuous engagement programs.</p>
+  <p><strong>Staircase pattern with plateaus:</strong> Churn happens at predictable moments (contract renewals, seasonal patterns). Action: preemptive retention campaigns timed to these inflection points.</p>
+  <p><strong>Late-stage acceleration:</strong> Long-tenured customers eventually fatigue. Action: loyalty program redesign, win-back before they're fully gone.</p>
+</div>
+
+<h3>Log-Rank Test: Comparing Segments</h3>
+<p>One of the most powerful uses of KM curves is comparing survival across segments. Do contract customers survive longer than month-to-month? Do customers acquired via referral churn less than paid acquisition? The <strong>log-rank test</strong> gives you a formal statistical test (chi-squared) to determine if the difference between two survival curves is significant or just noise.</p>
+
+<!-- Interactive KM Demo -->
+<div class="demo-container" id="km-demo">
+  <div class="demo-title">Interactive: Kaplan-Meier Curve Simulator</div>
+  <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">Adjust parameters to see how different churn patterns affect the survival curve</p>
+  <div class="slider-group">
+    <div class="slider-item">
+      <label>Early Churn Rate (Month 1-3) <span class="slider-val" id="early-val">15%</span></label>
+      <input type="range" min="5" max="40" value="15" id="early-churn" oninput="updateKM()">
+    </div>
+    <div class="slider-item">
+      <label>Steady-State Churn Rate (Month 4+) <span class="slider-val" id="steady-val">3%</span></label>
+      <input type="range" min="1" max="15" value="3" id="steady-churn" oninput="updateKM()">
+    </div>
+  </div>
+  <canvas id="km-canvas" width="840" height="300"></canvas>
+  <p style="font-size: 13px; color: var(--muted); margin-top: 8px;" id="km-insight">After 24 months: ~44% of customers survive. Median lifetime: ~20 months.</p>
+</div>
+</div>
+
+<!-- ============ SECTION 4: BG/NBD MODEL ============ -->
+<div class="section" id="bgnbd">
+<h2>Part 4: The BG/NBD Model &mdash; "Counting Your Customers"</h2>
+
+<p>This is where things get genuinely powerful. The BG/NBD model, published by Peter Fader, Bruce Hardie, and Ka Lok Lee in Marketing Science (2005), is the industry standard for understanding customer behavior in non-contractual settings. It answers two questions simultaneously: <strong>Is this customer still alive?</strong> and <strong>If yes, how many transactions will they make?</strong></p>
+
+<h3>The Behavioral Story</h3>
+
+<p>The model is built on a "story" about how customers behave. Understanding this story is more important than memorizing the math:</p>
+
+<div class="callout">
+  <div class="callout-label">The BG/NBD Story in Plain English</div>
+  <p><strong>While active</strong>, each customer shops at their own personal rate. Some people buy weekly, others buy quarterly. This buying rate follows a Poisson process (random timing, but with a personal average rate).</p>
+  <p><strong>At some point</strong>, each customer "dies" (permanently stops buying). This happens right after a purchase &mdash; the customer makes a transaction and then decides they're done. Think of it as: after every purchase, there's a coin flip determining if the customer comes back.</p>
+  <p><strong>Across the population</strong>, buying rates vary (some customers are naturally frequent buyers, others are infrequent), and churn probabilities vary (some customers are inherently loyal, others are one-and-done). These variations are modeled using probability distributions.</p>
+</div>
+
+<h3>The Five Assumptions (Formally)</h3>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab(event, 'tab-a1')">Assumption 1</button>
+  <button class="tab-btn" onclick="switchTab(event, 'tab-a2')">Assumption 2</button>
+  <button class="tab-btn" onclick="switchTab(event, 'tab-a3')">Assumption 3</button>
+  <button class="tab-btn" onclick="switchTab(event, 'tab-a4')">Assumption 4</button>
+  <button class="tab-btn" onclick="switchTab(event, 'tab-a5')">Assumption 5</button>
+</div>
+
+<div id="tab-a1" class="tab-content active">
+  <h4>While "alive," transactions follow a Poisson process with rate &lambda;</h4>
+  <p>Each customer has a personal transaction rate &lambda;. If &lambda; = 0.5 per week, they buy on average once every two weeks. The timing of each purchase is random (not clockwork), but the average rate is consistent. This is a well-validated assumption for most retail and e-commerce settings.</p>
+  <p><strong>Business implication:</strong> High-&lambda; customers are your power buyers. Low-&lambda; customers aren't necessarily bad &mdash; they might have high monetary values per transaction.</p>
+</div>
+
+<div id="tab-a2" class="tab-content">
+  <h4>Heterogeneity in &lambda; follows a Gamma distribution across the population</h4>
+  <p>Not all customers buy at the same rate. The Gamma distribution is flexible enough to capture the reality that most customers are infrequent buyers (low &lambda;) while a small number are very frequent (high &lambda;). This is the famous "long tail" of customer activity.</p>
+  <p>The Gamma has two parameters: <strong>r</strong> (shape) and <strong>&alpha;</strong> (scale). Together they describe the distribution of purchase rates across your entire customer base.</p>
+</div>
+
+<div id="tab-a3" class="tab-content">
+  <h4>After any transaction, a customer "dies" with probability p</h4>
+  <p>This is the BG (Beta-Geometric) part. After each purchase, there's a probability <em>p</em> that the customer permanently stops buying. This is a geometric process &mdash; each purchase is an independent "trial" where the customer might drop out.</p>
+  <p><strong>Key distinction from Pareto/NBD:</strong> In the original Pareto/NBD model, customers could die at any moment. In BG/NBD, death only happens immediately after a purchase. This simplification makes the model vastly easier to estimate while producing nearly identical results.</p>
+</div>
+
+<div id="tab-a4" class="tab-content">
+  <h4>Heterogeneity in p follows a Beta distribution across the population</h4>
+  <p>Different customers have different churn probabilities. Some customers are naturally one-time buyers (high <em>p</em>), while others are inherently loyal (low <em>p</em>). The Beta distribution captures this variation with parameters <strong>&gamma;</strong> and <strong>&delta;</strong>.</p>
+  <p>Together with Assumptions 1-2, this means the model learns just <strong>four parameters</strong> (r, &alpha;, &gamma;, &delta;) from your data that completely describe the buying and churning behavior of your entire customer base.</p>
+</div>
+
+<div id="tab-a5" class="tab-content">
+  <h4>The transaction rate &lambda; and churn probability p are independent</h4>
+  <p>How often someone buys is unrelated to how likely they are to churn. This is an assumption that sometimes gets challenged &mdash; in some businesses, very frequent buyers might actually burn out faster. But in practice, this assumption holds well enough for the model to produce excellent predictions.</p>
+  <p><strong>When to worry:</strong> If your business model specifically induces churn in heavy users (e.g., limited-time promotions that attract deal-seekers who then disappear), this assumption weakens.</p>
+</div>
+
+<h3>What the Model Gives You</h3>
+
+<p>Once fitted to your transaction data (which only requires three fields per customer: <strong>recency</strong>, <strong>frequency</strong>, and <strong>tenure</strong>), the BG/NBD model produces:</p>
+
+<table class="comp-table">
+  <thead><tr><th>Output</th><th>What It Means</th><th>Business Use</th></tr></thead>
+  <tbody>
+    <tr><td><strong>P(Alive)</strong></td><td>Probability that a specific customer is still "alive" (will buy again)</td><td>Customer scoring, retention targeting, list cleaning</td></tr>
+    <tr><td><strong>E[X(t)]</strong></td><td>Expected number of future transactions in time period t</td><td>Revenue forecasting, demand planning</td></tr>
+    <tr><td><strong>Frequency/Recency Matrix</strong></td><td>Heatmap showing expected purchases by recency and frequency</td><td>Segment identification, visual diagnostic</td></tr>
+    <tr><td><strong>P(Alive) Matrix</strong></td><td>Heatmap showing survival probability by recency and frequency</td><td>Identifying the "danger zone" customers</td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight">
+  <div class="callout-label">The Recency-Frequency Insight</div>
+  <p>The model reveals a counterintuitive truth: <strong>a customer with 20 purchases whose last purchase was 8 months ago has a LOWER P(Alive) than a customer with 3 purchases whose last purchase was last week.</strong> Recency dominates frequency. A customer who bought a lot but stopped long ago has almost certainly churned. A customer who bought infrequently but recently is likely still in the game. This is something that simple RFM scoring often gets wrong because it treats high frequency as unconditionally good.</p>
+</div>
+</div>
+
+<!-- ============ SECTION 5: CLV ============ -->
+<div class="section" id="clv">
+<h2>Part 5: From P(Alive) to Customer Lifetime Value</h2>
+
+<p>P(Alive) and expected transactions are valuable on their own, but the real prize is <strong>Customer Lifetime Value (CLV)</strong> &mdash; the discounted present value of all future cash flows from a customer. To get there, we combine two models:</p>
+
+<h3>The Two-Model Architecture</h3>
+
+<div style="display: grid; grid-template-columns: 1fr 40px 1fr; gap: 12px; align-items: center; margin: 24px 0;">
+  <div style="background: #fff; border: 2px solid var(--accent); border-radius: 10px; padding: 20px; text-align: center;">
+    <div style="font-weight: 700; color: var(--accent); margin-bottom: 8px;">BG/NBD Model</div>
+    <div style="font-size: 14px;">Predicts NUMBER of future transactions</div>
+    <div style="font-size: 13px; color: var(--muted); margin-top: 4px;">Input: Recency, Frequency, T</div>
+  </div>
+  <div style="text-align: center; font-size: 24px; color: var(--muted);">&times;</div>
+  <div style="background: #fff; border: 2px solid var(--accent2); border-radius: 10px; padding: 20px; text-align: center;">
+    <div style="font-weight: 700; color: var(--accent2); margin-bottom: 8px;">Gamma-Gamma Model</div>
+    <div style="font-size: 14px;">Predicts average VALUE per transaction</div>
+    <div style="font-size: 13px; color: var(--muted); margin-top: 4px;">Input: Frequency, Monetary Value</div>
+  </div>
+</div>
+
+<div class="formula">
+  <div class="formula-label">CUSTOMER LIFETIME VALUE</div>
+  <div class="formula-math">CLV = &sum;<sub>t=1</sub><sup>T</sup> E[transactions in t] &times; E[value per transaction] &times; (1 / (1 + d)<sup>t</sup>)</div>
+  <div class="formula-label">d = discount rate (cost of capital, typically 8-15% annually)</div>
+</div>
+
+<h3>The Gamma-Gamma Model (Quick Preview)</h3>
+
+<p>This companion model, also from Fader and Hardie, estimates the expected monetary value per transaction. It makes one key assumption: <strong>monetary value is independent of purchase frequency</strong>. You need to verify this in your data (check that the Pearson correlation between frequency and average transaction value is near zero). If the correlation is significant, the model's estimates will be biased.</p>
+
+<h3>The Discount Rate: A Strategic Choice</h3>
+
+<p>The discount rate isn't just a technical parameter &mdash; it's a strategic statement about how much you value future cash flows relative to today. A higher discount rate means you're more "impatient" and value near-term revenue more heavily. For most businesses, use the weighted average cost of capital (WACC) converted to a monthly rate. If your company's WACC is 12% annually, that's roughly 1% monthly.</p>
+
+<div class="callout">
+  <div class="callout-label">Practical CLV Interpretation</div>
+  <p>Once you have individual-level CLV projections, you can answer questions like: "What is the maximum I should spend to acquire a customer in segment X?" (Answer: no more than their projected CLV minus your margin requirement). "Which customers deserve premium support?" (Answer: top decile by CLV). "Is this customer segment growing in value?" (Answer: compare CLV distributions across acquisition cohorts).</p>
+</div>
+</div>
+
+<!-- ============ SECTION 6: CODE ============ -->
+<div class="section" id="code">
+<h2>Part 6: Implementation in Python</h2>
+
+<p>Here's the complete, production-ready code. This uses the <code>lifetimes</code> library by Cameron Davidson-Pilon, which implements BG/NBD and Gamma-Gamma with a scikit-learn-style API.</p>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; lifetimes</div>
+<pre><span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Install & Import</span>
+<span class="cm"># ============================================</span>
+<span class="cm"># pip install lifetimes pandas matplotlib</span>
+
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> lifetimes <span class="kw">import</span> BetaGeoFitter
+<span class="kw">from</span> lifetimes <span class="kw">import</span> GammaGammaFitter
+<span class="kw">from</span> lifetimes.utils <span class="kw">import</span> summary_data_from_transaction_data
+<span class="kw">from</span> lifetimes.plotting <span class="kw">import</span> (
+    plot_frequency_recency_matrix,
+    plot_probability_alive_matrix
+)</pre>
+</div>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; Data Prep</div>
+<pre><span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Prepare Your Data</span>
+<span class="cm"># Your raw data needs: customer_id, date, revenue</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Load transaction data</span>
+transactions = pd.<span class="fn">read_csv</span>(<span class="str">'transactions.csv'</span>, parse_dates=[<span class="str">'date'</span>])
+
+<span class="cm"># Create RFM summary (this is the magic function)</span>
+<span class="cm"># It computes: frequency, recency, T, monetary_value</span>
+rfm = <span class="fn">summary_data_from_transaction_data</span>(
+    transactions,
+    customer_id_col=<span class="str">'customer_id'</span>,
+    datetime_col=<span class="str">'date'</span>,
+    monetary_value_col=<span class="str">'revenue'</span>,
+    observation_period_end=<span class="str">'2026-01-31'</span>  <span class="cm"># freeze date</span>
+)
+
+<span class="cm"># CRITICAL: Filter to repeat customers for Gamma-Gamma</span>
+rfm_repeat = rfm[rfm[<span class="str">'frequency'</span>] > <span class="num">0</span>]
+
+<span class="fn">print</span>(rfm.<span class="fn">head</span>(<span class="num">10</span>))
+<span class="cm"># frequency = number of REPEAT purchases (not total)</span>
+<span class="cm"># recency   = time between first and last purchase</span>
+<span class="cm"># T         = time between first purchase and end of observation</span>
+<span class="cm"># monetary_value = average spend per repeat transaction</span></pre>
+</div>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; BG/NBD Model</div>
+<pre><span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Fit the BG/NBD Model</span>
+<span class="cm"># ============================================</span>
+
+bgf = <span class="fn">BetaGeoFitter</span>(penalizer_coef=<span class="num">0.001</span>)
+bgf.<span class="fn">fit</span>(
+    rfm[<span class="str">'frequency'</span>],
+    rfm[<span class="str">'recency'</span>],
+    rfm[<span class="str">'T'</span>]
+)
+
+<span class="fn">print</span>(bgf.<span class="fn">summary</span>())
+<span class="cm"># Shows the 4 learned parameters: r, alpha, a, b</span>
+<span class="cm"># r, alpha = Gamma params for transaction rate</span>
+<span class="cm"># a, b     = Beta params for churn probability</span>
+
+<span class="cm"># Visualize the frequency-recency matrix</span>
+fig, axes = plt.<span class="fn">subplots</span>(<span class="num">1</span>, <span class="num">2</span>, figsize=(<span class="num">14</span>, <span class="num">5</span>))
+<span class="fn">plot_frequency_recency_matrix</span>(bgf, ax=axes[<span class="num">0</span>])
+<span class="fn">plot_probability_alive_matrix</span>(bgf, ax=axes[<span class="num">1</span>])
+plt.<span class="fn">tight_layout</span>()
+plt.<span class="fn">show</span>()</pre>
+</div>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; Predictions & CLV</div>
+<pre><span class="cm"># ============================================</span>
+<span class="cm"># STEP 4: Generate Predictions</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># P(Alive) for each customer</span>
+rfm[<span class="str">'p_alive'</span>] = bgf.<span class="fn">conditional_probability_alive</span>(
+    rfm[<span class="str">'frequency'</span>], rfm[<span class="str">'recency'</span>], rfm[<span class="str">'T'</span>]
+)
+
+<span class="cm"># Expected purchases in next 90 days</span>
+rfm[<span class="str">'predicted_purchases_90d'</span>] = \
+    bgf.<span class="fn">conditional_expected_number_of_purchases_up_to_time</span>(
+        <span class="num">90</span>,  <span class="cm"># days</span>
+        rfm[<span class="str">'frequency'</span>], rfm[<span class="str">'recency'</span>], rfm[<span class="str">'T'</span>]
+    )
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 5: Fit Gamma-Gamma & Calculate CLV</span>
+<span class="cm"># ============================================</span>
+
+<span class="cm"># Verify independence assumption</span>
+corr = rfm_repeat[[<span class="str">'frequency'</span>, <span class="str">'monetary_value'</span>]].<span class="fn">corr</span>()
+<span class="fn">print</span>(<span class="str">f"Correlation: {corr.iloc[0,1]:.3f}"</span>)  <span class="cm"># Should be near 0</span>
+
+ggf = <span class="fn">GammaGammaFitter</span>(penalizer_coef=<span class="num">0.001</span>)
+ggf.<span class="fn">fit</span>(rfm_repeat[<span class="str">'frequency'</span>], rfm_repeat[<span class="str">'monetary_value'</span>])
+
+<span class="cm"># FULL CLV CALCULATION</span>
+rfm[<span class="str">'clv_12_months'</span>] = ggf.<span class="fn">customer_lifetime_value</span>(
+    bgf,
+    rfm[<span class="str">'frequency'</span>],
+    rfm[<span class="str">'recency'</span>],
+    rfm[<span class="str">'T'</span>],
+    rfm[<span class="str">'monetary_value'</span>],
+    time=<span class="num">12</span>,          <span class="cm"># months</span>
+    discount_rate=<span class="num">0.01</span>  <span class="cm"># monthly ~12.7% annual</span>
+)
+
+<span class="cm"># Segment customers by CLV</span>
+rfm[<span class="str">'segment'</span>] = pd.<span class="fn">qcut</span>(
+    rfm[<span class="str">'clv_12_months'</span>], <span class="num">4</span>,
+    labels=[<span class="str">'Low'</span>, <span class="str">'Medium'</span>, <span class="str">'High'</span>, <span class="str">'Platinum'</span>]
+)
+
+<span class="fn">print</span>(rfm.<span class="fn">groupby</span>(<span class="str">'segment'</span>)[<span class="str">'clv_12_months'</span>].<span class="fn">describe</span>())</pre>
+</div>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; Kaplan-Meier</div>
+<pre><span class="cm"># ============================================</span>
+<span class="cm"># BONUS: Kaplan-Meier for Segment Comparison</span>
+<span class="cm"># ============================================</span>
+
+<span class="kw">from</span> lifelines <span class="kw">import</span> KaplanMeierFitter
+<span class="kw">from</span> lifelines.statistics <span class="kw">import</span> logrank_test
+
+kmf = <span class="fn">KaplanMeierFitter</span>()
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">10</span>, <span class="num">6</span>))
+
+<span class="kw">for</span> segment <span class="kw">in</span> [<span class="str">'Referral'</span>, <span class="str">'Paid Ads'</span>, <span class="str">'Organic'</span>]:
+    mask = churn_data[<span class="str">'channel'</span>] == segment
+    kmf.<span class="fn">fit</span>(
+        churn_data.<span class="fn">loc</span>[mask, <span class="str">'tenure_days'</span>],
+        event_observed=churn_data.<span class="fn">loc</span>[mask, <span class="str">'churned'</span>],
+        label=segment
+    )
+    kmf.<span class="fn">plot_survival_function</span>(ax=ax)
+
+ax.<span class="fn">set_title</span>(<span class="str">'Customer Survival by Acquisition Channel'</span>)
+ax.<span class="fn">set_xlabel</span>(<span class="str">'Days Since First Purchase'</span>)
+ax.<span class="fn">set_ylabel</span>(<span class="str">'Probability of Still Being Active'</span>)
+plt.<span class="fn">show</span>()
+
+<span class="cm"># Statistical test: Are survival curves significantly different?</span>
+result = <span class="fn">logrank_test</span>(
+    referral_durations, paid_durations,
+    event_observed_A=referral_events,
+    event_observed_B=paid_events
+)
+<span class="fn">print</span>(<span class="str">f"p-value: {result.p_value:.4f}"</span>)
+<span class="cm"># p < 0.05 means the curves are significantly different</span></pre>
+</div>
+</div>
+
+<!-- ============ SECTION 7: PLAYBOOK ============ -->
+<div class="section" id="playbook">
+<h2>Part 7: Your Week 1 Playbook</h2>
+
+<h3>Key Takeaways for Your Analytics Playbook</h3>
+
+<table class="comp-table">
+  <thead><tr><th>Decision</th><th>Method</th><th>When to Use</th></tr></thead>
+  <tbody>
+    <tr><td>"What's our overall retention curve?"</td><td>Kaplan-Meier</td><td>Board presentations, cohort comparisons, segment analysis</td></tr>
+    <tr><td>"Is this specific customer still alive?"</td><td>BG/NBD &rarr; P(Alive)</td><td>Retention targeting, list hygiene, CRM scoring</td></tr>
+    <tr><td>"How many orders will this customer place?"</td><td>BG/NBD &rarr; E[X(t)]</td><td>Demand forecasting, inventory planning</td></tr>
+    <tr><td>"What is this customer worth over 12 months?"</td><td>BG/NBD + Gamma-Gamma &rarr; CLV</td><td>Acquisition budget setting, customer prioritization</td></tr>
+    <tr><td>"Do referral customers last longer than paid?"</td><td>KM + Log-Rank Test</td><td>Channel ROI analysis, acquisition strategy</td></tr>
+  </tbody>
+</table>
+
+<h3>Common Pitfalls to Avoid</h3>
+
+<div class="callout danger">
+  <div class="callout-label">Top 5 Mistakes</div>
+  <p><strong>1. Confusing frequency definitions.</strong> In the lifetimes library, "frequency" means REPEAT purchases (total minus 1). A customer with 5 total purchases has frequency = 4. Get this wrong and your model is garbage.</p>
+  <p><strong>2. Ignoring censoring.</strong> If you calculate "average customer lifetime" without accounting for currently-active customers, you'll underestimate by 30-50%.</p>
+  <p><strong>3. Applying BG/NBD to contractual businesses.</strong> If customers explicitly cancel (SaaS, telecom with contracts), use survival models directly. BG/NBD is for non-contractual settings where churn is latent.</p>
+  <p><strong>4. Skipping the independence check.</strong> If frequency and monetary value are correlated (r > 0.3), the Gamma-Gamma model will produce biased CLV estimates. You may need to segment first or use an alternative monetary model.</p>
+  <p><strong>5. Using raw transaction count as "frequency."</strong> Remember: a customer who bought once has frequency = 0 in the model. They've had zero repeat purchases. The model can still estimate their P(Alive) based on how long it's been since that single purchase.</p>
+</div>
+
+<h3>This Week's Study Assignments</h3>
+
+<div class="timeline">
+  <div class="timeline-step">
+    <h4>Day 1-2: Read the Original Paper</h4>
+    <p>Fader, Hardie, Lee (2005). "Counting Your Customers the Easy Way." Marketing Science, 24(2). Focus on Sections 1-3 and the intuition behind the model. Available at brucehardie.com/papers.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 3-4: Implement in Python</h4>
+    <p>Use the lifetimes quickstart guide (lifetimes.readthedocs.io). Work through the CDNOW dataset example. Reproduce the frequency-recency matrix and P(Alive) matrix. Calculate CLV for the full customer base.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 5: Apply to Your Own Data</h4>
+    <p>Take real transaction data (or use the Online Retail dataset from UCI ML Repository). Build the complete pipeline: data prep, BG/NBD fit, Gamma-Gamma fit, CLV calculation, segmentation. Document your findings.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 6: Build KM Curves by Segment</h4>
+    <p>Using the same data, create KM survival curves comparing at least 3 customer segments (by channel, geography, or product category). Run log-rank tests. Write up which segments retain best and why.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 7: Write Your Executive Brief</h4>
+    <p>Draft a one-page memo for a hypothetical CEO: "Based on our analysis, X% of our customer base is effectively dead. Our true active customer count is Y. The 12-month projected CLV of our active base is $Z. Recommended actions: ..."</p>
+  </div>
+</div>
+
+<h3>References & Further Reading</h3>
+
+<p style="font-size: 15px; line-height: 1.8; color: #555;">
+<strong>Essential Paper:</strong> Fader, P.S., Hardie, B.G.S., Lee, K.L. (2005). "Counting Your Customers" the Easy Way: An Alternative to the Pareto/NBD Model. <em>Marketing Science</em>, 24(2), 275-284.<br>
+<strong>Companion Paper:</strong> Fader, P.S., Hardie, B.G.S. (2013). The Gamma-Gamma Model of Monetary Value.<br>
+<strong>Overview:</strong> Fader, P.S., Hardie, B.G.S. (2009). Probability Models for Customer-Base Analysis. <em>Journal of Interactive Marketing</em>, 23(1), 61-69.<br>
+<strong>Python Library:</strong> lifetimes by Cameron Davidson-Pilon &mdash; lifetimes.readthedocs.io<br>
+<strong>Bayesian Alternative:</strong> PyMC-Marketing CLV module &mdash; pymc-marketing.io<br>
+<strong>Textbook:</strong> Fader, P. (2020). <em>Customer Centricity</em>. Wharton Digital Press.<br>
+<strong>Excel Implementation:</strong> brucehardie.com/notes/ (Fader & Hardie's own spreadsheets for the BG/NBD)
+</p>
+
+<div class="bottom-nav">
+  <a href="index.html" style="font-size: 14px;">&larr; Q1 Hub</a>
+  <a href="week2_renewal_cliff.html" style="font-size: 14px;">Next: Week 2 &rarr; The Renewal Cliff</a>
+</div>
+</div>
+
+</main>
+
+<script>
+// Tab switching
+function switchTab(event, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// Navigation highlighting
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) {
+      current = s.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+
+// Interactive KM Curve
+function updateKM() {
+  const earlyRate = parseInt(document.getElementById('early-churn').value) / 100;
+  const steadyRate = parseInt(document.getElementById('steady-churn').value) / 100;
+  document.getElementById('early-val').textContent = Math.round(earlyRate * 100) + '%';
+  document.getElementById('steady-val').textContent = Math.round(steadyRate * 100) + '%';
+
+  const canvas = document.getElementById('km-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.offsetWidth * 2;
+  const H = canvas.height = 600;
+  ctx.clearRect(0, 0, W, H);
+
+  const padL = 80, padR = 40, padT = 30, padB = 60;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+
+  // Grid
+  ctx.strokeStyle = '#e8e4dc';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (chartH / 4) * i;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+    ctx.fillStyle = '#999';
+    ctx.font = '22px Source Sans 3';
+    ctx.textAlign = 'right';
+    ctx.fillText((100 - i * 25) + '%', padL - 12, y + 6);
+  }
+  for (let m = 0; m <= 24; m += 6) {
+    const x = padL + (m / 24) * chartW;
+    ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + chartH); ctx.stroke();
+    ctx.fillStyle = '#999';
+    ctx.textAlign = 'center';
+    ctx.font = '22px Source Sans 3';
+    ctx.fillText(m + 'mo', x, padT + chartH + 30);
+  }
+
+  // Calculate survival curve
+  const months = 24;
+  const points = [];
+  let survival = 1.0;
+  for (let m = 0; m <= months; m++) {
+    points.push({ m, s: survival });
+    const rate = m < 3 ? earlyRate : steadyRate;
+    survival *= (1 - rate);
+  }
+
+  // Draw confidence interval (approximate)
+  ctx.fillStyle = 'rgba(196, 93, 62, 0.08)';
+  ctx.beginPath();
+  points.forEach((p, i) => {
+    const x = padL + (p.m / months) * chartW;
+    const band = 0.05 * Math.sqrt(p.m + 1) * 0.3;
+    const y = padT + (1 - Math.min(1, p.s + band)) * chartH;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  for (let i = points.length - 1; i >= 0; i--) {
+    const p = points[i];
+    const x = padL + (p.m / months) * chartW;
+    const band = 0.05 * Math.sqrt(p.m + 1) * 0.3;
+    const y = padT + (1 - Math.max(0, p.s - band)) * chartH;
+    ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.fill();
+
+  // Draw step function (proper KM style)
+  ctx.strokeStyle = '#c45d3e';
+  ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  points.forEach((p, i) => {
+    const x = padL + (p.m / months) * chartW;
+    const y = padT + (1 - p.s) * chartH;
+    if (i === 0) { ctx.moveTo(x, y); }
+    else {
+      const prevX = padL + (points[i-1].m / months) * chartW;
+      ctx.lineTo(x, padT + (1 - points[i-1].s) * chartH); // horizontal
+      ctx.lineTo(x, y); // vertical drop
+    }
+  });
+  ctx.stroke();
+
+  // Median line
+  let medianMonth = null;
+  for (const p of points) {
+    if (p.s <= 0.5) { medianMonth = p.m; break; }
+  }
+
+  if (medianMonth) {
+    const mx = padL + (medianMonth / months) * chartW;
+    const my = padT + 0.5 * chartH;
+    ctx.setLineDash([8, 6]);
+    ctx.strokeStyle = '#2d6a4f';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(padL, my); ctx.lineTo(mx, my); ctx.lineTo(mx, padT + chartH); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#2d6a4f';
+    ctx.font = 'bold 22px Source Sans 3';
+    ctx.fillText('Median: ' + medianMonth + ' mo', mx + 10, my - 10);
+  }
+
+  // Labels
+  ctx.fillStyle = '#1a1a2e';
+  ctx.font = 'bold 24px Source Sans 3';
+  ctx.textAlign = 'center';
+  ctx.fillText('Customer Survival Over Time', W / 2, H - 2);
+
+  // Insight text
+  const finalSurvival = points[points.length - 1].s;
+  const medText = medianMonth ? `Median lifetime: ~${medianMonth} months.` : 'Median lifetime: >24 months.';
+  document.getElementById('km-insight').textContent =
+    `After 24 months: ~${Math.round(finalSurvival * 100)}% of customers survive. ${medText}`;
+}
+
+// Initialize
+updateKM();
+</script>
+
+</body>
+</html>

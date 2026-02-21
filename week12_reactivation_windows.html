@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 12: Reactivation Windows</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q1 HUB</a><a href="#business" class="nav-link active">Dormancy Problem</a><a href="#defining" class="nav-link">Defining Dormancy</a><a href="#survival" class="nav-link">Dormancy Survival</a><a href="#optimal" class="nav-link">Optimal Windows</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 12 &middot; Q1: Customer Lifetime &amp; Retention Economics</div><h1>Customer <span>Reactivation Windows</span>: Timing Your Win-Back</h1><p class="hero-sub">Week 6 asked "should you chase lost customers?" This week dives deeper: "when exactly should you reach out, and when should you give up?" Using survival analysis on dormant customer data, you'll calculate the precise reactivation window for each segment and build an automated trigger system that fires at the optimal moment.</p></header>
+<main class="content">
+<div class="section" id="business"><h2>Part 1: The Dormancy Continuum</h2>
+<p>In non-contractual businesses, customers don't announce their departure. They just stop buying. The challenge: at any given moment, some inactive customers are genuinely gone while others are simply between purchases. Week 1's BG/NBD model gives you P(Alive), but that's a snapshot. What you need is a <strong>time-aware reactivation framework</strong> that understands how the probability of return decays with each passing day of inactivity.</p>
+<div class="callout"><div class="callout-label">The Three Zones</div>
+<p><strong>Active zone (0-1x average inter-purchase time):</strong> Customer is between normal purchases. No intervention needed.</p>
+<p><strong>Dormancy zone (1-3x average IPT):</strong> Customer is outside their normal rhythm. This is the reactivation window &mdash; the period where intervention has the highest ROI.</p>
+<p><strong>Lost zone (>3x average IPT):</strong> Customer has almost certainly churned. Win-back attempts here have very low probability of success (Week 6 framework applies).</p></div></div>
+
+<div class="section" id="defining"><h2>Part 2: Defining Dormancy Thresholds Statistically</h2>
+<p>Most companies use arbitrary thresholds: "inactive for 90 days = dormant." This ignores the massive variation in customer buying rhythms. A weekly grocery buyer who hasn't purchased in 30 days is deeply dormant. A furniture buyer who hasn't purchased in 30 days is right on schedule.</p>
+<h3>The Percentile Method</h3>
+<p>For each customer, compute their historical average inter-purchase time (IPT). A customer is dormant when their current gap exceeds a threshold relative to <em>their personal</em> rhythm. Common thresholds: 90th percentile of their historical inter-purchase distribution, or 2x their median IPT.</p>
+<div class="formula"><div class="formula-label">PERSONALIZED DORMANCY THRESHOLD</div><div class="formula-math">Dormant<sub>i</sub> = 1 &nbsp;if&nbsp; gap<sub>i</sub> > k &middot; median(IPT<sub>i</sub>)</div><div class="formula-label">k = 2 is a common default | gap = days since last purchase</div></div>
+<h3>The BG/NBD Method</h3>
+<p>Alternatively, use the P(Alive) from Week 1. Set the dormancy threshold at P(Alive) &lt; 0.5 (more likely dead than alive). This is more sophisticated because it accounts for both frequency and recency simultaneously, and handles the recency-frequency interaction that simple IPT methods miss.</p></div>
+
+<div class="section" id="survival"><h2>Part 3: Survival Analysis of Dormant Customers</h2>
+<p>Once you've identified dormant customers, model their "time-to-reactivation" using survival analysis. The event is reactivation (a purchase after the dormancy threshold was crossed). Censoring occurs when a customer remains dormant through the observation period.</p>
+<div class="callout insight"><div class="callout-label">What the Hazard Function Tells You</div>
+<p>The reactivation hazard function typically shows: a brief spike in the first 2-4 weeks of dormancy (some customers were just on vacation or had temporary cash flow issues), a rapid decline, and then a long flat tail approaching zero. The <strong>inflection point</strong> where the hazard drops below a business-relevant threshold (e.g., 2% weekly reactivation probability) defines the boundary between "worth pursuing" and "let them go."</p></div>
+<h3>Segmenting Reactivation Windows</h3>
+<table class="comp-table"><thead><tr><th>Segment</th><th>Optimal Window Start</th><th>Window Close</th><th>Expected Response Rate</th></tr></thead><tbody>
+<tr><td>High CLV, recent dormancy</td><td>Week 2</td><td>Week 8</td><td>15-25%</td></tr>
+<tr><td>High CLV, extended dormancy</td><td>Week 4</td><td>Week 12</td><td>5-10%</td></tr>
+<tr><td>Medium CLV, recent dormancy</td><td>Week 3</td><td>Week 6</td><td>10-15%</td></tr>
+<tr><td>Low CLV, any dormancy</td><td>&mdash;</td><td>&mdash;</td><td>Usually negative ROI</td></tr>
+</tbody></table></div>
+
+<div class="section" id="optimal"><h2>Part 4: Building the Automated Trigger System</h2>
+<p>The end product of this analysis is an automated system that: (1) monitors each customer's gap since last purchase relative to their personal rhythm, (2) triggers a reactivation campaign when they enter the dormancy zone, (3) escalates the intervention intensity over time (email &rarr; personalized offer &rarr; phone call for high-value), and (4) stops attempting reactivation when the customer exits the viable window.</p>
+<div class="callout"><div class="callout-label">The Escalation Ladder</div>
+<p><strong>Week 2 (dormancy entry):</strong> Personalized "we noticed you haven't visited" email with product recommendations based on purchase history. Cost: $0.10.</p>
+<p><strong>Week 4:</strong> Targeted offer (10% off, free shipping). Cost: $2-5 per customer.</p>
+<p><strong>Week 6:</strong> For high-CLV only: direct outreach (personal email from account manager or phone call). Cost: $15-30.</p>
+<p><strong>Week 8+:</strong> Move to passive win-back pool (low-cost batch campaigns). Stop active investment.</p></div></div>
+
+<div class="section" id="code"><h2>Part 5: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; Reactivation Windows</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> lifelines <span class="kw">import</span> KaplanMeierFitter, WeibullAFTFitter
+
+txns = pd.<span class="fn">read_csv</span>(<span class="str">'transactions.csv'</span>, parse_dates=[<span class="str">'date'</span>])
+
+<span class="cm"># === Step 1: Personal dormancy thresholds ===</span>
+ipt = txns.<span class="fn">sort_values</span>([<span class="str">'customer_id'</span>,<span class="str">'date'</span>])
+ipt[<span class="str">'gap'</span>] = ipt.<span class="fn">groupby</span>(<span class="str">'customer_id'</span>)[<span class="str">'date'</span>].<span class="fn">diff</span>().dt.days
+median_ipt = ipt.<span class="fn">groupby</span>(<span class="str">'customer_id'</span>)[<span class="str">'gap'</span>].<span class="fn">median</span>()
+
+<span class="cm"># Current gap (days since last purchase)</span>
+last_purchase = txns.<span class="fn">groupby</span>(<span class="str">'customer_id'</span>)[<span class="str">'date'</span>].<span class="fn">max</span>()
+today = pd.<span class="fn">Timestamp</span>(<span class="str">'2026-02-01'</span>)
+current_gap = (today - last_purchase).dt.days
+
+<span class="cm"># Dormancy flag: gap > 2x median IPT</span>
+dormancy = pd.<span class="fn">DataFrame</span>({
+    <span class="str">'median_ipt'</span>: median_ipt,
+    <span class="str">'current_gap'</span>: current_gap,
+    <span class="str">'threshold'</span>: median_ipt * <span class="num">2</span>,
+})
+dormancy[<span class="str">'is_dormant'</span>] = dormancy[<span class="str">'current_gap'</span>] > dormancy[<span class="str">'threshold'</span>]
+dormancy[<span class="str">'dormancy_days'</span>] = (dormancy[<span class="str">'current_gap'</span>] - dormancy[<span class="str">'threshold'</span>]).<span class="fn">clip</span>(lower=<span class="num">0</span>)
+
+<span class="cm"># === Step 2: Reactivation survival analysis ===</span>
+<span class="cm"># Historical: among those who became dormant, time to reactivation</span>
+dormant_history = pd.<span class="fn">read_csv</span>(<span class="str">'dormancy_episodes.csv'</span>)
+<span class="cm"># days_dormant: duration of dormancy episode</span>
+<span class="cm"># reactivated: 1=purchased again, 0=still dormant at end of observation</span>
+
+kmf = <span class="fn">KaplanMeierFitter</span>()
+kmf.<span class="fn">fit</span>(dormant_history[<span class="str">'days_dormant'</span>],
+       dormant_history[<span class="str">'reactivated'</span>])
+<span class="cm"># This gives the "survival in dormancy" curve</span>
+<span class="cm"># P(still dormant at day t) = how long dormancy lasts</span>
+
+<span class="cm"># === Step 3: Trigger assignment ===</span>
+dormant_now = dormancy[dormancy[<span class="str">'is_dormant'</span>]]
+dormant_now[<span class="str">'action'</span>] = pd.<span class="fn">cut</span>(
+    dormant_now[<span class="str">'dormancy_days'</span>],
+    bins=[<span class="num">0</span>, <span class="num">14</span>, <span class="num">28</span>, <span class="num">42</span>, <span class="num">56</span>, <span class="fn">float</span>(<span class="str">'inf'</span>)],
+    labels=[<span class="str">'Email nudge'</span>, <span class="str">'Targeted offer'</span>,
+            <span class="str">'High-value outreach'</span>, <span class="str">'Passive pool'</span>, <span class="str">'Let go'</span>]
+)
+<span class="fn">print</span>(dormant_now[<span class="str">'action'</span>].<span class="fn">value_counts</span>())</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 6: Your Week 12 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th></tr></thead><tbody>
+<tr><td>"Is this customer dormant or just between purchases?"</td><td>Personal dormancy threshold (2x median IPT or P(Alive) < 0.5)</td></tr>
+<tr><td>"When is the optimal reactivation window?"</td><td>KM of time-to-reactivation; identify the hazard peak zone</td></tr>
+<tr><td>"How should I escalate interventions?"</td><td>Escalation ladder: email &rarr; offer &rarr; outreach &rarr; passive &rarr; stop</td></tr>
+<tr><td>"When should I stop trying?"</td><td>When reactivation hazard drops below cost-effective threshold (Week 6 ROI formula)</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Build Personal Dormancy Thresholds</h4><p>Compute median IPT per customer from your transaction data. Flag currently dormant customers. Compare this to the BG/NBD P(Alive) method from Week 1.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Model Time-to-Reactivation</h4><p>Using historical dormancy episodes, fit KM and AFT models on reactivation times. Identify the window where reactivation hazard is highest.</p></div>
+<div class="timeline-step"><h4>Day 5-6: Design the Trigger System</h4><p>Map dormancy duration to intervention type. Define escalation ladder. Calculate expected ROI per tier using Week 6's win-back value formula.</p></div>
+<div class="timeline-step"><h4>Day 7: Operational Brief</h4><p>"We have X dormant customers. Y% are in the viable reactivation window. Recommended interventions by tier: [table]. Projected reactivation revenue: $Z."</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Framework:</strong> Builds on Week 1 (BG/NBD P(Alive)), Week 6 (Win-Back ROI), and Week 10 (AFT models).<br><strong>Essential:</strong> Ascarza, E. (2018). Retention Futility: Targeting High-Risk Customers Might Be Ineffective. <em>JMR</em>, 55(1).<br><strong>Python:</strong> lifelines KaplanMeierFitter, WeibullAFTFitter for dormancy modeling.</p>
+<div class="bottom-nav"><a href="week11_contractual_noncontractual.html">&larr; Week 11: Contractual vs. Non-Contractual</a><a href="week13_causal_network.html">Week 13: Causal Network Analysis &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

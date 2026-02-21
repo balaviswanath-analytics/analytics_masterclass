@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3: Churn Segmentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}.section:nth-child(2){animation-delay:.1s}.section:nth-child(3){animation-delay:.2s}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-label">Q1 HUB</a>
+  <a href="#business" class="nav-link active">Business Case</a>
+  <a href="#lca" class="nav-link">Latent Class Analysis</a>
+  <a href="#em" class="nav-link">EM Algorithm</a>
+  <a href="#clvweight" class="nav-link">CLV-Weighted Churn</a>
+  <a href="#model-select" class="nav-link">Model Selection</a>
+  <a href="#code" class="nav-link">Python Code</a>
+  <a href="#playbook" class="nav-link">Playbook</a>
+</div></nav>
+
+<header class="hero">
+  <div class="week-tag">Week 03 &middot; Q1: Customer Lifetime &amp; Retention Economics</div>
+  <h1>Churn <span>Segmentation</span>: Not All Lost Customers Cost the Same</h1>
+  <p class="hero-sub">You've learned WHEN customers churn (Week 1) and WHY they churn (Week 2). This week you learn that churn isn't one thing &mdash; it's several distinct phenomena hiding under one label. Latent class analysis reveals the hidden segments within your churned population, and CLV-weighting ensures you allocate retention budgets where the money actually is.</p>
+</header>
+
+<main class="content">
+<div class="section" id="business">
+<h2>Part 1: The Business Problem</h2>
+<p>Your churn rate is 12% annually. The board wants it below 8%. The Head of Retention is asking for more budget. But here's the question nobody is asking: <em>Which of those churned customers were worth saving?</em></p>
+
+<p>Not all churn is created equal. Within that 12%, you'll typically find very distinct groups masquerading as a single number:</p>
+
+<table class="comp-table">
+  <thead><tr><th>Churn Segment</th><th>Typical % of Churners</th><th>Avg CLV Before Churn</th><th>Was Preventable?</th></tr></thead>
+  <tbody>
+    <tr><td><strong>"Trial and Bail"</strong></td><td>35-45%</td><td>Very low ($50-200)</td><td>Mostly not &mdash; bad fit from the start</td></tr>
+    <tr><td><strong>"Slow Bleeders"</strong></td><td>20-30%</td><td>Medium ($500-2,000)</td><td>Yes, with early intervention</td></tr>
+    <tr><td><strong>"Sticker Shock"</strong></td><td>15-20%</td><td>Medium-High ($1K-5K)</td><td>Yes, with pricing flexibility</td></tr>
+    <tr><td><strong>"Poached Whales"</strong></td><td>5-10%</td><td>Very high ($10K+)</td><td>Sometimes &mdash; competitive counter-offers</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="callout-label">The $1.2M Insight</div>
+  <p>A retail bank discovered that 40% of their "churned" customers were actually low-value accounts that cost more to serve than they generated. Spending $200 per customer to retain them was destroying value. Meanwhile, the 8% of churners who were high-CLV clients were receiving the same generic retention treatment as everyone else. By segmenting churn and redirecting budget, they saved $1.2M annually while reducing high-value churn by 22%.</p>
+</div>
+
+<h3>The Key Insight: You Need Two Segmentations</h3>
+<p>First, segment by <strong>churn behavior</strong> (latent class analysis reveals hidden patterns in how people churn). Second, weight each segment by <strong>CLV impact</strong> (a lost whale matters 100x more than a lost minnow). This combination &mdash; behavioral segmentation weighted by economic value &mdash; is what the top 1% of analysts do that everyone else misses.</p>
+</div>
+
+<div class="section" id="lca">
+<h2>Part 2: Latent Class Analysis (LCA)</h2>
+<p>Latent class analysis assumes your observed data is generated by a <strong>mixture of K hidden (latent) subpopulations</strong>, each with its own distinct behavior pattern. You don't know which customer belongs to which class &mdash; the model infers this probabilistically.</p>
+
+<div class="formula">
+  <div class="formula-label">THE MIXTURE MODEL</div>
+  <div class="formula-math">P(X) = &sum;<sub>k=1</sub><sup>K</sup> &pi;<sub>k</sub> &middot; f(X | &theta;<sub>k</sub>)</div>
+  <div class="formula-label">&pi;<sub>k</sub> = probability of belonging to class k &nbsp;|&nbsp; &theta;<sub>k</sub> = parameters for class k</div>
+</div>
+
+<p>In plain English: the overall distribution of churn behavior in your data is a weighted sum of K distinct distributions, each representing a different "type" of churner. The model learns both the number and characteristics of these types from the data.</p>
+
+<h3>What Makes LCA Different from K-Means</h3>
+<table class="comp-table">
+  <thead><tr><th>Feature</th><th>K-Means Clustering</th><th>Latent Class Analysis</th></tr></thead>
+  <tbody>
+    <tr><td>Assignment</td><td>Hard (each customer in exactly one cluster)</td><td><strong>Soft (probabilistic membership)</strong></td></tr>
+    <tr><td>Model basis</td><td>Distance-based (minimizes within-cluster variance)</td><td><strong>Statistical model (maximum likelihood)</strong></td></tr>
+    <tr><td>Uncertainty</td><td>No measure of confidence</td><td><strong>Gives P(class | customer) for each class</strong></td></tr>
+    <tr><td>Model selection</td><td>Elbow method (subjective)</td><td><strong>BIC/AIC (formal statistical criteria)</strong></td></tr>
+    <tr><td>Variable types</td><td>Continuous only (without preprocessing)</td><td><strong>Handles mixed types naturally</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight">
+  <div class="callout-label">Why Soft Assignment Matters</div>
+  <p>With K-means, a customer is either in Segment A or Segment B. With LCA, a customer might be 70% Segment A and 30% Segment B. This uncertainty is <em>information</em>. A customer who is 51%/49% between two segments should be treated differently than one who is 99%/1%. In retention, this translates to: customers on the boundary between "saveable" and "gone" are exactly the ones where intervention has the highest marginal value.</p>
+</div>
+
+<h3>Choosing the Inputs</h3>
+<p>For churn segmentation, the input variables should capture <strong>how</strong> and <strong>why</strong> customers leave, not just that they left. Good inputs include:</p>
+<p><strong>Behavioral:</strong> Recency of last purchase, purchase frequency trend (increasing/decreasing), category breadth, channel usage (web vs. app vs. store).</p>
+<p><strong>Engagement:</strong> Email open rates over last 3 months, app logins, website visit frequency, content consumption.</p>
+<p><strong>Financial:</strong> Average order value trend, discount sensitivity, total lifetime spend, payment issues.</p>
+<p><strong>Temporal:</strong> Tenure at churn, time since last engagement, seasonality of purchases.</p>
+</div>
+
+<div class="section" id="em">
+<h2>Part 3: The EM Algorithm &mdash; How LCA Actually Works</h2>
+<p>The Expectation-Maximization (EM) algorithm is the engine inside LCA. It solves a chicken-and-egg problem: to estimate the class parameters, you need to know which customers belong to which class; but to assign customers, you need the parameters. EM handles this iteratively.</p>
+
+<h3>The Two Steps</h3>
+
+<h4>E-Step (Expectation): Assign Probabilities</h4>
+<p>Given current parameter estimates, calculate the probability that each customer belongs to each class. This uses Bayes' theorem: the probability of belonging to class <em>k</em> given the customer's observed data is proportional to the class prevalence times the likelihood of the data under that class.</p>
+
+<div class="formula">
+  <div class="formula-label">E-STEP: POSTERIOR CLASS PROBABILITY</div>
+  <div class="formula-math">P(class k | X<sub>i</sub>) = &pi;<sub>k</sub> &middot; f(X<sub>i</sub> | &theta;<sub>k</sub>) / &sum;<sub>j</sub> &pi;<sub>j</sub> &middot; f(X<sub>i</sub> | &theta;<sub>j</sub>)</div>
+</div>
+
+<h4>M-Step (Maximization): Update Parameters</h4>
+<p>Given the class membership probabilities from the E-step, re-estimate all parameters (&pi;, &theta;) to maximize the likelihood. This is like fitting K separate models, but each data point is weighted by its probability of belonging to each class.</p>
+
+<p>The algorithm alternates between these steps until convergence (the parameters stop changing). The result: each customer has a probability distribution over classes, and each class has a distinct behavioral profile.</p>
+
+<div class="callout danger">
+  <div class="callout-label">EM Pitfalls</div>
+  <p><strong>Local optima:</strong> EM can converge to a local maximum rather than the global one. Fix: run the algorithm multiple times with different random initializations (at least 10-20) and keep the best result.</p>
+  <p><strong>Label switching:</strong> The classes don't have inherent labels. "Class 1" in one run might correspond to "Class 3" in another run. Always label classes based on their learned characteristics, not their arbitrary index.</p>
+  <p><strong>Degenerate solutions:</strong> A class can collapse to a single data point (variance goes to zero). Fix: use regularization or set a minimum class size.</p>
+</div>
+</div>
+
+<div class="section" id="clvweight">
+<h2>Part 4: CLV-Weighted Churn &mdash; The Economic Lens</h2>
+<p>This is where the analysis becomes truly strategic. Once you have your latent segments, you weight them by economic impact. The formula is deceptively simple:</p>
+
+<div class="formula">
+  <div class="formula-label">CLV-WEIGHTED CHURN RATE</div>
+  <div class="formula-math">Weighted Churn = &sum;<sub>k</sub> (churn rate<sub>k</sub> &times; CLV share<sub>k</sub>)</div>
+  <div class="formula-label">CLV share = total CLV of segment / total CLV of all customers</div>
+</div>
+
+<h3>A Worked Example</h3>
+<table class="comp-table">
+  <thead><tr><th>Segment</th><th>% of Customers</th><th>Churn Rate</th><th>Avg CLV</th><th>CLV Share</th><th>CLV-Weighted Churn</th></tr></thead>
+  <tbody>
+    <tr><td>Trial and Bail</td><td>40%</td><td>30%</td><td>$100</td><td>8%</td><td>2.4%</td></tr>
+    <tr><td>Slow Bleeders</td><td>30%</td><td>10%</td><td>$800</td><td>48%</td><td>4.8%</td></tr>
+    <tr><td>Sticker Shock</td><td>20%</td><td>8%</td><td>$600</td><td>24%</td><td>1.9%</td></tr>
+    <tr><td>Poached Whales</td><td>10%</td><td>5%</td><td>$1,000</td><td>20%</td><td>1.0%</td></tr>
+    <tr style="font-weight:700"><td>Total</td><td>100%</td><td>15.4%</td><td>&mdash;</td><td>100%</td><td><strong>10.1%</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout insight">
+  <div class="callout-label">The Strategic Reveal</div>
+  <p>The headline churn rate is 15.4%, but the CLV-weighted churn is 10.1%. The difference tells you something crucial: <strong>the customers who churn most (Trial and Bail at 30%) are your least valuable customers</strong>. Meanwhile, Slow Bleeders have only 10% churn rate but represent 48% of your CLV at risk. This is where your retention budget should go &mdash; not spread evenly across all churners.</p>
+  <p>Furthermore, the Slow Bleeder segment is the most <strong>preventable</strong> churn type. They're gradually disengaging, which means an early intervention (triggered by your Week 2 Cox model) can reverse the slide. The ROI of preventing one Slow Bleeder from churning ($800 saved) is 8x the ROI of preventing one Trial-and-Bail ($100 saved).</p>
+</div>
+</div>
+
+<div class="section" id="model-select">
+<h2>Part 5: Model Selection &mdash; How Many Segments?</h2>
+<p>This is one of the most consequential decisions. Too few segments and you miss meaningful differences. Too many and you're fitting noise. The standard approach uses <strong>information criteria</strong>.</p>
+
+<h3>BIC vs. AIC</h3>
+<table class="comp-table">
+  <thead><tr><th>Criterion</th><th>Formula Intuition</th><th>Tendency</th><th>When to Prefer</th></tr></thead>
+  <tbody>
+    <tr><td><strong>AIC</strong></td><td>Penalizes for # parameters (light penalty)</td><td>Favors more complex models</td><td>When prediction accuracy is the goal</td></tr>
+    <tr><td><strong>BIC</strong></td><td>Penalizes for # parameters AND sample size (heavy penalty)</td><td>Favors simpler models</td><td>When finding the "true" number of segments matters</td></tr>
+  </tbody>
+</table>
+
+<p><strong>In practice:</strong> Fit models with K = 2, 3, 4, 5, 6 classes. For each, record the BIC and AIC. The "elbow" in the BIC curve (where adding another class stops improving fit substantially) is your best K. If BIC says 3 and AIC says 5, go with 3 or 4 &mdash; BIC is generally more trustworthy for segment discovery because it protects against overfitting more aggressively.</p>
+
+<div class="callout">
+  <div class="callout-label">The Practical Sanity Check</div>
+  <p>Statistical criteria give you a starting point, but always validate segments against business reality. Can your retention team actually design distinct interventions for each segment? If you have 6 segments but can only build 3 different programs, start with K=3. The best statistical model is one your organization can actually execute against.</p>
+</div>
+</div>
+
+<div class="section" id="code">
+<h2>Part 6: Implementation in Python</h2>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; Latent Class Analysis with Gaussian Mixture</div>
+<pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> sklearn.mixture <span class="kw">import</span> GaussianMixture
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Prepare Churner Features</span>
+<span class="cm"># ============================================</span>
+
+churned = df[df[<span class="str">'churned'</span>] == <span class="num">1</span>].copy()
+
+features = [<span class="str">'tenure_months'</span>, <span class="str">'avg_order_value'</span>,
+            <span class="str">'purchase_frequency'</span>, <span class="str">'support_tickets'</span>,
+            <span class="str">'usage_decline_pct'</span>, <span class="str">'total_clv'</span>]
+
+X = churned[features].<span class="fn">fillna</span>(<span class="num">0</span>)
+
+<span class="cm"># Scale features (critical for mixture models)</span>
+scaler = <span class="fn">StandardScaler</span>()
+X_scaled = scaler.<span class="fn">fit_transform</span>(X)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Find Optimal Number of Classes</span>
+<span class="cm"># ============================================</span>
+
+bics, aics = [], []
+K_range = <span class="fn">range</span>(<span class="num">2</span>, <span class="num">8</span>)
+
+<span class="kw">for</span> k <span class="kw">in</span> K_range:
+    gmm = <span class="fn">GaussianMixture</span>(
+        n_components=k,
+        covariance_type=<span class="str">'full'</span>,
+        n_init=<span class="num">20</span>,        <span class="cm"># multiple restarts!</span>
+        random_state=<span class="num">42</span>
+    )
+    gmm.<span class="fn">fit</span>(X_scaled)
+    bics.<span class="fn">append</span>(gmm.<span class="fn">bic</span>(X_scaled))
+    aics.<span class="fn">append</span>(gmm.<span class="fn">aic</span>(X_scaled))
+
+<span class="cm"># Plot BIC/AIC elbow</span>
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">8</span>, <span class="num">4</span>))
+ax.<span class="fn">plot</span>(<span class="fn">list</span>(K_range), bics, <span class="str">'o-'</span>, label=<span class="str">'BIC'</span>)
+ax.<span class="fn">plot</span>(<span class="fn">list</span>(K_range), aics, <span class="str">'s--'</span>, label=<span class="str">'AIC'</span>)
+ax.<span class="fn">set_xlabel</span>(<span class="str">'Number of Classes (K)'</span>)
+ax.<span class="fn">set_ylabel</span>(<span class="str">'Information Criterion'</span>)
+ax.<span class="fn">legend</span>(); plt.<span class="fn">show</span>()
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Fit Final Model & Assign Classes</span>
+<span class="cm"># ============================================</span>
+
+best_k = <span class="num">4</span>  <span class="cm"># chosen from BIC plot</span>
+
+gmm = <span class="fn">GaussianMixture</span>(
+    n_components=best_k,
+    covariance_type=<span class="str">'full'</span>,
+    n_init=<span class="num">20</span>,
+    random_state=<span class="num">42</span>
+)
+gmm.<span class="fn">fit</span>(X_scaled)
+
+<span class="cm"># Soft assignment: probabilities for each class</span>
+churned[<span class="str">'class_probs'</span>] = <span class="fn">list</span>(gmm.<span class="fn">predict_proba</span>(X_scaled))
+<span class="cm"># Hard assignment: most likely class</span>
+churned[<span class="str">'segment'</span>] = gmm.<span class="fn">predict</span>(X_scaled)
+
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 4: Profile Each Segment</span>
+<span class="cm"># ============================================</span>
+
+profile = churned.<span class="fn">groupby</span>(<span class="str">'segment'</span>)[features].<span class="fn">agg</span>([<span class="str">'mean'</span>, <span class="str">'count'</span>])
+<span class="fn">print</span>(profile)
+
+<span class="cm"># CLV-Weighted Churn Analysis</span>
+segment_clv = churned.<span class="fn">groupby</span>(<span class="str">'segment'</span>).<span class="fn">agg</span>(
+    count=(<span class="str">'total_clv'</span>, <span class="str">'count'</span>),
+    avg_clv=(<span class="str">'total_clv'</span>, <span class="str">'mean'</span>),
+    total_clv=(<span class="str">'total_clv'</span>, <span class="str">'sum'</span>)
+)
+segment_clv[<span class="str">'clv_share'</span>] = (
+    segment_clv[<span class="str">'total_clv'</span>] / segment_clv[<span class="str">'total_clv'</span>].<span class="fn">sum</span>()
+)
+<span class="fn">print</span>(segment_clv)</pre>
+</div>
+</div>
+
+<div class="section" id="playbook">
+<h2>Part 7: Your Week 3 Playbook</h2>
+
+<table class="comp-table">
+  <thead><tr><th>Business Question</th><th>Method</th></tr></thead>
+  <tbody>
+    <tr><td>"Are all churners the same?"</td><td>LCA/GMM &rarr; identify distinct churn archetypes</td></tr>
+    <tr><td>"Which churners are worth saving?"</td><td>CLV-weighted analysis of each latent segment</td></tr>
+    <tr><td>"How should I allocate retention budget?"</td><td>Budget proportional to segment CLV share &times; preventability</td></tr>
+    <tr><td>"How many distinct retention programs do I need?"</td><td>BIC curve &rarr; optimal K, validated by operational capacity</td></tr>
+    <tr><td>"Is this customer firmly in one segment?"</td><td>Check soft assignment probabilities; boundary customers get special attention</td></tr>
+  </tbody>
+</table>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+  <div class="timeline-step"><h4>Day 1-2: Read the Fundamentals</h4><p>McLachlan, G.J. & Peel, D. (2000). Finite Mixture Models. Wiley. Focus on Chapters 1-3. Also read the sklearn GaussianMixture documentation and the tutorial on mixture models.</p></div>
+  <div class="timeline-step"><h4>Day 3-4: Implement Churn Segmentation</h4><p>Using the same dataset from Weeks 1-2, filter to churned customers. Run GMM with K = 2 through 7. Select best K via BIC. Profile each segment on behavioral and financial dimensions.</p></div>
+  <div class="timeline-step"><h4>Day 5: Build CLV-Weighted Analysis</h4><p>Calculate CLV share for each segment. Compute CLV-weighted churn rate. Build a "Retention Priority Matrix" with segments on one axis and preventability on the other.</p></div>
+  <div class="timeline-step"><h4>Day 6: Design Segment-Specific Interventions</h4><p>For each segment, draft a one-paragraph retention strategy. What triggers the intervention? What offer/action? What's the expected ROI?</p></div>
+  <div class="timeline-step"><h4>Day 7: Write the Executive Brief</h4><p>"Our churn segmentation reveals K distinct churner types. X% of churn value is concentrated in Segment [name]. Recommended reallocation: shift $Y from mass retention to targeted interventions for this segment, projected to save $Z annually."</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Essential:</strong> McLachlan, G.J. & Peel, D. (2000). <em>Finite Mixture Models</em>. Wiley.<br>
+<strong>Practical:</strong> Dempster, A.P., Laird, N.M., Rubin, D.B. (1977). Maximum Likelihood from Incomplete Data via the EM Algorithm. <em>JRSS-B</em>, 39(1), 1-38.<br>
+<strong>Model Selection:</strong> Schwarz, G. (1978). Estimating the Dimension of a Model. <em>Annals of Statistics</em>, 6(2), 461-464.<br>
+<strong>Business Application:</strong> Wedel, M. & Kamakura, W.A. (2000). <em>Market Segmentation: Conceptual and Methodological Foundations</em>. Springer.<br>
+<strong>Python:</strong> sklearn.mixture.GaussianMixture &mdash; scikit-learn.org
+</p>
+
+<div class="bottom-nav">
+  <a href="week2_renewal_cliff.html">&larr; Week 2: The Renewal Cliff</a>
+  <a href="week4_recency_frequency.html">Week 4: Recency vs. Frequency &rarr;</a>
+</div>
+</div>
+</main>
+
+<script>
+const navLinks=document.querySelectorAll('.nav-link');const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});
+</script>
+</body>
+</html>

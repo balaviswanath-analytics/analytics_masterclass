@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 11: Contractual vs. Non-Contractual</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q1 HUB</a><a href="#business" class="nav-link active">The Critical Distinction</a><a href="#framework" class="nav-link">The 2x2 Framework</a><a href="#models" class="nav-link">Model Mapping</a><a href="#sbg" class="nav-link">sBG Model</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 11 &middot; Q1: Customer Lifetime &amp; Retention Economics</div><h1><span>Contractual vs. Non-Contractual</span>: Why Your CLV Model Choice Matters</h1><p class="hero-sub">The #1 mistake in CLV modeling isn't a technical error &mdash; it's applying the wrong model class entirely. A subscription business and an e-commerce business have fundamentally different data structures. Using BG/NBD (designed for non-contractual) on subscription data, or using a churn model (designed for contractual) on e-commerce data, produces garbage estimates. This week teaches you to classify your business correctly and pick the right model every time.</p></header>
+<main class="content">
+<div class="section" id="business"><h2>Part 1: The Most Common CLV Mistake</h2>
+<p>A subscription box company (contractual, continuous) spent 3 months building a BG/NBD model (designed for non-contractual, discrete settings). The model produced "P(Alive)" estimates for subscribers &mdash; but these subscribers were either active or cancelled. There was no ambiguity about their status. The BG/NBD model was solving a problem that didn't exist while ignoring the actual problem (predicting renewal at the next contract boundary). They scrapped 3 months of work and started over.</p>
+<div class="callout danger"><div class="callout-label">Why This Happens</div><p>Most CLV tutorials teach BG/NBD because it's elegant and well-documented. Analysts learn the tool and apply it everywhere, regardless of business context. But BG/NBD was specifically designed for <strong>non-contractual, continuous</strong> settings (like e-commerce) where you don't observe the moment of churn. Applying it to contractual settings where churn is observed is like using a metal detector to find a car parked in your driveway &mdash; the tool works perfectly, but you already know where the car is.</p></div></div>
+
+<div class="section" id="framework"><h2>Part 2: Fader's 2x2 Framework</h2>
+<p>Peter Fader and Bruce Hardie proposed a classification framework based on two dimensions:</p>
+<table class="comp-table"><thead><tr><th></th><th>Continuous (any time)</th><th>Discrete (specific opportunities)</th></tr></thead><tbody>
+<tr><td><strong>Contractual</strong> (churn is observed)</td><td>Subscriptions, SaaS, gym memberships, insurance. Customer actively cancels.</td><td>Magazine subscriptions, annual memberships. Renewal decision at fixed points.</td></tr>
+<tr><td><strong>Non-Contractual</strong> (churn is unobserved)</td><td>E-commerce, retail, restaurants, apps. Customer just stops showing up.</td><td>Event attendance, seasonal purchases. Buy at periodic opportunities.</td></tr>
+</tbody></table>
+<div class="callout insight"><div class="callout-label">The Key Question</div><p>Ask yourself: <strong>"Do I know when a customer has churned?"</strong> If yes (they cancelled, didn't renew, closed their account), it's contractual. If no (they just haven't bought in a while, but might come back), it's non-contractual. This single question determines your entire modeling strategy.</p></div>
+<h3>Why the Distinction Matters for CLV</h3>
+<p>In <strong>contractual</strong> settings, the key modeling challenge is predicting the probability of renewal at the next contract boundary. You observe churn directly. The survival analysis tools from Weeks 1-2 (KM, Cox) apply naturally.</p>
+<p>In <strong>non-contractual</strong> settings, the key challenge is determining whether a customer is still "alive" when you can't observe death. This is exactly what BG/NBD (Week 1) and Pareto/NBD (Week 4) solve &mdash; they probabilistically infer aliveness from purchase patterns.</p></div>
+
+<div class="section" id="models"><h2>Part 3: Model Selection Map</h2>
+<table class="comp-table"><thead><tr><th>Business Type</th><th>Correct Transaction Model</th><th>Correct Monetary Model</th><th>Wrong Choice</th></tr></thead><tbody>
+<tr><td><strong>Non-contractual, continuous</strong> (e-commerce)</td><td>BG/NBD or Pareto/NBD</td><td>Gamma-Gamma</td><td>Churn classification models (logistic regression)</td></tr>
+<tr><td><strong>Non-contractual, discrete</strong> (seasonal buyer)</td><td>BG/BB (Beta-geometric/Beta-binomial)</td><td>Gamma-Gamma</td><td>BG/NBD (wrong timing assumption)</td></tr>
+<tr><td><strong>Contractual, continuous</strong> (SaaS)</td><td>sBG (shifted Beta-geometric) or Cox PH</td><td>Revenue regression or ARPU model</td><td>BG/NBD (P(Alive) is meaningless here)</td></tr>
+<tr><td><strong>Contractual, discrete</strong> (annual membership)</td><td>BdW (Beta-discrete-Weibull) or sBG</td><td>Revenue per renewal</td><td>Pareto/NBD</td></tr>
+</tbody></table></div>
+
+<div class="section" id="sbg"><h2>Part 4: The sBG Model for Contractual Settings</h2>
+<p>The <strong>shifted Beta-Geometric (sBG)</strong> model is the contractual analog of BG/NBD. It models the probability that a customer renews at each contract boundary, allowing for heterogeneity across the customer base.</p>
+<div class="formula"><div class="formula-label">THE sBG MODEL</div><div class="formula-math">P(churn at renewal t) = &theta;<sub>i</sub> &nbsp;|&nbsp; &theta;<sub>i</sub> ~ Beta(a, b)</div><div class="formula-label">Each customer has a personal churn probability &theta; drawn from a Beta distribution</div></div>
+<p>With just two parameters (a, b), the sBG model captures the entire heterogeneity of churn propensity across your customer base. Customers with low &theta; are the loyal ones who renew almost automatically; customers with high &theta; are the ones who churn quickly. The population-level retention curve emerges from this mixture.</p>
+<h3>The sBG Retention Curve</h3>
+<div class="callout"><div class="callout-label">The Power of Two Parameters</div><p>The sBG model produces a retention curve from just two numbers: the shape parameters of the Beta distribution. Fit these two parameters to your observed retention data (% of cohort surviving at each renewal point), and the model gives you: projected retention for future periods, expected customer lifetime, CLV per cohort, and the heterogeneity structure (what % are loyal vs. at-risk).</p></div>
+<h3>Hybrid Businesses</h3>
+<p>Many real businesses are hybrids. A SaaS company has contractual subscriptions (contractual, continuous) but also tracks product usage frequency (non-contractual signal). The best approach: use sBG or Cox for the contractual churn prediction, but incorporate non-contractual signals (usage frequency, login cadence) as covariates. Don't force a pure non-contractual model on a fundamentally contractual relationship.</p></div>
+
+<div class="section" id="code"><h2>Part 5: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; sBG + Model Selection</div>
+<pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.optimize <span class="kw">import</span> minimize
+<span class="kw">from</span> scipy.special <span class="kw">import</span> beta <span class="kw">as</span> beta_fn
+
+<span class="cm"># === sBG Model: Shifted Beta-Geometric ===</span>
+<span class="cm"># Input: observed retention rates by renewal period</span>
+<span class="cm"># retention[t] = fraction surviving through renewal t</span>
+
+retention_observed = np.<span class="fn">array</span>([
+    <span class="num">1.0</span>, <span class="num">0.631</span>, <span class="num">0.468</span>, <span class="num">0.382</span>, <span class="num">0.326</span>,
+    <span class="num">0.289</span>, <span class="num">0.262</span>, <span class="num">0.241</span>  <span class="cm"># 7 renewal periods</span>
+])
+
+<span class="kw">def</span> <span class="fn">sbg_survival</span>(params, T):
+    <span class="str">"""sBG survival function: P(alive at renewal T)"""</span>
+    a, b = params
+    S = np.<span class="fn">ones</span>(T + <span class="num">1</span>)
+    <span class="kw">for</span> t <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, T + <span class="num">1</span>):
+        <span class="cm"># P(survive through renewal t) = Beta(a, b+t) / Beta(a, b)</span>
+        S[t] = beta_fn(a, b + t) / beta_fn(a, b)
+    <span class="kw">return</span> S
+
+<span class="kw">def</span> <span class="fn">sbg_neg_loglik</span>(params, retention):
+    a, b = params
+    <span class="kw">if</span> a <= <span class="num">0</span> <span class="kw">or</span> b <= <span class="num">0</span>: <span class="kw">return</span> <span class="num">1e10</span>
+    T = <span class="fn">len</span>(retention) - <span class="num">1</span>
+    S_pred = <span class="fn">sbg_survival</span>((a, b), T)
+    <span class="cm"># Minimize squared error between predicted and observed</span>
+    sse = np.<span class="fn">sum</span>((S_pred - retention) ** <span class="num">2</span>)
+    <span class="kw">return</span> sse
+
+result = <span class="fn">minimize</span>(sbg_neg_loglik, x0=[<span class="num">1.0</span>, <span class="num">1.0</span>],
+                   args=(retention_observed,), method=<span class="str">'Nelder-Mead'</span>)
+a_hat, b_hat = result.x
+<span class="fn">print</span>(<span class="str">f"sBG Parameters: a={a_hat:.3f}, b={b_hat:.3f}"</span>)
+
+<span class="cm"># === Project Future Retention ===</span>
+S_projected = <span class="fn">sbg_survival</span>((a_hat, b_hat), T=<span class="num">20</span>)
+<span class="fn">print</span>(<span class="str">"Projected retention (next 20 renewals):"</span>)
+<span class="kw">for</span> t <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">21</span>, <span class="num">5</span>):
+    <span class="fn">print</span>(<span class="str">f"  Renewal {t}: {S_projected[t]:.1%}"</span>)
+
+<span class="cm"># === Expected Lifetime ===</span>
+E_lifetime = S_projected[<span class="num">1</span>:].<span class="fn">sum</span>()
+<span class="fn">print</span>(<span class="str">f"Expected customer lifetime: {E_lifetime:.1f} renewals"</span>)
+
+<span class="cm"># === CLV ===</span>
+ARPU = <span class="num">99</span>  <span class="cm"># per renewal period</span>
+MARGIN = <span class="num">0.70</span>
+DISCOUNT = <span class="num">0.01</span>  <span class="cm"># per period</span>
+clv = <span class="fn">sum</span>(S_projected[t] * ARPU * MARGIN / (<span class="num">1</span>+DISCOUNT)**t
+         <span class="kw">for</span> t <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">21</span>))
+<span class="fn">print</span>(<span class="str">f"20-period CLV: ${clv:.0f}"</span>)</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 6: Your Week 11 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Answer</th></tr></thead><tbody>
+<tr><td>"Which CLV model for my business?"</td><td>Ask: do I observe churn? If yes &rarr; contractual (sBG/Cox). If no &rarr; non-contractual (BG/NBD).</td></tr>
+<tr><td>"Can I use BG/NBD for SaaS?"</td><td>No. P(Alive) is meaningless when you directly observe cancellations. Use sBG or Cox PH.</td></tr>
+<tr><td>"What about hybrid businesses?"</td><td>Model the contractual decision (renew/cancel) with sBG/Cox; use non-contractual signals as covariates.</td></tr>
+<tr><td>"How does sBG compare to Cox?"</td><td>sBG is simpler (2 parameters, cohort-level). Cox is richer (covariates, individual-level). sBG for projections, Cox for understanding drivers.</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Read the Framework Paper</h4><p>Fader, P.S. & Hardie, B.G.S. (2009). "Probability Models for Customer-Base Analysis." Journal of Interactive Marketing, 23(1), 61-69. The 2x2 framework is laid out here.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Implement sBG Model</h4><p>Using subscription data (or simulated cohort retention), fit the sBG model. Project retention for 20+ periods. Compare to naive "average retention rate" projection.</p></div>
+<div class="timeline-step"><h4>Day 5: Classify Your Business</h4><p>For each product/line at your company, classify into the 2x2 framework. Map the correct model to each. Document where the wrong model was previously applied.</p></div>
+<div class="timeline-step"><h4>Day 6-7: Synthesis Brief</h4><p>"Our business operates in the [contractual/non-contractual] x [continuous/discrete] quadrant. The correct model class is [X]. Expected customer lifetime: Y renewals. CLV per customer: $Z."</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Essential:</strong> Fader, P.S. & Hardie, B.G.S. (2009). Probability Models for Customer-Base Analysis. <em>JIM</em>, 23(1), 61-69.<br><strong>sBG Model:</strong> Fader, P.S. & Hardie, B.G.S. (2007). "How to Project Customer Retention." <em>Journal of Interactive Marketing</em>, 21(1), 76-90.<br><strong>BG/BB:</strong> Fader, P.S., Hardie, B.G.S., Berger, P.D. (2004). Counting Your Customers the Easy Way: An Alternative to the BG/NBD Model. brucehardie.com<br><strong>Textbook:</strong> Fader, P. (2020). Customer Centricity. Wharton Digital Press.</p>
+<div class="bottom-nav"><a href="week10_second_purchase.html">&larr; Week 10: Time-to-Second-Purchase</a><a href="week12_reactivation_windows.html">Week 12: Reactivation Windows &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>
