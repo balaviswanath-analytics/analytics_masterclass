@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8D + KT Problem Solving Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--border:#e0dcd4;--code-bg:#1e1e2e;--warn:#a66b00;--warn-bg:#fef3e2}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px}
+a{color:var(--accent);text-decoration:none;font-weight:500}
+a:hover{text-decoration:underline}
+
+/* BREADCRUMB */
+.breadcrumb{max-width:960px;margin:0 auto;padding:24px 32px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);font-weight:400}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb span{margin:0 8px}
+
+/* HERO */
+.hero{max-width:960px;margin:0 auto;padding:56px 32px 48px}
+.badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);border:1.5px solid var(--accent);padding:6px 18px;border-radius:100px;margin-bottom:28px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,56px);font-weight:900;line-height:1.1;margin-bottom:20px}
+.hero h1 span{color:var(--accent)}
+.hero .sub{font-size:19px;color:var(--muted);max-width:680px;line-height:1.65;font-weight:300;margin-bottom:32px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:20px}
+.hero-meta strong{color:var(--ink)}
+
+/* FLOW DIAGRAM */
+.flow-section{max-width:960px;margin:0 auto 48px;padding:0 32px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.flow-diagram{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:8px}
+.flow-step{flex:1;min-width:90px;background:#fff;border:1.5px solid var(--border);padding:16px 12px;text-align:center;position:relative;cursor:pointer;transition:all .2s}
+.flow-step:hover{border-color:var(--accent);background:#fff9f7;z-index:1}
+.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--border);z-index:2;background:var(--cream);padding:2px}
+.flow-step.d0{border-top:4px solid var(--muted)}
+.flow-step.d1-2{border-top:4px solid #4a90d9}
+.flow-step.d3{border-top:4px solid var(--warn)}
+.flow-step.d4{border-top:4px solid var(--accent)}
+.flow-step.d5-6{border-top:4px solid var(--accent2)}
+.flow-step.d7-8{border-top:4px solid var(--blue)}
+.flow-step .d-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px}
+.flow-step .d-name{font-size:12px;font-weight:700;color:var(--ink);line-height:1.3}
+.flow-step .d-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px}
+.flow-step a{color:inherit;text-decoration:none;display:block}
+
+/* PHASE NAVIGATION GRID */
+.phases-section{max-width:960px;margin:0 auto;padding:0 32px 48px}
+.phase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.phase-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px;transition:all .25s;position:relative;overflow:hidden}
+.phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.phase-card.frame::before{background:linear-gradient(90deg,#4a90d9,#6baed6)}
+.phase-card.contain::before{background:linear-gradient(90deg,var(--warn),#e9c46a)}
+.phase-card.analyze::before{background:linear-gradient(90deg,var(--accent),#e07b5a)}
+.phase-card.solve::before{background:linear-gradient(90deg,var(--accent2),#52b788)}
+.phase-card.close::before{background:linear-gradient(90deg,var(--blue),#457b9d)}
+.phase-card.tools::before{background:linear-gradient(90deg,#6d4c82,#a875bf)}
+.phase-card.govern::before{background:linear-gradient(90deg,var(--ink),#3a3a5e)}
+.phase-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.07);transform:translateY(-2px);border-color:var(--accent)}
+.phase-card a{text-decoration:none;color:inherit}
+.phase-d{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:8px}
+.phase-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:8px;line-height:1.3;color:var(--ink)}
+.phase-card p{font-size:14px;color:#666;line-height:1.6;margin-bottom:16px}
+.phase-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.ptag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;background:#f0f7f4;color:var(--accent2);font-weight:500}
+.phase-link{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);display:flex;align-items:center;gap:6px;font-weight:600}
+.phase-link::after{content:'→';transition:transform .2s}
+.phase-card:hover .phase-link::after{transform:translateX(4px)}
+
+/* WHAT + WHY SECTION */
+.intro-grid{max-width:960px;margin:0 auto;padding:0 32px 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.intro-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px}
+.intro-box h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:16px;color:var(--blue)}
+.intro-box ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.intro-box li{font-size:14px;color:#555;line-height:1.5;padding-left:20px;position:relative}
+.intro-box li::before{content:'✓';position:absolute;left:0;color:var(--accent2);font-weight:700}
+.intro-box.not li::before{content:'✗';color:var(--accent)}
+
+/* TRIGGER SECTION */
+.trigger-section{max-width:960px;margin:0 auto 48px;padding:0 32px}
+.trigger-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.trigger-box{border-radius:10px;padding:20px}
+.trigger-box.go{background:#e6f4ea;border:1px solid #b7dfbc}
+.trigger-box.maybe{background:var(--warn-bg);border:1px solid #f0d49a}
+.trigger-box.no{background:#fdecea;border:1px solid #f5b8b4}
+.trigger-box h4{font-size:14px;font-weight:700;margin-bottom:10px}
+.trigger-box.go h4{color:#1b7340}
+.trigger-box.maybe h4{color:var(--warn)}
+.trigger-box.no h4{color:#b71c1c}
+.trigger-box ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.trigger-box li{font-size:13px;color:#444;line-height:1.4;padding-left:16px;position:relative}
+.trigger-box.go li::before{content:'●';position:absolute;left:0;color:#1b7340;font-size:8px;top:5px}
+.trigger-box.maybe li::before{content:'●';position:absolute;left:0;color:var(--warn);font-size:8px;top:5px}
+.trigger-box.no li::before{content:'●';position:absolute;left:0;color:#b71c1c;font-size:8px;top:5px}
+
+/* NON-VIOLABLE RULES */
+.rules-section{max-width:960px;margin:0 auto 48px;padding:0 32px}
+.rule-card{background:#fff8f7;border:1.5px solid #f0c4ba;border-radius:10px;padding:20px 24px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start}
+.rule-icon{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--accent);color:#fff;padding:4px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.rule-card p{font-size:14px;color:#444;line-height:1.6;margin:0}
+
+/* THEME HEADER */
+.theme-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.theme-header h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:700}
+.theme-line{flex:1;height:2px;background:var(--border)}
+
+/* DOWNLOAD SECTION */
+.download-section{max-width:960px;margin:0 auto 64px;padding:0 32px}
+.download-card{background:var(--ink);color:#fff;border-radius:14px;padding:36px;display:flex;align-items:center;gap:32px;justify-content:space-between;flex-wrap:wrap}
+.download-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px}
+.download-card p{font-size:14px;color:rgba(255,255,255,0.6);max-width:480px;line-height:1.5}
+.download-btn{background:var(--accent);color:#fff;padding:14px 28px;border-radius:8px;font-weight:700;font-size:15px;white-space:nowrap;transition:background .2s;cursor:pointer;border:none;font-family:'Source Sans 3',sans-serif}
+.download-btn:hover{background:#a84a2e}
+
+/* FOOTER */
+.site-footer{max-width:960px;margin:0 auto;padding:32px;text-align:center;border-top:2px solid var(--border)}
+.site-footer p{font-size:13px;color:var(--muted)}
+
+@media(max-width:700px){
+  .intro-grid{grid-template-columns:1fr}
+  .trigger-grid{grid-template-columns:1fr}
+  .flow-step{min-width:70px}
+}
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">Analytics Hub</a>
+  <span>›</span>
+  <strong>8D + KT Problem Solving Playbook</strong>
+</div>
+
+<header class="hero">
+  <div class="badge">Analytical Problem Solving &middot; Operating Playbook</div>
+  <h1>8D + <span>Kepner-Tregoe</span><br>Problem Solving Playbook</h1>
+  <p class="sub">A structured, high-impact operating system for root cause analysis. Built for analysts, analytics leads, and product owners who need a rigorous, repeatable approach to complex problems.</p>
+  <div class="hero-meta">
+    <div><strong>Version</strong> 1.0 &middot; February 2026</div>
+    <div><strong>Audience</strong> Analysts &middot; Analytics Leads &middot; Product Owners</div>
+    <div><strong>Phases</strong> 8 Disciplines + KT Deep Dive</div>
+    <div><strong>With</strong> GenAI Integration</div>
+  </div>
+</header>
+
+<!-- END-TO-END FLOW -->
+<section class="flow-section">
+  <div class="section-label">End-to-End Process Flow</div>
+  <div class="flow-diagram">
+    <div class="flow-step d0">
+      <div class="d-label">PRE-8D</div>
+      <div class="d-name">Launch Gate</div>
+      <div class="d-time">&lt; 1 day</div>
+    </div>
+    <div class="flow-step d1-2">
+      <a href="8d_kt_phase_d1d2.html">
+      <div class="d-label">D1 &amp; D2</div>
+      <div class="d-name">Team &amp; Problem Frame</div>
+      <div class="d-time">1–3 days</div>
+      </a>
+    </div>
+    <div class="flow-step d3">
+      <a href="8d_kt_phase_d3.html">
+      <div class="d-label">D3</div>
+      <div class="d-name">Contain</div>
+      <div class="d-time">1–2 days</div>
+      </a>
+    </div>
+    <div class="flow-step d4">
+      <a href="8d_kt_phase_d4.html">
+      <div class="d-label">D4 + KT</div>
+      <div class="d-name">Root Cause</div>
+      <div class="d-time">3–10 days</div>
+      </a>
+    </div>
+    <div class="flow-step d5-6">
+      <a href="8d_kt_phase_d5d6.html">
+      <div class="d-label">D5 &amp; D6</div>
+      <div class="d-name">Solve &amp; Implement</div>
+      <div class="d-time">7–20 days</div>
+      </a>
+    </div>
+    <div class="flow-step d7-8">
+      <a href="8d_kt_phase_d7d8.html">
+      <div class="d-label">D7 &amp; D8</div>
+      <div class="d-name">Prevent &amp; Close</div>
+      <div class="d-time">3–7 days</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS / IS NOT -->
+<section style="max-width:960px;margin:0 auto 48px;padding:0 32px">
+  <div class="theme-header">
+    <h2>Purpose &amp; Positioning</h2>
+    <div class="theme-line"></div>
+  </div>
+  <div class="intro-grid" style="padding:0;margin:0">
+    <div class="intro-box">
+      <h3>What This Playbook Is</h3>
+      <ul>
+        <li>A decision framework for when to apply structured vs ad-hoc analysis</li>
+        <li>A disciplined sequence from symptom to validated root cause</li>
+        <li>A set of KT analytical tools integrated into 8D stages</li>
+        <li>A quality gate system to prevent premature closure</li>
+        <li>GenAI prompt templates to accelerate analysis workflows</li>
+        <li>Industry-tested case studies across Telecom, Retail, and Banking</li>
+      </ul>
+    </div>
+    <div class="intro-box not">
+      <h3>What This Playbook Is NOT</h3>
+      <ul>
+        <li>A quick fix template or checklist substitute for thinking</li>
+        <li>A replacement for domain expertise and subject matter knowledge</li>
+        <li>For one-off issues with clear, explainable causes</li>
+        <li>For routine operational issues covered by standard procedures</li>
+        <li>A documentation exercise &mdash; every step must add analytical value</li>
+        <li>Optional. When triggered, governance rules are non-violable</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LAUNCH TRIGGERS -->
+<section class="trigger-section">
+  <div class="theme-header">
+    <h2>When to Launch an 8D + KT Investigation</h2>
+    <div class="theme-line"></div>
+  </div>
+  <div class="trigger-grid">
+    <div class="trigger-box go">
+      <h4>MANDATORY Launch Triggers</h4>
+      <ul>
+        <li>Customer-impacting issues &gt;24 hours unresolved</li>
+        <li>P0/P1 incidents with unknown root cause</li>
+        <li>KPI deviation &gt;10% from baseline for 3+ days</li>
+        <li>Issues with regulatory or financial implications</li>
+        <li>Recurring failures (&gt;2 occurrences in 30 days)</li>
+        <li>Cross-functional problems with no clear owner</li>
+      </ul>
+    </div>
+    <div class="trigger-box maybe">
+      <h4>Optional (Judgment-Based) Triggers</h4>
+      <ul>
+        <li>Learning opportunities with documentation value</li>
+        <li>Pattern of minor issues suggesting systemic root cause</li>
+        <li>Stakeholders requesting formal RCA documentation</li>
+        <li>P2/P3 issues escalating in frequency</li>
+        <li>Pre-emptive analysis before known risk events</li>
+      </ul>
+    </div>
+    <div class="trigger-box no">
+      <h4>Do NOT Launch 8D When</h4>
+      <ul>
+        <li>One-off with clear, explainable cause</li>
+        <li>Pure execution gap; fix is known</li>
+        <li>Cost of analysis exceeds future risk</li>
+        <li>Routine ops handled by standard procedures</li>
+        <li>User error or training gap (UX improvement instead)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- NON-VIOLABLE RULES -->
+<section class="rules-section">
+  <div class="theme-header">
+    <h2>Non-Violable Governance Rules</h2>
+    <div class="theme-line"></div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">RULE 1</div>
+    <p>Every 8D + KT analysis must have ONE named Problem Owner and ONE named Reviewer assigned at launch. No exceptions. The launch decision (Proceed / Redirect / Reject) must be documented BEFORE any deep analysis begins.</p>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">RULE 2</div>
+    <p>Reviewer rejections MUST be documented with specific, actionable rationale &mdash; not just "needs more work." Reviewers must state exactly what is missing and what is required to pass the gate.</p>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">RULE 3</div>
+    <p>No stage can be skipped. If a stage is deemed "not applicable," this must be explicitly documented with justification reviewed and approved by the gatekeeper.</p>
+  </div>
+  <div class="rule-card">
+    <div class="rule-icon">RULE 4</div>
+    <p>No root cause, no solution. You must identify and validate BOTH the root cause of occurrence AND the root cause of escape (why detection failed) before progressing to D5.</p>
+  </div>
+</section>
+
+<!-- PHASE NAVIGATION CARDS -->
+<section class="phases-section">
+  <div class="theme-header">
+    <h2>Navigate by Phase</h2>
+    <div class="theme-line"></div>
+  </div>
+  <div class="phase-grid">
+
+    <div class="phase-card frame">
+      <a href="8d_kt_phase_d1d2.html">
+        <div class="phase-d">D1 &amp; D2</div>
+        <h3>Team Formation &amp; Problem Framing</h3>
+        <p>Establish the right team with clear roles, then define the problem with precision using data &mdash; not assumptions. A well-framed problem is half-solved.</p>
+        <div class="phase-tags">
+          <span class="ptag">IS/IS NOT Setup</span>
+          <span class="ptag">Problem Statement</span>
+          <span class="ptag">RACI</span>
+        </div>
+        <div class="phase-link">Open Phase Guide</div>
+      </a>
+    </div>
+
+    <div class="phase-card contain">
+      <a href="8d_kt_phase_d3.html">
+        <div class="phase-d">D3</div>
+        <h3>Interim Containment Actions</h3>
+        <p>Protect customers and the business while RCA is underway. Contain first, analyze second. Never let analysis paralysis extend customer impact.</p>
+        <div class="phase-tags">
+          <span class="ptag">Traffic Rerouting</span>
+          <span class="ptag">Feature Toggles</span>
+          <span class="ptag">Monitoring</span>
+        </div>
+        <div class="phase-link">Open Phase Guide</div>
+      </a>
+    </div>
+
+    <div class="phase-card analyze">
+      <a href="8d_kt_phase_d4.html">
+        <div class="phase-d">D4 + KT Deep Dive</div>
+        <h3>Root Cause Analysis &amp; Validation</h3>
+        <p>The analytical core. KT IS/IS NOT, Distinction Analysis, Change Analysis, MPC Scoring, and Evidence Validation. The most rigorous phase of the playbook.</p>
+        <div class="phase-tags">
+          <span class="ptag">IS/IS NOT</span>
+          <span class="ptag">Change Analysis</span>
+          <span class="ptag">MPC Scoring</span>
+          <span class="ptag">Evidence Tiers</span>
+        </div>
+        <div class="phase-link">Open Phase Guide</div>
+      </a>
+    </div>
+
+    <div class="phase-card solve">
+      <a href="8d_kt_phase_d5d6.html">
+        <div class="phase-d">D5 &amp; D6</div>
+        <h3>Permanent Solutions &amp; Implementation</h3>
+        <p>Design and deploy solutions that remove the root cause, not just the symptoms. Staged rollout with validation gates and containment removal protocol.</p>
+        <div class="phase-tags">
+          <span class="ptag">Solution Design</span>
+          <span class="ptag">Staged Rollout</span>
+          <span class="ptag">Validation Criteria</span>
+        </div>
+        <div class="phase-link">Open Phase Guide</div>
+      </a>
+    </div>
+
+    <div class="phase-card close">
+      <a href="8d_kt_phase_d7d8.html">
+        <div class="phase-d">D7 &amp; D8</div>
+        <h3>Prevention &amp; Formal Closure</h3>
+        <p>Prevent recurrence through monitoring, process, automation, and standards changes. Capture lessons learned and build organizational memory.</p>
+        <div class="phase-tags">
+          <span class="ptag">Prevention Actions</span>
+          <span class="ptag">Lessons Learned</span>
+          <span class="ptag">Closure Checklist</span>
+        </div>
+        <div class="phase-link">Open Phase Guide</div>
+      </a>
+    </div>
+
+    <div class="phase-card tools">
+      <a href="8d_kt_tools_genai.html">
+        <div class="phase-d">Tool Integration</div>
+        <h3>Python, SQL, Excel &amp; GenAI Prompts</h3>
+        <p>Ready-to-use SQL queries, Python code, Excel templates, and 4 GenAI prompts to accelerate each phase of analysis without replacing evidence-based thinking.</p>
+        <div class="phase-tags">
+          <span class="ptag">SQL Queries</span>
+          <span class="ptag">Python Code</span>
+          <span class="ptag">GenAI Prompts</span>
+        </div>
+        <div class="phase-link">Open Tool Guide</div>
+      </a>
+    </div>
+
+    <div class="phase-card govern">
+      <a href="8d_kt_governance.html">
+        <div class="phase-d">Governance &amp; Reference</div>
+        <h3>Quality Gates, Anti-Patterns &amp; Appendix</h3>
+        <p>Reviewer rejection criteria, common RCA failure patterns with remedies, escalation matrix, analysis register structure, and all quick-reference templates.</p>
+        <div class="phase-tags">
+          <span class="ptag">Quality Gates</span>
+          <span class="ptag">Anti-Patterns</span>
+          <span class="ptag">Templates</span>
+          <span class="ptag">Case Studies</span>
+        </div>
+        <div class="phase-link">Open Reference Guide</div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- DOWNLOAD CTA -->
+<section class="download-section">
+  <div class="download-card">
+    <div>
+      <h3>Download the Full Playbook</h3>
+      <p>The complete 8D + KT Operating Playbook with all templates, worked examples, and appendices. Version 1.0 &middot; February 2026.</p>
+    </div>
+    <button class="download-btn" onclick="window.location.href='8D_KT_Operating_Playbook_WITH_ENHANCEMENTS.docx'">&#8595; Download Playbook (.docx)</button>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>The Analytics Strategist &middot; 8D + KT Problem Solving Playbook &middot; Version 1.0 &middot; 2026</p>
+</footer>
+
+</body>
+</html>

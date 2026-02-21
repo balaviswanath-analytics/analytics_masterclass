@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D7 & D8: Prevention & Closure | 8D+KT Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--border:#e0dcd4;--phase-color:#264653;--phase-light:#e8f0f5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:16px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.breadcrumb{max-width:960px;margin:0 auto;padding:24px 32px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);font-weight:400}.breadcrumb a:hover{color:var(--accent)}.breadcrumb span{margin:0 8px}
+.phase-hero{max-width:960px;margin:0 auto;padding:48px 32px 36px}
+.d-pill{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--phase-color);color:#fff;padding:6px 14px;border-radius:100px;font-weight:600;display:inline-block;margin-bottom:20px}
+.phase-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.phase-hero h1 span{color:var(--phase-color)}
+.phase-hero .sub{font-size:17px;color:var(--muted);max-width:680px;line-height:1.65;font-weight:300}
+.phase-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:20px}
+.phase-meta strong{color:var(--ink)}
+.phase-nav{max-width:960px;margin:0 auto 48px;padding:0 32px}
+.phase-strip{display:flex;gap:6px;overflow-x:auto}
+.phase-step{flex:1;min-width:80px;text-align:center;padding:10px 8px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;border:1.5px solid var(--border);color:var(--muted)}
+.phase-step.active{background:var(--phase-color);color:#fff;border-color:var(--phase-color)}
+.phase-step:not(.active):hover{border-color:var(--accent);color:var(--accent)}
+.phase-step a{color:inherit;text-decoration:none;display:block}
+.content{max-width:960px;margin:0 auto;padding:0 32px 64px}
+.section-block{margin-bottom:44px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--phase-color);margin-bottom:12px}
+.section-block h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:16px}
+.section-block h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:12px;color:var(--blue)}
+.section-block p{font-size:15px;color:#444;line-height:1.7;margin-bottom:14px}
+.prevention-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.prevention-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px}
+.prevention-card .ptype{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--phase-color);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.prevention-card h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.prevention-card ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.prevention-card li{font-size:12px;color:#555;padding-left:14px;position:relative}
+.prevention-card li::before{content:'→';position:absolute;left:0;color:var(--phase-color);font-size:10px}
+.prevention-table{width:100%;border-collapse:collapse;margin:16px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.prevention-table th{background:var(--ink);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left}
+.prevention-table td{padding:12px 16px;font-size:13px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.prevention-table td:first-child{font-weight:700;color:var(--ink)}
+.prevention-table tr:last-child td{border-bottom:none}
+.prevention-table tr:nth-child(even){background:#fafafa}
+.lessons-table{width:100%;border-collapse:collapse;margin:16px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.lessons-table th{font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left;border-bottom:2px solid var(--border)}
+.lessons-table th:first-child{background:#e6f4ea;color:var(--accent2);width:180px}
+.lessons-table th:last-child{background:var(--phase-light);color:var(--phase-color)}
+.lessons-table td{padding:13px 16px;font-size:13px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.lessons-table td:first-child{font-weight:700;color:var(--ink)}
+.lessons-table tr:last-child td{border-bottom:none}
+.callout{border-radius:10px;padding:20px 24px;margin:20px 0}
+.callout.tip{background:var(--phase-light);border-left:4px solid var(--phase-color)}
+.callout.done{background:#e6f4ea;border-left:4px solid var(--accent2)}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+.callout.tip .callout-label{color:var(--phase-color)}
+.callout.done .callout-label{color:var(--accent2)}
+.callout p{font-size:14px;color:#444;line-height:1.65;margin:0}
+.closure-checklist{background:#fff;border:1px solid var(--border);border-radius:10px;padding:24px;margin:20px 0}
+.closure-checklist h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:16px;color:var(--ink)}
+.check-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border)}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border:2px solid var(--phase-color);border-radius:4px;flex-shrink:0;margin-top:2px}
+.check-item p{font-size:14px;color:#444;margin:0;line-height:1.4}
+.exit-box{background:#e6f4ea;border:1.5px solid #b7dfbc;border-radius:10px;padding:24px;margin-top:32px}
+.exit-box h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1b7340;margin-bottom:16px}
+.exit-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.exit-list li{font-size:14px;color:#2d5a35;padding-left:28px;position:relative;line-height:1.5}
+.exit-list li::before{content:'✓';position:absolute;left:0;color:#1b7340;font-weight:700;font-size:16px}
+.phase-nav-btns{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:2px solid var(--border)}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink);font-size:14px;font-weight:600;transition:.2s}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.nav-btn.next{background:var(--phase-color);color:#fff;border-color:var(--phase-color)}
+.nav-btn.next:hover{opacity:.9;color:#fff}
+.site-footer{max-width:960px;margin:0 auto;padding:24px 32px;text-align:center;border-top:1px solid var(--border)}
+.site-footer p{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">Analytics Hub</a><span>›</span>
+  <a href="8d_kt_hub.html">8D + KT Playbook</a><span>›</span>
+  <strong>D7 &amp; D8: Prevention &amp; Closure</strong>
+</div>
+
+<header class="phase-hero">
+  <span class="d-pill">D7 &amp; D8 &mdash; Organizational Learning</span>
+  <h1>Prevent Recurrence &amp;<br><span>Close with Rigor</span></h1>
+  <p class="sub">Where the organization actually learns. Prevention ensures the problem cannot recur in any form. Closure builds organizational memory. Skipping either is the fastest way to run the same 8D investigation again in 6 months.</p>
+  <div class="phase-meta">
+    <div><strong>D7 Duration</strong> 2–5 days</div>
+    <div><strong>D8 Duration</strong> 1–2 days</div>
+    <div><strong>Key Output</strong> Systemic changes in place &bull; Lessons captured &bull; Register closed</div>
+  </div>
+</header>
+
+<div class="phase-nav">
+  <div class="phase-strip">
+    <div class="phase-step"><a href="8d_kt_phase_d1d2.html">D1 &amp; D2<br>Frame</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d3.html">D3<br>Contain</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d4.html">D4 + KT<br>Root Cause</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d5d6.html">D5 &amp; D6<br>Solve</a></div>
+    <div class="phase-step active">D7 &amp; D8<br>Close</div>
+    <div class="phase-step"><a href="8d_kt_tools_genai.html">Tools &amp;<br>GenAI</a></div>
+  </div>
+</div>
+
+<main class="content">
+
+  <div class="section-block">
+    <div class="section-label">Discipline 7</div>
+    <h2>D7: Prevention Mechanisms</h2>
+    <p>Prevention is where permanent organizational improvement happens. The goal is not just to stop this specific problem from recurring, but to close the systemic gaps that allowed it to occur and escape in the first place.</p>
+
+    <h3>Five Types of Prevention Actions</h3>
+    <div class="prevention-grid">
+      <div class="prevention-card">
+        <div class="ptype">Monitoring</div>
+        <h4>Monitoring Enhancements</h4>
+        <ul>
+          <li>Add EUM timeout rate alerts</li>
+          <li>Create activation success dashboard</li>
+          <li>Monitor Android OS version distribution</li>
+        </ul>
+      </div>
+      <div class="prevention-card">
+        <div class="ptype">Process</div>
+        <h4>Process Changes</h4>
+        <ul>
+          <li>Update RACI to clarify OS tracking ownership</li>
+          <li>Add OS compatibility to test checklist</li>
+          <li>Mandate pre-deployment sign-off</li>
+        </ul>
+      </div>
+      <div class="prevention-card">
+        <div class="ptype">Automation</div>
+        <h4>Automation</h4>
+        <ul>
+          <li>Auto-update device test matrix weekly</li>
+          <li>Automated OS release notifications</li>
+          <li>Self-healing timeout adjustments</li>
+        </ul>
+      </div>
+      <div class="prevention-card">
+        <div class="ptype">Standards</div>
+        <h4>Standards &amp; Guidelines</h4>
+        <ul>
+          <li>Document timeout standards in tech wiki</li>
+          <li>Create API integration guidelines</li>
+          <li>Publish lessons learned organization-wide</li>
+        </ul>
+      </div>
+      <div class="prevention-card">
+        <div class="ptype">Training</div>
+        <h4>Training &amp; Awareness</h4>
+        <ul>
+          <li>Android API compatibility training</li>
+          <li>KT methodology workshops for analysts</li>
+          <li>Incident response training</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Prevention Action Tracker Template</h3>
+    <table class="prevention-table">
+      <thead><tr><th>Prevention Action</th><th>Type</th><th>Owner</th><th>Target Date</th><th>Success Measure</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Add EUM timeout rate alerts</td>
+          <td>Monitoring</td>
+          <td>SRE Team</td>
+          <td>Week 1</td>
+          <td>Alert fires when timeout &gt;1%</td>
+        </tr>
+        <tr>
+          <td>Update test device matrix to include current OS versions</td>
+          <td>Process</td>
+          <td>QA Lead</td>
+          <td>Week 2</td>
+          <td>100% OS coverage maintained</td>
+        </tr>
+        <tr>
+          <td>Automate matrix updates on OS release</td>
+          <td>Automation</td>
+          <td>Dev Team</td>
+          <td>Month 1</td>
+          <td>Matrix auto-syncs weekly</td>
+        </tr>
+        <tr>
+          <td>Document API timeout standards in tech wiki</td>
+          <td>Standards</td>
+          <td>Architecture</td>
+          <td>Week 3</td>
+          <td>Published and linked in onboarding</td>
+        </tr>
+        <tr>
+          <td>Android API compatibility training for mobile team</td>
+          <td>Training</td>
+          <td>Tech Lead</td>
+          <td>Month 2</td>
+          <td>90% team completion rate</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Discipline 8</div>
+    <h2>D8: Formal Closure &amp; Recognition</h2>
+    <p>Closure is not administrative paperwork. It is the moment the organization captures what it learned and ensures that learning is accessible to the team for future investigations.</p>
+
+    <h3>D8 Formal Closure Steps</h3>
+    <div class="closure-checklist">
+      <h4>Closure Checklist</h4>
+      <div class="check-item"><div class="check-box"></div><p>Verify all D7 prevention actions are implemented, not just planned</p></div>
+      <div class="check-item"><div class="check-box"></div><p>Confirm all D3 containment actions are fully removed</p></div>
+      <div class="check-item"><div class="check-box"></div><p>Complete final documentation: root cause report, lessons learned, solution summary</p></div>
+      <div class="check-item"><div class="check-box"></div><p>Present findings to broader team for organizational learning (not just stakeholders)</p></div>
+      <div class="check-item"><div class="check-box"></div><p>Update Analysis Register with final status "Closed &mdash; Resolved"</p></div>
+      <div class="check-item"><div class="check-box"></div><p>Celebrate and recognize team contributions explicitly</p></div>
+    </div>
+
+    <h3>Lessons Learned Template</h3>
+    <table class="lessons-table">
+      <thead><tr><th>Category</th><th>Lessons Captured</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>What Went Well</td>
+          <td>Quick containment limited customer impact to 3 days &bull; KT IS/IS NOT identified problem scope rapidly &bull; Cross-team collaboration was effective throughout</td>
+        </tr>
+        <tr>
+          <td>What Could Be Improved</td>
+          <td>Earlier escalation would have accelerated analysis by at least 2 days &bull; Test coverage gap should have been caught in design review, not production &bull; Monitoring should have detected the issue before customers did</td>
+        </tr>
+        <tr>
+          <td>Future Applications</td>
+          <td>Apply KT IS/IS NOT as standard for all multi-system issues &bull; Use IS/IS NOT template as team default for scoping problems &bull; Mandate OS compatibility review for all releases</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout done">
+      <div class="callout-label">On Recognition</div>
+      <p>Recognition is not optional sentimentality. It is how you signal to the team that rigorous, disciplined analytical work is valued. Teams that are never recognized for excellent process work eventually stop doing excellent process work. Make recognition explicit, specific, and public.</p>
+    </div>
+  </div>
+
+  <div class="exit-box">
+    <h3>Exit Criteria for D7 &amp; D8 (Final Closure Gate)</h3>
+    <p style="font-size:14px;color:#2d5a35;margin-bottom:16px">All criteria must be met before the analysis register is updated to "Closed":</p>
+    <ul class="exit-list">
+      <li>All D7 prevention actions implemented and independently verified (not just assigned)</li>
+      <li>All D3 containment actions removed without incident</li>
+      <li>Documentation complete: problem statement, root cause, solution, prevention, lessons learned</li>
+      <li>Lessons learned session conducted with broader team (not just the core 8D team)</li>
+      <li>Analysis Register updated to "Closed &mdash; Resolved" with all artifact links</li>
+      <li>Team recognition completed</li>
+    </ul>
+  </div>
+
+  <div class="phase-nav-btns">
+    <a href="8d_kt_phase_d5d6.html" class="nav-btn">&larr; D5 &amp; D6: Solve &amp; Implement</a>
+    <a href="8d_kt_governance.html" class="nav-btn next">Governance &amp; Reference &rarr;</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>8D + KT Problem Solving Playbook &middot; D7 &amp; D8 &middot; <a href="8d_kt_hub.html">Back to Hub</a></p>
+</footer>
+</body>
+</html>

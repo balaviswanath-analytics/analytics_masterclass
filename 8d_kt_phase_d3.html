@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D3: Interim Containment | 8D+KT Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--border:#e0dcd4;--phase-color:#a66b00;--phase-light:#fef9ee}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:16px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.breadcrumb{max-width:960px;margin:0 auto;padding:24px 32px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);font-weight:400}.breadcrumb a:hover{color:var(--accent)}.breadcrumb span{margin:0 8px}
+.phase-hero{max-width:960px;margin:0 auto;padding:48px 32px 36px}
+.d-pill{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--phase-color);color:#fff;padding:6px 14px;border-radius:100px;font-weight:600;display:inline-block;margin-bottom:20px}
+.phase-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.phase-hero h1 span{color:var(--phase-color)}
+.phase-hero .sub{font-size:17px;color:var(--muted);max-width:680px;line-height:1.65;font-weight:300}
+.phase-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:20px}
+.phase-meta strong{color:var(--ink)}
+.phase-nav{max-width:960px;margin:0 auto 48px;padding:0 32px}
+.phase-strip{display:flex;gap:6px;overflow-x:auto}
+.phase-step{flex:1;min-width:80px;text-align:center;padding:10px 8px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;border:1.5px solid var(--border);color:var(--muted)}
+.phase-step.active{background:var(--phase-color);color:#fff;border-color:var(--phase-color)}
+.phase-step:not(.active):hover{border-color:var(--accent);color:var(--accent)}
+.phase-step a{color:inherit;text-decoration:none;display:block}
+.content{max-width:960px;margin:0 auto;padding:0 32px 64px}
+.section-block{margin-bottom:40px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--phase-color);margin-bottom:12px}
+.section-block h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:16px}
+.section-block h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:12px;color:var(--blue)}
+.section-block p{font-size:15px;color:#444;line-height:1.7;margin-bottom:14px}
+
+.char-table{width:100%;border-collapse:collapse;margin-bottom:24px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.char-table th{background:var(--phase-light);color:var(--phase-color);font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left;border-bottom:2px solid var(--phase-color)}
+.char-table td{padding:13px 16px;font-size:14px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.char-table td:first-child{font-weight:700;color:var(--ink)}
+.char-table tr:last-child td{border-bottom:none}
+
+.strategy-table{width:100%;border-collapse:collapse;margin-bottom:24px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.strategy-table th{background:var(--ink);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left}
+.strategy-table td{padding:13px 16px;font-size:14px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.strategy-table td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.strategy-table tr:last-child td{border-bottom:none}
+.strategy-table tr:nth-child(even){background:#fafafa}
+
+.callout{border-radius:10px;padding:20px 24px;margin:20px 0}
+.callout.warn{background:#fef3e2;border-left:4px solid var(--phase-color)}
+.callout.rule{background:#fff8f7;border-left:4px solid var(--accent)}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px;color:var(--phase-color)}
+.callout.rule .callout-label{color:var(--accent)}
+.callout p{font-size:14px;color:#444;line-height:1.65;margin:0}
+
+.domain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0}
+.domain-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px}
+.domain-card .domain-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--phase-color);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:600}
+.domain-card h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.domain-card p{font-size:13px;color:#555;line-height:1.55;margin:0}
+
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.metric-item{background:var(--phase-light);border:1px solid #f0d49a;border-radius:8px;padding:14px;text-align:center}
+.metric-item .m-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--phase-color);margin-bottom:4px}
+.metric-item .m-desc{font-size:13px;color:var(--ink);font-weight:600;line-height:1.3}
+
+.exit-box{background:#e6f4ea;border:1.5px solid #b7dfbc;border-radius:10px;padding:24px;margin-top:32px}
+.exit-box h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1b7340;margin-bottom:16px}
+.exit-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.exit-list li{font-size:14px;color:#2d5a35;padding-left:28px;position:relative;line-height:1.5}
+.exit-list li::before{content:'✓';position:absolute;left:0;color:#1b7340;font-weight:700;font-size:16px}
+
+.phase-nav-btns{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:2px solid var(--border)}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink);font-size:14px;font-weight:600;transition:.2s}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.nav-btn.next{background:var(--accent);color:#fff;border-color:var(--accent)}
+.nav-btn.next:hover{background:#a84a2e;color:#fff}
+.site-footer{max-width:960px;margin:0 auto;padding:24px 32px;text-align:center;border-top:1px solid var(--border)}
+.site-footer p{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">Analytics Hub</a><span>›</span>
+  <a href="8d_kt_hub.html">8D + KT Playbook</a><span>›</span>
+  <strong>D3: Containment</strong>
+</div>
+
+<header class="phase-hero">
+  <span class="d-pill">D3 &mdash; Interim Containment</span>
+  <h1>Contain First,<br><span>Analyze Second</span></h1>
+  <p class="sub">Protect customers and the business while root cause analysis is underway. Containment is temporary but critical &mdash; never let analysis paralysis extend customer impact while you investigate.</p>
+  <div class="phase-meta">
+    <div><strong>Typical Duration</strong> 1–2 days</div>
+    <div><strong>KT Technique</strong> None &mdash; action-focused phase</div>
+    <div><strong>Key Output</strong> Customer protected &bull; Evidence preserved</div>
+  </div>
+</header>
+
+<div class="phase-nav">
+  <div class="phase-strip">
+    <div class="phase-step"><a href="8d_kt_phase_d1d2.html">D1 &amp; D2<br>Frame</a></div>
+    <div class="phase-step active">D3<br>Contain</div>
+    <div class="phase-step"><a href="8d_kt_phase_d4.html">D4 + KT<br>Root Cause</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d5d6.html">D5 &amp; D6<br>Solve</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d7d8.html">D7 &amp; D8<br>Close</a></div>
+    <div class="phase-step"><a href="8d_kt_tools_genai.html">Tools &amp;<br>GenAI</a></div>
+  </div>
+</div>
+
+<main class="content">
+
+  <div class="section-block">
+    <div class="section-label">Core Principle</div>
+    <h2>The Containment Imperative</h2>
+
+    <div class="callout warn">
+      <div class="callout-label">Guiding Principle</div>
+      <p>Contain first, analyze second. Every day of customer-impacting exposure while the team discusses root causes is a day of avoidable damage. Containment is not a workaround &mdash; it is a professional obligation.</p>
+    </div>
+
+    <p>Containment actions are temporary measures designed to stop or reduce customer impact while the permanent root cause analysis proceeds. They are not solutions &mdash; they are bought time. A containment that masks evidence or prevents proper diagnosis is worse than no containment at all.</p>
+
+    <h3>What Makes a Good Containment Action</h3>
+    <table class="char-table">
+      <thead><tr><th>Characteristic</th><th>Description &amp; Why It Matters</th></tr></thead>
+      <tbody>
+        <tr><td>Reversible</td><td>Can be undone quickly once the permanent fix is deployed. Containments that become permanent create technical debt and hide systemic problems.</td></tr>
+        <tr><td>Monitored</td><td>Impact and effectiveness are tracked continuously. If containment is not working, you need to know immediately &mdash; not at the next weekly review.</td></tr>
+        <tr><td>Non-destructive</td><td>Does not alter or destroy evidence needed for root cause analysis. Avoid containment actions that flush logs, overwrite states, or clear queues without backups.</td></tr>
+        <tr><td>Documented</td><td>Clear record of what was done, when, by whom, and what it was designed to achieve. Undocumented containment creates confusion in D6 when it's time to remove it.</td></tr>
+        <tr><td>Time-bound</td><td>Has a planned removal date or condition tied to permanent fix validation. Open-ended containment is a containment that will never be removed.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Containment Strategies</div>
+    <h2>Common Containment Approaches by Type</h2>
+
+    <table class="strategy-table">
+      <thead><tr><th>Strategy</th><th>When to Use</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Traffic Rerouting</td>
+          <td>System or service degradation affecting specific nodes/regions</td>
+          <td>Route traffic to backup data center &bull; Shift load to healthy nodes &bull; Use alternate API endpoint</td>
+        </tr>
+        <tr>
+          <td>Feature Toggles</td>
+          <td>New feature causing issues &mdash; need to disable without full rollback</td>
+          <td>Disable problematic feature flag &bull; Rollback to previous version &bull; Enable only for test users</td>
+        </tr>
+        <tr>
+          <td>Manual Overrides</td>
+          <td>Automation failure requiring human intervention temporarily</td>
+          <td>Manual approval workflows &bull; Operator-assisted processing &bull; Bypass automated checks temporarily</td>
+        </tr>
+        <tr>
+          <td>Rate Limiting</td>
+          <td>Capacity or performance issues from volume spikes</td>
+          <td>Throttle API calls &bull; Queue non-critical requests &bull; Implement request prioritization</td>
+        </tr>
+        <tr>
+          <td>Data Corrections</td>
+          <td>Data quality issues causing downstream failures</td>
+          <td>Run correction scripts &bull; Manual data cleanup &bull; Block corrupt data ingestion</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Domain Examples</div>
+    <h2>Containment in Action: By Industry</h2>
+    <div class="domain-grid">
+      <div class="domain-card">
+        <div class="domain-label">Telecom</div>
+        <h4>eSIM Activation Failures &bull; Circle X</h4>
+        <p>Route eSIM activations to legacy EUM provider for Circle X customers until root cause is fixed. Monitor activation success rate hourly. Remove routing rule once permanent fix is validated and stable for 48 hours.</p>
+      </div>
+      <div class="domain-card">
+        <div class="domain-label">E-Commerce</div>
+        <h4>Checkout Failures &bull; Safari Mobile</h4>
+        <p>Display alternative payment flow for Safari users. Add browser detection to route Safari traffic to legacy payment gateway. Track conversion rates separately for contained vs normal flow to measure effectiveness.</p>
+      </div>
+      <div class="domain-card">
+        <div class="domain-label">Banking</div>
+        <h4>Auto-Debit Failures &bull; Post-Migration</h4>
+        <p>Manually process failed auto-debits in overnight batch. Notify affected customers proactively of manual processing. Run daily reconciliation report until permanent fix is deployed and verified.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Monitoring</div>
+    <h2>Tracking Containment Effectiveness</h2>
+    <p>Every containment action must have defined metrics being tracked in near real-time. If containment is not measurably working within the first few hours, escalate &mdash; do not wait for the daily standup.</p>
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <div class="m-label">Primary KPI</div>
+        <div class="m-desc">Return to 90%+ of baseline or agreed threshold</div>
+      </div>
+      <div class="metric-item">
+        <div class="m-label">Side Effects</div>
+        <div class="m-desc">Latency, throughput, or error rate changes from containment</div>
+      </div>
+      <div class="metric-item">
+        <div class="m-label">Customer Impact</div>
+        <div class="m-desc">Support ticket / escalation volume reduction</div>
+      </div>
+      <div class="metric-item">
+        <div class="m-label">Business Impact</div>
+        <div class="m-desc">Revenue recovery or loss reduction rate</div>
+      </div>
+      <div class="metric-item">
+        <div class="m-label">Ops Cost</div>
+        <div class="m-desc">Manual effort hours per day for maintained containment</div>
+      </div>
+    </div>
+
+    <div class="callout rule">
+      <div class="callout-label">Critical Rule</div>
+      <p>Containment must not alter or destroy evidence needed for D4 root cause analysis. Before deploying containment, explicitly confirm: what logs, states, or data must be preserved? Designate an analyst to capture pre-containment baselines.</p>
+    </div>
+  </div>
+
+  <div class="exit-box">
+    <h3>Exit Criteria for D3</h3>
+    <p style="font-size:14px;color:#2d5a35;margin-bottom:16px">All of the following must be true before D4 root cause analysis is considered fully launched:</p>
+    <ul class="exit-list">
+      <li>Containment action implemented, active, and confirmed working</li>
+      <li>Monitoring metrics defined and actively tracked (near real-time)</li>
+      <li>Removal plan documented with specific conditions or timeline</li>
+      <li>Stakeholders notified of temporary containment measure and what to expect</li>
+      <li>Evidence preserved: logs, snapshots, states captured before containment altered behavior</li>
+    </ul>
+  </div>
+
+  <div class="phase-nav-btns">
+    <a href="8d_kt_phase_d1d2.html" class="nav-btn">&larr; D1 &amp; D2: Team &amp; Frame</a>
+    <a href="8d_kt_phase_d4.html" class="nav-btn next">D4 + KT: Root Cause Analysis &rarr;</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>8D + KT Problem Solving Playbook &middot; D3 Containment &middot; <a href="8d_kt_hub.html">Back to Hub</a></p>
+</footer>
+</body>
+</html>

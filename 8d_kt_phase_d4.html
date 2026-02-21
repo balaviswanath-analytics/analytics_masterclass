@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D4 + KT: Root Cause Analysis | 8D+KT Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--border:#e0dcd4;--phase-color:#c45d3e;--phase-light:#fff4f2}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:16px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.breadcrumb{max-width:960px;margin:0 auto;padding:24px 32px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);font-weight:400}.breadcrumb a:hover{color:var(--accent)}.breadcrumb span{margin:0 8px}
+.phase-hero{max-width:960px;margin:0 auto;padding:48px 32px 36px}
+.d-pill{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--accent);color:#fff;padding:6px 14px;border-radius:100px;font-weight:600;display:inline-block;margin-bottom:20px}
+.phase-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.phase-hero h1 span{color:var(--accent)}
+.phase-hero .sub{font-size:17px;color:var(--muted);max-width:680px;line-height:1.65;font-weight:300}
+.phase-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:20px}
+.phase-meta strong{color:var(--ink)}
+.phase-nav{max-width:960px;margin:0 auto 48px;padding:0 32px}
+.phase-strip{display:flex;gap:6px;overflow-x:auto}
+.phase-step{flex:1;min-width:80px;text-align:center;padding:10px 8px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;border:1.5px solid var(--border);color:var(--muted)}
+.phase-step.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.phase-step:not(.active):hover{border-color:var(--accent);color:var(--accent)}
+.phase-step a{color:inherit;text-decoration:none;display:block}
+.content{max-width:960px;margin:0 auto;padding:0 32px 64px}
+.section-block{margin-bottom:44px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.section-block h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:16px}
+.section-block h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:12px;color:var(--blue)}
+.section-block h4{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.section-block p{font-size:15px;color:#444;line-height:1.7;margin-bottom:14px}
+
+/* KT TECHNIQUE SELECTOR */
+.kt-selector{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:32px}
+.kt-card{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:18px;cursor:pointer;transition:.2s}
+.kt-card:hover,.kt-card.active{border-color:var(--accent);background:var(--phase-light)}
+.kt-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px}
+.kt-card h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.kt-card p{font-size:12px;color:var(--muted);margin:0;line-height:1.4}
+
+/* IS/IS NOT TABLE */
+.is-isnot-table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.is-isnot-table th{font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left;font-weight:700}
+.is-isnot-table th.is-col{background:#e6f4ea;color:#1b7340}
+.is-isnot-table th.isnot-col{background:#fdecea;color:#b71c1c}
+.is-isnot-table th.dim-col{background:var(--ink);color:#fff;width:100px}
+.is-isnot-table td{padding:13px 16px;font-size:13px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.is-isnot-table td.is-cell{background:#f6fcf8;border-right:1px solid var(--border)}
+.is-isnot-table td.isnot-cell{background:#fef8f8}
+.is-isnot-table td.dim-cell{font-weight:700;font-size:12px;color:var(--ink);background:#f8f8fa;border-right:1px solid var(--border)}
+.is-isnot-table tr:last-child td{border-bottom:none}
+
+/* CHANGE TIMELINE TABLE */
+.timeline-table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.timeline-table th{background:var(--ink);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left}
+.timeline-table td{padding:12px 16px;font-size:13px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.timeline-table tr:last-child td{border-bottom:none}
+.timeline-table tr.problem-row td{background:#fff4f2;font-weight:700;color:var(--accent)}
+.status-suspect{background:#fff3cd;color:#664d00;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700}
+.status-investigate{background:#e0e7ff;color:#2d3a8c;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10px}
+.status-ruleout{background:#f5f5f5;color:#666;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10px}
+
+/* MPC SCORING TABLE */
+.mpc-table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.mpc-table th{background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;padding:10px 12px;text-align:center}
+.mpc-table th:first-child{text-align:left}
+.mpc-table td{padding:12px;font-size:13px;color:#444;border-bottom:1px solid var(--border);text-align:center}
+.mpc-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.mpc-table tr:last-child td{border-bottom:none}
+.mpc-table tr:first-child td{background:#fff9f7}
+.score-high{color:var(--accent2);font-weight:700}
+.score-win{background:var(--accent);color:#fff;font-weight:700;border-radius:4px;padding:2px 8px}
+
+/* EVIDENCE TIERS */
+.evidence-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.evidence-tier{border-radius:10px;padding:18px}
+.evidence-tier.t1{background:#e6f4ea;border:1.5px solid #a5d6a7}
+.evidence-tier.t2{background:#fef9e7;border:1.5px solid #f0d49a}
+.evidence-tier.t3{background:#fdecea;border:1.5px solid #f5b8b4}
+.tier-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;margin-bottom:8px}
+.evidence-tier.t1 .tier-badge{color:#1b7340}
+.evidence-tier.t2 .tier-badge{color:#a66b00}
+.evidence-tier.t3 .tier-badge{color:#b71c1c}
+.evidence-tier h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.evidence-tier p{font-size:12px;color:#555;margin-bottom:8px;line-height:1.4}
+.evidence-tier .accept{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;display:inline-block}
+.evidence-tier.t1 .accept{background:#1b7340;color:#fff}
+.evidence-tier.t2 .accept{background:#a66b00;color:#fff}
+.evidence-tier.t3 .accept{background:#b71c1c;color:#fff}
+
+/* CALLOUTS */
+.callout{border-radius:10px;padding:20px 24px;margin:20px 0}
+.callout.rule{background:#fff8f7;border-left:4px solid var(--accent)}
+.callout.tip{background:#e6f4ea;border-left:4px solid var(--accent2)}
+.callout.insight{background:#e8f0fe;border-left:4px solid #4a90d9}
+.callout.warn{background:#fff8dc;border-left:4px solid var(--gold)}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+.callout.rule .callout-label{color:var(--accent)}
+.callout.tip .callout-label{color:var(--accent2)}
+.callout.insight .callout-label{color:#4a90d9}
+.callout.warn .callout-label{color:#a66b00}
+.callout p{font-size:14px;color:#444;line-height:1.65;margin:0}
+
+/* TEMPLATE */
+.template-block{background:var(--ink);color:#fff;border-radius:10px;padding:24px;margin:20px 0;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8}
+.template-block .placeholder{color:var(--gold)}
+.template-block .key{color:#7ee7a2}
+
+/* HYPOTHESIS TEST */
+.test-steps{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.test-step{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px}
+.test-num{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
+.test-step-content h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.test-step-content p{font-size:13px;color:#555;margin:0;line-height:1.5}
+
+.exit-box{background:#e6f4ea;border:1.5px solid #b7dfbc;border-radius:10px;padding:24px;margin-top:32px}
+.exit-box h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1b7340;margin-bottom:16px}
+.exit-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.exit-list li{font-size:14px;color:#2d5a35;padding-left:28px;position:relative;line-height:1.5}
+.exit-list li::before{content:'✓';position:absolute;left:0;color:#1b7340;font-weight:700;font-size:16px}
+.phase-nav-btns{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:2px solid var(--border)}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink);font-size:14px;font-weight:600;transition:.2s}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.nav-btn.next{background:var(--accent);color:#fff;border-color:var(--accent)}
+.nav-btn.next:hover{background:#a84a2e;color:#fff}
+.site-footer{max-width:960px;margin:0 auto;padding:24px 32px;text-align:center;border-top:1px solid var(--border)}
+.site-footer p{font-size:13px;color:var(--muted)}
+@media(max-width:640px){.evidence-tiers{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">Analytics Hub</a><span>›</span>
+  <a href="8d_kt_hub.html">8D + KT Playbook</a><span>›</span>
+  <strong>D4 + KT: Root Cause Analysis</strong>
+</div>
+
+<header class="phase-hero">
+  <span class="d-pill">D4 + KT &mdash; The Analytical Core</span>
+  <h1>Root Cause Analysis<br><span>&amp; Validation</span></h1>
+  <p class="sub">The most rigorous phase of the playbook. KT techniques &mdash; IS/IS NOT, Distinction Analysis, Change Analysis, and MPC Scoring &mdash; transform raw hypotheses into validated, evidence-backed root causes.</p>
+  <div class="phase-meta">
+    <div><strong>Typical Duration</strong> 3–10 days</div>
+    <div><strong>KT Techniques</strong> IS/IS NOT &bull; Distinction &bull; Change Analysis &bull; MPC</div>
+    <div><strong>Key Output</strong> Validated root cause of occurrence &amp; escape</div>
+  </div>
+</header>
+
+<div class="phase-nav">
+  <div class="phase-strip">
+    <div class="phase-step"><a href="8d_kt_phase_d1d2.html">D1 &amp; D2<br>Frame</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d3.html">D3<br>Contain</a></div>
+    <div class="phase-step active">D4 + KT<br>Root Cause</div>
+    <div class="phase-step"><a href="8d_kt_phase_d5d6.html">D5 &amp; D6<br>Solve</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d7d8.html">D7 &amp; D8<br>Close</a></div>
+    <div class="phase-step"><a href="8d_kt_tools_genai.html">Tools &amp;<br>GenAI</a></div>
+  </div>
+</div>
+
+<main class="content">
+
+  <!-- TWO ROOT CAUSES -->
+  <div class="section-block">
+    <div class="section-label">Foundational Principle</div>
+    <h2>Two Root Causes Required</h2>
+
+    <div class="callout rule">
+      <div class="callout-label">Non-Violable Rule</div>
+      <p>No root cause, no solution. You must identify and validate BOTH the root cause of <strong>occurrence</strong> (why it happened) AND the root cause of <strong>escape</strong> (why detection failed). A solution that addresses only one is incomplete.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0">
+      <div style="background:#fff;border:1.5px solid var(--accent);border-radius:10px;padding:20px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;margin-bottom:8px">Root Cause of OCCURRENCE</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13px;color:#444;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--accent)">?</span>Why did this problem happen?</li>
+          <li style="font-size:13px;color:#444;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--accent)">?</span>What specific condition or change caused the defect?</li>
+          <li style="font-size:13px;color:#444;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--accent)">?</span>What is the technical mechanism?</li>
+        </ul>
+      </div>
+      <div style="background:#fff;border:1.5px solid #4a90d9;border-radius:10px;padding:20px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4a90d9;text-transform:uppercase;margin-bottom:8px">Root Cause of ESCAPE</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13px;color:#444;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:#4a90d9">?</span>Why did this problem reach customers?</li>
+          <li style="font-size:13px;color:#444;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:#4a90d9">?</span>What detection or prevention mechanism failed?</li>
+          <li style="font-size:13px;color:#444;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:#4a90d9">?</span>Why did testing or monitoring not catch this?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- KT: IS/IS NOT -->
+  <div class="section-block">
+    <div class="section-label">KT Technique 1</div>
+    <h2>IS / IS NOT Analysis</h2>
+    <p>IS/IS NOT forces the team to define the precise boundaries of the problem. You cannot hypothesize a cause until you know exactly what the problem affects and &mdash; critically &mdash; what it does NOT affect. The contrast is where the clues live.</p>
+
+    <h3>The Four Dimensions</h3>
+    <p>Complete all four dimensions. Partial IS/IS NOT analysis is a common anti-pattern and a reviewer rejection trigger.</p>
+
+    <table class="is-isnot-table">
+      <thead>
+        <tr>
+          <th class="dim-col">Dimension</th>
+          <th class="is-col">IS (What IS affected)</th>
+          <th class="isnot-col">IS NOT (What is NOT affected)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="dim-cell">WHAT</td>
+          <td class="is-cell">eSIM activation failure &mdash; profile download step<br><em style="font-size:11px;color:#888">Which products, features, functions?</em></td>
+          <td class="isnot-cell">Physical SIM activations are unaffected<br><em style="font-size:11px;color:#888">What similar items are NOT affected?</em></td>
+        </tr>
+        <tr>
+          <td class="dim-cell">WHERE</td>
+          <td class="is-cell">Circle X (Mumbai metro) &mdash; all towers in region<br><em style="font-size:11px;color:#888">Which locations, regions, systems?</em></td>
+          <td class="isnot-cell">Circles A, B, C are completely unaffected<br><em style="font-size:11px;color:#888">What locations are spared?</em></td>
+        </tr>
+        <tr>
+          <td class="dim-cell">WHEN</td>
+          <td class="is-cell">Since Jan 15, 6pm. Worse during peak hours (9am–6pm)<br><em style="font-size:11px;color:#888">When did it start? Is there a pattern?</em></td>
+          <td class="isnot-cell">Before Jan 15. Off-peak hours have lower (but not zero) failure rate<br><em style="font-size:11px;color:#888">When was it normal?</em></td>
+        </tr>
+        <tr>
+          <td class="dim-cell">EXTENT</td>
+          <td class="is-cell">29% failure rate (15,000 daily attempts &rarr; 4,350 failures)<br><em style="font-size:11px;color:#888">How big is the problem? How many affected?</em></td>
+          <td class="isnot-cell">71% of activations still succeed<br><em style="font-size:11px;color:#888">What is NOT being impacted within affected scope?</em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout insight">
+      <div class="callout-label">Key Analytical Insight</div>
+      <p>After completing IS/IS NOT, ask: <strong>What is DISTINCTIVE about the IS cases that is absent in IS NOT cases?</strong> This single question drives hypothesis generation. In the example above: only Circle X was upgraded with new RAN nodes on Jan 10. Only eSIM uses the EUM provider that was migrated on Jan 13. These distinctions point directly to hypotheses.</p>
+    </div>
+  </div>
+
+  <!-- CHANGE ANALYSIS -->
+  <div class="section-block">
+    <div class="section-label">KT Technique 2</div>
+    <h2>Change Analysis</h2>
+    <p>Something changed. If you cannot find the change, you are not looking hard enough. Map every change that occurred in the window before the problem started against the IS/IS NOT dimensions.</p>
+
+    <h3>Types of Changes to Investigate</h3>
+    <p style="font-size:14px;color:#555;margin-bottom:16px">Systematically audit all six change categories. Analysts often miss Process and Environment changes while focusing only on Code changes.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">CODE / CONFIG</div>
+        <p style="font-size:12px;color:#555;margin:0">Deployments, config changes, feature flags, API updates</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">INFRASTRUCTURE</div>
+        <p style="font-size:12px;color:#555;margin:0">Server upgrades, network changes, capacity, routing updates</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">DATA</div>
+        <p style="font-size:12px;color:#555;margin:0">Schema changes, migrations, reference data updates, volume spikes</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">PROCESS</div>
+        <p style="font-size:12px;color:#555;margin:0">Workflow changes, policy updates, team restructuring</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">ENVIRONMENT</div>
+        <p style="font-size:12px;color:#555;margin:0">External system changes, vendor updates, third-party integrations</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">LOAD / DEMAND</div>
+        <p style="font-size:12px;color:#555;margin:0">Traffic patterns, user behavior, seasonal factors, campaigns</p>
+      </div>
+    </div>
+
+    <h3>Change Timeline Example (eSIM Activation Case)</h3>
+    <table class="timeline-table">
+      <thead><tr><th>Date</th><th>Change Event</th><th>Type</th><th>Relevance</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Jan 8</td><td>Marketing campaign launched</td><td>Load/Demand</td><td>Medium &mdash; increased traffic</td><td><span class="status-investigate">Investigate</span></td></tr>
+        <tr><td>Jan 10</td><td>New RAN nodes deployed in Circle X</td><td>Infrastructure</td><td>HIGH &mdash; matches affected location</td><td><span class="status-suspect">PRIME SUSPECT</span></td></tr>
+        <tr><td>Jan 12</td><td>HSS v3.5 upgrade deployed</td><td>Code</td><td>HIGH &mdash; provisioning system</td><td><span class="status-suspect">PRIME SUSPECT</span></td></tr>
+        <tr><td>Jan 13</td><td>Cloud EUM provider migrated</td><td>Environment</td><td>HIGH &mdash; eSIM profiles flow through EUM</td><td><span class="status-suspect">PRIME SUSPECT</span></td></tr>
+        <tr class="problem-row"><td>Jan 15, 6pm</td><td colspan="4">&#9888; PROBLEM STARTS &mdash; Activation success drops from 94% &rarr; 71%</td></tr>
+        <tr><td>Jan 16</td><td>Rate limit increased</td><td>Config</td><td>Low &mdash; change occurred after problem start</td><td><span class="status-ruleout">Rule Out</span></td></tr>
+        <tr><td>Jan 18</td><td>Hotfix deployed</td><td>Code</td><td>Low &mdash; containment action, not root cause</td><td><span class="status-ruleout">Rule Out</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout insight">
+      <div class="callout-label">Analytical Insight</div>
+      <p>Three changes occurred within 5 days before the problem: RAN deployment, HSS upgrade, and EUM migration. All three are in the activation flow. Each is a prime suspect. The next step is MPC Scoring to determine which to test first.</p>
+    </div>
+  </div>
+
+  <!-- MPC SCORING -->
+  <div class="section-block">
+    <div class="section-label">KT Technique 3</div>
+    <h2>Most Probable Cause (MPC) Scoring</h2>
+    <p>After IS/IS NOT and Change Analysis, you will have multiple candidate causes. MPC scoring uses weighted criteria to prioritize which hypothesis to test first &mdash; preventing confirmation bias and hypothesis fatigue.</p>
+
+    <h3>Scoring Criteria (each scored 1–5)</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:16px 0 24px">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">Criterion 1</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">Explains ALL IS</div>
+        <div style="font-size:11px;color:#777;margin-top:4px">5=All, 3=Most, 1=Few</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">Criterion 2</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">Explains NO IS NOT</div>
+        <div style="font-size:11px;color:#777;margin-top:4px">5=Excludes all, 1=Few</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">Criterion 3</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">Change Correlation</div>
+        <div style="font-size:11px;color:#777;margin-top:4px">5=Direct, 3=Indirect, 1=None</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">Criterion 4</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">Technical Plausibility</div>
+        <div style="font-size:11px;color:#777;margin-top:4px">5=Proven, 3=Possible, 1=Unlikely</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:6px">Criterion 5</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">Evidence Availability</div>
+        <div style="font-size:11px;color:#777;margin-top:4px">5=Easy, 3=Moderate, 1=Hard</div>
+      </div>
+    </div>
+
+    <h3>MPC Scoring Example (eSIM Case)</h3>
+    <table class="mpc-table">
+      <thead>
+        <tr>
+          <th>Hypothesis</th>
+          <th>Explains IS</th>
+          <th>Explains NOT</th>
+          <th>Change Match</th>
+          <th>Plausibility</th>
+          <th>Evidence</th>
+          <th>TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cloud EUM timeout</td>
+          <td class="score-high">5</td><td class="score-high">5</td><td class="score-high">5</td><td class="score-high">4</td><td class="score-high">5</td>
+          <td><span class="score-win">24/25</span></td>
+        </tr>
+        <tr>
+          <td>HSS v3.5 bug</td>
+          <td>4</td><td>4</td><td>5</td><td>4</td><td>4</td><td>21</td>
+        </tr>
+        <tr>
+          <td>RAN capacity issue</td>
+          <td>3</td><td>3</td><td>5</td><td>3</td><td>4</td><td>18</td>
+        </tr>
+        <tr>
+          <td>Android 14 API change</td>
+          <td>4</td><td>2</td><td>2</td><td>3</td><td>3</td><td>14</td>
+        </tr>
+        <tr>
+          <td>Network congestion</td>
+          <td>2</td><td>1</td><td>1</td><td>2</td><td>5</td><td>11</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:var(--accent2);font-weight:600">Decision: Test "Cloud EUM timeout" first (24/25). Then "HSS v3.5 bug" (21/25) if first hypothesis fails testing.</p>
+
+    <div class="callout tip">
+      <div class="callout-label">Anti-Pattern Warning</div>
+      <p>Require minimum 3 candidate hypotheses with MPC scoring before accepting any root cause. Declaring the first hypothesis as the root cause without scoring alternatives is Hypothesis Fatigue &mdash; a common reviewer rejection trigger.</p>
+    </div>
+  </div>
+
+  <!-- EVIDENCE TIERS -->
+  <div class="section-block">
+    <div class="section-label">Root Cause Validation</div>
+    <h2>Evidence Quality Hierarchy</h2>
+    <p>Root cause conclusions are only as strong as the evidence supporting them. Volume of evidence does not substitute for quality. Three log queries from the same system is still single-source evidence.</p>
+
+    <div class="evidence-tiers">
+      <div class="evidence-tier t1">
+        <div class="tier-badge">TIER 1 &mdash; STRONG</div>
+        <h4>Reproducible &amp; Definitive</h4>
+        <p>Reproducible experiments, logs, config diffs, code traces. Direct proof of causal mechanism.</p>
+        <span class="accept">Mandatory for validation</span>
+      </div>
+      <div class="evidence-tier t2">
+        <div class="tier-badge">TIER 2 &mdash; MODERATE</div>
+        <h4>Correlational &amp; Statistical</h4>
+        <p>Time-aligned metrics, statistical correlations, controlled comparisons. Supports causality but does not prove mechanism.</p>
+        <span class="accept">Acceptable with Tier 1</span>
+      </div>
+      <div class="evidence-tier t3">
+        <div class="tier-badge">TIER 3 &mdash; WEAK</div>
+        <h4>Expert Opinion &amp; Anecdotal</h4>
+        <p>Expert opinion, anecdotal observations, screenshots. Directional only &mdash; useful for generating hypotheses, not validating them.</p>
+        <span class="accept">Insufficient alone</span>
+      </div>
+    </div>
+
+    <div class="callout rule">
+      <div class="callout-label">Non-Violable Evidence Standard</div>
+      <p>A validated root cause MUST be supported by: (1) at least one Tier 1 evidence source, AND (2) at least one additional independent evidence source (Tier 1 or 2). Tier 3 evidence may guide hypothesis generation but must NEVER be used to validate a root cause.</p>
+    </div>
+
+    <h3>Root Cause Statement Template</h3>
+    <div class="template-block">
+<span class="key">ROOT CAUSE OF OCCURRENCE:</span>
+The root cause of <span class="placeholder">[PROBLEM]</span> is <span class="placeholder">[SPECIFIC CONDITION/CHANGE]</span>
+which resulted in <span class="placeholder">[TECHNICAL MECHANISM]</span>
+because <span class="placeholder">[UNDERLYING REASON]</span>.
+
+<span class="key">VALIDATION EVIDENCE:</span>
+1. <span class="placeholder">[Tier 1 evidence &mdash; e.g., log trace showing EUM timeout at profile download]</span>
+2. <span class="placeholder">[Additional evidence source &mdash; e.g., lab reproduction at timeout thresholds]</span>
+3. <span class="placeholder">[Additional corroboration &mdash; e.g., correlation between EUM latency and failure rate]</span>
+
+<span class="key">ROOT CAUSE OF ESCAPE:</span>
+The problem escaped because <span class="placeholder">[DETECTION FAILURE REASON]</span>.
+
+<span class="key">VALIDATION EVIDENCE:</span>
+1. <span class="placeholder">[Evidence of why monitoring/testing failed to catch this]</span>
+    </div>
+  </div>
+
+  <!-- HYPOTHESIS TESTING PROTOCOL -->
+  <div class="section-block">
+    <div class="section-label">Testing Protocol</div>
+    <h2>Hypothesis Validation Steps</h2>
+    <p>Once MPC is identified, design a structured test before declaring root cause. Declare the test design before running it &mdash; changing the test after seeing the data is confirmation bias.</p>
+
+    <div class="test-steps">
+      <div class="test-step">
+        <div class="test-num">1</div>
+        <div class="test-step-content">
+          <h4>Log Analysis</h4>
+          <p>Examine EUM response times in activation logs during failure windows. Identify timeout events and correlate with activation failure timestamps.</p>
+        </div>
+      </div>
+      <div class="test-step">
+        <div class="test-num">2</div>
+        <div class="test-step-content">
+          <h4>Correlation Test</h4>
+          <p>Do activation failures correlate with EUM timeout events? Use Python (pearsonr or time-series alignment) to quantify the relationship. &gt;0.7 correlation with p &lt; 0.05 is strong evidence.</p>
+        </div>
+      </div>
+      <div class="test-step">
+        <div class="test-num">3</div>
+        <div class="test-step-content">
+          <h4>Reproduction Test</h4>
+          <p>Can we reproduce failures by simulating EUM delay in a controlled environment? Controlled lab reproduction is Tier 1 evidence. If reproducible, the causal mechanism is confirmed.</p>
+        </div>
+      </div>
+      <div class="test-step">
+        <div class="test-num">4</div>
+        <div class="test-step-content">
+          <h4>Elimination Test</h4>
+          <p>Does routing around the EUM prevent failures? If bypassing the suspected cause eliminates the problem, that is near-conclusive validation. This is also your containment action prototype.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-label">When Tests Fail</div>
+      <p>If the top MPC hypothesis fails testing, return to the MPC scoring table and test the next-ranked hypothesis. Do not retrofit evidence to a failing hypothesis. Escalate if you're stuck on all hypotheses after 2 weeks of D4 &mdash; this is the Timebox threshold (see Governance page).</p>
+    </div>
+  </div>
+
+  <div class="exit-box">
+    <h3>Exit Criteria for D4 (Non-Violable)</h3>
+    <p style="font-size:14px;color:#2d5a35;margin-bottom:16px">Reviewer must approve ALL of the following before D5 solution design begins:</p>
+    <ul class="exit-list">
+      <li>Root cause of OCCURRENCE identified and validated with evidence meeting quality standards</li>
+      <li>Root cause of ESCAPE identified and validated with evidence</li>
+      <li>Both root causes documented using the root cause statement template format</li>
+      <li>Evidence artifacts attached (logs, test results, reproduction steps, code traces)</li>
+      <li>Minimum 3 independent pieces of evidence for each root cause (at least one Tier 1)</li>
+      <li>Minimum 3 hypotheses considered with documented MPC scoring</li>
+      <li>IS/IS NOT table completed with all four dimensions</li>
+      <li>Peer review completed and approved by Reviewer/Gatekeeper</li>
+    </ul>
+  </div>
+
+  <div class="phase-nav-btns">
+    <a href="8d_kt_phase_d3.html" class="nav-btn">&larr; D3: Containment</a>
+    <a href="8d_kt_phase_d5d6.html" class="nav-btn next">D5 &amp; D6: Solve &amp; Implement &rarr;</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>8D + KT Problem Solving Playbook &middot; D4 Root Cause Analysis &middot; <a href="8d_kt_hub.html">Back to Hub</a></p>
+</footer>
+</body>
+</html>

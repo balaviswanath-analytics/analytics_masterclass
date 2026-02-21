@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D5 & D6: Solve & Implement | 8D+KT Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--border:#e0dcd4;--phase-color:#2d6a4f;--phase-light:#e8f4ef}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:16px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.breadcrumb{max-width:960px;margin:0 auto;padding:24px 32px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);font-weight:400}.breadcrumb a:hover{color:var(--accent)}.breadcrumb span{margin:0 8px}
+.phase-hero{max-width:960px;margin:0 auto;padding:48px 32px 36px}
+.d-pill{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--phase-color);color:#fff;padding:6px 14px;border-radius:100px;font-weight:600;display:inline-block;margin-bottom:20px}
+.phase-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.phase-hero h1 span{color:var(--phase-color)}
+.phase-hero .sub{font-size:17px;color:var(--muted);max-width:680px;line-height:1.65;font-weight:300}
+.phase-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:20px}
+.phase-meta strong{color:var(--ink)}
+.phase-nav{max-width:960px;margin:0 auto 48px;padding:0 32px}
+.phase-strip{display:flex;gap:6px;overflow-x:auto}
+.phase-step{flex:1;min-width:80px;text-align:center;padding:10px 8px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;border:1.5px solid var(--border);color:var(--muted)}
+.phase-step.active{background:var(--phase-color);color:#fff;border-color:var(--phase-color)}
+.phase-step:not(.active):hover{border-color:var(--accent);color:var(--accent)}
+.phase-step a{color:inherit;text-decoration:none;display:block}
+.content{max-width:960px;margin:0 auto;padding:0 32px 64px}
+.section-block{margin-bottom:44px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--phase-color);margin-bottom:12px}
+.section-block h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:16px}
+.section-block h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:12px;color:var(--blue)}
+.section-block p{font-size:15px;color:#444;line-height:1.7;margin-bottom:14px}
+.char-table{width:100%;border-collapse:collapse;margin:16px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.char-table th{background:var(--phase-light);color:var(--phase-color);font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left;border-bottom:2px solid var(--phase-color)}
+.char-table td{padding:13px 16px;font-size:14px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.char-table td:first-child{font-weight:700;color:var(--ink)}
+.char-table tr:last-child td{border-bottom:none}
+.solution-table{width:100%;border-collapse:collapse;margin:16px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.solution-table th{background:var(--ink);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left}
+.solution-table td{padding:13px 16px;font-size:13px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.solution-table td:first-child{font-weight:700;color:var(--ink);font-size:13px}
+.solution-table tr:last-child td{border-bottom:none}
+.callout{border-radius:10px;padding:20px 24px;margin:20px 0}
+.callout.rule{background:#fff8f7;border-left:4px solid var(--accent)}
+.callout.tip{background:var(--phase-light);border-left:4px solid var(--phase-color)}
+.callout.warn{background:#fef9e7;border-left:4px solid var(--gold)}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+.callout.rule .callout-label{color:var(--accent)}
+.callout.tip .callout-label{color:var(--phase-color)}
+.callout.warn .callout-label{color:#a66b00}
+.callout p{font-size:14px;color:#444;line-height:1.65;margin:0}
+.rollout-steps{display:flex;gap:0;overflow-x:auto;margin:20px 0}
+.rollout-step{flex:1;min-width:100px;text-align:center;padding:16px 10px;border:1.5px solid var(--border);background:#fff;position:relative}
+.rollout-step:not(:first-child)::before{content:'→';position:absolute;left:-14px;top:50%;transform:translateY(-50%);color:var(--muted);z-index:1;background:var(--cream);font-size:14px}
+.rollout-step .r-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--phase-color);margin-bottom:6px}
+.rollout-step .r-name{font-size:12px;font-weight:700;color:var(--ink)}
+.rollout-step .r-pct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px}
+.success-table{width:100%;border-collapse:collapse;margin:16px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.success-table th{background:var(--phase-color);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;padding:12px 16px;text-align:left}
+.success-table td{padding:13px 16px;font-size:14px;color:#444;border-bottom:1px solid var(--border);vertical-align:top}
+.success-table td:first-child{font-weight:700;color:var(--ink)}
+.success-table tr:last-child td{border-bottom:none}
+.exit-box{background:#e6f4ea;border:1.5px solid #b7dfbc;border-radius:10px;padding:24px;margin-top:32px}
+.exit-box h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1b7340;margin-bottom:16px}
+.exit-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.exit-list li{font-size:14px;color:#2d5a35;padding-left:28px;position:relative;line-height:1.5}
+.exit-list li::before{content:'✓';position:absolute;left:0;color:#1b7340;font-weight:700;font-size:16px}
+.phase-nav-btns{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:2px solid var(--border)}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink);font-size:14px;font-weight:600;transition:.2s}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.nav-btn.next{background:var(--accent);color:#fff;border-color:var(--accent)}
+.nav-btn.next:hover{background:#a84a2e;color:#fff}
+.site-footer{max-width:960px;margin:0 auto;padding:24px 32px;text-align:center;border-top:1px solid var(--border)}
+.site-footer p{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">Analytics Hub</a><span>›</span>
+  <a href="8d_kt_hub.html">8D + KT Playbook</a><span>›</span>
+  <strong>D5 &amp; D6: Solve &amp; Implement</strong>
+</div>
+
+<header class="phase-hero">
+  <span class="d-pill">D5 &amp; D6 &mdash; Permanent Solutions</span>
+  <h1>Design, Deploy &amp;<br><span>Validate the Fix</span></h1>
+  <p class="sub">Design solutions that directly address validated root causes &mdash; not symptoms. Then implement with staged rollout, validation gates, and a clear protocol for removing the containment measures deployed in D3.</p>
+  <div class="phase-meta">
+    <div><strong>D5 Duration</strong> 2–5 days (design)</div>
+    <div><strong>D6 Duration</strong> 5–15 days (implementation)</div>
+    <div><strong>Key Output</strong> Permanent fix deployed &bull; Containment removed &bull; Metrics validated</div>
+  </div>
+</header>
+
+<div class="phase-nav">
+  <div class="phase-strip">
+    <div class="phase-step"><a href="8d_kt_phase_d1d2.html">D1 &amp; D2<br>Frame</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d3.html">D3<br>Contain</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d4.html">D4 + KT<br>Root Cause</a></div>
+    <div class="phase-step active">D5 &amp; D6<br>Solve</div>
+    <div class="phase-step"><a href="8d_kt_phase_d7d8.html">D7 &amp; D8<br>Close</a></div>
+    <div class="phase-step"><a href="8d_kt_tools_genai.html">Tools &amp;<br>GenAI</a></div>
+  </div>
+</div>
+
+<main class="content">
+
+  <div class="section-block">
+    <div class="section-label">Discipline 5</div>
+    <h2>D5: Solution Design</h2>
+    <p>A permanent solution must directly remove the validated root cause. Solutions that address symptoms rather than causes are the primary driver of repeat issues and recurring 8D investigations.</p>
+
+    <div class="callout rule">
+      <div class="callout-label">Design Gate Rule</div>
+      <p>The proposed solution must map directly to each validated root cause from D4. A solution that cannot explicitly explain how it removes the root cause of occurrence AND the root cause of escape must be redesigned before proceeding.</p>
+    </div>
+
+    <h3>Solution Design Criteria</h3>
+    <table class="char-table">
+      <thead><tr><th>Criterion</th><th>What This Means &amp; Why It Matters</th></tr></thead>
+      <tbody>
+        <tr><td>Removes Root Cause</td><td>Directly addresses the identified root cause, not just symptoms. This is non-negotiable &mdash; verify the causal chain explicitly.</td></tr>
+        <tr><td>No New Risks</td><td>Does not introduce new failure modes or customer impact. Every solution that changes system behavior carries new risk; this must be assessed and mitigated.</td></tr>
+        <tr><td>Testable</td><td>Can be validated before production deployment. If you cannot define a test that would tell you whether the solution works, the solution is not well-designed.</td></tr>
+        <tr><td>Scalable</td><td>Works under expected load and growth scenarios. A fix that works at today's volume but fails at 2&times; volume is a ticking clock, not a solution.</td></tr>
+        <tr><td>Maintainable</td><td>Can be supported by the operations team long-term without specialized knowledge or heroic effort.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Solution Design Template (by Root Cause)</h3>
+    <table class="solution-table">
+      <thead><tr><th>Root Cause</th><th>Proposed Solution</th><th>How It Removes the Cause</th><th>Success Metric</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Cloud EUM 5s timeout causes activation failures under peak load in Circle X</td>
+          <td>Increase EUM timeout to 30s + add retry logic + implement async loading for Android 14</td>
+          <td>Allows sufficient time for profile download under peak load. Async loading prevents request blocking on timeout.</td>
+          <td>Activation success &ge; 94%, EUM timeout rate &lt; 0.1%</td>
+        </tr>
+        <tr>
+          <td>Missing Android 14 in test matrix allowed escape without detection</td>
+          <td>Update device matrix to include all OS versions released in last 6 months + automate matrix updates</td>
+          <td>Ensures new OS versions are always tested before production. Automation prevents future manual gaps.</td>
+          <td>100% OS coverage in test matrix, matrix auto-updated within 2 weeks of each OS release</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Discipline 6</div>
+    <h2>D6: Implementation &amp; Validation</h2>
+    <p>Staged rollout is not optional for P0/P1 issues. Rolling out to 100% before validating success at lower traffic volumes creates risk of deploying a fix that introduces a new failure.</p>
+
+    <div class="callout warn">
+      <div class="callout-label">Critical Pre-Implementation Step</div>
+      <p>Define success criteria BEFORE implementation begins. A team that starts measuring after deployment will rationalize any outcome. Success criteria must be locked in writing and reviewed by the Gatekeeper before the first deployment step.</p>
+    </div>
+
+    <h3>Staged Rollout Protocol</h3>
+    <div class="rollout-steps">
+      <div class="rollout-step">
+        <div class="r-num">Step 1</div>
+        <div class="r-name">Design Review</div>
+        <div class="r-pct">Technical &amp; Risk</div>
+      </div>
+      <div class="rollout-step">
+        <div class="r-num">Step 2</div>
+        <div class="r-name">Pre-Prod Testing</div>
+        <div class="r-pct">Unit + Load + Regression</div>
+      </div>
+      <div class="rollout-step">
+        <div class="r-num">Step 3</div>
+        <div class="r-name">Canary</div>
+        <div class="r-pct">1–5% traffic</div>
+      </div>
+      <div class="rollout-step">
+        <div class="r-num">Step 4</div>
+        <div class="r-name">Expanded</div>
+        <div class="r-pct">10% → 50%</div>
+      </div>
+      <div class="rollout-step">
+        <div class="r-num">Step 5</div>
+        <div class="r-name">Full Rollout</div>
+        <div class="r-pct">100% + validate</div>
+      </div>
+      <div class="rollout-step">
+        <div class="r-num">Step 6</div>
+        <div class="r-name">Remove Containment</div>
+        <div class="r-pct">After 7-day hold</div>
+      </div>
+    </div>
+
+    <h3>Validation Success Criteria</h3>
+    <table class="success-table">
+      <thead><tr><th>Success Type</th><th>Example Criteria</th></tr></thead>
+      <tbody>
+        <tr><td>Metric Recovery</td><td>Primary KPI returns to baseline ± acceptable variance for 7 consecutive days</td></tr>
+        <tr><td>Error Reduction</td><td>Error rate &lt; target threshold (e.g., &lt;1%) with no isolated spikes</td></tr>
+        <tr><td>No Recurrence</td><td>Zero related incidents in 30-day post-deployment window</td></tr>
+        <tr><td>Customer Impact</td><td>Support ticket and escalation volume returns to pre-incident baseline</td></tr>
+        <tr><td>No New Issues</td><td>No new P0/P1 issues introduced by the deployed solution</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <div class="callout-label">Containment Removal Protocol</div>
+      <p>Only remove D3 containment actions after the permanent solution has been validated for a defined hold period (minimum 48 hours at full rollout for P0/P1, 7 days recommended). Document the removal as a formal step and monitor closely for 24 hours post-removal.</p>
+    </div>
+  </div>
+
+  <div class="exit-box">
+    <h3>Exit Criteria for D5 &amp; D6</h3>
+    <p style="font-size:14px;color:#2d5a35;margin-bottom:16px">Both D5 and D6 exit criteria must be met before progressing to D7:</p>
+    <ul class="exit-list">
+      <li>Solution design documented and approved by Reviewer with explicit root cause mapping</li>
+      <li>Test plan created with clear pass/fail criteria defined BEFORE implementation</li>
+      <li>Pre-production testing completed (unit, integration, load, regression)</li>
+      <li>Solution implemented via staged rollout with validation gates between stages</li>
+      <li>Validation metrics meet success criteria for the defined hold period</li>
+      <li>Containment actions removed safely with no incident in 24-hour post-removal window</li>
+      <li>Final deployment documentation complete</li>
+    </ul>
+  </div>
+
+  <div class="phase-nav-btns">
+    <a href="8d_kt_phase_d4.html" class="nav-btn">&larr; D4: Root Cause Analysis</a>
+    <a href="8d_kt_phase_d7d8.html" class="nav-btn next">D7 &amp; D8: Prevent &amp; Close &rarr;</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>8D + KT Problem Solving Playbook &middot; D5 &amp; D6 &middot; <a href="8d_kt_hub.html">Back to Hub</a></p>
+</footer>
+</body>
+</html>

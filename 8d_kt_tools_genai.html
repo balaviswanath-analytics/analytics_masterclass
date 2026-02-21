@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools & GenAI Prompts | 8D+KT Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--border:#e0dcd4;--phase-color:#6d4c82;--phase-light:#f3eef8;--code-bg:#1e1e2e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:16px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.breadcrumb{max-width:960px;margin:0 auto;padding:24px 32px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);font-weight:400}.breadcrumb a:hover{color:var(--accent)}.breadcrumb span{margin:0 8px}
+.phase-hero{max-width:960px;margin:0 auto;padding:48px 32px 36px}
+.d-pill{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--phase-color);color:#fff;padding:6px 14px;border-radius:100px;font-weight:600;display:inline-block;margin-bottom:20px}
+.phase-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.phase-hero h1 span{color:var(--phase-color)}
+.phase-hero .sub{font-size:17px;color:var(--muted);max-width:680px;line-height:1.65;font-weight:300}
+.phase-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:20px}
+.phase-meta strong{color:var(--ink)}
+.phase-nav{max-width:960px;margin:0 auto 48px;padding:0 32px}
+.phase-strip{display:flex;gap:6px;overflow-x:auto}
+.phase-step{flex:1;min-width:80px;text-align:center;padding:10px 8px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;border:1.5px solid var(--border);color:var(--muted)}
+.phase-step.active{background:var(--phase-color);color:#fff;border-color:var(--phase-color)}
+.phase-step:not(.active):hover{border-color:var(--accent);color:var(--accent)}
+.phase-step a{color:inherit;text-decoration:none;display:block}
+.content{max-width:960px;margin:0 auto;padding:0 32px 64px}
+.section-block{margin-bottom:44px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--phase-color);margin-bottom:12px}
+.section-block h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:16px}
+.section-block h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:12px;color:var(--blue)}
+.section-block p{font-size:15px;color:#444;line-height:1.7;margin-bottom:14px}
+
+/* TOOL TABS */
+.tool-tabs{display:flex;gap:8px;margin-bottom:24px;overflow-x:auto}
+.tool-tab{padding:10px 20px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:12px;border:1.5px solid var(--border);color:var(--muted);cursor:pointer;white-space:nowrap;background:#fff;transition:.2s}
+.tool-tab.active,.tool-tab:hover{background:var(--phase-color);color:#fff;border-color:var(--phase-color)}
+
+/* CODE BLOCKS */
+.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:16px 0;position:relative;overflow-x:auto}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:#cdd6f4;line-height:1.7;margin:0;white-space:pre}
+.code-block .kw{color:#cba6f7}/* keywords */
+.code-block .fn{color:#89b4fa}/* functions */
+.code-block .str{color:#a6e3a1}/* strings */
+.code-block .cm{color:#6c7086}/* comments */
+.code-block .kv{color:#f38ba8}/* key values */
+.code-block .num{color:#fab387}/* numbers */
+.code-block-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--phase-color);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.copy-btn{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.1);color:#cdd6f4;border:none;border-radius:6px;padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:.2s}
+.copy-btn:hover{background:rgba(255,255,255,.2)}
+
+/* GENAI PROMPTS */
+.prompt-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px}
+.prompt-card .prompt-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.prompt-num{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--phase-color);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.prompt-card h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin:0}
+.prompt-card .use-when{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:12px}
+.prompt-body{background:var(--phase-light);border:1px solid #d4c8e8;border-radius:8px;padding:16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#444;line-height:1.8}
+.prompt-body .placeholder{color:var(--accent);font-style:italic}
+.prompt-tip{font-size:13px;color:var(--accent2);margin-top:12px;font-style:italic}
+
+.callout{border-radius:10px;padding:20px 24px;margin:20px 0}
+.callout.warn{background:#fff8f7;border-left:4px solid var(--accent)}
+.callout.tip{background:#e6f4ea;border-left:4px solid var(--accent2)}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+.callout.warn .callout-label{color:var(--accent)}
+.callout.tip .callout-label{color:var(--accent2)}
+.callout p{font-size:14px;color:#444;line-height:1.65;margin:0}
+
+.phase-nav-btns{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:2px solid var(--border)}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink);font-size:14px;font-weight:600;transition:.2s}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.nav-btn.next{background:var(--phase-color);color:#fff;border-color:var(--phase-color)}
+.nav-btn.next:hover{opacity:.9;color:#fff}
+.site-footer{max-width:960px;margin:0 auto;padding:24px 32px;text-align:center;border-top:1px solid var(--border)}
+.site-footer p{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">Analytics Hub</a><span>›</span>
+  <a href="8d_kt_hub.html">8D + KT Playbook</a><span>›</span>
+  <strong>Tools &amp; GenAI Prompts</strong>
+</div>
+
+<header class="phase-hero">
+  <span class="d-pill">Tool Integration</span>
+  <h1>Python, SQL, Excel &amp;<br><span>GenAI Prompts</span></h1>
+  <p class="sub">Ready-to-use code and prompt templates that accelerate each phase of 8D + KT analysis. The playbook is tool-agnostic &mdash; the focus is always on analytical thinking, not any specific tool.</p>
+  <div class="phase-meta">
+    <div><strong>SQL</strong> Evidence gathering &bull; IS/IS NOT population</div>
+    <div><strong>Python</strong> Hypothesis testing &bull; Correlation analysis</div>
+    <div><strong>GenAI</strong> 4 structured prompts for analysis acceleration</div>
+  </div>
+</header>
+
+<div class="phase-nav">
+  <div class="phase-strip">
+    <div class="phase-step"><a href="8d_kt_phase_d1d2.html">D1 &amp; D2<br>Frame</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d3.html">D3<br>Contain</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d4.html">D4 + KT<br>Root Cause</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d5d6.html">D5 &amp; D6<br>Solve</a></div>
+    <div class="phase-step"><a href="8d_kt_phase_d7d8.html">D7 &amp; D8<br>Close</a></div>
+    <div class="phase-step active">Tools &amp;<br>GenAI</div>
+  </div>
+</div>
+
+<main class="content">
+
+  <!-- SQL -->
+  <div class="section-block">
+    <div class="section-label">SQL</div>
+    <h2>SQL for Evidence Gathering</h2>
+    <p>SQL is the primary tool for extracting evidence to populate KT analysis tables. The two most useful queries in the 8D workflow are IS/IS NOT segmentation and Change Analysis lookup.</p>
+
+    <div class="code-block-label">IS / IS NOT Population Query &mdash; Use in D4 to find affected vs unaffected segments</div>
+    <div class="code-block">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').innerText)">Copy</button>
+      <pre><span class="kw">SELECT</span>
+    customer_segment,
+    os_version,
+    circle_name,
+    <span class="fn">COUNT</span>(*) <span class="kw">AS</span> total_attempts,
+    <span class="fn">SUM</span>(<span class="kw">CASE WHEN</span> status = <span class="str">'failed'</span> <span class="kw">THEN</span> <span class="num">1</span> <span class="kw">ELSE</span> <span class="num">0</span> <span class="kw">END</span>) <span class="kw">AS</span> failures,
+    <span class="fn">ROUND</span>(
+        <span class="num">100.0</span> * <span class="fn">SUM</span>(<span class="kw">CASE WHEN</span> status = <span class="str">'failed'</span> <span class="kw">THEN</span> <span class="num">1</span> <span class="kw">ELSE</span> <span class="num">0</span> <span class="kw">END</span>) / <span class="fn">COUNT</span>(*),
+        <span class="num">2</span>
+    ) <span class="kw">AS</span> failure_rate
+<span class="kw">FROM</span> activation_logs
+<span class="kw">WHERE</span> attempt_timestamp <span class="kw">BETWEEN</span> <span class="str">'2026-01-15'</span> <span class="kw">AND</span> <span class="str">'2026-01-20'</span>
+<span class="kw">GROUP BY</span> customer_segment, os_version, circle_name
+<span class="kw">ORDER BY</span> failure_rate <span class="kw">DESC</span>;
+
+<span class="cm">-- High failure rates (&gt;20%) → IS column
+-- Low failure rates (&lt;5%) → IS NOT column
+-- What is DISTINCTIVE about high-failure segments?</span></pre>
+    </div>
+
+    <div class="code-block-label">Change Analysis Lookup &mdash; Use in D4 to surface changes before problem start</div>
+    <div class="code-block">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').innerText)">Copy</button>
+      <pre><span class="kw">SELECT</span>
+    change_date,
+    change_type,
+    component,
+    change_description,
+    author
+<span class="kw">FROM</span> change_log
+<span class="kw">WHERE</span>
+    change_date <span class="kw">BETWEEN</span> <span class="str">'2026-01-01'</span> <span class="kw">AND</span> <span class="str">'2026-01-15'</span>
+    <span class="kw">AND</span> (
+        component <span class="kw">LIKE</span> <span class="str">'%activation%'</span>
+        <span class="kw">OR</span> component <span class="kw">LIKE</span> <span class="str">'%eSIM%'</span>
+        <span class="kw">OR</span> component <span class="kw">LIKE</span> <span class="str">'%provisioning%'</span>
+    )
+<span class="kw">ORDER BY</span> change_date <span class="kw">DESC</span>;</pre>
+    </div>
+  </div>
+
+  <!-- PYTHON -->
+  <div class="section-block">
+    <div class="section-label">Python</div>
+    <h2>Python for Hypothesis Testing</h2>
+    <p>Use Python at D4 to quantify correlations and detect structural breaks in time series data. Both examples below produce Tier 2 evidence &mdash; pair with Tier 1 (log traces, code diffs) for full validation.</p>
+
+    <div class="code-block-label">Correlation Analysis &mdash; Quantify relationship between EUM timeout and failure rate</div>
+    <div class="code-block">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').innerText)">Copy</button>
+      <pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.stats <span class="kw">import</span> pearsonr
+
+<span class="cm"># Load activation logs and EUM timeout data</span>
+df = pd.<span class="fn">read_sql</span>(query, connection)
+
+<span class="cm"># Calculate correlation between EUM timeout and activation failure</span>
+correlation, p_value = <span class="fn">pearsonr</span>(
+    df[<span class="str">'eum_timeout_ms'</span>],
+    df[<span class="str">'activation_failed'</span>]
+)
+
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"Correlation: {correlation:.3f}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"P-value: {p_value:.4f}"</span>)
+
+<span class="cm"># Interpretation:
+# correlation &gt; 0.7 + p_value &lt; 0.05 → strong Tier 2 evidence
+# Now pair with log traces (Tier 1) to confirm mechanism</span></pre>
+    </div>
+
+    <div class="code-block-label">Change Detection &mdash; Identify structural break at problem start date in time series</div>
+    <div class="code-block">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').innerText)">Copy</button>
+      <pre><span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> statsmodels.tsa.seasonal <span class="kw">import</span> seasonal_decompose
+
+<span class="cm"># Decompose activation success rate time series</span>
+ts = df.<span class="fn">set_index</span>(<span class="str">'date'</span>)[<span class="str">'activation_success_rate'</span>]
+decomposition = <span class="fn">seasonal_decompose</span>(ts, model=<span class="str">'additive'</span>, period=<span class="num">7</span>)
+
+<span class="cm"># Plot trend, seasonality, and residuals</span>
+decomposition.<span class="fn">plot</span>()
+plt.<span class="fn">tight_layout</span>()
+plt.<span class="fn">show</span>()
+
+<span class="cm"># Look for sharp changes in the TREND component at Jan 15
+# A step-change in trend is strong evidence of an external cause</span></pre>
+    </div>
+  </div>
+
+  <!-- EXCEL -->
+  <div class="section-block">
+    <div class="section-label">Excel</div>
+    <h2>Excel for KT Matrices</h2>
+    <p>Excel remains the most practical tool for building and sharing KT analysis matrices within a team. Structure your workbook as follows:</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--phase-color);margin-bottom:6px">TAB 1</div>
+        <div style="font-weight:700;font-size:13px;color:var(--ink);margin-bottom:4px">IS / IS NOT Matrix</div>
+        <p style="font-size:12px;color:#666;margin:0">4 dimensions with conditional formatting: IS cells green, IS NOT cells red</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--phase-color);margin-bottom:6px">TAB 2</div>
+        <div style="font-weight:700;font-size:13px;color:var(--ink);margin-bottom:4px">Change Timeline</div>
+        <p style="font-size:12px;color:#666;margin:0">Dates, change types, relevance scores with status column (suspect/ruleout)</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--phase-color);margin-bottom:6px">TAB 3</div>
+        <div style="font-weight:700;font-size:13px;color:var(--ink);margin-bottom:4px">MPC Scoring Matrix</div>
+        <p style="font-size:12px;color:#666;margin:0">Hypotheses scored 1–5 on 5 criteria with auto-calculated totals and rank</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--phase-color);margin-bottom:6px">TAB 4</div>
+        <div style="font-weight:700;font-size:13px;color:var(--ink);margin-bottom:4px">Prevention Tracker</div>
+        <p style="font-size:12px;color:#666;margin:0">D7 actions with owner, date, success measure, and completion status</p>
+      </div>
+    </div>
+    <div class="callout tip">
+      <div class="callout-label">Team Tip</div>
+      <p>Create a standardized Excel template with pre-formatted tabs for consistent analysis across the team. A team that uses the same template produces work that reviewers can gate-check in half the time.</p>
+    </div>
+  </div>
+
+  <!-- GENAI PROMPTS -->
+  <div class="section-block">
+    <div class="section-label">GenAI Integration</div>
+    <h2>GenAI Prompts for Analysis Acceleration</h2>
+
+    <div class="callout warn">
+      <div class="callout-label">Critical Rule</div>
+      <p>GenAI is a thinking partner, not a replacement for evidence-based analysis. ALWAYS validate GenAI outputs with real data. A GenAI-generated hypothesis that is not tested against data is not a root cause &mdash; it is a guess with better formatting.</p>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-header">
+        <div class="prompt-num">1</div>
+        <h3>Hypothesis Generation from IS/IS NOT</h3>
+      </div>
+      <div class="use-when">USE WHEN: You have completed IS/IS NOT and need candidate hypotheses to score in MPC</div>
+      <div class="prompt-body">
+I am conducting a root cause analysis using Kepner-Tregoe methodology.
+Here is my IS/IS NOT analysis:
+
+IS (what IS affected):
+<span class="placeholder">[paste your IS observations across all 4 dimensions]</span>
+
+IS NOT (what is NOT affected):
+<span class="placeholder">[paste your IS NOT observations]</span>
+
+Based on the distinctions between IS and IS NOT, generate 5 potential
+hypotheses for what might be causing this problem. For each hypothesis:
+1. Explain which IS observations it explains
+2. Explain which IS NOT observations it does NOT explain (and why)
+3. Suggest one test that would confirm or rule out this hypothesis
+      </div>
+      <p class="prompt-tip">Expected output: 5 structured hypotheses ready for MPC scoring. Add them to your MPC matrix and score independently before reviewing GenAI output.</p>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-header">
+        <div class="prompt-num">2</div>
+        <h3>Change Analysis Support</h3>
+      </div>
+      <div class="use-when">USE WHEN: You have a change timeline but need help assessing causal relevance</div>
+      <div class="prompt-body">
+I have a problem that started on <span class="placeholder">[DATE AT TIME]</span>.
+The problem affects <span class="placeholder">[brief IS description]</span>.
+
+Here are the changes that occurred in the 14 days before the problem:
+
+<span class="placeholder">[paste your change timeline: date | change type | description]</span>
+
+Help me assess which changes are most likely causally related. For each:
+1. Rate likelihood (High/Medium/Low) with reasoning
+2. Explain the technical mechanism by which it could cause this problem
+3. Identify what evidence would confirm or rule it out
+Rank changes by most probable cause order.
+      </div>
+      <p class="prompt-tip">Expected output: Ranked change list with causal reasoning. Cross-reference with IS/IS NOT &mdash; the highest-ranked GenAI change should also explain IS/IS NOT distinctions.</p>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-header">
+        <div class="prompt-num">3</div>
+        <h3>Root Cause Validation Check</h3>
+      </div>
+      <div class="use-when">USE WHEN: Before submitting D4 for Reviewer approval &mdash; run as a self-check</div>
+      <div class="prompt-body">
+I believe I have identified the root cause of a problem.
+Root cause: <span class="placeholder">[YOUR ROOT CAUSE STATEMENT]</span>
+
+IS/IS NOT analysis:
+<span class="placeholder">[paste full IS/IS NOT table]</span>
+
+Evidence gathered:
+<span class="placeholder">[list your evidence items and their tier]</span>
+
+Please review:
+1. Does this root cause explain ALL IS observations? List any gaps.
+2. Does this root cause correctly NOT explain IS NOT observations?
+3. Are there alternative explanations I should rule out?
+4. Is the evidence sufficient (Tier 1 present, at least 2 sources)?
+5. What is the weakest point in my logic?
+      </div>
+      <p class="prompt-tip">Expected output: Critical assessment of your root cause logic. The "weakest point" question is most valuable &mdash; address it before the Reviewer finds it.</p>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-header">
+        <div class="prompt-num">4</div>
+        <h3>Prevention Actions Brainstorming</h3>
+      </div>
+      <div class="use-when">USE WHEN: Building D7 prevention plan after root cause is validated</div>
+      <div class="prompt-body">
+Root cause of OCCURRENCE: <span class="placeholder">[paste validated root cause of occurrence]</span>
+Root cause of ESCAPE: <span class="placeholder">[paste validated root cause of escape]</span>
+
+Generate comprehensive prevention actions across these 5 categories:
+1. Monitoring enhancements
+2. Process changes
+3. Automation opportunities
+4. Standards / guidelines
+5. Training needs
+
+For each action:
+- Specify exactly WHAT needs to change
+- Identify WHO should own it (by role)
+- Suggest a realistic implementation timeline
+- Define a measurable success criterion
+      </div>
+      <p class="prompt-tip">Expected output: Draft D7 prevention action list. Filter for feasibility and assign concrete owners before adding to your Prevention Tracker.</p>
+    </div>
+  </div>
+
+  <div class="phase-nav-btns">
+    <a href="8d_kt_phase_d7d8.html" class="nav-btn">&larr; D7 &amp; D8: Prevention &amp; Closure</a>
+    <a href="8d_kt_governance.html" class="nav-btn next">Governance &amp; Reference &rarr;</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>8D + KT Problem Solving Playbook &middot; Tools &amp; GenAI &middot; <a href="8d_kt_hub.html">Back to Hub</a></p>
+</footer>
+</body>
+</html>
