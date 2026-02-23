@@ -10,8 +10,17 @@ notebooks/
 ├── Week02_Cox_PH_Model.ipynb
 ├── Week03_Churn_Segmentation.ipynb
 ├── Week04_Complete_CLV_Engine.ipynb
-├── WA_Fn-UseC_-Telco-Customer-Churn.csv    ← download once, used in Weeks 2, 3
-└── this_README.md
+├── Week05_Competing_Risks.ipynb
+├── Week06_WinBack_ROI.ipynb
+├── Week07_Cohort_Economics.ipynb
+├── Week08_Frailty_Models.ipynb
+├── Week09_Switching_Costs.ipynb
+├── Week10_Second_Purchase.ipynb
+├── Week11_Model_Selection.ipynb
+├── Week12_Reactivation_Windows.ipynb
+├── Week13_Causal_Network.ipynb
+├── WA_Fn-UseC_-Telco-Customer-Churn.csv    ← download once, used in Weeks 2,3,5,8,9
+└── DATASET_GUIDE.md
 ```
 
 ---
@@ -77,12 +86,25 @@ from lifetimes.datasets import load_cdnow_summary, load_transaction_data
 
 ---
 
+## Dataset Mapping: Which Weeks Use What
+
+| Weeks | Dataset | Notes |
+|-------|---------|-------|
+| 1, 4, 6, 7, 10, 11, 12 | **CDNOW** (auto-loads) | Transaction data bundled with `lifetimes` |
+| 2, 3, 5, 8, 9 | **IBM Telco** (Kaggle download) | 7,043 telecom customers |
+| 13 | **Simulated network** | Generated in-notebook, no download needed |
+| Exercises (1, 7, 10) | **UCI Online Retail II** (optional) | For deeper exploration |
+
+**Weeks 6, 12, 13** include synthetic extensions built on real datasets (win-back outcomes, reactivation events, customer networks). These are generated within the notebooks using documented random seeds for reproducibility.
+
+---
+
 ## Python Environment
 
 All notebooks require Python 3.8+ with the following packages:
 
 ```bash
-pip install lifetimes lifelines pandas matplotlib seaborn scikit-learn
+pip install lifetimes lifelines pandas matplotlib seaborn scikit-learn networkx statsmodels
 ```
 
 **Package versions tested:**
