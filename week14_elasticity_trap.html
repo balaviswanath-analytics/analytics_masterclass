@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 14: The Elasticity Trap</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q2 HUB</a><a href="#business" class="nav-link active">The Trap</a><a href="#loglog" class="nav-link">Log-Log Model</a><a href="#arc" class="nav-link">Arc Elasticity</a><a href="#cross" class="nav-link">Cross-Price</a><a href="#breakeven" class="nav-link">Break-Even</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 14 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div><h1>The <span>Elasticity Trap</span>: Why a 10% Price Cut Costs More Than You Think</h1><p class="hero-sub">A VP proposes a 10% price reduction to "boost volume." Sounds reasonable. But without measuring price elasticity, you can't know if the volume increase will offset the margin loss. Most of the time, it won't. This week you'll learn to estimate demand elasticity from observational data, understand the log-log regression framework, compute cross-price effects, and build the break-even analysis that prevents pricing disasters.</p></header>
+<main class="content">
+
+<div class="section" id="business"><h2>Part 1: The $6M Pricing Mistake</h2>
+<p>A mid-market SaaS company dropped its monthly price from $99 to $89 (a 10.1% cut) expecting a surge in new subscriptions. Six months later: new subscriptions rose 7%, but revenue per customer fell 10.1%. Net effect: <strong>revenue dropped 3.8%</strong>, which on a $160M base meant a $6.1M annual loss. The volume gain didn't come close to compensating for the margin sacrifice.</p>
+<p>The mistake? They assumed demand was elastic (elasticity > 1 in absolute terms). It was actually inelastic at &epsilon; = -0.7. Meaning a 10% price cut only generated a 7% volume increase &mdash; mathematically guaranteed to lose money.</p>
+<div class="callout danger"><div class="callout-label">The Break-Even Rule</div><p>For a price cut to be revenue-neutral, volume must increase by more than the percentage price cut, adjusted for margin. Specifically: <strong>%&Delta;Volume &ge; %&Delta;Price / (1 + %&Delta;Price)</strong>. For a 10% price cut, volume must increase by at least 11.1%. For a 20% price cut, volume must increase by 25%. Most products aren't elastic enough to clear this bar, which is why the majority of price cuts destroy value.</p></div></div>
+
+<div class="section" id="loglog"><h2>Part 2: The Log-Log Demand Model</h2>
+<p>The standard framework for estimating price elasticity is the <strong>constant-elasticity (log-log) model</strong>. By taking the natural log of both price and quantity, the regression coefficient directly gives you the elasticity.</p>
+<div class="formula"><div class="formula-label">LOG-LOG DEMAND MODEL</div><div class="formula-math">ln(Q) = &alpha; + &epsilon; &middot; ln(P) + &beta;'X + u</div><div class="formula-label">Q = quantity demanded | P = price | &epsilon; = price elasticity | X = controls | u = error</div></div>
+<p>The beauty of this specification: the coefficient &epsilon; on ln(P) is directly interpretable as <strong>"a 1% increase in price leads to an &epsilon;% change in quantity demanded."</strong> No additional transformation needed. This works because the derivative of ln(Q) with respect to ln(P) is dQ/Q &divide; dP/P = percentage change in Q per percentage change in P, which is exactly the definition of elasticity.</p>
+<h3>Why Log-Log and Not Linear?</h3>
+<table class="comp-table"><thead><tr><th>Model</th><th>Specification</th><th>Elasticity</th><th>Assumption</th></tr></thead><tbody>
+<tr><td><strong>Log-Log (constant elasticity)</strong></td><td>ln(Q) = a + &epsilon; ln(P)</td><td>Constant across all price levels</td><td>Multiplicative demand: same % response everywhere</td></tr>
+<tr><td>Linear</td><td>Q = a + bP</td><td>Varies: &epsilon; = b &middot; P/Q</td><td>Absolute response is constant; elasticity changes</td></tr>
+<tr><td>Semi-log</td><td>ln(Q) = a + bP</td><td>Varies: &epsilon; = b &middot; P</td><td>Elasticity increases linearly with price</td></tr>
+</tbody></table>
+<div class="callout insight"><div class="callout-label">When Constant Elasticity Fails</div><p>The log-log model assumes the same elasticity at $50 and $500. This is often reasonable within a normal operating range (say, &plusmn;20% of current price) but breaks down for extreme price changes. If you're considering a 50%+ price change, use a semi-log or piecewise model instead. Also: elasticity is not a fixed property of the product &mdash; it varies by segment, season, competitive environment, and how recently the price changed.</p></div></div>
+
+<div class="section" id="arc"><h2>Part 3: Arc Elasticity &mdash; When You Only Have Two Data Points</h2>
+<p>In practice, you often don't have continuous price variation. You have: "We charged $99 for 12 months and sold X units. We moved to $89 and sold Y units." Arc elasticity handles this discrete case by using the midpoint method, avoiding the asymmetry of simple percentage changes.</p>
+<div class="formula"><div class="formula-label">ARC ELASTICITY (MIDPOINT METHOD)</div><div class="formula-math">&epsilon;<sub>arc</sub> = [(Q<sub>2</sub> - Q<sub>1</sub>) / ((Q<sub>1</sub> + Q<sub>2</sub>)/2)] &divide; [(P<sub>2</sub> - P<sub>1</sub>) / ((P<sub>1</sub> + P<sub>2</sub>)/2)]</div><div class="formula-label">Uses average of start/end as base &rarr; symmetric, direction-independent</div></div>
+<div class="callout"><div class="callout-label">Why Midpoint?</div><p>Simple elasticity using starting values gives different answers depending on direction: going from $100 to $90 is a -10% change, but going from $90 to $100 is an +11.1% change. The midpoint method uses the average as the base, giving the same elasticity regardless of direction. This matters when you're comparing elasticities across products or time periods.</p></div></div>
+
+<div class="section" id="cross"><h2>Part 4: Cross-Price Elasticity</h2>
+<p>Your product's demand doesn't exist in isolation. When a competitor drops their price, your demand changes too. <strong>Cross-price elasticity</strong> measures how sensitive your demand is to a competitor's (or substitute's or complement's) price.</p>
+<div class="formula"><div class="formula-label">CROSS-PRICE ELASTICITY</div><div class="formula-math">&epsilon;<sub>ij</sub> = %&Delta;Q<sub>i</sub> / %&Delta;P<sub>j</sub></div><div class="formula-label">&epsilon;<sub>ij</sub> > 0 &rarr; substitutes (competitor price up, your demand up) | &epsilon;<sub>ij</sub> < 0 &rarr; complements</div></div>
+<p>In the log-log framework, cross-price elasticity is estimated simply by adding the competitor's log-price as an additional regressor:</p>
+<div class="formula"><div class="formula-label">EXTENDED LOG-LOG WITH CROSS-PRICE</div><div class="formula-math">ln(Q<sub>i</sub>) = &alpha; + &epsilon;<sub>own</sub> &middot; ln(P<sub>i</sub>) + &epsilon;<sub>cross</sub> &middot; ln(P<sub>j</sub>) + &beta;'X + u</div></div>
+<table class="comp-table"><thead><tr><th>&epsilon;<sub>cross</sub> Range</th><th>Interpretation</th><th>Strategic Implication</th></tr></thead><tbody>
+<tr><td>> 0.5</td><td>Strong substitute</td><td>Competitor price drops will hurt you significantly; match or differentiate</td></tr>
+<tr><td>0.1 to 0.5</td><td>Moderate substitute</td><td>Monitor competitor pricing; respond selectively</td></tr>
+<tr><td>-0.1 to 0.1</td><td>Independent</td><td>Competitor pricing is largely irrelevant to your demand</td></tr>
+<tr><td>< -0.1</td><td>Complement</td><td>Partner pricing matters; co-promote</td></tr>
+</tbody></table></div>
+
+<div class="section" id="breakeven"><h2>Part 5: The Break-Even Volume Formula</h2>
+<p>Before any price change, run the break-even analysis. The question: <strong>"How much additional volume do I need to maintain the same profit?"</strong></p>
+<div class="formula"><div class="formula-label">BREAK-EVEN VOLUME CHANGE</div><div class="formula-math">%&Delta;Q<sub>BE</sub> = &minus;%&Delta;P / (CM% + %&Delta;P)</div><div class="formula-label">CM% = contribution margin percentage (revenue minus variable costs / revenue)</div></div>
+<p>For a product with 60% contribution margin:</p>
+<table class="comp-table"><thead><tr><th>Price Cut</th><th>Break-Even Volume Increase Required</th><th>Implied Minimum Elasticity</th></tr></thead><tbody>
+<tr><td>5%</td><td>+9.1%</td><td>-1.82</td></tr>
+<tr><td>10%</td><td>+20.0%</td><td>-2.00</td></tr>
+<tr><td>15%</td><td>+33.3%</td><td>-2.22</td></tr>
+<tr><td>20%</td><td>+50.0%</td><td>-2.50</td></tr>
+</tbody></table>
+<div class="callout danger"><div class="callout-label">Most Products Are Inelastic</div><p>Empirical studies consistently find that most B2B products have elasticities between -0.5 and -2.0, and most consumer goods between -1.0 and -3.0 (Tellis, 1988; Bijmolt et al., 2005). At a 60% margin, you need elasticity of -2.0 or stronger just to break even on a 10% price cut. This means the <strong>majority of price cuts destroy profit</strong>, even when they increase volume. The math is unforgiving.</p></div></div>
+
+<div class="section" id="code"><h2>Part 6: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; Price Elasticity Estimation</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> statsmodels.api <span class="kw">as</span> sm
+
+df = pd.<span class="fn">read_csv</span>(<span class="str">'pricing_data.csv'</span>)
+<span class="cm"># Columns: date, product, price, quantity_sold,</span>
+<span class="cm">#          competitor_price, promo_flag, season</span>
+
+<span class="cm"># === Log-Log Demand Model ===</span>
+df[<span class="str">'ln_q'</span>] = np.<span class="fn">log</span>(df[<span class="str">'quantity_sold'</span>])
+df[<span class="str">'ln_p'</span>] = np.<span class="fn">log</span>(df[<span class="str">'price'</span>])
+df[<span class="str">'ln_p_comp'</span>] = np.<span class="fn">log</span>(df[<span class="str">'competitor_price'</span>])
+
+X = sm.<span class="fn">add_constant</span>(df[[<span class="str">'ln_p'</span>, <span class="str">'ln_p_comp'</span>,
+                        <span class="str">'promo_flag'</span>, <span class="str">'season'</span>]])
+model = sm.<span class="fn">OLS</span>(df[<span class="str">'ln_q'</span>], X).<span class="fn">fit</span>(cov_type=<span class="str">'HC1'</span>)
+<span class="fn">print</span>(model.<span class="fn">summary</span>())
+
+own_elasticity = model.params[<span class="str">'ln_p'</span>]
+cross_elasticity = model.params[<span class="str">'ln_p_comp'</span>]
+<span class="fn">print</span>(<span class="str">f"\nOwn-price elasticity:   {own_elasticity:.3f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Cross-price elasticity: {cross_elasticity:.3f}"</span>)
+
+<span class="cm"># === Break-Even Analysis ===</span>
+CM = <span class="num">0.60</span>  <span class="cm"># contribution margin</span>
+price_cuts = [<span class="num">0.05</span>, <span class="num">0.10</span>, <span class="num">0.15</span>, <span class="num">0.20</span>]
+
+<span class="fn">print</span>(<span class="str">"\n=== Break-Even Analysis ==="</span>)
+<span class="kw">for</span> cut <span class="kw">in</span> price_cuts:
+    be_vol = cut / (CM - cut)
+    predicted_vol = -own_elasticity * cut
+    profitable = predicted_vol > be_vol
+    <span class="fn">print</span>(<span class="str">f"  {cut:.0%} cut: need +{be_vol:.1%} volume, "</span>
+          <span class="str">f"model predicts +{predicted_vol:.1%} → "</span>
+          <span class="str">f"{'PROFITABLE' if profitable else 'DESTROYS VALUE'}"</span>)
+
+<span class="cm"># === Arc Elasticity (two-period comparison) ===</span>
+<span class="kw">def</span> <span class="fn">arc_elasticity</span>(q1, q2, p1, p2):
+    pct_q = (q2 - q1) / ((q1 + q2) / <span class="num">2</span>)
+    pct_p = (p2 - p1) / ((p1 + p2) / <span class="num">2</span>)
+    <span class="kw">return</span> pct_q / pct_p
+
+<span class="cm"># Example: price went from 99 to 89, units from 1000 to 1070</span>
+arc_e = <span class="fn">arc_elasticity</span>(<span class="num">1000</span>, <span class="num">1070</span>, <span class="num">99</span>, <span class="num">89</span>)
+<span class="fn">print</span>(<span class="str">f"\nArc elasticity: {arc_e:.3f}"</span>)</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 7: Your Week 14 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th></tr></thead><tbody>
+<tr><td>"How sensitive is demand to our price?"</td><td>Log-log regression: coefficient on ln(P) = own-price elasticity</td></tr>
+<tr><td>"Will a price cut increase revenue?"</td><td>Break-even formula: compare required vs. predicted volume change</td></tr>
+<tr><td>"How does competitor pricing affect us?"</td><td>Add ln(P_competitor) to the log-log model → cross-price elasticity</td></tr>
+<tr><td>"Is elasticity the same for all segments?"</td><td>Run separate models by segment or add interaction terms</td></tr>
+<tr><td>"We only have before/after data"</td><td>Arc elasticity (midpoint method)</td></tr>
+</tbody></table>
+<h3>Top 5 Mistakes</h3>
+<table class="comp-table"><thead><tr><th>#</th><th>Mistake</th><th>Consequence</th></tr></thead><tbody>
+<tr><td>1</td><td>Using correlation (price vs. quantity) without controls</td><td>Confounders (seasonality, promotions) bias the estimate</td></tr>
+<tr><td>2</td><td>Assuming constant elasticity across huge price ranges</td><td>Log-log is a local approximation; breaks at extremes</td></tr>
+<tr><td>3</td><td>Ignoring endogeneity (prices set in response to demand)</td><td>OLS estimates are biased; need IV or natural experiments</td></tr>
+<tr><td>4</td><td>Forgetting the margin in break-even analysis</td><td>Revenue-neutral ≠ profit-neutral; margin is the denominator</td></tr>
+<tr><td>5</td><td>Treating elasticity as permanent</td><td>Elasticity changes with competitive context, season, and customer awareness</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Foundation Reading</h4><p>Tellis, G.J. (1988). "The Price Elasticity of Selective Demand: A Meta-Analysis." Marketing Science, 7(4), 331-341. Also: Bijmolt, T.H.A., Van Heerde, H.J., Pieters, R.G.M. (2005). "New Empirical Generalizations on the Determinants of Price Elasticity." JMR, 42(2).</p></div>
+<div class="timeline-step"><h4>Day 3-4: Estimate Your Own Elasticity</h4><p>Using any pricing dataset (try the UCI Online Retail data), build a log-log model. Include at least two controls (season, promotion). Interpret the own-price elasticity.</p></div>
+<div class="timeline-step"><h4>Day 5-6: Break-Even Scenario Analysis</h4><p>For your product: compute break-even volume for 5%, 10%, 15%, 20% price cuts at your actual margin. Compare to model-predicted volume changes. Produce a one-page "should we cut prices?" brief.</p></div>
+<div class="timeline-step"><h4>Day 7: Endogeneity Discussion</h4><p>Write a one-paragraph critique of your own elasticity estimate: what confounders might bias it? What instrumental variable could help? (Preview of Week 19's causal methods.)</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Essential:</strong> Tellis, G.J. (1988). The Price Elasticity of Selective Demand. <em>Marketing Science</em>, 7(4), 331-341.<br><strong>Meta-Analysis:</strong> Bijmolt, T.H.A. et al. (2005). New Empirical Generalizations on Price Elasticity. <em>JMR</em>, 42(2), 141-156.<br><strong>Textbook:</strong> Nagle, T., Hogan, J., Zale, J. (2016). <em>The Strategy and Tactics of Pricing</em>, 6th Ed. Routledge. Chapters 2-4.<br><strong>Endogeneity:</strong> Villas-Boas, J.M. & Winer, R.S. (1999). Endogeneity in Brand Choice Models. <em>Management Science</em>, 45(10).</p>
+<div class="bottom-nav"><a href="week13_causal_network.html">&larr; Week 13: Causal Network Analysis</a><a href="week15_premium_volume.html">Week 15: Premium vs. Volume &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

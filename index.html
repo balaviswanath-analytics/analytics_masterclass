@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Analytics Strategist - Q1 Hub</title>
+<title>The Analytics Strategist - 52-Week Masterclass</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--border:#e0dcd4;--code-bg:#1e1e2e}
@@ -18,13 +18,16 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
 .hero-landing .sub{font-size:20px;color:var(--muted);max-width:640px;margin:0 auto;line-height:1.65;font-weight:300}
 
 .quarter-nav{max-width:960px;margin:40px auto 0;padding:0 32px;display:flex;gap:0;border-bottom:2px solid var(--border)}
-.quarter-tab{padding:14px 28px;font-size:15px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;transition:.2s}
+.quarter-tab{padding:14px 28px;font-size:15px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;transition:.2s;user-select:none}
 .quarter-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 .quarter-tab:hover{color:var(--ink)}
 
+.quarter-content{display:none}
+.quarter-content.active{display:block}
+
 .progress-bar{max-width:960px;margin:32px auto 0;padding:0 32px}
 .progress-track{background:#e8e4dc;border-radius:100px;height:8px;position:relative}
-.progress-fill{background:linear-gradient(90deg,var(--accent),var(--accent2));height:100%;border-radius:100px;width:100%;transition:width .6s ease}
+.progress-fill{background:linear-gradient(90deg,var(--accent),var(--accent2));height:100%;border-radius:100px;transition:width .6s ease}
 .progress-label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-top:8px;display:flex;justify-content:space-between}
 
 .weeks-grid{max-width:960px;margin:48px auto;padding:0 32px;display:grid;grid-template-columns:1fr;gap:0}
@@ -50,20 +53,26 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
 
 .week-link{text-decoration:none;color:inherit;display:contents}
 
-/* Theme section */
 .theme-section{max-width:960px;margin:64px auto;padding:0 32px}
 .theme-header{display:flex;align-items:center;gap:16px;margin-bottom:32px}
 .theme-header h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700}
 .theme-line{flex:1;height:2px;background:var(--border)}
 
-/* What you'll master */
 .mastery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin:32px 0}
 .mastery-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.03)}
 .mastery-card h4{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--blue)}
 .mastery-card p{font-size:14px;color:#666;line-height:1.6;margin:0}
 .mastery-icon{font-size:28px;margin-bottom:12px;display:block}
 
-/* Footer */
+.month-divider{padding:32px 0 8px}
+.month-divider:first-of-type{padding-top:20px}
+.month-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding-bottom:8px;border-bottom:2px solid currentColor;display:inline-block}
+
+.placeholder-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center;margin-top:32px}
+.placeholder-box .icon{font-size:48px;margin-bottom:16px}
+.placeholder-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px}
+.placeholder-box p{color:var(--muted);font-size:15px;max-width:480px;margin:0 auto}
+
 .landing-footer{max-width:960px;margin:80px auto 0;padding:32px;text-align:center;border-top:2px solid var(--border)}
 .landing-footer p{font-size:14px;color:var(--muted)}
 
@@ -71,6 +80,7 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
   .week-card{grid-template-columns:48px 1fr 24px;gap:14px}
   .week-num{width:44px;height:44px;font-size:16px}
   .week-info h3{font-size:17px}
+  .quarter-tab{padding:12px 14px;font-size:13px}
 }
 </style>
 </head>
@@ -83,11 +93,17 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
 </header>
 
 <nav class="quarter-nav">
-  <div class="quarter-tab active">Q1: Retention Economics</div>
-  <div class="quarter-tab">Q2: Pricing</div>
-  <div class="quarter-tab">Q3: Attribution</div>
-  <div class="quarter-tab">Q4: Growth</div>
+  <div class="quarter-tab active" data-tab="q1">Q1: Retention Economics</div>
+  <div class="quarter-tab" data-tab="q2">Q2: Pricing</div>
+  <div class="quarter-tab" data-tab="q3">Q3: Attribution</div>
+  <div class="quarter-tab" data-tab="q4">Q4: Growth</div>
 </nav>
+
+
+<!-- ============================================================ -->
+<!-- Q1: CUSTOMER LIFETIME & RETENTION ECONOMICS (Weeks 1-13)     -->
+<!-- ============================================================ -->
+<div class="quarter-content active" id="q1">
 
 <div class="progress-bar">
   <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
@@ -96,106 +112,28 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
 
 <section class="theme-section">
   <div class="theme-header">
-    <h2>Q1: Customer Lifetime & Retention Economics</h2>
+    <h2>Q1: Customer Lifetime &amp; Retention Economics</h2>
     <div class="theme-line"></div>
   </div>
   <p style="color:#555;max-width:700px;margin-bottom:12px;">This quarter builds the analytical foundation every customer-centric business needs. You'll master survival analysis, probabilistic buy-till-you-die models, and the economic frameworks that separate high-value retention strategies from expensive mistakes.</p>
-
   <div class="mastery-grid">
-    <div class="mastery-card">
-      <span class="mastery-icon">&#9201;</span>
-      <h4>Survival Analysis</h4>
-      <p>Kaplan-Meier curves, Cox regression, hazard functions &mdash; the toolkit for modeling "when" events happen, not just "if."</p>
-    </div>
-    <div class="mastery-card">
-      <span class="mastery-icon">&#9733;</span>
-      <h4>Probabilistic CLV</h4>
-      <p>BG/NBD and Gamma-Gamma models &mdash; compute P(Alive) and lifetime value for every customer in your database.</p>
-    </div>
-    <div class="mastery-card">
-      <span class="mastery-icon">&#9881;</span>
-      <h4>Churn Segmentation</h4>
-      <p>Latent class analysis and mixture models &mdash; not all lost customers cost the same, and not all churn is equal.</p>
-    </div>
-    <div class="mastery-card">
-      <span class="mastery-icon">&#8644;</span>
-      <h4>Competing Risks</h4>
-      <p>When customers leave for different reasons, you need cause-specific hazard models, not one-size-fits-all churn rates.</p>
-    </div>
+    <div class="mastery-card"><span class="mastery-icon">&#9201;</span><h4>Survival Analysis</h4><p>Kaplan-Meier curves, Cox regression, hazard functions &mdash; the toolkit for modeling "when" events happen, not just "if."</p></div>
+    <div class="mastery-card"><span class="mastery-icon">&#9733;</span><h4>Probabilistic CLV</h4><p>BG/NBD and Gamma-Gamma models &mdash; compute P(Alive) and lifetime value for every customer in your database.</p></div>
+    <div class="mastery-card"><span class="mastery-icon">&#9881;</span><h4>Churn Segmentation</h4><p>Latent class analysis and mixture models &mdash; not all lost customers cost the same, and not all churn is equal.</p></div>
+    <div class="mastery-card"><span class="mastery-icon">&#8644;</span><h4>Competing Risks</h4><p>When customers leave for different reasons, you need cause-specific hazard models, not one-size-fits-all churn rates.</p></div>
   </div>
 </section>
 
 <section class="weeks-grid">
 
-  <!-- WEEK 1 -->
-  <a href="week1_the_3m_question.html" class="week-link">
-  <div class="week-card completed">
-    <div class="week-num">1</div>
-    <div class="week-info">
-      <h3>The $3M Question: When Will Your Best Customers Stop Buying?</h3>
-      <div class="meta">
-        <span class="week-tag">Kaplan-Meier</span>
-        <span class="week-tag">BG/NBD</span>
-        <span class="week-tag">P(Alive)</span>
-        <span class="week-status done">&#10003; Complete</span>
-      </div>
-    </div>
-    <span class="week-arrow">&rarr;</span>
-  </div>
-  </a>
+  <a href="week1_the_3m_question.html" class="week-link"><div class="week-card completed"><div class="week-num">1</div><div class="week-info"><h3>The $3M Question: When Will Your Best Customers Stop Buying?</h3><div class="meta"><span class="week-tag">Kaplan-Meier</span><span class="week-tag">BG/NBD</span><span class="week-tag">P(Alive)</span><span class="week-status done">&#10003; Complete</span></div></div><span class="week-arrow">&rarr;</span></div></a>
 
-  <!-- WEEK 2 -->
-  <a href="week2_renewal_cliff.html" class="week-link">
-  <div class="week-card current">
-    <div class="week-num">2</div>
-    <div class="week-info">
-      <h3>The Renewal Cliff: Predicting Contract Churn 90 Days Out</h3>
-      <div class="meta">
-        <span class="week-tag">Cox PH</span>
-        <span class="week-tag">Time-Varying Covariates</span>
-        <span class="week-tag">Hazard Ratios</span>
-        <span class="week-status ready">&#9654; Ready</span>
-      </div>
-    </div>
-    <span class="week-arrow">&rarr;</span>
-  </div>
-  </a>
+  <a href="week2_renewal_cliff.html" class="week-link"><div class="week-card current"><div class="week-num">2</div><div class="week-info"><h3>The Renewal Cliff: Predicting Contract Churn 90 Days Out</h3><div class="meta"><span class="week-tag">Cox PH</span><span class="week-tag">Time-Varying Covariates</span><span class="week-tag">Hazard Ratios</span><span class="week-status ready">&#9654; Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
 
-  <!-- WEEK 3 -->
-  <a href="week3_churn_segmentation.html" class="week-link">
-  <div class="week-card current">
-    <div class="week-num">3</div>
-    <div class="week-info">
-      <h3>Churn Segmentation: Not All Lost Customers Cost the Same</h3>
-      <div class="meta">
-        <span class="week-tag">Latent Class Analysis</span>
-        <span class="week-tag">EM Algorithm</span>
-        <span class="week-tag">CLV-Weighted</span>
-        <span class="week-status ready">&#9654; Ready</span>
-      </div>
-    </div>
-    <span class="week-arrow">&rarr;</span>
-  </div>
-  </a>
+  <a href="week3_churn_segmentation.html" class="week-link"><div class="week-card current"><div class="week-num">3</div><div class="week-info"><h3>Churn Segmentation: Not All Lost Customers Cost the Same</h3><div class="meta"><span class="week-tag">Latent Class Analysis</span><span class="week-tag">EM Algorithm</span><span class="week-tag">CLV-Weighted</span><span class="week-status ready">&#9654; Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
 
-  <!-- WEEK 4 -->
-  <a href="week4_recency_frequency.html" class="week-link">
-  <div class="week-card current">
-    <div class="week-num">4</div>
-    <div class="week-info">
-      <h3>The Recency-Frequency Trade-off: Which Matters More?</h3>
-      <div class="meta">
-        <span class="week-tag">Pareto/NBD</span>
-        <span class="week-tag">Gamma-Gamma</span>
-        <span class="week-tag">Monetary Value</span>
-        <span class="week-status ready">&#9654; Ready</span>
-      </div>
-    </div>
-    <span class="week-arrow">&rarr;</span>
-  </div>
-  </a>
+  <a href="week4_recency_frequency.html" class="week-link"><div class="week-card current"><div class="week-num">4</div><div class="week-info"><h3>The Recency-Frequency Trade-off: Which Matters More?</h3><div class="meta"><span class="week-tag">Pareto/NBD</span><span class="week-tag">Gamma-Gamma</span><span class="week-tag">Monetary Value</span><span class="week-status ready">&#9654; Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
 
-  <!-- WEEKS 5-13 (Locked) -->
   <a href="week5_competing_risks.html" class="week-link"><div class="week-card current"><div class="week-num">5</div><div class="week-info"><h3>Competing Risks: When Customers Leave for Different Reasons</h3><div class="meta"><span class="week-tag">Competing Risks</span><span class="week-status ready">Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
 
   <a href="week6_winback_equation.html" class="week-link"><div class="week-card current"><div class="week-num">6</div><div class="week-info"><h3>The Win-Back Equation: Should You Chase Lost Customers?</h3><div class="meta"><span class="week-tag">Cost-Benefit</span><span class="week-status ready">Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
@@ -216,16 +154,13 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
 
 </section>
 
-<!-- 8D + KT PROBLEM SOLVING PLAYBOOK -->
-<section class="content-wrapper" style="max-width:960px;margin:64px auto 0;padding:0 32px">
+<!-- Q1 RESOURCES -->
+<section style="max-width:960px;margin:64px auto 0;padding:0 32px">
   <div class="theme-header">
-    <div class="theme-accent" style="width:4px;height:40px;background:var(--accent);border-radius:4px"></div>
-    <div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin:0">Analytical Problem Solving</h2>
-      <p style="color:var(--muted);font-size:14px;margin:4px 0 0">Structured root cause analysis for analysts who need a rigorous, repeatable system</p>
-    </div>
+    <div style="width:4px;height:40px;background:var(--accent);border-radius:4px"></div>
+    <div><h2 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin:0">Analytical Problem Solving</h2>
+    <p style="color:var(--muted);font-size:14px;margin:4px 0 0">Structured root cause analysis for analysts who need a rigorous, repeatable system</p></div>
   </div>
-
   <a href="8d_kt_hub.html" style="text-decoration:none;display:block">
   <div style="background:var(--ink);border-radius:14px;padding:32px 36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;transition:all .25s;margin-top:20px" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(0,0,0,.15)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
     <div>
@@ -249,16 +184,13 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
   </a>
 </section>
 
-<!-- PRACTICE LAB -->
-<section class="content-wrapper" style="max-width:960px;margin:48px auto 0;padding:0 32px">
+<section style="max-width:960px;margin:48px auto 0;padding:0 32px">
   <div class="theme-header">
-    <div class="theme-accent" style="width:4px;height:40px;background:var(--accent2);border-radius:4px"></div>
+    <div style="width:4px;height:40px;background:var(--accent2);border-radius:4px"></div>
     <div><h2 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin:0">Practice Lab</h2>
     <p style="color:var(--muted);font-size:14px;margin:4px 0 0">Jupyter notebooks with real datasets &mdash; run the code, not just read it</p></div>
   </div>
-
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px">
-
     <a href="https://github.com/balaviswanath-analytics/analytics_masterclass/tree/main/notebooks" target="_blank" style="text-decoration:none">
     <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;transition:all .25s;cursor:pointer" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.08)';this.style.borderColor='var(--accent)'" onmouseout="this.style.boxShadow='none';this.style.borderColor='var(--border)'">
       <div style="font-size:24px;margin-bottom:12px">&#128209;</div>
@@ -272,7 +204,6 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
       </div>
     </div>
     </a>
-
     <a href="https://github.com/balaviswanath-analytics/analytics_masterclass/blob/main/notebooks/DATASET_GUIDE.md" target="_blank" style="text-decoration:none">
     <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;transition:all .25s;cursor:pointer" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.08)';this.style.borderColor='var(--accent)'" onmouseout="this.style.boxShadow='none';this.style.borderColor='var(--border)'">
       <div style="font-size:24px;margin-bottom:12px">&#128451;</div>
@@ -285,13 +216,160 @@ a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decorati
       </div>
     </div>
     </a>
-
   </div>
 </section>
+
+</div><!-- end #q1 -->
+
+
+<!-- ============================================================ -->
+<!-- Q2: PRICING, PROMOTION & REVENUE OPTIMIZATION (Weeks 14-26)  -->
+<!-- ============================================================ -->
+<div class="quarter-content" id="q2">
+
+<div class="progress-bar">
+  <div class="progress-track"><div class="progress-fill" style="width:31%"></div></div>
+  <div class="progress-label"><span>4 of 13 weeks ready</span><span>Weeks 14&ndash;17 live</span></div>
+</div>
+
+<section class="theme-section">
+  <div class="theme-header">
+    <h2>Q2: Pricing, Promotion &amp; Revenue Optimization</h2>
+    <div class="theme-line"></div>
+  </div>
+  <p style="color:#555;max-width:700px;margin-bottom:12px;">This quarter tackles the highest-leverage question in business: <strong>how much should we charge?</strong> You'll move from measuring price sensitivity through conjoint-based willingness-to-pay to dynamic pricing algorithms, promotion ROI, and the causal methods that separate real lift from noise.</p>
+  <div class="mastery-grid">
+    <div class="mastery-card"><span class="mastery-icon">&#128200;</span><h4>Price Elasticity</h4><p>Log-log regression, arc elasticity, cross-price effects &mdash; measure how demand responds to every dollar of price change.</p></div>
+    <div class="mastery-card"><span class="mastery-icon">&#9878;</span><h4>Conjoint &amp; WTP</h4><p>Choice-based conjoint analysis, part-worth utilities, willingness-to-pay &mdash; decompose what customers really value in dollars.</p></div>
+    <div class="mastery-card"><span class="mastery-icon">&#9889;</span><h4>Dynamic Pricing</h4><p>Revenue management, EMSR, Thompson Sampling bandits &mdash; optimize prices in real-time as demand signals evolve.</p></div>
+    <div class="mastery-card"><span class="mastery-icon">&#127919;</span><h4>Promotion Science</h4><p>Uplift modeling, PSM, intervention analysis &mdash; measure true incremental lift and stop bleeding profit on discounts.</p></div>
+  </div>
+</section>
+
+<section class="weeks-grid">
+
+  <!-- MONTH 4: PRICING FOUNDATIONS -->
+  <div class="month-divider"><span class="month-label" style="color:var(--accent)">Month 4 &middot; Pricing Foundations</span></div>
+
+  <a href="week14_elasticity_trap.html" class="week-link"><div class="week-card current"><div class="week-num">14</div><div class="week-info"><h3>The Elasticity Trap: Why a 10% Price Cut Costs More Than You Think</h3><div class="meta"><span class="week-tag">Log-Log Regression</span><span class="week-tag">Arc Elasticity</span><span class="week-tag">Break-Even</span><span class="week-status ready">&#9654; Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
+
+  <a href="week15_premium_volume.html" class="week-link"><div class="week-card current"><div class="week-num">15</div><div class="week-info"><h3>Premium vs. Volume: The Statistical Case for Raising Prices</h3><div class="meta"><span class="week-tag">Van Westendorp PSM</span><span class="week-tag">OPP / PMC / PME</span><span class="week-status ready">&#9654; Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
+
+  <a href="week16_conjoint_secrets.html" class="week-link"><div class="week-card current"><div class="week-num">16</div><div class="week-info"><h3>Conjoint Secrets: What Customers Really Value</h3><div class="meta"><span class="week-tag">CBC</span><span class="week-tag">Part-Worth Utilities</span><span class="week-tag">WTP</span><span class="week-status ready">&#9654; Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
+
+  <a href="week17_dynamic_pricing.html" class="week-link"><div class="week-card current"><div class="week-num">17</div><div class="week-info"><h3>Dynamic Pricing: From Littlewood to Contextual Bandits</h3><div class="meta"><span class="week-tag">Revenue Mgmt</span><span class="week-tag">EMSR</span><span class="week-tag">Thompson Sampling</span><span class="week-status ready">&#9654; Ready</span></div></div><span class="week-arrow">&rarr;</span></div></a>
+
+  <!-- MONTH 5: BUNDLING & PROMOTIONS -->
+  <div class="month-divider"><span class="month-label" style="color:var(--gold)">Month 5 &middot; Bundling &amp; Promotions</span></div>
+
+  <div class="week-card locked"><div class="week-num">18</div><div class="week-info"><h3>Bundling Math: When 1+1 = 3 (And When It Doesn't)</h3><div class="meta"><span class="week-tag">Association Rules</span><span class="week-tag">Support-Confidence-Lift</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+  <div class="week-card locked"><div class="week-num">19</div><div class="week-info"><h3>Why Your Discount Strategy Is Bleeding Profit</h3><div class="meta"><span class="week-tag">PSM</span><span class="week-tag">Uplift Modeling</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+  <div class="week-card locked"><div class="week-num">20</div><div class="week-info"><h3>The Promotion Calendar Trap: Why More Isn't Better</h3><div class="meta"><span class="week-tag">ARIMA Interventions</span><span class="week-tag">Saturation Effects</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+  <div class="week-card locked"><div class="week-num">21</div><div class="week-info"><h3>Price Discrimination That Works (And Stays Legal)</h3><div class="meta"><span class="week-tag">Third-Degree PD</span><span class="week-tag">Surplus Extraction</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+  <!-- MONTH 6: MONETIZATION STRATEGIES -->
+  <div class="month-divider"><span class="month-label" style="color:var(--blue)">Month 6 &middot; Monetization Strategies</span></div>
+
+  <div class="week-card locked"><div class="week-num">22</div><div class="week-info"><h3>The Reference Price Effect: How Anchoring Shapes Demand</h3><div class="meta"><span class="week-tag">Anchoring Analysis</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+  <div class="week-card locked"><div class="week-num">23</div><div class="week-info"><h3>Markdown Optimization: The Science of Clearance</h3><div class="meta"><span class="week-tag">Inventory Survival</span><span class="week-tag">Margin Protection</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+  <div class="week-card locked"><div class="week-num">24</div><div class="week-info"><h3>Freemium Conversion: When Free Becomes Paid</h3><div class="meta"><span class="week-tag">Conversion Funnels</span><span class="week-tag">Logistic Regression</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+  <div class="week-card locked"><div class="week-num">25</div><div class="week-info"><h3>Subscription Tier Optimization: Designing Price Fences</h3><div class="meta"><span class="week-tag">Conjoint + Clustering</span><span class="week-tag">Tier Migration</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+  <div class="week-card locked"><div class="week-num">26</div><div class="week-info"><h3>Cross-Selling Probability: Right Product, Right Customer</h3><div class="meta"><span class="week-tag">Propensity Scoring</span><span class="week-tag">Product Affinity</span><span class="week-status coming">Coming Soon</span></div></div><span class="week-arrow">&rarr;</span></div>
+
+</section>
+
+</div><!-- end #q2 -->
+
+
+<!-- ============================================================ -->
+<!-- Q3: ATTRIBUTION & EXPERIMENTATION (Placeholder)              -->
+<!-- ============================================================ -->
+<div class="quarter-content" id="q3">
+
+<div class="progress-bar">
+  <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+  <div class="progress-label"><span>Week 0 of 13</span><span>Coming Q3 2026</span></div>
+</div>
+
+<section class="theme-section">
+  <div class="theme-header">
+    <h2>Q3: Marketing Attribution &amp; Experimentation</h2>
+    <div class="theme-line"></div>
+  </div>
+  <p style="color:#555;max-width:700px;margin-bottom:12px;">Weeks 27&ndash;39. This quarter covers multi-touch attribution, marketing mix models, A/B testing at scale, causal inference methods, and the experimentation platforms that let you measure what actually works.</p>
+  <div class="placeholder-box">
+    <div class="icon">&#128302;</div>
+    <h3>Under Construction</h3>
+    <p>Q3 content is in development. Topics include MMM, geo experiments, Bayesian A/B testing, incrementality, and causal forests. Launching July 2026.</p>
+  </div>
+</section>
+
+</div><!-- end #q3 -->
+
+
+<!-- ============================================================ -->
+<!-- Q4: GROWTH ANALYTICS (Placeholder)                           -->
+<!-- ============================================================ -->
+<div class="quarter-content" id="q4">
+
+<div class="progress-bar">
+  <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+  <div class="progress-label"><span>Week 0 of 13</span><span>Coming Q4 2026</span></div>
+</div>
+
+<section class="theme-section">
+  <div class="theme-header">
+    <h2>Q4: Growth Analytics &amp; Forecasting</h2>
+    <div class="theme-line"></div>
+  </div>
+  <p style="color:#555;max-width:700px;margin-bottom:12px;">Weeks 40&ndash;52. The final quarter covers demand forecasting, market sizing, network effects, viral growth modeling, and the strategic analytics frameworks that tie everything together.</p>
+  <div class="placeholder-box">
+    <div class="icon">&#128640;</div>
+    <h3>Under Construction</h3>
+    <p>Q4 content is in development. Topics include time series forecasting, TAM/SAM/SOM, network growth models, and capstone projects. Launching October 2026.</p>
+  </div>
+</section>
+
+</div><!-- end #q4 -->
+
 
 <footer class="landing-footer">
   <p>The Analytics Strategist &middot; 52-Week Customer Analytics Masterclass &middot; Q1 2026&ndash;Q4 2026</p>
 </footer>
+
+<script>
+// Tab switching
+const tabs = document.querySelectorAll('.quarter-tab');
+const contents = document.querySelectorAll('.quarter-content');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    contents.forEach(c => c.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.quarter-nav').offsetTop - 20, behavior: 'smooth' });
+  });
+});
+// Direct linking via hash: index.html#q2
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById(hash)) {
+    tabs.forEach(t => t.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+    const matchTab = document.querySelector('[data-tab="' + hash + '"]');
+    if (matchTab) matchTab.classList.add('active');
+    document.getElementById(hash).classList.add('active');
+  }
+});
+</script>
 
 </body>
 </html>

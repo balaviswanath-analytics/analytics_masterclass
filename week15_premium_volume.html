@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 15: Premium vs. Volume</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q2 HUB</a><a href="#business" class="nav-link active">The Pricing Debate</a><a href="#vw" class="nav-link">Van Westendorp</a><a href="#methodology" class="nav-link">Survey Design</a><a href="#analysis" class="nav-link">Analysis</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 15 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div><h1><span>Premium vs. Volume</span>: The Statistical Case for Raising Prices</h1><p class="hero-sub">Most companies underprice. They're terrified of losing customers but have never actually measured what customers would willingly pay. The Van Westendorp Price Sensitivity Meter is a lightweight survey method that maps the entire demand curve from four simple questions. This week, you'll learn to design, execute, and analyze a pricing study that reveals your optimal price point, acceptable range, and whether your product has premium pricing power.</p></header>
+<main class="content">
+
+<div class="section" id="business"><h2>Part 1: The Underpricing Epidemic</h2>
+<p>A McKinsey study found that a 1% improvement in price (without volume loss) improves operating profit by 8-11%, compared to just 3-4% for a 1% improvement in volume. Yet most product teams spend 10x more energy on acquisition than on pricing optimization. Why? Because price increases feel risky and irreversible, while growth initiatives feel safe and expansive. The data tells a different story.</p>
+<div class="callout insight"><div class="callout-label">The Asymmetry of Pricing Errors</div><p>Underpricing costs you on every single transaction, forever, silently. Overpricing costs you on lost transactions, which are visible and alarming. This asymmetry makes companies systematically underprice. Van Westendorp helps quantify exactly how much room you have above your current price before you hit the "too expensive" threshold &mdash; and the answer is almost always more room than you'd expect.</p></div></div>
+
+<div class="section" id="vw"><h2>Part 2: The Van Westendorp Price Sensitivity Meter</h2>
+<p>Developed by Dutch economist Peter van Westendorp in 1976, this technique uses four questions to map the psychological price boundaries of your market. Each respondent gives four prices, creating four cumulative distribution curves whose intersections define pricing zones.</p>
+<h3>The Four Questions</h3>
+<table class="comp-table"><thead><tr><th>#</th><th>Question</th><th>Measures</th><th>Curve Label</th></tr></thead><tbody>
+<tr><td>1</td><td>"At what price would this product be <strong>so cheap</strong> that you'd question its quality?"</td><td>Lower bound of credibility</td><td>Too Cheap</td></tr>
+<tr><td>2</td><td>"At what price would this product be a <strong>bargain</strong> &mdash; a great buy for the money?"</td><td>Lower bound of acceptable range</td><td>Cheap / Good Value</td></tr>
+<tr><td>3</td><td>"At what price would this product start to feel <strong>expensive</strong> but you'd still consider it?"</td><td>Upper bound of consideration</td><td>Expensive / High</td></tr>
+<tr><td>4</td><td>"At what price would this product be <strong>too expensive</strong> to consider, regardless of quality?"</td><td>Upper bound of credibility</td><td>Too Expensive</td></tr>
+</tbody></table>
+<div class="callout"><div class="callout-label">Why It Works</div><p>Each question maps to a distinct psychological threshold. Together they produce four cumulative curves whose intersections reveal pricing landmarks that no single "what would you pay?" question can capture. The method is lightweight (4 questions, no conjoint complexity), works with small samples (n=100-300 is typically sufficient), and produces results that are intuitive for non-technical stakeholders.</p></div></div>
+
+<div class="section" id="methodology"><h2>Part 3: Survey Design Best Practices</h2>
+<h3>Before the Price Questions</h3>
+<p>Context matters enormously. Before showing the price questions, present the product with enough detail that respondents can form a genuine value judgment: product description, key features, competitive alternatives, and the specific use case. Without this anchoring, responses become meaningless guesses.</p>
+<h3>Sample Requirements</h3>
+<table class="comp-table"><thead><tr><th>Parameter</th><th>Recommendation</th></tr></thead><tbody>
+<tr><td>Minimum sample size</td><td>100-150 per segment you want to analyze separately</td></tr>
+<tr><td>Target respondents</td><td>Actual buyers or qualified prospects (not random consumers)</td></tr>
+<tr><td>Data quality checks</td><td>Remove responses where Too Cheap > Bargain or Expensive > Too Expensive (logical inconsistencies)</td></tr>
+<tr><td>Price range</td><td>Leave open-ended (don't constrain with dropdowns); use integer input fields</td></tr>
+</tbody></table>
+<div class="callout danger"><div class="callout-label">The Hypothetical Bias</div><p>Van Westendorp (and all stated-preference methods) suffer from hypothetical bias: people say they'd pay more than they actually will. Calibrate by comparing results to actual transaction data where possible. A common rule of thumb: discount the "optimal price point" by 10-15% for real-world pricing. Alternatively, use the "Point of Marginal Cheapness" as a more conservative anchor.</p></div></div>
+
+<div class="section" id="analysis"><h2>Part 4: Analysis &mdash; The Four Intersections</h2>
+<p>Plot four cumulative distribution curves from the responses. The key intersections define your pricing map:</p>
+<table class="comp-table"><thead><tr><th>Intersection</th><th>Definition</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><strong>Point of Marginal Cheapness (PMC)</strong></td><td>Too Cheap = Expensive</td><td>Below this, you're leaving money on the table for everyone</td></tr>
+<tr><td><strong>Point of Marginal Expensiveness (PME)</strong></td><td>Too Expensive = Cheap</td><td>Above this, you're losing too many price-sensitive buyers</td></tr>
+<tr><td><strong>Indifference Price Point (IDP)</strong></td><td>Cheap = Expensive</td><td>The "normal" price; equal numbers find it cheap vs. expensive</td></tr>
+<tr><td><strong>Optimal Price Point (OPP)</strong></td><td>Too Cheap = Too Expensive</td><td>Minimizes the share who reject on price (either direction)</td></tr>
+</tbody></table>
+<div class="callout insight"><div class="callout-label">The Acceptable Price Range</div><p>The range between PMC and PME is your <strong>acceptable pricing zone</strong>. You can price anywhere in this range without significant demand destruction. The IDP is where the market "expects" your price. The OPP is the theoretically optimal point. If your current price is below the PMC, you are definitively underpriced &mdash; even the most price-sensitive respondents think you could charge more.</p></div></div>
+
+<div class="section" id="code"><h2>Part 5: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; Van Westendorp Analysis</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> scipy <span class="kw">import</span> interpolate
+
+survey = pd.<span class="fn">read_csv</span>(<span class="str">'vw_survey.csv'</span>)
+<span class="cm"># Columns: too_cheap, bargain, expensive, too_expensive</span>
+
+<span class="cm"># === Data Quality ===</span>
+valid = survey[
+    (survey[<span class="str">'too_cheap'</span>] <= survey[<span class="str">'bargain'</span>]) &
+    (survey[<span class="str">'bargain'</span>] <= survey[<span class="str">'expensive'</span>]) &
+    (survey[<span class="str">'expensive'</span>] <= survey[<span class="str">'too_expensive'</span>])
+]
+<span class="fn">print</span>(<span class="str">f"Valid responses: {len(valid)}/{len(survey)}"</span>)
+
+<span class="cm"># === Build CDFs ===</span>
+prices = np.<span class="fn">arange</span>(valid[[<span class="str">'too_cheap'</span>]].<span class="fn">min</span>().<span class="fn">min</span>(),
+                    valid[[<span class="str">'too_expensive'</span>]].<span class="fn">max</span>().<span class="fn">max</span>() + <span class="num">1</span>)
+
+<span class="kw">def</span> <span class="fn">ecdf_above</span>(data, price_grid):
+    <span class="str">"""% of respondents who gave a value >= each price"""</span>
+    <span class="kw">return</span> np.<span class="fn">array</span>([(data >= p).<span class="fn">mean</span>() <span class="kw">for</span> p <span class="kw">in</span> price_grid])
+
+<span class="kw">def</span> <span class="fn">ecdf_below</span>(data, price_grid):
+    <span class="str">"""% of respondents who gave a value <= each price"""</span>
+    <span class="kw">return</span> np.<span class="fn">array</span>([(data <= p).<span class="fn">mean</span>() <span class="kw">for</span> p <span class="kw">in</span> price_grid])
+
+too_cheap_cdf  = <span class="fn">ecdf_below</span>(valid[<span class="str">'too_cheap'</span>], prices)
+bargain_cdf    = <span class="fn">ecdf_below</span>(valid[<span class="str">'bargain'</span>], prices)
+expensive_cdf  = <span class="fn">ecdf_above</span>(valid[<span class="str">'expensive'</span>], prices)
+too_exp_cdf    = <span class="fn">ecdf_above</span>(valid[<span class="str">'too_expensive'</span>], prices)
+
+<span class="cm"># === Find Intersections ===</span>
+<span class="kw">def</span> <span class="fn">find_intersect</span>(curve1, curve2, price_grid):
+    diff = curve1 - curve2
+    idx = np.<span class="fn">where</span>(np.<span class="fn">diff</span>(np.<span class="fn">sign</span>(diff)))[<span class="num">0</span>]
+    <span class="kw">if</span> <span class="fn">len</span>(idx) == <span class="num">0</span>: <span class="kw">return</span> <span class="kw">None</span>
+    <span class="kw">return</span> price_grid[idx[<span class="num">0</span>]]
+
+PMC = <span class="fn">find_intersect</span>(too_cheap_cdf, expensive_cdf, prices)
+PME = <span class="fn">find_intersect</span>(too_exp_cdf, bargain_cdf, prices)
+IDP = <span class="fn">find_intersect</span>(bargain_cdf, expensive_cdf, prices)
+OPP = <span class="fn">find_intersect</span>(too_cheap_cdf, too_exp_cdf, prices)
+
+<span class="fn">print</span>(<span class="str">f"Point of Marginal Cheapness (PMC):      ${PMC}"</span>)
+<span class="fn">print</span>(<span class="str">f"Point of Marginal Expensiveness (PME):   ${PME}"</span>)
+<span class="fn">print</span>(<span class="str">f"Indifference Price Point (IDP):          ${IDP}"</span>)
+<span class="fn">print</span>(<span class="str">f"Optimal Price Point (OPP):               ${OPP}"</span>)
+<span class="fn">print</span>(<span class="str">f"Acceptable Range: ${PMC} - ${PME}"</span>)
+
+<span class="cm"># === Plot ===</span>
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">12</span>, <span class="num">7</span>))
+ax.<span class="fn">plot</span>(prices, too_cheap_cdf, <span class="str">'--'</span>, color=<span class="str">'#e63946'</span>, lw=<span class="num">2</span>, label=<span class="str">'Too Cheap'</span>)
+ax.<span class="fn">plot</span>(prices, bargain_cdf, color=<span class="str">'#2d6a4f'</span>, lw=<span class="num">2</span>, label=<span class="str">'Bargain'</span>)
+ax.<span class="fn">plot</span>(prices, expensive_cdf, color=<span class="str">'#e9c46a'</span>, lw=<span class="num">2</span>, label=<span class="str">'Expensive'</span>)
+ax.<span class="fn">plot</span>(prices, too_exp_cdf, <span class="str">'--'</span>, color=<span class="str">'#c45d3e'</span>, lw=<span class="num">2</span>, label=<span class="str">'Too Expensive'</span>)
+<span class="kw">for</span> pt, lbl <span class="kw">in</span> [(PMC,<span class="str">'PMC'</span>),(PME,<span class="str">'PME'</span>),(IDP,<span class="str">'IDP'</span>),(OPP,<span class="str">'OPP'</span>)]:
+    <span class="kw">if</span> pt: ax.<span class="fn">axvline</span>(x=pt, ls=<span class="str">':'</span>, alpha=<span class="num">0.4</span>, color=<span class="str">'gray'</span>)
+    <span class="kw">if</span> pt: ax.<span class="fn">annotate</span>(lbl, (pt, <span class="num">0.5</span>), fontsize=<span class="num">11</span>, fontweight=<span class="str">'bold'</span>)
+ax.<span class="fn">set_title</span>(<span class="str">'Van Westendorp Price Sensitivity Meter'</span>, fontsize=<span class="num">14</span>, fontweight=<span class="str">'bold'</span>)
+ax.<span class="fn">set_xlabel</span>(<span class="str">'Price ($)'</span>); ax.<span class="fn">set_ylabel</span>(<span class="str">'Cumulative Proportion'</span>)
+ax.<span class="fn">legend</span>(); plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 6: Your Week 15 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th></tr></thead><tbody>
+<tr><td>"What should we charge?"</td><td>Van Westendorp OPP (discount 10-15% for hypothetical bias)</td></tr>
+<tr><td>"Are we underpriced?"</td><td>If current price < PMC, definitively yes</td></tr>
+<tr><td>"What's the safe range for pricing?"</td><td>PMC to PME = acceptable pricing zone</td></tr>
+<tr><td>"How do price perceptions vary by segment?"</td><td>Run VW separately by customer segment; compare OPPs</td></tr>
+<tr><td>"Is there room for a premium tier?"</td><td>If PME for your best segment is significantly above your current price, yes</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Read the Original Paper</h4><p>Van Westendorp, P. (1976). "NSS-Price Sensitivity Meter: A New Approach to Study Consumer Perception of Price." Research paper presented at ESOMAR Congress, Venice. Also: Lipovetsky, S. (2006). "Van Westendorp Price Sensitivity in Statistical Modeling." International Journal of Operations and Quantitative Management.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Design a VW Survey</h4><p>Pick a product you know well. Draft the 4 VW questions with proper context and product description. Deploy to 50+ colleagues or contacts using Google Forms.</p></div>
+<div class="timeline-step"><h4>Day 5-6: Analyze Results</h4><p>Build the four CDF curves, find the four intersection points, and plot the Van Westendorp chart. Compare PMC to your current price.</p></div>
+<div class="timeline-step"><h4>Day 7: Executive Recommendation</h4><p>"Our optimal price point is $X (vs. current $Y). The acceptable range is $A-$B. We have $Z of pricing headroom before hitting the 'too expensive' threshold for a majority of our market."</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Original:</strong> Van Westendorp, P. (1976). NSS-Price Sensitivity Meter. ESOMAR Congress, Venice.<br><strong>Statistical Extension:</strong> Lipovetsky, S. (2006). Van Westendorp Price Sensitivity in Statistical Modeling. <em>Intl. J. of Operations and Quantitative Management</em>, 12(2).<br><strong>Practical Guide:</strong> Newton-Miller-Smith extension for purchase probability estimation.<br><strong>Context:</strong> Nagle, T. et al. (2016). <em>The Strategy and Tactics of Pricing</em>. Ch. 13 on Value Measurement.</p>
+<div class="bottom-nav"><a href="week14_elasticity_trap.html">&larr; Week 14: The Elasticity Trap</a><a href="week16_conjoint_secrets.html">Week 16: Conjoint Secrets &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

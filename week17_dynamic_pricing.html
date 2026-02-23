@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 17: Dynamic Pricing</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-label">Q2 HUB</a><a href="#business" class="nav-link active">Why Dynamic</a><a href="#littlewood" class="nav-link">Littlewood's Rule</a><a href="#emsr" class="nav-link">EMSR</a><a href="#bandits" class="nav-link">Bandits</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 17 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div><h1><span>Dynamic Pricing</span>: From Littlewood to Contextual Bandits</h1><p class="hero-sub">Static pricing leaves money on the table when demand fluctuates. Airlines, hotels, ride-sharing, and increasingly SaaS and e-commerce companies adjust prices in real-time based on demand signals. This week covers the full spectrum: from classical revenue management (Littlewood's Rule, EMSR) to modern machine learning approaches (Thompson Sampling, contextual bandits) for learning optimal prices online.</p></header>
+<main class="content">
+
+<div class="section" id="business"><h2>Part 1: The Case for Dynamic Pricing</h2>
+<p>An event ticketing company sells 10,000 seats at a fixed $75. They sell out 3 weeks before the event. Problem: the last 2,000 buyers would have paid $120+. Meanwhile, early birds who bought at $75 might have bought at $60. By pricing dynamically, the company could capture an additional $300K-$500K in revenue from the same 10,000 seats. The product is identical &mdash; only the timing of the transaction changes.</p>
+<div class="callout"><div class="callout-label">When Dynamic Pricing Makes Sense</div>
+<p><strong>Perishable inventory:</strong> Unsold airline seats, hotel rooms, event tickets, ad impressions &mdash; value drops to zero after the deadline. <strong>Heterogeneous willingness-to-pay:</strong> Some customers will pay much more than others for the same product. <strong>Demand uncertainty:</strong> You don't know demand in advance and need to learn from market signals. <strong>Low marginal cost:</strong> Selling one more unit costs almost nothing (digital goods, seats, subscriptions).</p></div>
+
+<h3>The Spectrum of Dynamic Pricing</h3>
+<table class="comp-table"><thead><tr><th>Approach</th><th>Era</th><th>Key Idea</th><th>Best For</th></tr></thead><tbody>
+<tr><td><strong>Littlewood's Rule</strong></td><td>1972</td><td>Accept a low-fare booking only if the expected revenue from waiting exceeds the low fare</td><td>Two fare classes, known demand distribution</td></tr>
+<tr><td><strong>EMSR (Expected Marginal Seat Revenue)</strong></td><td>1988</td><td>Extension to multiple fare classes; set nested booking limits</td><td>Airlines, hotels, multiple tiers</td></tr>
+<tr><td><strong>Bid-Price Control</strong></td><td>1990s</td><td>LP-based; compute a "bid price" per resource unit</td><td>Network revenue management (connecting flights)</td></tr>
+<tr><td><strong>Multi-Armed Bandits</strong></td><td>2000s</td><td>Learn optimal price by balancing exploration vs. exploitation</td><td>Unknown demand, digital products, A/B testing at scale</td></tr>
+<tr><td><strong>Contextual Bandits</strong></td><td>2010s</td><td>Personalize price based on customer features (context)</td><td>E-commerce, SaaS, when you have customer-level data</td></tr>
+</tbody></table></div>
+
+<div class="section" id="littlewood"><h2>Part 2: Littlewood's Rule &mdash; The Foundation</h2>
+<p>Littlewood (1972) posed the simplest revenue management problem: you have C seats, two fare classes (high and low), and low-fare demand arrives before high-fare demand. How many seats should you protect for the high fare?</p>
+<div class="formula"><div class="formula-label">LITTLEWOOD'S RULE</div><div class="formula-math">Accept a low-fare booking if: P<sub>low</sub> &ge; P<sub>high</sub> &middot; P(D<sub>high</sub> &ge; C &minus; already sold)</div><div class="formula-label">Protect seats for high fare when the expected marginal revenue from waiting exceeds the low fare</div></div>
+<p>In practice: if your low fare is $200, high fare is $500, and there's a 45% chance that high-fare demand will fill the remaining seats, then the expected value of protecting a seat is $500 &times; 0.45 = $225. Since $225 > $200, protect the seat. If the probability drops to 35%, expected value = $175 < $200, so sell it at the low fare.</p>
+<div class="callout insight"><div class="callout-label">The Protection Level</div><p>The <strong>protection level</strong> y* for the high fare is the number of seats where Littlewood's inequality flips: P(D<sub>high</sub> &ge; y*) = P<sub>low</sub> / P<sub>high</sub>. If demand is normally distributed: y* = &mu; + &sigma; &middot; &Phi;<sup>-1</sup>(1 &minus; P<sub>low</sub>/P<sub>high</sub>). This single formula is the foundation of all revenue management systems. Everything else is a generalization.</p></div></div>
+
+<div class="section" id="emsr"><h2>Part 3: EMSR &mdash; Multiple Fare Classes</h2>
+<p>Real businesses have more than two fare classes. EMSR (Belobaba, 1987, 1989) extends Littlewood to n fare classes using a nested protection level structure.</p>
+<h3>EMSR-b (The Industry Standard)</h3>
+<p>For each pair of adjacent fare classes, EMSR-b aggregates all higher-fare demand into a single virtual class, then applies Littlewood's rule once. This is computationally simpler than the original EMSR-a (which applies Littlewood iteratively) and produces near-optimal results.</p>
+<div class="formula"><div class="formula-label">EMSR-b PROTECTION LEVEL</div><div class="formula-math">y<sub>j</sub>* : where P(&sum;<sub>i=1..j</sub> D<sub>i</sub> &ge; y<sub>j</sub>*) = P<sub>j+1</sub> / P&#x0304;<sub>1..j</sub></div><div class="formula-label">P&#x0304; = weighted average fare of all classes above j | D = demand per class</div></div>
+<table class="comp-table"><thead><tr><th>Fare Class</th><th>Price</th><th>E[Demand]</th><th>Std Dev</th><th>Protection Level (EMSR-b)</th></tr></thead><tbody>
+<tr><td>Business (1)</td><td>$800</td><td>30</td><td>12</td><td>42 seats</td></tr>
+<tr><td>Full Economy (2)</td><td>$400</td><td>60</td><td>20</td><td>110 seats</td></tr>
+<tr><td>Discount (3)</td><td>$200</td><td>100</td><td>35</td><td>Sells into remaining</td></tr>
+</tbody></table></div>
+
+<div class="section" id="bandits"><h2>Part 4: Thompson Sampling for Price Optimization</h2>
+<p>Classical revenue management assumes you <em>know</em> the demand distribution. What if you don't? This is the <strong>exploration-exploitation trade-off</strong>: you must simultaneously learn the demand curve (exploration) and maximize revenue (exploitation). Multi-armed bandits, specifically Thompson Sampling, solve this elegantly.</p>
+<div class="formula"><div class="formula-label">THOMPSON SAMPLING FOR PRICING</div><div class="formula-math">For each price p<sub>k</sub>: sample &theta;&#x0303;<sub>k</sub> ~ Posterior(conversion rate | data so far)</div><div class="formula-label">Offer the price that maximizes p<sub>k</sub> &middot; &theta;&#x0303;<sub>k</sub> (expected revenue per visitor)</div></div>
+<p>Thompson Sampling naturally balances exploration and exploitation: uncertain prices (wide posteriors) get sampled more often (exploration), while prices with strong evidence of high revenue get selected more frequently (exploitation). Over time, the algorithm converges to the revenue-maximizing price.</p>
+<h3>Contextual Bandits: Personalized Dynamic Pricing</h3>
+<p>Standard bandits choose the same price for everyone. <strong>Contextual bandits</strong> observe customer features (segment, device, time of day, purchase history) and learn price-response curves for each context. This enables personalized pricing: a price-insensitive enterprise buyer sees $149, while a price-sensitive startup founder sees $99.</p>
+<div class="callout danger"><div class="callout-label">The Fairness Constraint</div><p>Personalized pricing raises ethical and legal concerns. Price discrimination based on protected characteristics (race, gender, age, location in some jurisdictions) is illegal or heavily regulated. Even proxy-based discrimination (using device type as a proxy for income) creates reputational risk. Best practice: allow personalization on <em>behavioral</em> signals (feature usage, engagement level, purchase history) but not demographic or geographic signals. Always maintain a publicly visible "list price" as an anchor.</p></div></div>
+
+<div class="section" id="code"><h2>Part 5: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; EMSR-b &amp; Thompson Sampling</div>
+<pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.stats <span class="kw">import</span> norm, beta
+
+<span class="cm"># === EMSR-b: Protection Levels ===</span>
+fares = [<span class="num">800</span>, <span class="num">400</span>, <span class="num">200</span>]  <span class="cm"># highest to lowest</span>
+means = [<span class="num">30</span>, <span class="num">60</span>, <span class="num">100</span>]
+stds  = [<span class="num">12</span>, <span class="num">20</span>, <span class="num">35</span>]
+capacity = <span class="num">200</span>
+
+<span class="fn">print</span>(<span class="str">"=== EMSR-b Protection Levels ==="</span>)
+<span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(fares) - <span class="num">1</span>):
+    <span class="cm"># Aggregate demand for classes 0..j</span>
+    agg_mean = <span class="fn">sum</span>(means[:j+<span class="num">1</span>])
+    agg_std = np.<span class="fn">sqrt</span>(<span class="fn">sum</span>(s**<span class="num">2</span> <span class="kw">for</span> s <span class="kw">in</span> stds[:j+<span class="num">1</span>]))
+    <span class="cm"># Weighted average fare</span>
+    avg_fare = np.<span class="fn">average</span>(fares[:j+<span class="num">1</span>], weights=means[:j+<span class="num">1</span>])
+    <span class="cm"># Critical ratio</span>
+    ratio = fares[j+<span class="num">1</span>] / avg_fare
+    <span class="cm"># Protection level</span>
+    y_star = agg_mean + agg_std * norm.<span class="fn">ppf</span>(<span class="num">1</span> - ratio)
+    <span class="fn">print</span>(<span class="str">f"  Protect {y_star:.0f} seats for classes 1-{j+1} "</span>
+          <span class="str">f"(avg fare ${avg_fare:.0f}, ratio {ratio:.2f})"</span>)
+
+<span class="cm"># === Thompson Sampling for Price Testing ===</span>
+prices = [<span class="num">79</span>, <span class="num">89</span>, <span class="num">99</span>, <span class="num">109</span>, <span class="num">119</span>]
+<span class="cm"># Beta priors for conversion rate at each price</span>
+alphas = np.<span class="fn">ones</span>(<span class="fn">len</span>(prices))   <span class="cm"># successes + 1</span>
+betas  = np.<span class="fn">ones</span>(<span class="fn">len</span>(prices))   <span class="cm"># failures + 1</span>
+
+np.random.<span class="fn">seed</span>(<span class="num">42</span>)
+<span class="cm"># True conversion rates (unknown to the algorithm)</span>
+true_rates = [<span class="num">0.12</span>, <span class="num">0.10</span>, <span class="num">0.08</span>, <span class="num">0.06</span>, <span class="num">0.04</span>]
+
+total_revenue = <span class="num">0</span>
+<span class="kw">for</span> t <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5000</span>):
+    <span class="cm"># Sample from posterior</span>
+    samples = [beta.<span class="fn">rvs</span>(a, b) <span class="kw">for</span> a, b <span class="kw">in</span> <span class="fn">zip</span>(alphas, betas)]
+    <span class="cm"># Expected revenue = price * sampled conversion rate</span>
+    exp_rev = [p * s <span class="kw">for</span> p, s <span class="kw">in</span> <span class="fn">zip</span>(prices, samples)]
+    chosen = np.<span class="fn">argmax</span>(exp_rev)
+
+    <span class="cm"># Simulate customer response</span>
+    converted = np.random.<span class="fn">rand</span>() < true_rates[chosen]
+    <span class="kw">if</span> converted:
+        alphas[chosen] += <span class="num">1</span>
+        total_revenue += prices[chosen]
+    <span class="kw">else</span>:
+        betas[chosen] += <span class="num">1</span>
+
+<span class="fn">print</span>(<span class="str">f"\n=== Thompson Sampling Results (5000 visitors) ==="</span>)
+<span class="fn">print</span>(<span class="str">f"Total revenue: ${total_revenue:,.0f}"</span>)
+<span class="kw">for</span> i, p <span class="kw">in</span> <span class="fn">enumerate</span>(prices):
+    n = alphas[i] + betas[i] - <span class="num">2</span>
+    rate = (alphas[i]-<span class="num">1</span>) / n <span class="kw">if</span> n > <span class="num">0</span> <span class="kw">else</span> <span class="num">0</span>
+    <span class="fn">print</span>(<span class="str">f"  ${p}: shown {n:.0f}x, conv rate {rate:.3f}, "</span>
+          <span class="str">f"rev/visitor ${p*rate:.2f}"</span>)</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 6: Your Week 17 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th></tr></thead><tbody>
+<tr><td>"How many units to protect for higher-paying customers?"</td><td>Littlewood's Rule / EMSR-b protection levels</td></tr>
+<tr><td>"What price maximizes revenue when demand is unknown?"</td><td>Thompson Sampling (explore and exploit simultaneously)</td></tr>
+<tr><td>"Should different customers see different prices?"</td><td>Contextual bandits with behavioral (not demographic) features</td></tr>
+<tr><td>"How fast does the algorithm converge?"</td><td>Plot cumulative regret; Thompson typically converges in 1,000-5,000 trials</td></tr>
+</tbody></table>
+<h3>Top 5 Mistakes</h3>
+<table class="comp-table"><thead><tr><th>#</th><th>Mistake</th><th>Consequence</th></tr></thead><tbody>
+<tr><td>1</td><td>Using static A/B tests for price optimization</td><td>A/B tests don't adapt; bandits converge faster and waste less revenue</td></tr>
+<tr><td>2</td><td>Ignoring the exploration cost</td><td>Pure exploitation (always pick the best-so-far) misses better prices</td></tr>
+<tr><td>3</td><td>Personalizing on demographic features</td><td>Legal risk, reputational damage, potential discrimination</td></tr>
+<tr><td>4</td><td>Assuming stationary demand</td><td>Demand shifts seasonally; use non-stationary bandit variants or sliding windows</td></tr>
+<tr><td>5</td><td>Not tracking cumulative regret</td><td>Without regret tracking, you can't tell if the algorithm is converging</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Classical Revenue Management</h4><p>Talluri, K. & Van Ryzin, G. (2004). The Theory and Practice of Revenue Management. Springer. Chapters 2-3 (Littlewood, EMSR). Also: Belobaba, P. (1989). Application of a Probabilistic Decision Model to Airline Seat Inventory Control. Operations Research.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Implement EMSR-b</h4><p>Build a 3-class EMSR-b model. Compute protection levels. Simulate 1,000 flights with random demand draws. Compare EMSR-b revenue to fixed-allocation baseline.</p></div>
+<div class="timeline-step"><h4>Day 5-6: Build a Thompson Sampling Price Tester</h4><p>Implement the bandit from Part 5. Test with 5 price points. Plot: (a) cumulative revenue over time, (b) exploration frequency per price, (c) posterior distributions converging.</p></div>
+<div class="timeline-step"><h4>Day 7: Strategy Brief</h4><p>"By implementing dynamic pricing with [EMSR-b / Thompson Sampling], we project $X additional revenue per quarter. The algorithm requires Y visitors to converge. Fairness guardrails: [list]."</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Essential:</strong> Talluri, K. & Van Ryzin, G. (2004). <em>The Theory and Practice of Revenue Management</em>. Springer.<br><strong>Littlewood:</strong> Littlewood, K. (1972/2005). Forecasting and Control of Passenger Bookings. <em>J. of Revenue and Pricing Management</em>, 4(2), 111-123 (reprint).<br><strong>EMSR:</strong> Belobaba, P. (1989). Application of a Probabilistic Decision Model. <em>Operations Research</em>, 37(2), 183-197.<br><strong>Bandits:</strong> Russo, D. et al. (2018). A Tutorial on Thompson Sampling. <em>Foundations and Trends in ML</em>, 11(1).<br><strong>Fairness:</strong> Kallus, N. & Zhou, A. (2021). Fairness, Welfare, and Equity in Personalized Pricing. FAccT Conference.</p>
+<div class="bottom-nav"><a href="week16_conjoint_secrets.html">&larr; Week 16: Conjoint Secrets</a><a href="week18_bundling_math.html">Week 18: Bundling Math &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>
