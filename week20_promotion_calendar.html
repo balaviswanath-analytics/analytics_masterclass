@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 20: The Promotion Calendar Trap</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html#q2" class="nav-label">Q2 HUB</a><a href="#business" class="nav-link active">The Addiction Cycle</a><a href="#temporal" class="nav-link">Temporal Effects</a><a href="#arima" class="nav-link">ARIMA Foundation</a><a href="#intervention" class="nav-link">Intervention Analysis</a><a href="#saturation" class="nav-link">Saturation</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 20 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div><h1>The <span>Promotion Calendar</span> Trap: Why More Isn't Better</h1><p class="hero-sub">A CPG company ran 47 promotions last year across its product portfolio. Revenue during promoted weeks was up 25%. The VP of Sales pointed to this as proof that the strategy was working. But full-year revenue was flat year-over-year. How can 47 weeks of 25% lifts produce zero annual growth? Because promotions weren't creating demand &mdash; they were shifting it. This week teaches you to decompose promotional impact from baseline demand using time series intervention analysis, detect the saturation point, and find the optimal promotion frequency.</p></header>
+<main class="content">
+
+<div class="section" id="business"><h2>Part 1: The Promotion Addiction Cycle</h2>
+<p>The CPG company's story follows a pattern so common it has a name in industry: the <strong>promotion death spiral</strong>. It begins innocuously. A brand runs a quarterly promotion and sees strong results. Leadership asks for monthly promotions. Results hold, but non-promoted weeks start declining. By year two, the brand is running biweekly promotions, and the "promoted week" lift has shrunk from 25% to 12%. More troublingly, non-promoted weeks are now 15% below where they were two years ago.</p>
+<p>What happened? Three compounding mechanisms drove the spiral. First, <strong>pull-forward</strong>: customers learned the promotion cadence and shifted purchases to promoted weeks. No new demand was created; it was simply redistributed. Second, <strong>stockpiling</strong>: customers bought extra units during promotions, reducing their need for weeks afterward. Third, and most insidiously, the <strong>training effect</strong>: repeated promotions taught customers that the promoted price was the "real" price, permanently lowering their reference price and eroding willingness to pay at full price.</p>
+<p>Van Heerde, Leeflang, and Wittink (2004) decomposed the "promotion bump" for 560 brands and found that on average, <strong>33% of the bump was pull-forward from adjacent weeks</strong>, 25% was category expansion (true incremental), and 42% was brand switching. After accounting for the pull-forward and the margin cost, the average promotion had negative net profit contribution.</p>
+<div class="callout danger"><div class="callout-label">The Compounding Trap</div><p>Revenue during promotions looks great → leadership demands more promotions → customers learn to wait → non-promotion revenue drops → you need more promotions to hit quarterly targets → the baseline erodes further → repeat. Breaking this cycle requires measuring <strong>net incremental revenue</strong> (promotion lift minus pull-forward minus stockpiling) and <strong>baseline erosion</strong> (the training effect over time). If your year-over-year non-promoted-week revenue is declining, you're already in the spiral.</p></div>
+<div class="callout insight"><div class="callout-label">The Grocery Store Benchmark</div><p>Research by Ailawadi et al. (2007) in the <em>Journal of Marketing</em> found that the average grocery retailer spent 59% of its trade promotion budget on subsidizing purchases that would have occurred anyway. The brands that broke the cycle shared one trait: they measured the <strong>post-promotion trough</strong> as rigorously as they measured the promotional peak. When the trough exceeded 50% of the peak, they cut promotion frequency regardless of promotional-week performance.</p></div></div>
+
+<div class="section" id="temporal"><h2>Part 2: Three Temporal Effects Your Dashboard Doesn't Show</h2>
+<p>Standard business reporting shows "promoted week vs. same week last year." This metric captures the gross lift but hides the three temporal effects that determine true profitability:</p>
+<table class="comp-table"><thead><tr><th>Effect</th><th>Mechanism</th><th>Duration</th><th>Measurement</th></tr></thead><tbody>
+<tr><td><strong>Pull-Forward</strong></td><td>Customers advance planned purchases into the promotion window</td><td>1-2 weeks pre-promo demand shifts into promo week</td><td>Compare pre-promo weeks to same period in non-promoted months</td></tr>
+<tr><td><strong>Post-Promotion Dip</strong></td><td>Stockpiling reduces need; customers wait for the next sale</td><td>1-4 weeks post-promo below baseline</td><td>Measure sales in weeks t+1 through t+4 vs. rolling baseline</td></tr>
+<tr><td><strong>Baseline Erosion</strong></td><td>Reference price declines; full-price willingness drops</td><td>Cumulative over months/quarters</td><td>Year-over-year trend in non-promoted-week revenue</td></tr>
+</tbody></table>
+<div class="formula"><div class="formula-label">TRUE NET INCREMENTAL REVENUE</div><div class="formula-math">&Delta;R<sub>net</sub> = (Lift<sub>promo</sub> &minus; Margin<sub>sacrifice</sub>) &minus; Dip<sub>post</sub> &minus; Erosion<sub>baseline</sub></div><div class="formula-label">Most companies only measure the first term. The second and third terms often turn profit negative.</div></div>
+<p>The pull-forward and post-promotion dip are temporary and roughly cancel the gross lift for many promotions. Baseline erosion is the truly dangerous one because it's permanent and cumulative. Each promotion trains a few more customers to expect discounts, imperceptibly shifting the demand curve leftward at full price. By the time it shows up in annual revenue, you're years into the spiral.</p></div>
+
+<div class="section" id="arima"><h2>Part 3: ARIMA &mdash; Modeling the Counterfactual Baseline</h2>
+<p>To isolate promotional impact, you first need a model of what sales <em>would have been</em> without the promotion. This counterfactual baseline is what ARIMA provides: a mathematical model of your business's natural demand patterns &mdash; trend, seasonality, and autocorrelation &mdash; cleaned of promotional effects.</p>
+<h3>The ARIMA(p, d, q) Framework</h3>
+<div class="formula"><div class="formula-label">ARIMA MODEL</div><div class="formula-math">(1 &minus; &phi;<sub>1</sub>B &minus; ... &minus; &phi;<sub>p</sub>B<sup>p</sup>)(1 &minus; B)<sup>d</sup> y<sub>t</sub> = c + (1 + &theta;<sub>1</sub>B + ... + &theta;<sub>q</sub>B<sup>q</sup>)&epsilon;<sub>t</sub></div><div class="formula-label">B = backshift operator (By<sub>t</sub> = y<sub>t-1</sub>) | &phi; = AR coefficients | &theta; = MA coefficients | d = differencing order</div></div>
+<table class="comp-table"><thead><tr><th>Component</th><th>Parameter</th><th>What It Captures</th><th>How to Identify</th></tr></thead><tbody>
+<tr><td><strong>AR(p)</strong></td><td>p autoregressive terms</td><td>Momentum: this week's sales depend on the last p weeks' sales</td><td>Partial ACF shows significant spikes at lags 1...p then cuts off</td></tr>
+<tr><td><strong>I(d)</strong></td><td>d differencing steps</td><td>Non-stationarity: the series has a trend or unit root</td><td>ADF test p-value > 0.05 → needs differencing</td></tr>
+<tr><td><strong>MA(q)</strong></td><td>q moving average terms</td><td>Shock persistence: residual effects that decay over q periods</td><td>ACF shows significant spikes at lags 1...q then cuts off</td></tr>
+</tbody></table>
+<h3>Seasonal Extension: SARIMA(p,d,q)(P,D,Q)<sub>m</sub></h3>
+<p>Most business time series have seasonality. The seasonal ARIMA adds a second set of parameters at the seasonal lag. For weekly data with annual seasonality, m = 52. The seasonal AR(P) and MA(Q) terms capture patterns like "sales this week depend on sales the same week last year." In practice, SARIMA(1,1,1)(1,1,0)<sub>52</sub> is a strong default starting point for weekly retail or telecom data.</p>
+<div class="callout"><div class="callout-label">Model Selection: The Box-Jenkins Protocol</div><p>(1) <strong>Identify</strong>: Plot the series, ACF, and PACF. Check stationarity with ADF test. Determine d and D. (2) <strong>Estimate</strong>: Fit candidate models with different p, q, P, Q. Use AIC/BIC to compare. (3) <strong>Diagnose</strong>: Check that residuals are white noise (Ljung-Box test, p > 0.05). No significant ACF spikes in residuals. (4) <strong>Forecast</strong>: Generate counterfactual baseline by predicting what sales would be in promoted weeks without the promotion exogenous variable.</p></div></div>
+
+<div class="section" id="intervention"><h2>Part 4: Intervention Analysis (Box & Tiao, 1975)</h2>
+<p>George Box and George Tiao developed intervention analysis in their landmark 1975 <em>JASA</em> paper to model the effect of known external events (policy changes, strikes, environmental interventions) on time series. The approach extends ARIMA by adding exogenous indicator variables for the intervention periods.</p>
+<h3>The SARIMAX with Promotions</h3>
+<div class="formula"><div class="formula-label">SARIMAX INTERVENTION MODEL</div><div class="formula-math">y<sub>t</sub> = SARIMA(p,d,q)(P,D,Q)<sub>m</sub> + &omega;<sub>0</sub>P<sub>t</sub> + &omega;<sub>1</sub>P<sub>t-1</sub> + &omega;<sub>2</sub>P<sub>t-2</sub> + &delta;D<sub>t</sub></div><div class="formula-label">P<sub>t</sub> = promotion indicator at time t | &omega;<sub>k</sub> = impact at lag k | D<sub>t</sub> = post-promotion dip indicator</div></div>
+<p>The &omega; coefficients capture the promotion's temporal profile:</p>
+<table class="comp-table"><thead><tr><th>Coefficient</th><th>Interpretation</th><th>Expected Sign</th></tr></thead><tbody>
+<tr><td>&omega;<sub>0</sub></td><td>Immediate lift during the promoted week</td><td>Positive (the promotional bump)</td></tr>
+<tr><td>&omega;<sub>1</sub></td><td>Carryover effect: residual lift one week after promotion</td><td>Positive but smaller than &omega;<sub>0</sub> (decaying)</td></tr>
+<tr><td>&omega;<sub>2</sub></td><td>Second-week carryover</td><td>Near zero for most promotions</td></tr>
+<tr><td>&delta;</td><td>Post-promotion dip in the first non-promoted week</td><td>Negative (demand payback from pull-forward)</td></tr>
+</tbody></table>
+<p>The <strong>net incremental impact</strong> of a promotion = &omega;<sub>0</sub> + &omega;<sub>1</sub> + &omega;<sub>2</sub> + &delta;. If this sum is close to zero, the promotion simply shifted demand across weeks without creating any new revenue. If it's negative (the dip exceeds the lift), the promotion actually destroyed value by training customers and eroding baseline.</p>
+<h3>Transfer Function Shapes</h3>
+<p>Box and Tiao classified intervention effects by their temporal shape. Each shape has a different business interpretation:</p>
+<table class="comp-table"><thead><tr><th>Shape</th><th>Mathematical Form</th><th>Business Example</th></tr></thead><tbody>
+<tr><td><strong>Pulse</strong></td><td>&omega;<sub>0</sub> spike, zero after</td><td>Flash sale: one-day lift with no carryover or dip</td></tr>
+<tr><td><strong>Pulse + Decay</strong></td><td>&omega;<sub>0</sub> spike with exponentially decaying carryover</td><td>TV ad campaign: awareness lifts sales for 2-3 weeks</td></tr>
+<tr><td><strong>Pulse + Dip</strong></td><td>&omega;<sub>0</sub> spike followed by below-baseline dip</td><td>Discount promotion with pull-forward: the most common pattern</td></tr>
+<tr><td><strong>Step Change</strong></td><td>Permanent shift in level</td><td>Permanent price change or product launch (not a typical promotion)</td></tr>
+<tr><td><strong>Gradual Onset</strong></td><td>Effect builds over multiple periods</td><td>Loyalty program introduction: cumulative enrollment drives gradual lift</td></tr>
+</tbody></table>
+<div class="callout insight"><div class="callout-label">The Pulse + Dip Signature</div><p>When you see &omega;<sub>0</sub> = +$50K, &omega;<sub>1</sub> = +$5K, &delta; = &minus;$40K, the net impact is +$15K. But the company reported a $50K lift. The $35K difference between reported and actual is the "phantom lift" &mdash; demand that was merely shifted, not created. If your margin sacrifice on the promoted volume exceeds $15K, the promotion lost money despite looking like a success.</p></div></div>
+
+<div class="section" id="saturation"><h2>Part 5: Promotion Saturation &mdash; Finding the Optimal Frequency</h2>
+<p>Even when individual promotions are profitable, there exists a frequency beyond which each additional promotion yields diminishing (and eventually negative) incremental returns. The marketing science literature models this using the <strong>ADBUDG saturation function</strong> developed by John D.C. Little (1979).</p>
+<div class="formula"><div class="formula-label">ADBUDG SATURATION MODEL</div><div class="formula-math">Lift(n) = &alpha; &middot; n<sup>&beta;</sup> / (&gamma;<sup>&beta;</sup> + n<sup>&beta;</sup>)</div><div class="formula-label">n = promotion count in period | &alpha; = maximum achievable lift | &gamma; = half-saturation point | &beta; = steepness</div></div>
+<p>The function is S-shaped: the first few promotions generate large lifts, the middle promotions add incrementally, and beyond the half-saturation point &gamma;, each additional promotion adds negligibly. The optimal frequency is where the <strong>marginal incremental lift equals the marginal cost</strong> (promotion execution cost + margin sacrifice + baseline erosion).</p>
+<h3>Worked Example</h3>
+<p>A brand estimates &alpha; = $500K (maximum quarterly lift), &gamma; = 4 (half-saturation at 4 promotions per quarter), &beta; = 2. Each promotion costs $30K in execution and generates an average $8K in baseline erosion per subsequent quarter.</p>
+<table class="comp-table"><thead><tr><th>Promos / Qtr</th><th>Cumulative Lift</th><th>Marginal Lift</th><th>Marginal Cost</th><th>Marginal Profit</th></tr></thead><tbody>
+<tr><td>1</td><td>$29K</td><td>$29K</td><td>$38K</td><td>&minus;$9K</td></tr>
+<tr><td>2</td><td>$100K</td><td>$71K</td><td>$38K</td><td>+$33K</td></tr>
+<tr><td>4</td><td>$250K</td><td>$75K</td><td>$38K</td><td>+$37K</td></tr>
+<tr><td>6</td><td>$346K</td><td>$48K</td><td>$38K</td><td>+$10K</td></tr>
+<tr><td>8</td><td>$400K</td><td>$27K</td><td>$38K</td><td>&minus;$11K</td></tr>
+<tr><td>10</td><td>$431K</td><td>$16K</td><td>$38K</td><td>&minus;$22K</td></tr>
+</tbody></table>
+<p>The optimal frequency is approximately 6-7 promotions per quarter. Beyond that, each additional promotion costs more than it generates. At 10 promotions, you've spent $380K to generate $431K in lift &mdash; a razor-thin margin before accounting for baseline erosion. The company running 47 annual promotions (~12 per quarter) was deep into the negative-marginal-return zone.</p>
+<div class="callout"><div class="callout-label">How to Estimate Your Saturation Curve</div><p>You need variation in promotion frequency across comparable periods. Options: (1) use natural variation across regions that receive different promotion schedules; (2) use historical variation if frequency has changed over time; (3) design a deliberate holdout experiment with different promotion intensities by geography. Fit the ADBUDG curve to the observed {frequency, lift} pairs using nonlinear least squares. The half-saturation point &gamma; is your strategic anchor.</p></div></div>
+
+<div class="section" id="code"><h2>Part 6: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; SARIMAX Intervention Analysis</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> statsmodels.tsa.statespace.sarimax <span class="kw">import</span> SARIMAX
+<span class="kw">from</span> statsmodels.tsa.stattools <span class="kw">import</span> adfuller
+<span class="kw">from</span> statsmodels.stats.diagnostic <span class="kw">import</span> acorr_ljungbox
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+sales = pd.<span class="fn">read_csv</span>(<span class="str">'weekly_sales.csv'</span>, parse_dates=[<span class="str">'week'</span>],
+                    index_col=<span class="str">'week'</span>)
+<span class="cm"># Columns: revenue, promo_flag, promo_depth_pct</span>
+
+<span class="cm"># === Step 1: Stationarity Check ===</span>
+adf = <span class="fn">adfuller</span>(sales[<span class="str">'revenue'</span>])
+<span class="fn">print</span>(<span class="str">f"ADF Statistic: {adf[0]:.4f}"</span>)
+<span class="fn">print</span>(<span class="str">f"p-value: {adf[1]:.4f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Differencing needed: {'Yes' if adf[1] > 0.05 else 'No'}"</span>)
+
+<span class="cm"># === Step 2: Build Exogenous Variables ===</span>
+sales[<span class="str">'promo_lag1'</span>] = sales[<span class="str">'promo_flag'</span>].<span class="fn">shift</span>(<span class="num">1</span>).<span class="fn">fillna</span>(<span class="num">0</span>)
+sales[<span class="str">'promo_lag2'</span>] = sales[<span class="str">'promo_flag'</span>].<span class="fn">shift</span>(<span class="num">2</span>).<span class="fn">fillna</span>(<span class="num">0</span>)
+<span class="cm"># Post-promo dip: first non-promoted week after a promoted week</span>
+sales[<span class="str">'post_promo'</span>] = ((sales[<span class="str">'promo_flag'</span>] == <span class="num">0</span>) &
+                        (sales[<span class="str">'promo_lag1'</span>] == <span class="num">1</span>)).<span class="fn">astype</span>(<span class="fn">int</span>)
+
+exog_cols = [<span class="str">'promo_flag'</span>, <span class="str">'promo_lag1'</span>, <span class="str">'post_promo'</span>]
+exog = sales[exog_cols]
+
+<span class="cm"># === Step 3: Fit SARIMAX ===</span>
+model = <span class="fn">SARIMAX</span>(sales[<span class="str">'revenue'</span>], exog=exog,
+                order=(<span class="num">2</span>, <span class="num">1</span>, <span class="num">1</span>),
+                seasonal_order=(<span class="num">1</span>, <span class="num">1</span>, <span class="num">0</span>, <span class="num">52</span>),
+                enforce_stationarity=<span class="kw">False</span>,
+                enforce_invertibility=<span class="kw">False</span>)
+results = model.<span class="fn">fit</span>(disp=<span class="kw">False</span>)
+
+<span class="cm"># === Step 4: Diagnose Residuals ===</span>
+lb = <span class="fn">acorr_ljungbox</span>(results.resid, lags=[<span class="num">10</span>, <span class="num">20</span>])
+<span class="fn">print</span>(<span class="str">f"\nLjung-Box p-values: {lb['lb_pvalue'].values}"</span>)
+<span class="fn">print</span>(<span class="str">f"White noise? {'Yes' if lb['lb_pvalue'].min() > 0.05 else 'No'}"</span>)
+
+<span class="cm"># === Step 5: Decompose Promotion Impact ===</span>
+w0 = results.params[<span class="str">'promo_flag'</span>]
+w1 = results.params[<span class="str">'promo_lag1'</span>]
+dip = results.params[<span class="str">'post_promo'</span>]
+net = w0 + w1 + dip
+
+<span class="fn">print</span>(<span class="str">f"\n{'='*50}"</span>)
+<span class="fn">print</span>(<span class="str">f"PROMOTION DECOMPOSITION"</span>)
+<span class="fn">print</span>(<span class="str">f"{'='*50}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Immediate lift (w0):    ${w0:>+12,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Week-1 carryover (w1):  ${w1:>+12,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Post-promo dip (delta): ${dip:>+12,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  {'─'*40}"</span>)
+<span class="fn">print</span>(<span class="str">f"  NET incremental:        ${net:>+12,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Phantom lift:           ${w0 - net:>+12,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Phantom as % of gross:  {(w0-net)/w0*100:>11.0f}%"</span>)
+
+<span class="cm"># === Visualization ===</span>
+fig, axes = plt.<span class="fn">subplots</span>(<span class="num">2</span>, <span class="num">1</span>, figsize=(<span class="num">14</span>, <span class="num">10</span>), sharex=<span class="kw">True</span>)
+
+<span class="cm"># Actual vs. fitted baseline</span>
+axes[<span class="num">0</span>].<span class="fn">plot</span>(sales.index, sales[<span class="str">'revenue'</span>], alpha=<span class="num">0.6</span>,
+             label=<span class="str">'Actual'</span>, color=<span class="str">'#264653'</span>)
+axes[<span class="num">0</span>].<span class="fn">plot</span>(sales.index, results.fittedvalues, alpha=<span class="num">0.8</span>,
+             label=<span class="str">'SARIMAX Fitted'</span>, color=<span class="str">'#c45d3e'</span>)
+<span class="cm"># Shade promoted weeks</span>
+promo_weeks = sales[sales[<span class="str">'promo_flag'</span>] == <span class="num">1</span>].index
+<span class="kw">for</span> w <span class="kw">in</span> promo_weeks:
+    axes[<span class="num">0</span>].<span class="fn">axvline</span>(x=w, color=<span class="str">'#e9c46a'</span>, alpha=<span class="num">0.2</span>)
+axes[<span class="num">0</span>].<span class="fn">set_title</span>(<span class="str">'Revenue: Actual vs. SARIMAX Fitted'</span>,
+                 fontsize=<span class="num">13</span>, fontweight=<span class="str">'bold'</span>)
+axes[<span class="num">0</span>].<span class="fn">legend</span>()
+
+<span class="cm"># Residuals</span>
+axes[<span class="num">1</span>].<span class="fn">bar</span>(sales.index, results.resid, color=<span class="str">'#264653'</span>, alpha=<span class="num">0.5</span>)
+axes[<span class="num">1</span>].<span class="fn">axhline</span>(y=<span class="num">0</span>, color=<span class="str">'gray'</span>, linestyle=<span class="str">'--'</span>)
+axes[<span class="num">1</span>].<span class="fn">set_title</span>(<span class="str">'Residuals (should be white noise)'</span>,
+                 fontsize=<span class="num">13</span>, fontweight=<span class="str">'bold'</span>)
+plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()</pre></div>
+
+<div class="code-block"><div class="code-label">Python &middot; Saturation Curve Estimation</div>
+<pre><span class="kw">from</span> scipy.optimize <span class="kw">import</span> curve_fit
+
+<span class="cm"># Quarterly data: promotion count and measured incremental lift</span>
+qtr_data = pd.<span class="fn">DataFrame</span>({
+    <span class="str">'n_promos'</span>: [<span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>, <span class="num">8</span>, <span class="num">10</span>, <span class="num">12</span>],
+    <span class="str">'incremental_lift'</span>: [<span class="num">85</span>, <span class="num">140</span>, <span class="num">210</span>, <span class="num">265</span>, <span class="num">310</span>, <span class="num">355</span>, <span class="num">370</span>, <span class="num">365</span>]
+})
+
+<span class="kw">def</span> <span class="fn">adbudg</span>(n, alpha, beta, gamma):
+    <span class="kw">return</span> alpha * n**beta / (gamma**beta + n**beta)
+
+popt, pcov = <span class="fn">curve_fit</span>(adbudg, qtr_data[<span class="str">'n_promos'</span>],
+                       qtr_data[<span class="str">'incremental_lift'</span>],
+                       p0=[<span class="num">500</span>, <span class="num">2</span>, <span class="num">5</span>], maxfev=<span class="num">5000</span>)
+alpha, beta, gamma = popt
+
+<span class="fn">print</span>(<span class="str">f"=== Saturation Model ==="</span>)
+<span class="fn">print</span>(<span class="str">f"  Max lift (alpha): ${alpha:,.0f}K"</span>)
+<span class="fn">print</span>(<span class="str">f"  Half-saturation (gamma): {gamma:.1f} promos"</span>)
+<span class="fn">print</span>(<span class="str">f"  Steepness (beta): {beta:.2f}"</span>)
+
+<span class="cm"># Find optimal frequency</span>
+n_range = np.<span class="fn">arange</span>(<span class="num">1</span>, <span class="num">15</span>, <span class="num">0.1</span>)
+lifts = <span class="fn">adbudg</span>(n_range, *popt)
+marginal = np.<span class="fn">gradient</span>(lifts, n_range)
+cost_per_promo = <span class="num">38</span>  <span class="cm"># $38K per promo (execution + erosion)</span>
+optimal_n = n_range[np.<span class="fn">argmin</span>(np.<span class="fn">abs</span>(marginal - cost_per_promo))]
+<span class="fn">print</span>(<span class="str">f"  Optimal frequency: {optimal_n:.0f} promos/quarter"</span>)
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">10</span>, <span class="num">6</span>))
+ax.<span class="fn">plot</span>(n_range, lifts, color=<span class="str">'#264653'</span>, linewidth=<span class="num">2</span>,
+        label=<span class="str">'Cumulative Lift'</span>)
+ax.<span class="fn">scatter</span>(qtr_data[<span class="str">'n_promos'</span>], qtr_data[<span class="str">'incremental_lift'</span>],
+           color=<span class="str">'#c45d3e'</span>, s=<span class="num">80</span>, zorder=<span class="num">5</span>, label=<span class="str">'Observed'</span>)
+ax.<span class="fn">axvline</span>(x=optimal_n, color=<span class="str">'#2d6a4f'</span>, linestyle=<span class="str">'--'</span>,
+           label=<span class="str">f'Optimal: {optimal_n:.0f}/qtr'</span>)
+ax.<span class="fn">set_title</span>(<span class="str">'Promotion Saturation Curve'</span>, fontsize=<span class="num">14</span>,
+            fontweight=<span class="str">'bold'</span>)
+ax.<span class="fn">set_xlabel</span>(<span class="str">'Promotions per Quarter'</span>)
+ax.<span class="fn">set_ylabel</span>(<span class="str">'Incremental Lift ($K)'</span>)
+ax.<span class="fn">legend</span>(); plt.<span class="fn">tight_layout</span>(); plt.<span class="fn">show</span>()</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 7: Your Week 20 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th></tr></thead><tbody>
+<tr><td>"What's the true lift of each promotion?"</td><td>SARIMAX intervention: &omega;<sub>0</sub> + &omega;<sub>1</sub> + &delta; = net incremental</td></tr>
+<tr><td>"How much lift is phantom (shifted demand)?"</td><td>Phantom = gross lift (&omega;<sub>0</sub>) minus net incremental</td></tr>
+<tr><td>"Are customers learning to wait for sales?"</td><td>Track non-promoted-week YoY trend; if declining, training effect is active</td></tr>
+<tr><td>"How many promotions should we run per quarter?"</td><td>Saturation curve: find n where marginal lift = marginal cost</td></tr>
+<tr><td>"Which promotion format works best?"</td><td>Separate intervention variables by type (% off, BOGO, free shipping)</td></tr>
+<tr><td>"Should we reduce promotion frequency?"</td><td>If post-promo dip &gt; 60% of gross lift AND baseline is eroding → yes</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Intervention Analysis Foundation</h4><p>Box, G.E.P. & Tiao, G.C. (1975). "Intervention Analysis with Applications to Economic and Environmental Problems." <em>JASA</em>, 70(349), 70-79. Then: Hyndman, R.J. & Athanasopoulos, G. <em>Forecasting: Principles and Practice</em>, 3rd Ed., Ch. 10 (Dynamic Regression) and Ch. 13.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build SARIMAX with Intervention Variables</h4><p>Using weekly sales data (or simulate 104 weeks with embedded promotions), fit a SARIMAX with promotion flags, lags, and post-promotion indicators. Decompose each promotion into immediate lift, carryover, and dip. Compute net incremental vs. phantom lift.</p></div>
+<div class="timeline-step"><h4>Day 5-6: Estimate Your Saturation Curve</h4><p>Aggregate to quarterly: count promotions, measure average incremental lift. Fit the ADBUDG function. Identify the half-saturation point and optimal frequency. Compare your current frequency to the optimum.</p></div>
+<div class="timeline-step"><h4>Day 7: Promotion Calendar Recommendation</h4><p>"Current frequency: X/quarter. Optimal frequency: Y/quarter. We're Z above optimal, costing $W in wasted spend and baseline erosion. Recommended calendar: [specific weeks]. Expected annual impact of reducing to optimal: +$V net."</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;"><strong>Foundational:</strong> Box, G.E.P. & Tiao, G.C. (1975). Intervention Analysis with Applications. <em>JASA</em>, 70(349), 70-79.<br><strong>Promotion Decomposition:</strong> Van Heerde, H.J., Leeflang, P.S.H. & Wittink, D.R. (2004). Decomposing the Sales Promotion Bump. <em>Marketing Science</em>, 23(3), 317-334.<br><strong>Saturation Models:</strong> Little, J.D.C. (1979). Aggregate Advertising Models: The State of the Art. <em>Operations Research</em>, 27(4), 629-667.<br><strong>Promotional Response:</strong> Ailawadi, K.L., Beauchamp, J.P., Donthu, N., Gauri, D.K. & Shankar, V. (2009). Communication and Promotion Decisions in Retailing. <em>Journal of Retailing</em>, 85(1), 42-55.<br><strong>Forecasting:</strong> Hyndman, R.J. & Athanasopoulos, G. (2021). <em>Forecasting: Principles and Practice</em>, 3rd Ed. OTexts. Ch. 10, 13.<br><strong>Baseline Erosion:</strong> Pauwels, K., Hanssens, D.M. & Siddarth, S. (2002). The Long-Term Effects of Price Promotions. <em>JMR</em>, 39(4), 421-439.</p>
+<div class="bottom-nav"><a href="week19_discount_strategy.html">&larr; Week 19: Discount Strategy</a><a href="week21_price_discrimination.html">Week 21: Price Discrimination &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

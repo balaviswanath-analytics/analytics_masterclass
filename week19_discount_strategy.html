@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 19: Why Your Discount Strategy Is Bleeding Profit</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html#q2" class="nav-label">Q2 HUB</a><a href="#business" class="nav-link active">The Discount Trap</a><a href="#rubin" class="nav-link">Rubin Causal Model</a><a href="#psm" class="nav-link">Propensity Matching</a><a href="#uplift" class="nav-link">Uplift Modeling</a><a href="#tlearner" class="nav-link">T-Learner Deep-Dive</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+
+<header class="hero"><div class="week-tag">Week 19 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div><h1>Why Your <span>Discount Strategy</span> Is Bleeding Profit</h1><p class="hero-sub">A retail chain ran a 20% off promotion and celebrated a 35% revenue lift. But what they didn't measure: 60% of discounted purchases came from customers who would have bought at full price anyway. The true incremental lift was 14%, and after accounting for the 20% margin sacrifice, the promotion actually lost money. This week introduces the causal framework for separating real from phantom lift.</p></header>
+
+<main class="content">
+
+<!-- ============================================ -->
+<!-- PART 1: BUSINESS CASE                        -->
+<!-- ============================================ -->
+<div class="section" id="business"><h2>Part 1: The $47M Phantom Lift</h2>
+
+<p>In Q4 2019, a mid-market e-commerce retailer ran a sitewide 20% discount for 10 days. Marketing reported a 35% lift in revenue compared to the same period the prior year: $182 million versus $135 million, a gain of $47 million. The CMO presented this as one of the most successful promotions in company history. Bonuses were paid. The promotion was added to the permanent Q4 calendar.</p>
+
+<p>Eighteen months later, the new Head of Analytics rebuilt the analysis using propensity score matching. She matched every customer who purchased during the promotion to a statistically identical customer who didn't receive the promotional email (the company had accidentally held out 8% of its list due to a segmentation error &mdash; a natural experiment). The matched comparison revealed that the control group's purchase rate was already 21% higher than the prior year baseline, driven by organic growth, seasonal trends, and a new product launch that coincided with the promotion window.</p>
+
+<p>The true incremental lift attributable to the promotion was 14%, not 35%. But the margin impact was devastating. On the 60% of purchases that would have happened anyway (the "Sure Things"), the company gave away 20% of margin for nothing. On the remaining 40% of purchases that were genuinely incremental, the net margin after the discount was thin. After accounting for the $6.2 million in margin sacrificed on Sure Things, the promotion's true net contribution was &minus;$1.8 million. The most "successful" promotion in company history had actually lost money.</p>
+
+<p>This is the central problem of promotional analytics: naive before/after or treated/untreated comparisons systematically overstate promotional effectiveness because they attribute organic growth, secular trends, and selection bias to the promotion itself. Two methodological frameworks solve this: propensity score matching (for retrospective analysis of past promotions) and uplift modeling (for prospective targeting of future promotions).</p>
+
+<h3>The Four Customer Segments You Must Separate</h3>
+
+<table class="comp-table"><thead><tr><th>Segment</th><th>Without Promotion</th><th>With Promotion</th><th>Value of Promoting Them</th></tr></thead><tbody>
+<tr><td><strong>Sure Things</strong></td><td>Buy</td><td>Buy</td><td>Negative &mdash; you gave away margin for nothing</td></tr>
+<tr><td><strong>Persuadables</strong></td><td>Don't buy</td><td>Buy</td><td>Positive &mdash; the only segment generating true incremental lift</td></tr>
+<tr><td><strong>Lost Causes</strong></td><td>Don't buy</td><td>Don't buy</td><td>Zero &mdash; promotion wasted but at least no margin loss</td></tr>
+<tr><td><strong>Sleeping Dogs</strong></td><td>Buy</td><td>Don't buy</td><td>Negative &mdash; the promotion actually triggered them to leave</td></tr>
+</tbody></table>
+
+<div class="callout danger"><div class="callout-label">The Math That Kills Most Promotions</div><p>Suppose your promotion costs 20% of margin. If 50% of promoted customers are Sure Things who would have purchased anyway, you've sacrificed 10% of total margin on half your customer base just to reach the Persuadables in the other half. For the promotion to break even, the Persuadable segment must generate enough incremental profit (net of the 20% discount) to cover the entire margin giveaway to Sure Things. With typical Persuadable rates of 5&ndash;15%, most blanket promotions fail this arithmetic. The solution isn't to stop promoting &mdash; it's to stop promoting <em>everyone</em>.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 2: RUBIN CAUSAL MODEL                   -->
+<!-- ============================================ -->
+<div class="section" id="rubin"><h2>Part 2: The Rubin Causal Model &mdash; Why This Is a Causal Inference Problem</h2>
+
+<p>Donald Rubin's potential outcomes framework (formalized in his 1974 paper and expanded with Paul Holland in 1986) provides the mathematical language for what we're trying to measure. For each customer <em>i</em>, there are two <strong>potential outcomes</strong>:</p>
+
+<div class="formula"><div class="formula-label">POTENTIAL OUTCOMES</div><div class="formula-math">Y<sub>i</sub>(1) = outcome if customer i receives the promotion<br>Y<sub>i</sub>(0) = outcome if customer i does NOT receive the promotion</div><div class="formula-label">The individual treatment effect: &tau;<sub>i</sub> = Y<sub>i</sub>(1) &minus; Y<sub>i</sub>(0)</div></div>
+
+<p>The <strong>fundamental problem of causal inference</strong> is that we can only ever observe one of these outcomes for each customer. A customer either received the promotion or didn't &mdash; we can never see what would have happened in the alternative universe. This is why naive comparisons fail: the customers who received the promotion are systematically different from those who didn't (marketing targets its best customers, or self-selects engaged users), so comparing their outcomes confounds the treatment effect with selection bias.</p>
+
+<div class="formula"><div class="formula-label">THE QUANTITY WE WANT: AVERAGE TREATMENT EFFECT ON THE TREATED</div><div class="formula-math">ATT = E[Y(1) &minus; Y(0) | T = 1] = E[Y(1) | T = 1] &minus; E[Y(0) | T = 1]</div><div class="formula-label">The second term E[Y(0) | T = 1] is counterfactual: what would treated customers have done without treatment?</div></div>
+
+<p>The naive comparison estimates E[Y(1) | T = 1] &minus; E[Y(0) | T = 0], which introduces <strong>selection bias</strong> equal to E[Y(0) | T = 1] &minus; E[Y(0) | T = 0]. In words: the difference in outcomes between treated and untreated groups that exists <em>even without the treatment</em>. If marketing targeted its most engaged customers (as it usually does), this bias is positive, and the naive estimate overstates the true ATT.</p>
+
+<div class="callout insight"><div class="callout-label">The Selection Bias Decomposition</div><p>Naive estimate = ATT + Selection Bias. In the e-commerce example above, the naive estimate was 35% lift. The true ATT was 14%. Therefore, selection bias was 21 percentage points &mdash; three-fifths of the reported result was phantom. This is typical. In a meta-analysis of 43 promotional studies by Gordon et al. (2019), the median selection bias was <strong>50&ndash;80% of the reported effect</strong>. Most companies don't know this because they've never run the matching analysis.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 3: PROPENSITY SCORE MATCHING             -->
+<!-- ============================================ -->
+<div class="section" id="psm"><h2>Part 3: Propensity Score Matching (PSM)</h2>
+
+<p>Rosenbaum and Rubin (1983) proved a remarkable result: if you match on the <strong>propensity score</strong> &mdash; the probability of receiving treatment given observed covariates &mdash; the distribution of covariates is balanced between treated and control groups. This means matching on a single number (the propensity score) achieves the same covariate balance as matching on all covariates simultaneously.</p>
+
+<div class="formula"><div class="formula-label">PROPENSITY SCORE</div><div class="formula-math">e(X<sub>i</sub>) = P(T<sub>i</sub> = 1 | X<sub>i</sub>)</div><div class="formula-label">Estimated via logistic regression on pre-treatment covariates X (recency, frequency, monetary, tenure, segment)</div></div>
+
+<h3>The Matching Algorithm</h3>
+
+<p>For each treated customer, find the untreated customer with the closest propensity score. "Closest" can be operationalized in several ways:</p>
+
+<table class="comp-table"><thead><tr><th>Method</th><th>How It Works</th><th>Pros</th><th>Cons</th></tr></thead><tbody>
+<tr><td><strong>1:1 Nearest Neighbor</strong></td><td>Each treated matched to closest control (with replacement or without)</td><td>Simple, transparent</td><td>Some matches may be poor if propensity scores don't overlap well</td></tr>
+<tr><td><strong>Caliper Matching</strong></td><td>Only match within a maximum distance (typically 0.2 &times; SD of logit propensity)</td><td>Prevents bad matches</td><td>Drops treated units without close matches (bias-variance tradeoff)</td></tr>
+<tr><td><strong>Kernel Matching</strong></td><td>Use weighted average of all controls, weighted by propensity distance</td><td>Uses all data, more efficient</td><td>Less intuitive, harder to check balance</td></tr>
+<tr><td><strong>Stratification</strong></td><td>Divide propensity score into 5&ndash;10 strata, compare within strata</td><td>Simple, robust</td><td>Coarser than exact matching</td></tr>
+</tbody></table>
+
+<h3>Balance Checks &mdash; Did Matching Actually Work?</h3>
+
+<p>Matching is only as good as its covariate balance. You must verify that after matching, the treated and control groups are statistically indistinguishable on all pre-treatment covariates. The standard diagnostic is the <strong>Standardized Mean Difference (SMD)</strong>:</p>
+
+<div class="formula"><div class="formula-label">STANDARDIZED MEAN DIFFERENCE</div><div class="formula-math">SMD = (&bar;X<sub>treated</sub> &minus; &bar;X<sub>control</sub>) / &radic;[(s<sup>2</sup><sub>treated</sub> + s<sup>2</sup><sub>control</sub>) / 2]</div><div class="formula-label">Threshold: |SMD| < 0.1 for all covariates (Rosenbaum & Rubin guideline)</div></div>
+
+<p>If any covariate has |SMD| &gt; 0.1 after matching, the matching has failed for that variable. Common fixes: add interaction terms or nonlinear transformations to the propensity model, use a tighter caliper, or switch to kernel matching. If SMD exceeds 0.25 for multiple covariates, the overlap assumption is likely violated and PSM results should not be trusted.</p>
+
+<div class="callout"><div class="callout-label">Additional Diagnostics</div><p><strong>Variance ratio:</strong> should be between 0.5 and 2.0 for each covariate post-matching. <strong>Propensity score overlap plot:</strong> the distributions of e(X) for treated and control should overlap substantially. If there's a region where only treated (or only control) customers exist, trim that region (the "common support" restriction). <strong>Love plot:</strong> visual display of SMD before and after matching for all covariates &mdash; expect dramatic improvement.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 4: UPLIFT MODELING THEORY               -->
+<!-- ============================================ -->
+<div class="section" id="uplift"><h2>Part 4: Uplift Modeling &mdash; From Average to Individual Treatment Effects</h2>
+
+<p>PSM gives you the <strong>average</strong> treatment effect. Uplift modeling goes further: it estimates the <strong>individual-level</strong> treatment effect &tau;<sub>i</sub> = Y<sub>i</sub>(1) &minus; Y<sub>i</sub>(0) for each customer. This is what enables targeting: promote only the Persuadables, skip the Sure Things and Lost Causes, and absolutely avoid the Sleeping Dogs.</p>
+
+<p>The term "uplift modeling" was coined by Radcliffe and Surry (1999) at Stochastic Solutions. It's also known as "heterogeneous treatment effect estimation" in the econometrics literature (Athey &amp; Imbens, 2016), "incremental modeling" in marketing analytics, and "individual treatment effect estimation" in the causal ML community. The methods differ in sophistication but share the same objective: rank customers by expected responsiveness to the intervention.</p>
+
+<h3>Three Model Architectures</h3>
+
+<table class="comp-table"><thead><tr><th>Approach</th><th>How It Works</th><th>When to Use</th><th>Strengths</th><th>Limitations</th></tr></thead><tbody>
+<tr><td><strong>T-Learner</strong><br>(Two Models)</td><td>Fit model<sub>T</sub> on treated data, model<sub>C</sub> on control data. Uplift = P(buy|T=1,X) &minus; P(buy|T=0,X)</td><td>Simple, fast, good baseline</td><td>Flexible base learners; easy to explain</td><td>Doesn't optimize for the difference directly; noisy when treatment effect is small</td></tr>
+<tr><td><strong>S-Learner</strong><br>(Single Model)</td><td>Single model with treatment indicator T as a feature. Predict with T=1 vs. T=0 and take the difference</td><td>When treatment effect is subtle</td><td>Uses all data; efficient with small samples</td><td>May regularize away the treatment effect; underestimates heterogeneity</td></tr>
+<tr><td><strong>Causal Forest</strong><br>(Athey &amp; Imbens)</td><td>Modified random forest that splits on treatment effect heterogeneity rather than prediction accuracy</td><td>When heterogeneity is the primary interest</td><td>Theoretically grounded; valid confidence intervals</td><td>Requires more data (1000+ per arm); computationally expensive; harder to interpret</td></tr>
+</tbody></table></div>
+
+<!-- ============================================ -->
+<!-- PART 5: T-LEARNER DEEP DIVE                  -->
+<!-- ============================================ -->
+<div class="section" id="tlearner"><h2>Part 5: T-Learner Deep Dive &mdash; The Workhorse of Uplift</h2>
+
+<p>The T-Learner is the most widely used uplift architecture in industry because it's simple, flexible, and easy to audit. The procedure:</p>
+
+<p><strong>Step 1:</strong> Split your historical data into treatment group (customers who received the promotion) and control group (customers who didn't). <strong>Step 2:</strong> Train a classification model on each group separately, predicting the outcome (purchased / didn't purchase). Use the same features for both models. <strong>Step 3:</strong> For any customer, predict their purchase probability under both scenarios: &hat;P(buy | X, T=1) from the treatment model and &hat;P(buy | X, T=0) from the control model. <strong>Step 4:</strong> The uplift score is the difference: &hat;&tau;(X) = &hat;P(buy | X, T=1) &minus; &hat;P(buy | X, T=0).</p>
+
+<div class="formula"><div class="formula-label">T-LEARNER UPLIFT SCORE</div><div class="formula-math">&hat;&tau;(X<sub>i</sub>) = &hat;&mu;<sub>1</sub>(X<sub>i</sub>) &minus; &hat;&mu;<sub>0</sub>(X<sub>i</sub>)</div><div class="formula-label">&hat;&mu;<sub>1</sub> = prediction from treatment model | &hat;&mu;<sub>0</sub> = prediction from control model</div></div>
+
+<h3>Interpreting the Uplift Score</h3>
+
+<table class="comp-table"><thead><tr><th>Uplift Score</th><th>Customer Segment</th><th>Action</th></tr></thead><tbody>
+<tr><td>&hat;&tau; > 0.05</td><td><strong>Persuadable</strong> (promotion moves them from no-buy to buy)</td><td>Promote aggressively &mdash; these are your ROI generators</td></tr>
+<tr><td>0 &le; &hat;&tau; &le; 0.05</td><td><strong>Mild Persuadable / Lost Cause</strong> (promotion barely moves the needle)</td><td>Promote only if margin permits; borderline ROI</td></tr>
+<tr><td>&hat;&tau; &approx; 0</td><td><strong>Sure Thing</strong> (high P(buy) under both T=1 and T=0)</td><td>Do NOT promote &mdash; they'll buy anyway; save your margin</td></tr>
+<tr><td>&hat;&tau; < 0</td><td><strong>Sleeping Dog</strong> (promotion triggers negative response)</td><td>Never promote &mdash; the discount reminds them to churn or switch</td></tr>
+</tbody></table>
+
+<div class="callout insight"><div class="callout-label">Ascarza's "Retention Futility" Finding (2018)</div><p>Eva Ascarza's landmark 2018 <em>Journal of Marketing Research</em> paper demonstrated that Sleeping Dogs are not a theoretical curiosity &mdash; they're widespread and commercially significant. Studying a telecom company's retention campaigns, she found that 10&ndash;14% of contacted customers had <em>higher</em> churn rates after receiving a retention offer compared to no-contact controls. The retention offer literally reminded at-risk customers that their contract was up, prompting them to shop competitors. Without uplift modeling, this iatrogenic effect is invisible &mdash; it gets averaged away in the aggregate ATT calculation.</p></div>
+
+<h3>The Uplift Curve and AUUC</h3>
+
+<p>The uplift equivalent of the ROC curve is the <strong>cumulative uplift curve</strong>. Sort all customers by predicted uplift (highest to lowest). At each targeting threshold k%, compute the cumulative incremental conversion in the top k%. Plot this against k%. The curve should rise steeply at first (you're targeting Persuadables), plateau in the middle (Sure Things and Lost Causes), and may decline at the tail (Sleeping Dogs).</p>
+
+<p>The <strong>Area Under the Uplift Curve (AUUC)</strong> summarizes model quality. A perfect model captures all Persuadables first and all Sleeping Dogs last. A random model produces a straight line. The AUUC measures how much better your targeting is than random assignment. In practice, good uplift models achieve AUUC improvements of 20&ndash;50% over random targeting, which translates to 2&ndash;5x better promotion ROI.</p></div>
+
+<!-- ============================================ -->
+<!-- PART 6: PYTHON IMPLEMENTATION                -->
+<!-- ============================================ -->
+<div class="section" id="code"><h2>Part 6: Implementation in Python</h2>
+
+<div class="code-block"><div class="code-label">Python &middot; Propensity Score Matching</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
+<span class="kw">from</span> sklearn.neighbors <span class="kw">import</span> NearestNeighbors
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 1: Load Promotion Data</span>
+<span class="cm"># =============================================</span>
+<span class="cm"># Simulate: 10,000 customers, 40% treated</span>
+np.random.<span class="fn">seed</span>(<span class="num">42</span>)
+n = <span class="num">10000</span>
+df = pd.<span class="fn">DataFrame</span>({
+    <span class="str">'recency'</span>: np.random.<span class="fn">exponential</span>(<span class="num">30</span>, n),
+    <span class="str">'frequency'</span>: np.random.<span class="fn">poisson</span>(<span class="num">5</span>, n),
+    <span class="str">'monetary'</span>: np.random.<span class="fn">lognormal</span>(<span class="num">4</span>, <span class="num">0.8</span>, n),
+    <span class="str">'tenure'</span>: np.random.<span class="fn">normal</span>(<span class="num">24</span>, <span class="num">12</span>, n).<span class="fn">clip</span>(<span class="num">1</span>),
+})
+<span class="cm"># Selection bias: marketing targets high-value customers</span>
+treat_logit = -<span class="num">1</span> + <span class="num">0.3</span> * df[<span class="str">'frequency'</span>] + <span class="num">0.005</span> * df[<span class="str">'monetary'</span>]
+df[<span class="str">'treated'</span>] = (np.random.<span class="fn">rand</span>(n) < <span class="num">1</span>/(<span class="num">1</span>+np.<span class="fn">exp</span>(-treat_logit))).<span class="fn">astype</span>(<span class="fn">int</span>)
+
+<span class="cm"># True outcome: treatment effect = 5% for Persuadables only</span>
+base_buy = -<span class="num">2</span> + <span class="num">0.15</span> * df[<span class="str">'frequency'</span>] + <span class="num">0.002</span> * df[<span class="str">'monetary'</span>] - <span class="num">0.01</span> * df[<span class="str">'recency'</span>]
+true_effect = <span class="num">0.5</span> * (df[<span class="str">'frequency'</span>] < <span class="num">5</span>)  <span class="cm"># only low-frequency respond</span>
+outcome_logit = base_buy + true_effect * df[<span class="str">'treated'</span>]
+df[<span class="str">'purchased'</span>] = (np.random.<span class="fn">rand</span>(n) < <span class="num">1</span>/(<span class="num">1</span>+np.<span class="fn">exp</span>(-outcome_logit))).<span class="fn">astype</span>(<span class="fn">int</span>)
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 2: Propensity Score Estimation</span>
+<span class="cm"># =============================================</span>
+features = [<span class="str">'recency'</span>, <span class="str">'frequency'</span>, <span class="str">'monetary'</span>, <span class="str">'tenure'</span>]
+scaler = StandardScaler()
+X_scaled = scaler.<span class="fn">fit_transform</span>(df[features])
+
+ps_model = LogisticRegression(max_iter=<span class="num">1000</span>)
+ps_model.<span class="fn">fit</span>(X_scaled, df[<span class="str">'treated'</span>])
+df[<span class="str">'propensity'</span>] = ps_model.<span class="fn">predict_proba</span>(X_scaled)[:, <span class="num">1</span>]
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 3: Nearest Neighbor Matching with Caliper</span>
+<span class="cm"># =============================================</span>
+treated = df[df[<span class="str">'treated'</span>] == <span class="num">1</span>]
+control = df[df[<span class="str">'treated'</span>] == <span class="num">0</span>]
+
+nn = NearestNeighbors(n_neighbors=<span class="num">1</span>, metric=<span class="str">'euclidean'</span>)
+nn.<span class="fn">fit</span>(control[[<span class="str">'propensity'</span>]])
+distances, indices = nn.<span class="fn">kneighbors</span>(treated[[<span class="str">'propensity'</span>]])
+
+<span class="cm"># Caliper: drop matches with distance > 0.05</span>
+caliper = <span class="num">0.05</span>
+good_match = distances.flatten() < caliper
+matched_treated = treated[good_match]
+matched_control = control.<span class="fn">iloc</span>[indices[good_match].flatten()]
+
+<span class="fn">print</span>(<span class="str">f"Matched: {len(matched_treated):,} of {len(treated):,} treated"</span>)
+<span class="fn">print</span>(<span class="str">f"Dropped (outside caliper): {len(treated) - len(matched_treated):,}"</span>)
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 4: Balance Check (SMD)</span>
+<span class="cm"># =============================================</span>
+<span class="fn">print</span>(<span class="str">"\\n=== Covariate Balance (SMD) ==="</span>)
+<span class="kw">for</span> feat <span class="kw">in</span> features:
+    smd_before = (treated[feat].<span class="fn">mean</span>() - control[feat].<span class="fn">mean</span>()) / \
+                 np.<span class="fn">sqrt</span>((treated[feat].<span class="fn">var</span>() + control[feat].<span class="fn">var</span>()) / <span class="num">2</span>)
+    smd_after = (matched_treated[feat].<span class="fn">mean</span>() - matched_control[feat].values.<span class="fn">mean</span>()) / \
+                np.<span class="fn">sqrt</span>((matched_treated[feat].<span class="fn">var</span>() + matched_control[feat].values.<span class="fn">var</span>()) / <span class="num">2</span>)
+    status = <span class="str">'PASS'</span> <span class="kw">if</span> <span class="fn">abs</span>(smd_after) < <span class="num">0.1</span> <span class="kw">else</span> <span class="str">'FAIL'</span>
+    <span class="fn">print</span>(<span class="str">f"  {feat:12s}  Before: {smd_before:+.3f}  After: {smd_after:+.3f}  [{status}]"</span>)
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 5: ATT Estimation</span>
+<span class="cm"># =============================================</span>
+naive = treated[<span class="str">'purchased'</span>].<span class="fn">mean</span>() - control[<span class="str">'purchased'</span>].<span class="fn">mean</span>()
+att = matched_treated[<span class="str">'purchased'</span>].<span class="fn">mean</span>() - matched_control[<span class="str">'purchased'</span>].values.<span class="fn">mean</span>()
+bias = naive - att
+<span class="fn">print</span>(<span class="str">f"\\n=== Treatment Effect ==="</span>)
+<span class="fn">print</span>(<span class="str">f"Naive difference:  {naive:.3f}"</span>)
+<span class="fn">print</span>(<span class="str">f"PSM-adjusted ATT:  {att:.3f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Selection bias:    {bias:.3f} ({bias/naive*100:.0f}% of naive estimate)"</span>)</pre></div>
+
+<div class="code-block"><div class="code-label">Python &middot; T-Learner Uplift Model + Targeting</div>
+<pre><span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> GradientBoostingClassifier
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> cross_val_predict
+
+<span class="cm"># =============================================</span>
+<span class="cm"># T-LEARNER: Separate Treatment/Control Models</span>
+<span class="cm"># =============================================</span>
+model_t = GradientBoostingClassifier(n_estimators=<span class="num">200</span>, max_depth=<span class="num">4</span>,
+                                     learning_rate=<span class="num">0.1</span>, random_state=<span class="num">42</span>)
+model_c = GradientBoostingClassifier(n_estimators=<span class="num">200</span>, max_depth=<span class="num">4</span>,
+                                     learning_rate=<span class="num">0.1</span>, random_state=<span class="num">42</span>)
+model_t.<span class="fn">fit</span>(treated[features], treated[<span class="str">'purchased'</span>])
+model_c.<span class="fn">fit</span>(control[features], control[<span class="str">'purchased'</span>])
+
+<span class="cm"># Predict uplift for ALL customers</span>
+df[<span class="str">'p_treat'</span>] = model_t.<span class="fn">predict_proba</span>(df[features])[:, <span class="num">1</span>]
+df[<span class="str">'p_control'</span>] = model_c.<span class="fn">predict_proba</span>(df[features])[:, <span class="num">1</span>]
+df[<span class="str">'uplift'</span>] = df[<span class="str">'p_treat'</span>] - df[<span class="str">'p_control'</span>]
+
+<span class="cm"># Classify into segments</span>
+<span class="kw">def</span> <span class="fn">classify</span>(row):
+    <span class="kw">if</span> row[<span class="str">'uplift'</span>] > <span class="num">0.05</span>: <span class="kw">return</span> <span class="str">'Persuadable'</span>
+    <span class="kw">elif</span> row[<span class="str">'uplift'</span>] < -<span class="num">0.01</span>: <span class="kw">return</span> <span class="str">'Sleeping Dog'</span>
+    <span class="kw">elif</span> row[<span class="str">'p_control'</span>] > <span class="num">0.5</span>: <span class="kw">return</span> <span class="str">'Sure Thing'</span>
+    <span class="kw">else</span>: <span class="kw">return</span> <span class="str">'Lost Cause'</span>
+df[<span class="str">'segment'</span>] = df.<span class="fn">apply</span>(classify, axis=<span class="num">1</span>)
+
+<span class="fn">print</span>(<span class="str">"=== Customer Segments ==="</span>)
+<span class="fn">print</span>(df[<span class="str">'segment'</span>].<span class="fn">value_counts</span>())
+<span class="fn">print</span>(<span class="str">f"\\nPersuadable mean uplift: {df.loc[df['segment']=='Persuadable', 'uplift'].mean():.3f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Sleeping Dog mean uplift: {df.loc[df['segment']=='Sleeping Dog', 'uplift'].mean():.3f}"</span>)
+
+<span class="cm"># =============================================</span>
+<span class="cm"># CUMULATIVE UPLIFT CURVE</span>
+<span class="cm"># =============================================</span>
+df_sorted = df.<span class="fn">sort_values</span>(<span class="str">'uplift'</span>, ascending=<span class="kw">False</span>)
+df_sorted[<span class="str">'cum_uplift'</span>] = df_sorted[<span class="str">'uplift'</span>].<span class="fn">cumsum</span>()
+df_sorted[<span class="str">'pct_targeted'</span>] = np.<span class="fn">arange</span>(<span class="num">1</span>, <span class="fn">len</span>(df_sorted)+<span class="num">1</span>) / <span class="fn">len</span>(df_sorted) * <span class="num">100</span>
+
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">10</span>, <span class="num">6</span>))
+ax.<span class="fn">plot</span>(df_sorted[<span class="str">'pct_targeted'</span>], df_sorted[<span class="str">'cum_uplift'</span>],
+        color=<span class="str">'#264653'</span>, linewidth=<span class="num">2</span>)
+peak_idx = df_sorted[<span class="str">'cum_uplift'</span>].<span class="fn">idxmax</span>()
+peak_pct = df_sorted.<span class="fn">loc</span>[peak_idx, <span class="str">'pct_targeted'</span>]
+ax.<span class="fn">axvline</span>(x=peak_pct, color=<span class="str">'#c45d3e'</span>, linestyle=<span class="str">'--'</span>,
+           label=<span class="str">f'Optimal threshold: {peak_pct:.0f}%'</span>)
+ax.<span class="fn">set_title</span>(<span class="str">'Cumulative Uplift Curve'</span>, fontsize=<span class="num">14</span>, fontweight=<span class="str">'bold'</span>)
+ax.<span class="fn">set_xlabel</span>(<span class="str">'% of Customers Targeted (ordered by uplift)'</span>)
+ax.<span class="fn">set_ylabel</span>(<span class="str">'Cumulative Incremental Conversions'</span>)
+ax.<span class="fn">legend</span>()
+plt.<span class="fn">tight_layout</span>()
+plt.<span class="fn">show</span>()
+<span class="fn">print</span>(<span class="str">f"\\nOptimal: target top {peak_pct:.0f}% for maximum incremental lift"</span>)</pre></div></div>
+
+<!-- ============================================ -->
+<!-- PART 7: PLAYBOOK                             -->
+<!-- ============================================ -->
+<div class="section" id="playbook"><h2>Part 7: Your Week 19 Playbook</h2>
+
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th><th>Deliverable</th></tr></thead><tbody>
+<tr><td>"Did our promotion actually work?"</td><td>PSM: match on propensity score, compare outcomes</td><td>ATT with confidence interval + selection bias estimate</td></tr>
+<tr><td>"How much of the reported lift was real?"</td><td>Selection bias decomposition: naive &minus; ATT</td><td>% of reported lift attributable to selection bias</td></tr>
+<tr><td>"Who should we target next time?"</td><td>T-Learner uplift model: score all customers</td><td>Ranked customer list with uplift scores and segment labels</td></tr>
+<tr><td>"What's the optimal targeting threshold?"</td><td>Cumulative uplift curve</td><td>% of base to target for maximum incremental ROI</td></tr>
+<tr><td>"Are there customers we're hurting with promos?"</td><td>Negative uplift scores = Sleeping Dogs</td><td>Exclusion list for future campaigns</td></tr>
+</tbody></table>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Causal Inference Foundation</h4><p>Rosenbaum, P.R. &amp; Rubin, D.B. (1983). "The Central Role of the Propensity Score in Observational Studies for Causal Effects." <em>Biometrika</em>, 70(1), 41&ndash;55. Then: Holland, P.W. (1986). "Statistics and Causal Inference." <em>JASA</em>, 81(396), 945&ndash;960. Focus on the potential outcomes notation and the definition of ATT.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build a PSM Pipeline</h4><p>Using historical promotion data (or the simulation above), estimate propensity scores, match with caliper, check balance (SMD &lt; 0.1 for all covariates), and compute ATT. Compare to the naive estimate. How large is the selection bias?</p></div>
+<div class="timeline-step"><h4>Day 5-6: Build a T-Learner Uplift Model</h4><p>Train separate treatment/control GBMs. Score all customers. Plot the cumulative uplift curve. Find the optimal targeting threshold. Identify Sleeping Dogs. Read: Gutierrez, P. &amp; G&eacute;rardy, J.Y. (2017). "Causal Inference and Uplift Modelling: A Review." <em>JMLR Workshop</em>.</p></div>
+<div class="timeline-step"><h4>Day 7: Promotion Strategy Brief</h4><p>"Our last promotion's true lift was X% (vs. reported Y%). Z% of budget was wasted on Sure Things. By targeting only Persuadables (top W% of uplift scores), we can achieve the same incremental lift at 40% of the cost. Additionally, Q% of contacted customers were Sleeping Dogs who should be excluded from all future campaigns."</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Causal Framework:</strong> Rubin, D.B. (1974). Estimating Causal Effects of Treatments. <em>J. Educational Psychology</em>, 66(5), 688&ndash;701.<br>
+<strong>Propensity Score:</strong> Rosenbaum, P.R. &amp; Rubin, D.B. (1983). The Central Role of the Propensity Score. <em>Biometrika</em>, 70(1), 41&ndash;55.<br>
+<strong>Causal Inference:</strong> Holland, P.W. (1986). Statistics and Causal Inference. <em>JASA</em>, 81(396), 945&ndash;960.<br>
+<strong>Uplift Modeling:</strong> Gutierrez, P. &amp; G&eacute;rardy, J.Y. (2017). Causal Inference and Uplift Modelling: A Review. <em>JMLR Workshop &amp; Conference Proceedings</em>, 67, 1&ndash;13.<br>
+<strong>Sleeping Dogs:</strong> Ascarza, E. (2018). Retention Futility: Targeting High-Risk Customers Is Not Effective. <em>JMR</em>, 55(1), 80&ndash;98.<br>
+<strong>Causal Forests:</strong> Athey, S. &amp; Imbens, G.W. (2016). Recursive Partitioning for Heterogeneous Causal Effects. <em>PNAS</em>, 113(27), 7353&ndash;7360.<br>
+<strong>Meta-Analysis:</strong> Gordon, B.R., Zettelmeyer, F., Bhatt, N. &amp; Arora, M. (2019). A Comparison of Approaches to Advertising Measurement. <em>Marketing Science</em>, 38(6), 913&ndash;936.<br>
+<strong>Practical:</strong> Radcliffe, N.J. &amp; Surry, P.D. (2011). Real-World Uplift Modelling with Significance-Based Uplift Trees. <em>Stochastic Solutions White Paper</em>.
+</p>
+<div class="bottom-nav"><a href="week18_bundling_math.html">&larr; Week 18: Bundling Math</a><a href="week20_promotion_calendar.html">Week 20: Promotion Calendar &rarr;</a></div></div>
+
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 21: Price Discrimination That Works (And Stays Legal)</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html#q2" class="nav-label">Q2 HUB</a><a href="#business" class="nav-link active">The $180M Gap</a><a href="#degrees" class="nav-link">Three Degrees</a><a href="#lerner" class="nav-link">Lerner Pricing Rule</a><a href="#surplus" class="nav-link">Surplus Extraction</a><a href="#fences" class="nav-link">Price Fences</a><a href="#legal" class="nav-link">Legal Framework</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+
+<header class="hero"><div class="week-tag">Week 21 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div><h1><span>Price Discrimination</span> That Works (And Stays Legal)</h1><p class="hero-sub">Every SaaS company with a "Contact Sales" enterprise tier is practicing price discrimination. Every airline with 26 fare classes is practicing price discrimination. Every student discount, senior discount, and volume discount is price discrimination. This week formalizes the economics of charging different prices to different segments, derives the optimal price for each segment from elasticity data, quantifies the surplus extraction opportunity, and maps the legal boundaries you can't cross.</p></header>
+
+<main class="content">
+
+<!-- ============================================ -->
+<!-- PART 1: BUSINESS CASE                        -->
+<!-- ============================================ -->
+<div class="section" id="business"><h2>Part 1: The $180M Uniform Pricing Gap</h2>
+
+<p>A mid-market SaaS company selling project management software had a single pricing tier: $49/user/month for everyone. Engineering teams of 5, marketing agencies of 50, and Fortune 500 enterprises with 2,000 seats all paid the same rate. The simplicity felt fair. It was also leaving approximately $180 million per year on the table.</p>
+
+<p>Here's why. An internal conjoint study (using the methodology from Week 16) revealed that enterprise customers with 500+ seats had a median willingness-to-pay of $112/user/month. They valued the software that much because it replaced three separate tools, integrated with their SSO infrastructure, and reduced project delivery time by an estimated 18%. The $49 price captured only 44% of their WTP. Meanwhile, freelancers and small teams (1&ndash;5 users) had a median WTP of just $22/user/month &mdash; meaning the $49 price was actually <em>excluding</em> them entirely from the customer base.</p>
+
+<p>The pricing team modeled a three-tier structure based on segment elasticities: a Starter tier at $19/user/month (targeting freelancers and small teams, elasticity = &minus;5.2), a Professional tier at $49/user/month (mid-market, elasticity = &minus;2.8), and an Enterprise tier at $89/user/month (large organizations, elasticity = &minus;1.4). Each tier included genuinely differentiated features: Starter had limited integrations, Professional added reporting and collaboration, and Enterprise included SSO, audit logs, dedicated support, and an SLA.</p>
+
+<p>The results after 18 months: the Starter tier added 34,000 new users who would never have paid $49. The Enterprise tier captured an additional $63/user/month from 28,000 existing enterprise users who had been getting a windfall at $49. The Professional tier held steady. Net impact: +$184 million in ARR, with a 2.6x improvement in the surplus extraction ratio.</p>
+
+<div class="callout insight"><div class="callout-label">Why "Fair" Uniform Pricing Is Actually Unfair</div><p>Uniform pricing feels equitable &mdash; everyone pays the same. But it's actually a subsidy running in the wrong direction. Price-insensitive enterprise customers (who can afford more and derive more value) pay <em>less</em> than their WTP, while price-sensitive small customers (who derive less value and have less budget) are priced <em>out</em> of the market entirely. Segment-based pricing is more economically efficient: it captures more total surplus AND serves more customers. The key is that the price differences must be justified by genuine value differences (features, support, SLA), not arbitrary discrimination.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 2: PIGOU'S THREE DEGREES                -->
+<!-- ============================================ -->
+<div class="section" id="degrees"><h2>Part 2: Pigou's Three Degrees of Price Discrimination</h2>
+
+<p>Arthur Cecil Pigou formalized the taxonomy in <em>The Economics of Welfare</em> (1920), establishing three "degrees" of price discrimination that remain the foundational framework a century later. Understanding which degree you're practicing &mdash; and which is feasible in your market &mdash; determines the analytical approach.</p>
+
+<table class="comp-table"><thead><tr><th>Degree</th><th>What the Firm Knows</th><th>Mechanism</th><th>Real-World Example</th><th>Data Requirement</th></tr></thead><tbody>
+<tr><td><strong>First Degree</strong><br>(Perfect PD)</td><td>Each customer's exact WTP</td><td>Charge each customer their maximum &mdash; extract all consumer surplus</td><td>Auction models (eBay), negotiated enterprise contracts, car dealerships, bespoke consulting</td><td>Individual-level WTP &mdash; essentially impossible at scale without auctions</td></tr>
+<tr><td><strong>Second Degree</strong><br>(Self-Selection / Menu Pricing)</td><td>That different customer types exist but not which customer is which type</td><td>Design a menu of options; customers reveal their type by choosing</td><td>SaaS tiers (Basic/Pro/Enterprise), airline fare classes, quantity discounts, early-bird pricing</td><td>Package design + price fences that prevent high-WTP customers from choosing the cheap option</td></tr>
+<tr><td><strong>Third Degree</strong><br>(Segment Pricing)</td><td>Observable group membership that correlates with WTP</td><td>Charge different prices to different observable groups</td><td>Student/senior discounts, geographic pricing, B2B vs. B2C, new vs. existing customer offers</td><td>Observable segment variable + ability to prevent resale between segments</td></tr>
+</tbody></table>
+
+<h3>The Welfare Economics</h3>
+
+<p>A critical question in economics and policy: does price discrimination help or hurt society? The answer depends on the degree and context.</p>
+
+<p><strong>First-degree PD</strong> maximizes total surplus (producer + consumer) because it serves every customer whose WTP exceeds marginal cost. But all surplus goes to the producer &mdash; consumer surplus is zero. It's efficient but inequitable.</p>
+
+<p><strong>Third-degree PD</strong> has an ambiguous welfare effect. It can increase total welfare if it brings new customers into the market (the "output expansion" effect) &mdash; for example, student discounts allow students to purchase who couldn't afford full price. But if it merely redistributes purchases among existing customers without expanding the market, total welfare may decrease due to inefficient allocation (some high-WTP customers in the elastic segment buy more than optimal, while low-WTP customers in the inelastic segment buy less).</p>
+
+<div class="callout"><div class="callout-label">Varian's (1985) Welfare Condition</div><p>Hal Varian proved that third-degree price discrimination <strong>increases total welfare if and only if it increases total output</strong> relative to uniform pricing. This is the key analytical test: after implementing segment pricing, is the total number of units sold higher than under uniform pricing? If yes, total welfare increased (even though consumer surplus may have shifted to producer surplus). If no, welfare decreased and the only effect was redistribution from consumers to the firm.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 3: INVERSE ELASTICITY / LERNER RULE     -->
+<!-- ============================================ -->
+<div class="section" id="lerner"><h2>Part 3: The Inverse Elasticity Pricing Rule</h2>
+
+<p>For third-degree price discrimination, the profit-maximizing price for each segment can be derived from first principles. The firm maximizes profit &Pi; = &sum;<sub>k</sub> (p<sub>k</sub> &minus; MC) &middot; Q<sub>k</sub>(p<sub>k</sub>) where Q<sub>k</sub>(p<sub>k</sub>) is the demand function for segment k. Taking the first-order condition d&Pi;/dp<sub>k</sub> = 0 for each segment independently:</p>
+
+<div class="formula"><div class="formula-label">DERIVATION</div><div class="formula-math">d&Pi;/dp<sub>k</sub> = Q<sub>k</sub> + (p<sub>k</sub> &minus; MC) &middot; dQ<sub>k</sub>/dp<sub>k</sub> = 0</div><div class="formula-label">Divide both sides by Q<sub>k</sub> and rearrange:</div></div>
+
+<div class="formula"><div class="formula-label">LERNER INDEX / INVERSE ELASTICITY RULE</div><div class="formula-math">(p<sub>k</sub> &minus; MC) / p<sub>k</sub> = &minus;1 / &epsilon;<sub>k</sub></div><div class="formula-label">The markup over marginal cost is inversely proportional to the absolute elasticity of the segment</div></div>
+
+<p>Solving for the optimal price:</p>
+
+<div class="formula"><div class="formula-label">OPTIMAL SEGMENT PRICE</div><div class="formula-math">p<sub>k</sub>* = MC &middot; &epsilon;<sub>k</sub> / (1 + &epsilon;<sub>k</sub>)</div><div class="formula-label">Where &epsilon;<sub>k</sub> is the own-price elasticity of demand for segment k (negative number)</div></div>
+
+<p>Let's work through a concrete numerical example. Suppose MC = $20 per user per month and you've estimated segment elasticities using the log-log models from Week 14:</p>
+
+<table class="comp-table"><thead><tr><th>Segment</th><th>Elasticity (&epsilon;)</th><th>Lerner Index (markup %)</th><th>Optimal Price</th><th>Margin per User</th></tr></thead><tbody>
+<tr><td>Enterprise (500+ seats)</td><td>&minus;1.4</td><td>71.4%</td><td>$70.00</td><td>$50.00</td></tr>
+<tr><td>Mid-Market (50&ndash;499)</td><td>&minus;2.5</td><td>40.0%</td><td>$33.33</td><td>$13.33</td></tr>
+<tr><td>SMB (10&ndash;49)</td><td>&minus;4.0</td><td>25.0%</td><td>$26.67</td><td>$6.67</td></tr>
+<tr><td>Starter (1&ndash;9)</td><td>&minus;7.0</td><td>14.3%</td><td>$23.33</td><td>$3.33</td></tr>
+</tbody></table>
+
+<div class="callout insight"><div class="callout-label">Why Enterprise Pays 3x More &mdash; And Why That's Rational</div><p>Enterprise customers have low elasticity (&epsilon; = &minus;1.4) because switching costs are enormous (data migration, retraining, procurement cycles), the software is deeply embedded in their workflows, the price is a tiny fraction of their budget, and there are few substitutes that meet their compliance requirements. Starter customers have high elasticity (&epsilon; = &minus;7.0) because they can switch to free alternatives, have minimal data lock-in, and the price is a meaningful portion of their budget. The 3x price difference isn't arbitrary &mdash; it's a direct mathematical consequence of how sensitive each segment is to price changes.</p></div>
+
+<div class="callout danger"><div class="callout-label">The Elasticity > &minus;1 Trap</div><p>Notice that the Lerner formula requires |&epsilon;| > 1 (elastic demand). If a segment has |&epsilon;| &le; 1 (inelastic demand), the profit-maximizing price is technically infinite &mdash; you should keep raising the price because total revenue increases even as quantity falls. In practice, this means either: (a) your elasticity estimate is wrong (the linear model breaks down at extreme prices), or (b) you're in a monopoly position for that segment and should test higher prices. Never set prices based on elasticities measured only near the current price; re-estimate at candidate price points using conjoint or experimental methods.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 4: CONSUMER SURPLUS EXTRACTION          -->
+<!-- ============================================ -->
+<div class="section" id="surplus"><h2>Part 4: Quantifying the Surplus Extraction Opportunity</h2>
+
+<p>Consumer surplus is the area between the demand curve and the market price &mdash; it represents the aggregate "bargain" that customers get when they pay less than their maximum WTP. Under uniform pricing, this area can be enormous. Price discrimination captures a portion of it as additional profit.</p>
+
+<div class="formula"><div class="formula-label">CONSUMER SURPLUS UNDER UNIFORM PRICE</div><div class="formula-math">CS = &int;<sub>p*</sub><sup>p<sub>max</sub></sup> Q(p) dp</div><div class="formula-label">Area between the demand curve and the price line, from market price to the maximum WTP</div></div>
+
+<p>The <strong>Surplus Extraction Ratio (SER)</strong> measures how much additional profit segmented pricing captures relative to uniform pricing:</p>
+
+<div class="formula"><div class="formula-label">SURPLUS EXTRACTION RATIO</div><div class="formula-math">SER = &Pi;<sub>segmented</sub> / &Pi;<sub>uniform</sub></div><div class="formula-label">SER > 1 always. Typical range: 1.15&ndash;1.40 for well-executed third-degree PD.</div></div>
+
+<p>Let's compute the SER for our SaaS example. Under uniform pricing at $49 with MC = $20:</p>
+
+<table class="comp-table"><thead><tr><th>Scenario</th><th>Enterprise<br>(200 customers)</th><th>Mid-Market<br>(800)</th><th>SMB<br>(3,000)</th><th>Starter<br>(0 or 1,500)</th><th>Total Profit</th></tr></thead><tbody>
+<tr><td><strong>Uniform ($49)</strong></td><td>200 &times; $29 = $5,800</td><td>800 &times; $29 = $23,200</td><td>3,000 &times; $29 = $87,000</td><td>0 (priced out)</td><td>$116,000</td></tr>
+<tr><td><strong>Segmented</strong></td><td>180 &times; $50 = $9,000</td><td>720 &times; $13.33 = $9,600</td><td>3,500 &times; $6.67 = $23,345</td><td>1,500 &times; $3.33 = $4,995</td><td>$46,940*</td></tr>
+</tbody></table>
+
+<p><em>*This simplified example holds quantities fixed. In practice, lower prices in elastic segments increase quantity (SMB expands from 3,000 to 3,500, Starter enters at 1,500), while higher enterprise prices lose some customers (200 &rarr; 180). The net effect depends on the magnitude of elasticity differences, which is why you need the full demand model, not back-of-envelope math.</em></p>
+
+<div class="callout"><div class="callout-label">The Full Optimization: Monte Carlo Simulation</div><p>In practice, you don't use the analytical formula in isolation. You build a simulation: (1) estimate demand functions Q<sub>k</sub>(p<sub>k</sub>) for each segment using historical data or conjoint-derived elasticities, (2) simulate 10,000 scenarios with uncertainty around the elasticity estimates (&plusmn;0.3 around central estimate), (3) for each scenario, compute the optimal price per segment using the Lerner formula, (4) compute profit under both uniform and segmented pricing, (5) report the distribution of SER across scenarios. This gives you not just a point estimate but a confidence interval: "Segmented pricing is expected to increase profit by 22&ndash;38% (95% CI)."</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 5: PRICE FENCES AND SECOND-DEGREE PD    -->
+<!-- ============================================ -->
+<div class="section" id="fences"><h2>Part 5: Designing Price Fences</h2>
+
+<p>Price fences are the features, restrictions, or conditions that prevent high-WTP customers from choosing the low-price option. Without effective fences, segmented pricing collapses into a single low price &mdash; everyone chooses the cheapest tier. Fence design is where economic theory meets product strategy.</p>
+
+<table class="comp-table"><thead><tr><th>Fence Type</th><th>Mechanism</th><th>Example</th><th>Effectiveness</th></tr></thead><tbody>
+<tr><td><strong>Feature-Based</strong></td><td>Higher tier includes features that high-WTP customers need</td><td>SSO, audit logs, API access, advanced analytics</td><td>High &mdash; enterprise genuinely needs these features</td></tr>
+<tr><td><strong>Volume-Based</strong></td><td>Per-unit price decreases with quantity</td><td>"$49/user for 1&ndash;49 users, $39/user for 50+"</td><td>Moderate &mdash; prevents small customers from paying enterprise rate but not vice versa</td></tr>
+<tr><td><strong>Time-Based</strong></td><td>Higher price for immediate access, lower for delayed</td><td>Airline early-booking vs. last-minute pricing</td><td>High for travel, moderate for SaaS</td></tr>
+<tr><td><strong>Channel-Based</strong></td><td>Different prices through different sales channels</td><td>Self-serve web vs. sales-assisted</td><td>High &mdash; enterprise buying through sales naturally selects for higher WTP</td></tr>
+<tr><td><strong>Commitment-Based</strong></td><td>Lower price for longer contracts</td><td>Monthly vs. annual billing (20% discount for annual)</td><td>High &mdash; doubles as retention mechanism</td></tr>
+<tr><td><strong>Verification-Based</strong></td><td>Require proof of segment membership</td><td>Student ID for student discount, .edu email</td><td>Very high &mdash; hard to fake; but limited to verifiable groups</td></tr>
+</tbody></table>
+
+<div class="callout insight"><div class="callout-label">The Incentive Compatibility Constraint</div><p>In mechanism design theory (Myerson, 1981), a pricing menu is <strong>incentive compatible</strong> if each customer type voluntarily selects the option designed for them. The formal condition: the surplus a customer gets from choosing "their" tier must be greater than or equal to the surplus from choosing any other tier. If an enterprise customer gets more surplus from the Pro tier ($49) than the Enterprise tier ($89), they'll downgrade &mdash; and your segmented pricing collapses. Testing incentive compatibility is done via conjoint simulation: predict choice probabilities for each segment across all tiers. If more than 20% of a high-WTP segment prefers a lower tier, your fence is too weak.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 6: LEGAL FRAMEWORK                      -->
+<!-- ============================================ -->
+<div class="section" id="legal"><h2>Part 6: The Legal &amp; Ethical Framework</h2>
+
+<p>Price discrimination is not inherently illegal. In fact, most forms are perfectly legal and economically efficient. The legal landscape varies by context:</p>
+
+<table class="comp-table"><thead><tr><th>Context</th><th>Legal Status</th><th>Key Statute / Principle</th><th>Key Constraint</th></tr></thead><tbody>
+<tr><td><strong>B2B:</strong> different prices to different business customers</td><td>Conditional</td><td>Robinson-Patman Act (15 U.S.C. &sect; 13, 1936)</td><td>Cannot discriminate if it "substantially lessens competition." Three defenses: cost justification, meeting competition, functional discount</td></tr>
+<tr><td><strong>B2C:</strong> student/senior/military discounts</td><td>Generally legal</td><td>No federal prohibition in US; state consumer protection laws apply</td><td>Must not discriminate on protected classes (race, religion, national origin, sex)</td></tr>
+<tr><td><strong>Geographic pricing</strong> (different price by country/region)</td><td>Generally legal</td><td>Legal in most jurisdictions; EU has restrictions under Digital Single Market rules</td><td>Must prevent arbitrage; EU Geo-blocking Regulation (2018/302) prohibits unjustified geo-blocking for digital goods within EU</td></tr>
+<tr><td><strong>Personalized pricing</strong> (individual-level dynamic)</td><td>Legally gray, reputationally risky</td><td>GDPR (EU) requires transparency in automated decision-making; FTC scrutiny in US; California CCPA</td><td>Algorithmic pricing based on individual data profiles faces increasing regulatory attention</td></tr>
+<tr><td><strong>Protected-class pricing</strong></td><td>Never legal</td><td>Civil Rights Act (1964), Equal Credit Opportunity Act, Fair Housing Act in US; Equality Act (2010) in UK; equivalents worldwide</td><td>Cannot vary prices based on race, sex, religion, national origin, disability, age (with exceptions for genuine actuarial differences in insurance)</td></tr>
+</tbody></table>
+
+<h3>Robinson-Patman Act: The B2B Minefield</h3>
+
+<p>The Robinson-Patman Act (1936) is the most commonly relevant statute for B2B price discrimination. It prohibits sellers from charging different prices to different buyers of "commodities of like grade and quality" where the effect "may be substantially to lessen competition." Three critical defenses exist:</p>
+
+<p><strong>Cost Justification Defense:</strong> The price difference reflects genuine cost differences in serving the customer. Enterprise customers who require dedicated support, custom integrations, and SLA monitoring genuinely cost more to serve &mdash; and this cost difference justifies a higher price (not lower). Conversely, volume discounts are justified if the per-unit cost of serving a large customer is genuinely lower (bulk shipping, reduced transaction overhead).</p>
+
+<p><strong>Meeting Competition Defense:</strong> The lower price was offered in good faith to match a competitor's offer to that specific customer. This requires documented evidence of the competitive offer.</p>
+
+<p><strong>Functional Discount Defense:</strong> Different prices reflect different functions in the distribution chain (wholesaler vs. retailer). This primarily applies to physical goods distribution.</p>
+
+<div class="callout danger"><div class="callout-label">The Reputational Risk Is Greater Than Legal Risk</div><p>For most SaaS and digital businesses, the legal boundaries are clear and permissive. The real constraint is customer perception. If customers discover they're paying different prices based on opaque criteria, the trust damage can far exceed the pricing gains. Amazon famously abandoned a dynamic pricing experiment in 2000 after customers discovered they were being charged different prices for the same DVD based on browsing history. The ensuing PR crisis cost far more than the experiment gained. Best practices: (a) make tier structure publicly visible, (b) justify price differences with genuine value differences (features, SLA, support), (c) never price based on demographic proxies that could be perceived as discriminatory, and (d) let customers self-select into tiers rather than assigning them.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 7: PYTHON IMPLEMENTATION                -->
+<!-- ============================================ -->
+<div class="section" id="code"><h2>Part 7: Implementation in Python</h2>
+
+<div class="code-block"><div class="code-label">Python &middot; Segment Elasticity Estimation + Optimal Pricing</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.optimize <span class="kw">import</span> minimize
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 1: Define Segments with Estimated Elasticities</span>
+<span class="cm"># (In practice, these come from Week 14 log-log models)</span>
+<span class="cm"># =============================================</span>
+segments = pd.<span class="fn">DataFrame</span>({
+    <span class="str">'segment'</span>: [<span class="str">'Enterprise'</span>, <span class="str">'Mid-Market'</span>, <span class="str">'SMB'</span>, <span class="str">'Starter'</span>],
+    <span class="str">'elasticity'</span>: [-<span class="num">1.4</span>, -<span class="num">2.5</span>, -<span class="num">4.0</span>, -<span class="num">7.0</span>],
+    <span class="str">'n_customers'</span>: [<span class="num">200</span>, <span class="num">800</span>, <span class="num">3000</span>, <span class="num">0</span>],  <span class="cm"># Starter=0 at $49</span>
+    <span class="str">'current_price'</span>: [<span class="num">49</span>, <span class="num">49</span>, <span class="num">49</span>, <span class="num">49</span>],
+    <span class="str">'potential_starter'</span>: [<span class="num">0</span>, <span class="num">0</span>, <span class="num">0</span>, <span class="num">1500</span>]  <span class="cm"># addressable if priced right</span>
+})
+MC = <span class="num">20</span>  <span class="cm"># marginal cost per user/month</span>
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 2: Inverse Elasticity Pricing Rule</span>
+<span class="cm"># p* = MC * epsilon / (1 + epsilon)</span>
+<span class="cm"># =============================================</span>
+segments[<span class="str">'optimal_price'</span>] = MC * segments[<span class="str">'elasticity'</span>] / (<span class="num">1</span> + segments[<span class="str">'elasticity'</span>])
+segments[<span class="str">'lerner_index'</span>] = -<span class="num">1</span> / segments[<span class="str">'elasticity'</span>]
+
+<span class="fn">print</span>(<span class="str">"=== Inverse Elasticity Pricing ==="</span>)
+<span class="fn">print</span>(segments[[<span class="str">'segment'</span>, <span class="str">'elasticity'</span>, <span class="str">'lerner_index'</span>,
+                <span class="str">'optimal_price'</span>]].<span class="fn">to_string</span>(index=<span class="kw">False</span>))
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 3: Demand Response at New Prices</span>
+<span class="cm"># Q(p_new) = Q(p_old) * (p_new / p_old) ^ elasticity</span>
+<span class="cm"># =============================================</span>
+p_old = <span class="num">49</span>
+segments[<span class="str">'q_uniform'</span>] = segments[<span class="str">'n_customers'</span>]
+segments[<span class="str">'q_segmented'</span>] = segments.<span class="fn">apply</span>(
+    <span class="kw">lambda</span> r: r[<span class="str">'n_customers'</span>] * (r[<span class="str">'optimal_price'</span>] / p_old) ** r[<span class="str">'elasticity'</span>]
+    <span class="kw">if</span> r[<span class="str">'n_customers'</span>] > <span class="num">0</span> <span class="kw">else</span> r[<span class="str">'potential_starter'</span>], axis=<span class="num">1</span>)
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 4: Profit Comparison</span>
+<span class="cm"># =============================================</span>
+segments[<span class="str">'profit_uniform'</span>] = (p_old - MC) * segments[<span class="str">'q_uniform'</span>]
+segments[<span class="str">'profit_segmented'</span>] = (segments[<span class="str">'optimal_price'</span>] - MC) * segments[<span class="str">'q_segmented'</span>]
+
+<span class="fn">print</span>(<span class="str">"\\n=== Profit Comparison (Monthly) ==="</span>)
+<span class="kw">for</span> _, row <span class="kw">in</span> segments.<span class="fn">iterrows</span>():
+    <span class="fn">print</span>(<span class="str">f"  {row['segment']:12s}  Uniform: ${row['profit_uniform']:>10,.0f}"</span>
+          <span class="str">f"  Segmented: ${row['profit_segmented']:>10,.0f}"</span>
+          <span class="str">f"  @ ${row['optimal_price']:.2f}/user"</span>)
+
+total_uniform = segments[<span class="str">'profit_uniform'</span>].<span class="fn">sum</span>()
+total_segmented = segments[<span class="str">'profit_segmented'</span>].<span class="fn">sum</span>()
+ser = total_segmented / total_uniform
+
+<span class="fn">print</span>(<span class="str">f"\\n  {'TOTAL':12s}  Uniform: ${total_uniform:>10,.0f}"</span>
+      <span class="str">f"  Segmented: ${total_segmented:>10,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"\\n  Surplus Extraction Ratio (SER): {ser:.2f}x"</span>)
+<span class="fn">print</span>(<span class="str">f"  Additional monthly profit:       ${total_segmented - total_uniform:>+10,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Additional annual profit:         ${(total_segmented - total_uniform)*12:>+10,.0f}"</span>)</pre></div>
+
+<div class="code-block"><div class="code-label">Python &middot; Monte Carlo SER Simulation</div>
+<pre><span class="cm"># =============================================</span>
+<span class="cm"># STEP 5: Monte Carlo Uncertainty Quantification</span>
+<span class="cm"># Elasticities are estimates with uncertainty</span>
+<span class="cm"># =============================================</span>
+np.random.<span class="fn">seed</span>(<span class="num">42</span>)
+n_simulations = <span class="num">10000</span>
+elasticity_se = <span class="num">0.3</span>  <span class="cm"># standard error of elasticity estimates</span>
+
+sim_results = []
+<span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(n_simulations):
+    sim_profit_uniform = <span class="num">0</span>
+    sim_profit_segmented = <span class="num">0</span>
+    
+    <span class="kw">for</span> _, row <span class="kw">in</span> segments.<span class="fn">iterrows</span>():
+        <span class="cm"># Draw elasticity from normal distribution around estimate</span>
+        e = np.random.<span class="fn">normal</span>(row[<span class="str">'elasticity'</span>], elasticity_se)
+        e = <span class="fn">min</span>(e, -<span class="num">1.05</span>)  <span class="cm"># ensure |e| > 1</span>
+        
+        p_opt = MC * e / (<span class="num">1</span> + e)
+        q_base = row[<span class="str">'n_customers'</span>] <span class="kw">if</span> row[<span class="str">'n_customers'</span>] > <span class="num">0</span> <span class="kw">else</span> row[<span class="str">'potential_starter'</span>]
+        q_seg = q_base * (p_opt / p_old) ** e <span class="kw">if</span> row[<span class="str">'n_customers'</span>] > <span class="num">0</span> <span class="kw">else</span> q_base
+        
+        sim_profit_uniform += (p_old - MC) * row[<span class="str">'n_customers'</span>]
+        sim_profit_segmented += (p_opt - MC) * q_seg
+    
+    sim_results.<span class="fn">append</span>(sim_profit_segmented / sim_profit_uniform
+                       <span class="kw">if</span> sim_profit_uniform > <span class="num">0</span> <span class="kw">else</span> <span class="num">1</span>)
+
+ser_array = np.<span class="fn">array</span>(sim_results)
+<span class="fn">print</span>(<span class="str">f"\\n=== SER Distribution (n={n_simulations:,} simulations) ==="</span>)
+<span class="fn">print</span>(<span class="str">f"  Mean SER:   {ser_array.mean():.2f}x"</span>)
+<span class="fn">print</span>(<span class="str">f"  Median SER: {np.median(ser_array):.2f}x"</span>)
+<span class="fn">print</span>(<span class="str">f"  95% CI:     [{np.percentile(ser_array, 2.5):.2f}x, {np.percentile(ser_array, 97.5):.2f}x]"</span>)
+<span class="fn">print</span>(<span class="str">f"  P(SER > 1): {(ser_array > 1).mean()*100:.1f}%"</span>)</pre></div>
+
+<div class="code-block"><div class="code-label">Python &middot; Incentive Compatibility Check</div>
+<pre><span class="cm"># =============================================</span>
+<span class="cm"># STEP 6: Does the Menu Self-Select Correctly?</span>
+<span class="cm"># Check: would enterprise choose Pro tier instead?</span>
+<span class="cm"># =============================================</span>
+tiers = pd.<span class="fn">DataFrame</span>({
+    <span class="str">'tier'</span>: [<span class="str">'Starter'</span>, <span class="str">'Pro'</span>, <span class="str">'Enterprise'</span>],
+    <span class="str">'price'</span>: [<span class="num">23.33</span>, <span class="num">33.33</span>, <span class="num">70.00</span>],
+    <span class="str">'value_enterprise'</span>: [<span class="num">40</span>, <span class="num">80</span>, <span class="num">120</span>],   <span class="cm"># WTP by enterprise users</span>
+    <span class="str">'value_midmarket'</span>: [<span class="num">30</span>, <span class="num">55</span>, <span class="num">65</span>],    <span class="cm"># WTP by mid-market</span>
+    <span class="str">'value_smb'</span>: [<span class="num">25</span>, <span class="num">35</span>, <span class="num">38</span>],          <span class="cm"># WTP by SMB</span>
+    <span class="str">'value_starter'</span>: [<span class="num">22</span>, <span class="num">24</span>, <span class="num">25</span>],      <span class="cm"># WTP by starter</span>
+})
+
+<span class="fn">print</span>(<span class="str">"=== Incentive Compatibility Check ==="</span>)
+<span class="kw">for</span> seg <span class="kw">in</span> [<span class="str">'enterprise'</span>, <span class="str">'midmarket'</span>, <span class="str">'smb'</span>, <span class="str">'starter'</span>]:
+    val_col = <span class="str">f'value_{seg}'</span>
+    tiers[<span class="str">'surplus'</span>] = tiers[val_col] - tiers[<span class="str">'price'</span>]
+    best_tier = tiers.<span class="fn">loc</span>[tiers[<span class="str">'surplus'</span>].<span class="fn">idxmax</span>(), <span class="str">'tier'</span>]
+    best_surplus = tiers[<span class="str">'surplus'</span>].<span class="fn">max</span>()
+    <span class="fn">print</span>(<span class="str">f"  {seg:12s} → chooses {best_tier:12s} (surplus: ${best_surplus:.2f})"</span>)
+<span class="fn">print</span>(<span class="str">"\\nIf each segment chooses the tier designed for them → IC satisfied"</span>)</pre></div></div>
+
+<!-- ============================================ -->
+<!-- PART 8: PLAYBOOK                             -->
+<!-- ============================================ -->
+<div class="section" id="playbook"><h2>Part 8: Your Week 21 Playbook</h2>
+
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th><th>Deliverable</th></tr></thead><tbody>
+<tr><td>"How much more could we make with segment pricing?"</td><td>Inverse elasticity pricing per segment; compute SER</td><td>SER with 95% CI from Monte Carlo simulation</td></tr>
+<tr><td>"What should each tier cost?"</td><td>Lerner formula: p* = MC &middot; &epsilon; / (1 + &epsilon;)</td><td>Optimal price per segment with markup justification</td></tr>
+<tr><td>"Will customers self-select correctly?"</td><td>Incentive compatibility check via conjoint-derived valuations</td><td>Matrix showing surplus per segment per tier</td></tr>
+<tr><td>"What features differentiate our tiers?"</td><td>Price fence analysis: which features correlate with WTP?</td><td>Feature allocation matrix across tiers</td></tr>
+<tr><td>"Is our pricing legally defensible?"</td><td>Robinson-Patman checklist + cost/value justification</td><td>Legal review memo with defense documentation</td></tr>
+</tbody></table>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Microeconomic Foundation</h4><p>Pigou, A.C. (1920). <em>The Economics of Welfare</em>, Part II Ch. 17. Then: Varian, H.R. (1989). "Price Discrimination" in <em>Handbook of Industrial Organization</em>, Vol. 1, Ch. 10. Focus on the welfare conditions: when does PD increase vs. decrease total surplus? Derive the Lerner index from first-order profit maximization conditions.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Segment-Level Elasticity Estimation</h4><p>Using data from Week 14, split your customer base into 3&ndash;4 segments (by company size, industry, or behavioral cluster). Fit log-log demand models per segment. Compare elasticities. Apply the Lerner formula to compute optimal prices.</p></div>
+<div class="timeline-step"><h4>Day 5-6: Full P&L Simulation</h4><p>Build the Monte Carlo simulation: draw 10,000 elasticity scenarios, compute optimal prices and profits for each, report the SER distribution with confidence intervals. Then run the incentive compatibility check: does each segment prefer "their" tier?</p></div>
+<div class="timeline-step"><h4>Day 7: Pricing Strategy Memo</h4><p>"By moving from uniform pricing ($49) to three-tier pricing ($23/$33/$70), we expect to increase annual profit by $X (+Y%, 95% CI: [a%, b%]). This adds Z new Starter customers and captures $W additional surplus from Enterprise. Legal review confirms defensibility via [cost/feature justification]. Recommended launch: [phased rollout plan]."</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Foundational:</strong> Pigou, A.C. (1920). <em>The Economics of Welfare</em>. Macmillan. Part II, Ch. 17.<br>
+<strong>Welfare Analysis:</strong> Varian, H.R. (1985). Price Discrimination and Social Welfare. <em>American Economic Review</em>, 75(4), 870&ndash;875.<br>
+<strong>Industrial Organization:</strong> Tirole, J. (1988). <em>The Theory of Industrial Organization</em>. MIT Press. Ch. 3.<br>
+<strong>Handbook Survey:</strong> Varian, H.R. (1989). Price Discrimination. In <em>Handbook of Industrial Organization</em>, Vol. 1, Ch. 10. North-Holland.<br>
+<strong>Mechanism Design:</strong> Myerson, R.B. (1981). Optimal Auction Design. <em>Mathematics of Operations Research</em>, 6(1), 58&ndash;73.<br>
+<strong>Lerner Index:</strong> Lerner, A.P. (1934). The Concept of Monopoly and the Measurement of Monopoly Power. <em>Review of Economic Studies</em>, 1(3), 157&ndash;175.<br>
+<strong>Legal:</strong> Robinson-Patman Act, 15 U.S.C. &sect; 13 (1936). EU Geo-blocking Regulation 2018/302.<br>
+<strong>Digital Markets:</strong> Ezrachi, A. &amp; Stucke, M.E. (2016). <em>Virtual Competition: The Promise and Perils of the Algorithm-Driven Economy</em>. Harvard UP.<br>
+<strong>SaaS Pricing:</strong> Nagle, T.T. &amp; M&uuml;ller, G. (2018). <em>The Strategy and Tactics of Pricing</em>, 6th Ed. Routledge. Ch. 8&ndash;9.
+</p>
+<div class="bottom-nav"><a href="week20_promotion_calendar.html">&larr; Week 20: Promotion Calendar</a><a href="week22_reference_price.html">Week 22: Reference Price Effect &rarr;</a></div></div>
+
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>
