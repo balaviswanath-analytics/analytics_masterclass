@@ -1,0 +1,211 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 22: The Reference Price Effect — How Anchoring Shapes Demand</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html#q2" class="nav-label">Q2 HUB</a><a href="#business" class="nav-link active">The 5% Trap</a><a href="#prospect" class="nav-link">Prospect Theory</a><a href="#reference" class="nav-link">Reference Price Model</a><a href="#asymmetric" class="nav-link">Asymmetric Response</a><a href="#latitude" class="nav-link">Latitude of Acceptance</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+<header class="hero"><div class="week-tag">Week 22 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div><h1>The <span>Reference Price Effect</span>: How Anchoring Shapes Demand</h1><p class="hero-sub">A $5 price increase doesn't lose the same customers as a $5 decrease gains. Losses loom larger than gains. This asymmetry &mdash; rooted in Kahneman and Tversky's prospect theory &mdash; means that how your price compares to what customers <em>expect</em> to pay matters more than the price itself. This week formalizes the reference price mechanism, estimates its asymmetric impact on demand, and builds the models that predict when a price change will trigger disproportionate churn.</p></header>
+<main class="content">
+<div class="section" id="business"><h2>Part 1: The 5% Increase That Cost 18% of the Base</h2>
+<p>In early 2020, a regional US telecom with 1.6 million broadband subscribers implemented a 5% rate increase across its base plans. The pricing team modeled the impact using the company's historically estimated price elasticity of &minus;1.2, projecting a 6% volume loss offset by the 5% price gain for a net revenue improvement of roughly $14 million annually. The board approved the increase as routine &mdash; the company had raised prices by 3&ndash;5% every 18 months for a decade.</p>
+<p>What the model missed was context. This was the first price increase since a highly publicized competitor had entered the market six months earlier, offering comparable service at 15% below the incumbent's pre-increase price. The competitor's existence had reset customers' <em>reference price</em> &mdash; the price they considered "fair" and "expected" &mdash; from the incumbent's rate to the lower competitive rate. The 5% increase didn't register as a modest inflation adjustment in customers' minds. It registered as a 20% premium over the alternative, pushing the price well outside the latitude of acceptance.</p>
+<p>Within 90 days, the company lost 288,000 subscribers &mdash; an 18% churn rate on the affected base, triple what the elasticity model predicted. Post-hoc analysis using the reference price framework revealed why: the standard elasticity model treats a price increase and a price decrease symmetrically. But the <em>loss coefficient</em> (customers' sensitivity to prices above their reference point) was 2.4x the <em>gain coefficient</em> (sensitivity to prices below reference). The true predicted churn, using the asymmetric model, was 16.8% &mdash; almost exactly what occurred. The company had the data to forecast the disaster. They just used the wrong model.</p>
+<p>The $14 million in projected revenue gains evaporated. Instead, the lost subscribers represented $112 million in annual recurring revenue. The net annual impact was &minus;$98 million. It took 22 months and a $30 million win-back campaign to recover half the lost base &mdash; at a lower ARPU than the original cohort, because win-back offers required promotional pricing that further eroded the reference point.</p>
+<div class="callout danger"><div class="callout-label">Why Standard Elasticity Models Fail at Price Increases</div><p>The log-log elasticity model from Week 14 assumes that demand response is symmetric: a 5% increase and a 5% decrease produce equal-magnitude volume changes in opposite directions. Behavioral economics has known since 1979 (Kahneman &amp; Tversky) that this is empirically false. Losses are felt roughly 2&ndash;2.5x more intensely than equivalent gains. When you raise prices, you're not moving along a demand curve &mdash; you're triggering a loss-aversion response whose magnitude depends on the gap between the new price and the customer's internal reference price. The models in this week capture this asymmetry explicitly.</p></div></div>
+<div class="section" id="prospect"><h2>Part 2: Kahneman &amp; Tversky's Prospect Theory (1979)</h2>
+<p>Daniel Kahneman and Amos Tversky's 1979 <em>Econometrica</em> paper "Prospect Theory: An Analysis of Decision under Risk" is the most cited paper in the history of economics. Its central insight: people evaluate outcomes not in absolute terms but relative to a <strong>reference point</strong>, and their sensitivity to losses (outcomes below the reference) is roughly twice their sensitivity to gains (outcomes above the reference).</p>
+<div class="formula"><div class="formula-label">PROSPECT THEORY VALUE FUNCTION</div><div class="formula-math">v(x) = x<sup>&alpha;</sup> &nbsp;&nbsp; if x &ge; 0 (gains)<br>v(x) = &minus;&lambda;(&minus;x)<sup>&beta;</sup> &nbsp;&nbsp; if x &lt; 0 (losses)</div><div class="formula-label">&alpha; &asymp; &beta; &asymp; 0.88 | &lambda; &asymp; 2.25 (loss aversion coefficient) | Tversky &amp; Kahneman (1992) cumulative prospect theory estimates</div></div>
+<p>Three features of the value function matter for pricing:</p>
+<table class="comp-table"><thead><tr><th>Feature</th><th>Mathematical Property</th><th>Pricing Implication</th></tr></thead><tbody>
+<tr><td><strong>Reference Dependence</strong></td><td>Utility is evaluated as v(p &minus; r), not v(p), where r is the reference price</td><td>A $50 price feels cheap if the reference is $70 but expensive if the reference is $40 &mdash; even though the price is identical</td></tr>
+<tr><td><strong>Loss Aversion</strong></td><td>&lambda; &asymp; 2.25: the slope of the value function is steeper for losses than for gains</td><td>A $5 price increase triggers 2.25x the behavioral response of a $5 decrease</td></tr>
+<tr><td><strong>Diminishing Sensitivity</strong></td><td>&alpha;, &beta; &lt; 1: the function is concave for gains and convex for losses</td><td>The first $1 above the reference price hurts the most; subsequent dollars have diminishing marginal sting</td></tr>
+</tbody></table>
+<div class="callout insight"><div class="callout-label">From Lab to Market: The Empirical Evidence</div><p>Hardie, Johnson, and Fader (1993) applied prospect theory to actual brand-choice data (orange juice scanner panel data) and confirmed that loss aversion operates in real purchase decisions, not just laboratory gambles. Their estimates: the loss coefficient for price was 2.48x the gain coefficient. Subsequent studies across categories (Putler 1992 on eggs, Bell &amp; Lattin 2000 on grocery, Mazumdar et al. 2005 meta-analysis of 52 studies) consistently find loss-to-gain ratios between 1.5 and 3.0, with a median around 2.0&ndash;2.5. This is one of the most robust findings in behavioral economics.</p></div></div>
+<div class="section" id="reference"><h2>Part 3: The Reference Price Demand Model</h2>
+<p>Russell Winer's 1986 <em>Marketing Science</em> paper "A Reference Price Model of Brand Choice for Frequently Purchased Products" formalized how to incorporate reference prices into demand estimation. The core insight: split the price variable into two components &mdash; the price itself and its deviation from the reference price &mdash; and estimate separate coefficients for each.</p>
+<h3>What Is the Reference Price?</h3>
+<p>The reference price is the price a customer <em>expects</em> to pay based on their prior experience. Several formation mechanisms have been proposed and empirically tested:</p>
+<table class="comp-table"><thead><tr><th>Formation Rule</th><th>Formula</th><th>When It Dominates</th><th>Key Paper</th></tr></thead><tbody>
+<tr><td><strong>Exponential Smoothing</strong></td><td>r<sub>t</sub> = &phi; &middot; p<sub>t-1</sub> + (1&minus;&phi;) &middot; r<sub>t-1</sub></td><td>Frequently purchased products (grocery, CPG)</td><td>Winer (1986)</td></tr>
+<tr><td><strong>Last Price Paid</strong></td><td>r<sub>t</sub> = p<sub>t-1</sub></td><td>Infrequent purchases; subscription services</td><td>Lattin &amp; Bucklin (1989)</td></tr>
+<tr><td><strong>Average of Last N Prices</strong></td><td>r<sub>t</sub> = (1/N) &sum; p<sub>t-k</sub></td><td>Products with volatile pricing (fashion, travel)</td><td>Mazumdar &amp; Papatla (2000)</td></tr>
+<tr><td><strong>Contextual (Competitor)</strong></td><td>r<sub>t</sub> = competitive price or market average</td><td>Commoditized markets with transparent pricing</td><td>Hardie et al. (1993)</td></tr>
+</tbody></table>
+<p>The exponential smoothing model is the most commonly used because it captures a key behavioral fact: recent prices have more influence on expectations than distant prices, but the influence decays gradually rather than dropping to zero. The parameter &phi; (typically 0.3&ndash;0.7) governs the speed of adaptation. A high &phi; means customers quickly update their reference to the most recent price (short memory); a low &phi; means the reference is sticky and slow to move (long memory).</p>
+<div class="formula"><div class="formula-label">WINER (1986) REFERENCE PRICE DEMAND MODEL</div><div class="formula-math">U<sub>it</sub> = &beta;<sub>0</sub> + &beta;<sub>p</sub> p<sub>it</sub> + &beta;<sub>gain</sub> max(r<sub>it</sub> &minus; p<sub>it</sub>, 0) + &beta;<sub>loss</sub> min(r<sub>it</sub> &minus; p<sub>it</sub>, 0) + &epsilon;<sub>it</sub></div><div class="formula-label">U = utility (or log demand) | p = actual price | r = reference price | gain = price below ref | loss = price above ref</div></div>
+<p>The model splits the reference price effect into two separate variables: a <strong>gain</strong> variable (activated when the actual price is below the reference &mdash; the customer perceives a deal) and a <strong>loss</strong> variable (activated when the actual price is above the reference &mdash; the customer perceives a penalty). By estimating &beta;<sub>gain</sub> and &beta;<sub>loss</sub> separately, the model captures the asymmetry that standard elasticity models miss.</p>
+<div class="callout"><div class="callout-label">Interpreting the Coefficients</div><p><strong>&beta;<sub>p</sub></strong> is the baseline price sensitivity (equivalent to the standard elasticity coefficient). <strong>&beta;<sub>gain</sub></strong> is the <em>additional</em> positive demand response when price is below reference. <strong>&beta;<sub>loss</sub></strong> is the <em>additional</em> negative demand response when price is above reference. If |&beta;<sub>loss</sub>| > |&beta;<sub>gain</sub>|, loss aversion is confirmed. The <strong>loss aversion ratio</strong> &lambda; = |&beta;<sub>loss</sub>| / |&beta;<sub>gain</sub>| typically falls between 1.5 and 3.0. A ratio of 2.0 means a $1 price increase above the reference destroys twice as much demand as a $1 decrease below the reference creates.</p></div></div>
+<div class="section" id="asymmetric"><h2>Part 4: Modeling Asymmetric Price Response</h2>
+<p>The practical consequence of loss aversion is that the demand response to a price change depends on its <em>direction</em> relative to the reference price. This creates a kinked demand curve: steep above the reference price (customers are very sensitive to increases) and shallow below it (customers are less responsive to decreases).</p>
+<h3>Worked Example: Telecom Broadband Plan</h3>
+<p>Suppose your broadband plan is currently $59.99/month and the reference price (based on exponential smoothing of the last 12 months of market prices) is $57.00. Your estimated coefficients from the Winer model:</p>
+<table class="comp-table"><thead><tr><th>Parameter</th><th>Estimate</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>&beta;<sub>p</sub> (base price effect)</td><td>&minus;0.042</td><td>Each $1 in price reduces demand by 4.2% (baseline)</td></tr>
+<tr><td>&beta;<sub>gain</sub></td><td>+0.018</td><td>Each $1 below reference adds 1.8% demand (deal bonus)</td></tr>
+<tr><td>&beta;<sub>loss</sub></td><td>&minus;0.041</td><td>Each $1 above reference destroys 4.1% demand (loss penalty)</td></tr>
+<tr><td>Loss aversion ratio (&lambda;)</td><td>2.28</td><td>Losses hurt 2.28x more than gains help</td></tr>
+</tbody></table>
+<p>Current state: the actual price ($59.99) is $2.99 above the reference ($57.00), so the loss variable is active. Now consider two scenarios:</p>
+<table class="comp-table"><thead><tr><th>Scenario</th><th>New Price</th><th>Gap from Ref</th><th>Active Variable</th><th>Total Effect on Demand</th></tr></thead><tbody>
+<tr><td>A: Raise to $64.99</td><td>$64.99</td><td>+$7.99 (loss)</td><td>&beta;<sub>p</sub> &times; 5 + &beta;<sub>loss</sub> &times; 5</td><td>&minus;0.042(5) + (&minus;0.041)(5) = <strong>&minus;41.5%</strong></td></tr>
+<tr><td>B: Drop to $54.99</td><td>$54.99</td><td>&minus;$2.01 (gain)</td><td>&beta;<sub>p</sub> &times; (&minus;5) + &beta;<sub>gain</sub> &times; 5</td><td>+0.042(5) + 0.018(5) = <strong>+30.0%</strong></td></tr>
+<tr><td>Standard model (no ref)</td><td>&mdash;</td><td>&mdash;</td><td>&beta;<sub>p</sub> &times; 5 only</td><td><strong>&plusmn;21.0%</strong> (symmetric)</td></tr>
+</tbody></table>
+<p>The standard elasticity model predicts a symmetric 21% demand change for a $5 move in either direction. The reference price model reveals the truth: a $5 increase destroys 41.5% of demand (almost double the standard prediction), while a $5 decrease only recovers 30.0% (less than 50% more than the standard prediction). This asymmetry is why naive elasticity models consistently underpredict the damage from price increases and overpredict the benefit of price decreases.</p>
+<div class="callout insight"><div class="callout-label">The Ratchet Effect</div><p>Because losses are felt more strongly than gains, a cycle of "increase $5, then decrease $5 to win them back" does <em>not</em> return you to the starting point. The increase loses more customers than the decrease recovers. Each cycle ratchets demand downward. This is why "raise now, promotional discount later" strategies are insidious: each iteration erodes the base. Mazumdar, Raj, and Sinha (2005) documented this in their meta-analysis, finding that the long-run effect of a price increase followed by an equivalent decrease is a <strong>net loss of 8&ndash;15% of the affected customer base</strong>.</p></div></div>
+<div class="section" id="latitude"><h2>Part 5: Latitude of Acceptance &mdash; How Far Can You Push?</h2>
+<p>Kalyanaram and Little (1994) introduced the concept of the <strong>latitude of acceptance</strong> (also called the "zone of indifference") &mdash; a range around the reference price within which price changes have little or no effect on purchase probability. Only when the price moves <em>outside</em> this zone does the reference price effect activate.</p>
+<div class="formula"><div class="formula-label">LATITUDE OF ACCEPTANCE</div><div class="formula-math">If |p<sub>t</sub> &minus; r<sub>t</sub>| &le; &delta;, the reference price effect is dormant<br>If p<sub>t</sub> &minus; r<sub>t</sub> > &delta;, the loss effect activates<br>If r<sub>t</sub> &minus; p<sub>t</sub> > &delta;, the gain effect activates</div><div class="formula-label">&delta; = width of the indifference zone (typically 5&ndash;15% of the reference price)</div></div>
+<p>This is why small, frequent price increases (2&ndash;3% annually) often pass without resistance while a single large increase (8&ndash;10%) triggers disproportionate churn. The small increases stay within the latitude of acceptance; the large increase breaches it, activating loss aversion.</p>
+<table class="comp-table"><thead><tr><th>Price Change Strategy</th><th>Latitude Status</th><th>Expected Customer Response</th><th>When to Use</th></tr></thead><tbody>
+<tr><td>Small, annual increase (2&ndash;3%)</td><td>Likely within zone</td><td>Minimal churn; reference price gradually adjusts upward</td><td>Default strategy for mature products</td></tr>
+<tr><td>Large, infrequent increase (8&ndash;15%)</td><td>Likely outside zone</td><td>Significant churn spike; reference price takes 6&ndash;12 months to catch up</td><td>Avoid unless justified by major value addition</td></tr>
+<tr><td>Increase bundled with feature addition</td><td>Shifts reference upward</td><td>Increase is absorbed if perceived value increase &ge; price increase</td><td>Best practice for above-zone increases</td></tr>
+<tr><td>Competitive price match (decrease)</td><td>Moves into gain zone</td><td>Moderate demand boost; establishes new lower reference</td><td>Defensive response to market entry</td></tr>
+</tbody></table>
+<div class="callout"><div class="callout-label">Estimating the Latitude Width</div><p>Kalyanaram and Winer (1995) proposed a practical estimation approach: fit a threshold regression model where the reference price effect has a "dead zone" of width &delta; around r<sub>t</sub>. Use grid search over &delta; values (1% to 20% of mean price) and select the &delta; that maximizes model fit (AIC). Alternatively, segment customers by their price sensitivity decile and examine at which price-gap percentile churn first spikes &mdash; the inflection point estimates the latitude boundary. In telecom, typical estimates are 5&ndash;8% for contract customers and 10&ndash;15% for prepaid/no-contract.</p></div></div>
+<div class="section" id="code"><h2>Part 6: Implementation in Python</h2>
+<div class="code-block"><div class="code-label">Python &middot; Reference Price Formation + Winer Model</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LinearRegression
+<span class="kw">import</span> statsmodels.api <span class="kw">as</span> sm
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 1: Simulate Weekly Price & Demand Data</span>
+<span class="cm"># For real data: IRI Academic Dataset (store-level</span>
+<span class="cm"># scanner data) or your company's plan pricing history</span>
+<span class="cm"># =============================================</span>
+np.random.<span class="fn">seed</span>(<span class="num">42</span>)
+n_weeks = <span class="num">156</span>  <span class="cm"># 3 years of weekly data</span>
+
+<span class="cm"># Realistic telecom pricing: base $59.99, occasional changes</span>
+base_price = <span class="num">59.99</span>
+prices = np.<span class="fn">full</span>(n_weeks, base_price)
+<span class="cm"># Price events: increase at week 52, promo at week 80, increase at week 120</span>
+prices[<span class="num">52</span>:] = <span class="num">62.99</span>    <span class="cm"># +5% increase</span>
+prices[<span class="num">80</span>:<span class="num">92</span>] = <span class="num">54.99</span>   <span class="cm"># 12-week promotional price</span>
+prices[<span class="num">92</span>:] = <span class="num">62.99</span>     <span class="cm"># back to new standard</span>
+prices[<span class="num">120</span>:] = <span class="num">65.99</span>    <span class="cm"># second increase</span>
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 2: Compute Reference Price (Exp. Smoothing)</span>
+<span class="cm"># =============================================</span>
+phi = <span class="num">0.4</span>  <span class="cm"># smoothing parameter (0=sticky, 1=immediate)</span>
+ref_price = np.<span class="fn">zeros</span>(n_weeks)
+ref_price[<span class="num">0</span>] = prices[<span class="num">0</span>]
+<span class="kw">for</span> t <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, n_weeks):
+    ref_price[t] = phi * prices[t-<span class="num">1</span>] + (<span class="num">1</span> - phi) * ref_price[t-<span class="num">1</span>]
+
+<span class="cm"># Gain and Loss variables</span>
+gap = ref_price - prices  <span class="cm"># positive = price below ref (gain)</span>
+gain = np.<span class="fn">maximum</span>(gap, <span class="num">0</span>)
+loss = np.<span class="fn">minimum</span>(gap, <span class="num">0</span>)  <span class="cm"># negative values = price above ref</span>
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 3: Generate Demand with Asymmetric Response</span>
+<span class="cm"># =============================================</span>
+base_demand = <span class="num">50000</span>
+beta_p = -<span class="num">300</span>      <span class="cm"># base price sensitivity</span>
+beta_gain = <span class="num">150</span>    <span class="cm"># bonus demand per $1 below ref</span>
+beta_loss = -<span class="num">350</span>   <span class="cm"># penalty per $1 above ref</span>
+true_lambda = <span class="fn">abs</span>(beta_loss) / <span class="fn">abs</span>(beta_gain)  <span class="cm"># = 2.33</span>
+
+demand = (base_demand + beta_p * (prices - base_price)
+          + beta_gain * gain + beta_loss * loss
+          + np.random.<span class="fn">normal</span>(<span class="num">0</span>, <span class="num">500</span>, n_weeks)).<span class="fn">clip</span>(<span class="num">0</span>)
+
+df = pd.<span class="fn">DataFrame</span>({<span class="str">'week'</span>: <span class="fn">range</span>(n_weeks), <span class="str">'price'</span>: prices,
+                    <span class="str">'ref_price'</span>: ref_price, <span class="str">'gain'</span>: gain,
+                    <span class="str">'loss'</span>: loss, <span class="str">'demand'</span>: demand})
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 4: Estimate Standard vs. Winer Model</span>
+<span class="cm"># =============================================</span>
+X_standard = sm.<span class="fn">add_constant</span>(df[[<span class="str">'price'</span>]])
+model_standard = sm.<span class="fn">OLS</span>(df[<span class="str">'demand'</span>], X_standard).<span class="fn">fit</span>()
+
+X_winer = sm.<span class="fn">add_constant</span>(df[[<span class="str">'price'</span>, <span class="str">'gain'</span>, <span class="str">'loss'</span>]])
+model_winer = sm.<span class="fn">OLS</span>(df[<span class="str">'demand'</span>], X_winer).<span class="fn">fit</span>()
+
+<span class="fn">print</span>(<span class="str">"=== Model A: Standard Price Model ==="</span>)
+<span class="fn">print</span>(<span class="str">f"  R-squared: {model_standard.rsquared:.4f}  AIC: {model_standard.aic:.1f}"</span>)
+
+<span class="fn">print</span>(<span class="str">f"\n=== Model B: Winer Reference Price Model ==="</span>)
+<span class="fn">print</span>(<span class="str">f"  R-squared: {model_winer.rsquared:.4f}  AIC: {model_winer.aic:.1f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Price coef:  {model_winer.params['price']:.1f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Gain coef:   {model_winer.params['gain']:.1f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Loss coef:   {model_winer.params['loss']:.1f}"</span>)
+est_lambda = <span class="fn">abs</span>(model_winer.params[<span class="str">'loss'</span>]) / <span class="fn">abs</span>(model_winer.params[<span class="str">'gain'</span>])
+<span class="fn">print</span>(<span class="str">f"\n  Estimated loss aversion ratio: {est_lambda:.2f}x"</span>)
+<span class="fn">print</span>(<span class="str">f"  True loss aversion ratio:      {true_lambda:.2f}x"</span>)</pre></div>
+
+<div class="code-block"><div class="code-label">Python &middot; Latitude of Acceptance + Scenario Simulator</div>
+<pre><span class="cm"># =============================================</span>
+<span class="cm"># STEP 5: Latitude Width via Grid Search</span>
+<span class="cm"># =============================================</span>
+results = []
+<span class="kw">for</span> delta_pct <span class="kw">in</span> np.<span class="fn">arange</span>(<span class="num">0.01</span>, <span class="num">0.21</span>, <span class="num">0.01</span>):
+    delta = delta_pct * df[<span class="str">'ref_price'</span>]
+    gap = df[<span class="str">'ref_price'</span>] - df[<span class="str">'price'</span>]
+    gain_lat = np.<span class="fn">where</span>(gap > delta, gap - delta, <span class="num">0</span>)
+    loss_lat = np.<span class="fn">where</span>(gap < -delta, gap + delta, <span class="num">0</span>)
+    X_lat = sm.<span class="fn">add_constant</span>(pd.<span class="fn">DataFrame</span>({
+        <span class="str">'price'</span>: df[<span class="str">'price'</span>], <span class="str">'gain'</span>: gain_lat, <span class="str">'loss'</span>: loss_lat}))
+    <span class="kw">try</span>:
+        m = sm.<span class="fn">OLS</span>(df[<span class="str">'demand'</span>], X_lat).<span class="fn">fit</span>()
+        results.<span class="fn">append</span>({<span class="str">'delta_pct'</span>: delta_pct, <span class="str">'aic'</span>: m.aic})
+    <span class="kw">except</span>: <span class="kw">pass</span>
+
+best = pd.<span class="fn">DataFrame</span>(results).<span class="fn">sort_values</span>(<span class="str">'aic'</span>).<span class="fn">iloc</span>[<span class="num">0</span>]
+<span class="fn">print</span>(<span class="str">f"=== Latitude of Acceptance ==="</span>)
+<span class="fn">print</span>(<span class="str">f"  Optimal delta: {best['delta_pct']:.0%} of reference price"</span>)
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 6: Scenario Analysis</span>
+<span class="cm"># =============================================</span>
+current_price = <span class="num">62.99</span>; current_ref = <span class="num">60.50</span>; current_demand = <span class="num">44000</span>
+b_p = model_winer.params[<span class="str">'price'</span>]
+b_g = model_winer.params[<span class="str">'gain'</span>]
+b_l = model_winer.params[<span class="str">'loss'</span>]
+
+scenarios = [
+    (<span class="str">'Hold price'</span>, <span class="num">62.99</span>), (<span class="str">'Small increase +3%'</span>, <span class="num">64.88</span>),
+    (<span class="str">'Large increase +8%'</span>, <span class="num">68.03</span>), (<span class="str">'Competitive match -5%'</span>, <span class="num">59.84</span>)]
+
+<span class="fn">print</span>(<span class="str">f"\n{'Scenario':30s} {'Price':>7s} {'Gap':>7s} {'Demand':>8s} {'Revenue':>10s}"</span>)
+<span class="kw">for</span> name, p <span class="kw">in</span> scenarios:
+    g = <span class="fn">max</span>(current_ref - p, <span class="num">0</span>); l = <span class="fn">min</span>(current_ref - p, <span class="num">0</span>)
+    g0 = <span class="fn">max</span>(current_ref - current_price, <span class="num">0</span>); l0 = <span class="fn">min</span>(current_ref - current_price, <span class="num">0</span>)
+    dd = b_p*(p - current_price) + b_g*(g - g0) + b_l*(l - l0)
+    nd = <span class="fn">max</span>(current_demand + dd, <span class="num">0</span>)
+    <span class="fn">print</span>(<span class="str">f"{name:30s} ${p:>6.2f} ${current_ref-p:>+6.2f} {nd:>8,.0f} ${nd*p:>10,.0f}"</span>)</pre></div></div>
+
+<div class="section" id="playbook"><h2>Part 7: Your Week 22 Playbook</h2>
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th><th>Deliverable</th></tr></thead><tbody>
+<tr><td>"How will a price increase affect demand?"</td><td>Winer model with asymmetric gain/loss coefficients</td><td>Demand forecast with separate upside/downside scenarios</td></tr>
+<tr><td>"How sensitive are customers to increases vs. decreases?"</td><td>Loss aversion ratio: |&beta;<sub>loss</sub>| / |&beta;<sub>gain</sub>|</td><td>Ratio with confidence interval (typically 1.5&ndash;3.0)</td></tr>
+<tr><td>"How big a change can we get away with?"</td><td>Latitude of acceptance estimation via grid search</td><td>Zone width (% of reference price) and safe increase range</td></tr>
+<tr><td>"What's the current reference price?"</td><td>Exponential smoothing of historical prices</td><td>Time series of reference prices with the current estimate</td></tr>
+<tr><td>"One big increase or several small ones?"</td><td>Compare scenarios: 1 &times; 8% vs. 3 &times; 2.5% over 18 months</td><td>Revenue and churn trajectory for each path</td></tr>
+</tbody></table>
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Behavioral Foundation</h4><p>Kahneman, D. &amp; Tversky, A. (1979). "Prospect Theory: An Analysis of Decision under Risk." <em>Econometrica</em>, 47(2), 263&ndash;291. Then: Tversky, A. &amp; Kahneman, D. (1991). "Loss Aversion in Riskless Choice." <em>QJE</em>, 106(4), 1039&ndash;1061. Draw the S-shaped value function and label: reference point, concavity in gains, convexity in losses, steeper loss slope.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build the Winer Model</h4><p>Using IRI Academic Dataset or simulated data, compute reference prices at &phi; = 0.3, 0.4, 0.5. Construct gain and loss variables. Estimate both models. Compare R-squared and AIC. Estimate the loss aversion ratio. Read: Hardie et al. (1993). "Modeling Loss Aversion and Reference Dependence Effects on Brand Choice." <em>Marketing Science</em>, 12(4).</p></div>
+<div class="timeline-step"><h4>Day 5-6: Latitude Estimation + Scenarios</h4><p>Run grid search over &delta;. Find the optimal latitude width. Build the scenario simulator for 3 proposed price changes. Compare symmetric vs. asymmetric predictions. Read: Mazumdar, T. et al. (2005). "Reference Price Research: Review and Propositions." <em>JM</em>, 69(4).</p></div>
+<div class="timeline-step"><h4>Day 7: Price Change Recommendation</h4><p>"Given reference price of $X, a Y% increase is [within/outside] the latitude. The asymmetric model predicts Z% churn (vs. W% symmetric). Recommended approach: [small annual / bundled with feature / hold]. Expected 12-month revenue impact: $[K]."</p></div>
+</div>
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Prospect Theory:</strong> Kahneman, D. &amp; Tversky, A. (1979). Prospect Theory. <em>Econometrica</em>, 47(2), 263&ndash;291.<br>
+<strong>Cumulative PT:</strong> Tversky, A. &amp; Kahneman, D. (1992). Advances in Prospect Theory. <em>J. Risk &amp; Uncertainty</em>, 5(4), 297&ndash;323.<br>
+<strong>Reference Price Model:</strong> Winer, R.S. (1986). A Reference Price Model of Brand Choice. <em>Marketing Science</em>, 5(3), 250&ndash;268.<br>
+<strong>Empirical Validation:</strong> Hardie, B.G.S., Johnson, E.J. &amp; Fader, P.S. (1993). Modeling Loss Aversion. <em>Marketing Science</em>, 12(4), 378&ndash;394.<br>
+<strong>Latitude:</strong> Kalyanaram, G. &amp; Little, J.D.C. (1994). Latitude of Price Acceptance. <em>JCR</em>, 21(3), 408&ndash;418.<br>
+<strong>Meta-Analysis:</strong> Mazumdar, T., Raj, S.P. &amp; Sinha, I. (2005). Reference Price Research. <em>JM</em>, 69(4), 84&ndash;102.<br>
+<strong>Scanner Data:</strong> Putler, D.S. (1992). Incorporating Reference Price Effects. <em>Marketing Science</em>, 11(3), 287&ndash;309.<br>
+<strong>Cherry-Picking:</strong> Bell, D.R. &amp; Lattin, J.M. (2000). Looking for Loss Aversion in Scanner Panel Data. <em>Marketing Science</em>, 19(2), 185&ndash;200.
+</p>
+<div class="bottom-nav"><a href="week21_price_discrimination.html">&larr; Week 21: Price Discrimination</a><a href="week23_markdown_optimization.html">Week 23: Markdown Optimization &rarr;</a></div></div>
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 25: Subscription Tier Optimization</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}.section:nth-child(2){animation-delay:.1s}.section:nth-child(3){animation-delay:.2s}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}
+.demo-container{background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;margin:28px 0;box-shadow:0 4px 20px rgba(0,0,0,.04)}.demo-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:20px;color:var(--blue)}
+.slider-group{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}@media(max-width:600px){.slider-group{grid-template-columns:1fr}}.slider-item label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}.slider-item input[type="range"]{width:100%;accent-color:var(--accent)}.slider-val{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);float:right}
+.metric-box{background:var(--cream);padding:16px;border-radius:8px;text-align:center;border:1px solid var(--border)}
+.tier-bar{height:24px;border-radius:4px;display:inline-block;transition:width 0.3s ease;}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-label">Q2 HUB</a>
+  <a href="#business" class="nav-link active">Business Case</a>
+  <a href="#fences" class="nav-link">Price Fences</a>
+  <a href="#ic" class="nav-link">Incentive Compatibility</a>
+  <a href="#clustering" class="nav-link">Conjoint + Clustering</a>
+  <a href="#interactive" class="nav-link">Migration Simulator</a>
+  <a href="#code" class="nav-link">Python Code</a>
+  <a href="#playbook" class="nav-link">Playbook</a>
+</div></nav>
+
+<header class="hero">
+  <div class="week-tag">Week 25 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div>
+  <h1>Subscription Tier Optimization: <span>Designing Price Fences</span></h1>
+  <p class="hero-sub">In modern SaaS, Streaming, and Telecom, you rarely sell just one product. You sell a tiered architecture (Good-Better-Best). This week, we deploy clustering algorithms on conjoint utilities to design feature packages and price fences that mathematically force tier migration without triggering cannibalization.</p>
+</header>
+
+<main class="content">
+
+<div class="section" id="business">
+<h2>Part 1: The Good-Better-Best Dilemma</h2>
+<p>You are the Pricing Strategist for a B2B SaaS company. Currently, you have a "Pro" tier at $49/mo and an "Enterprise" tier at $499/mo. 92% of your customers sit in the Pro tier. Your sales team complains that Enterprise is "too expensive," but your product data shows that hundreds of Pro users are utilizing the platform heavily across entire departments.</p>
+
+<p>You have a tiering problem. You are leaving money on the table because your "Pro" tier is too generous, and your leap to "Enterprise" is too steep.</p>
+
+
+<div class="callout">
+  <div class="callout-label">The Packaging Failure</div>
+  <p>Most companies design tiers by sitting in a conference room and guessing: "Let's put the basic features in Tier 1, the advanced features in Tier 2, and SSO in Tier 3." This is product-centric pricing, not customer-centric pricing. Optimal tiering requires <strong>Feature-Value Mapping</strong>: identifying clusters of customers with distinctly different willingness-to-pay (WTP) profiles, and building tiers explicitly designed to capture the maximum surplus from each cluster.</p>
+</div>
+</div>
+
+<div class="section" id="fences">
+<h2>Part 2: The Architecture of a Price Fence</h2>
+<p>A <strong>Price Fence</strong> is a structural barrier designed to prevent a customer who is willing to pay a higher price from buying the cheaper tier. To make tiered pricing work, your fences must be uncomfortably tight for high-value users, but practically invisible to low-value users.</p>
+
+<h3>Types of Price Fences in Subscriptions </h3>
+<table class="comp-table">
+  <thead><tr><th>Fence Type</th><th>Example</th><th>Best Used When...</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Capacity / Usage</strong></td><td>100 GB vs. 1 TB storage; 5 vs. 50 users</td><td>Usage scales linearly with the value the customer extracts.</td></tr>
+    <tr><td><strong>Feature / Capability</strong></td><td>Basic analytics vs. Custom API access</td><td>Specific features are only demanded by highly sophisticated/corporate users.</td></tr>
+    <tr><td><strong>Performance / SLA</strong></td><td>48-hour email support vs. 1-hour phone SLA</td><td>Downtime represents massive financial risk to the buyer.</td></tr>
+    <tr><td><strong>Administrative</strong></td><td>SSO (Single Sign-On), Role-Based Access</td><td>The buyer is an enterprise IT department enforcing compliance.</td></tr>
+  </tbody>
+</table>
+
+<div class="callout danger">
+  <div class="callout-label">The Cannibalization Trap</div>
+  <p>If you include a feature in the "Good" tier that highly sophisticated users desperately need, those users will buy the "Good" tier, cannibalizing your "Best" tier revenue. Fencing is an exercise in intentional deprivation. You must restrict high-value features from lower tiers, even if they cost you $0 to provide.</p>
+</div>
+</div>
+
+<div class="section" id="ic">
+<h2>Part 3: The Incentive Compatibility Constraint</h2>
+<p>To predict <strong>Tier Migration</strong>, we must model consumer choice behavior. A rational user evaluates a pricing page by calculating their <strong>Consumer Surplus</strong> for each tier.</p>
+
+<div class="formula">
+  <div class="formula-label">CONSUMER SURPLUS</div>
+  <div class="formula-math">$$Surplus_{Tier} = Utility(Features_{Tier}) - Price_{Tier}$$</div>
+</div>
+
+<p>For a high-value "Enterprise" customer to actually buy the Enterprise tier, two mathematical conditions must hold:</p>
+<ol style="margin-left:24px;margin-bottom:16px;">
+  <li><strong>Individual Rationality:</strong> $Surplus_{Enterprise} \ge 0$. (The tier must be worth more than it costs).</li>
+  <li><strong>Incentive Compatibility (IC):</strong> $Surplus_{Enterprise} \ge Surplus_{Pro}$. (They must get a *better deal* by upgrading than by settling for the lower tier).</li>
+</ol>
+
+<p>If $Surplus_{Pro} > Surplus_{Enterprise}$ for a corporate buyer, they will downgrade to Pro. Your price fence has failed.</p>
+</div>
+
+<div class="section" id="clustering">
+<h2>Part 4: Conjoint + Clustering </h2>
+<p>How do we find the optimal packages? We return to Week 16's Choice-Based Conjoint analysis. Conjoint gives us individual-level part-worth utilities. But averaging utilities across 10,000 users results in a "mushy middle" product that nobody loves.</p>
+
+<p>Instead, we apply <strong>K-Means Clustering</strong> to the conjoint utility scores. This is <strong>Elasticity Segmentation</strong>.</p>
+
+<h3>The Workflow</h3>
+<ol style="margin-left:24px;margin-bottom:16px;">
+  <li>Extract the individual part-worth utility matrix from your conjoint study.</li>
+  <li>Run K-Means clustering (testing K=2, 3, 4) to group users with similar feature preferences.</li>
+  <li>Profile the clusters. You will inevitably find natural segments (e.g., "The Solopreneur", "The Data Geek", "The Corporate IT Buyer").</li>
+  <li>Map the tiers 1-to-1 with the clusters. Design the "Good" tier perfectly for Cluster 1, the "Better" tier for Cluster 2, and the "Best" tier for Cluster 3.</li>
+</ol>
+</div>
+
+<div class="section" id="interactive">
+<h2>Part 5: Tier Migration &amp; Cannibalization Simulator</h2>
+<p>Assume an audience of 10,000 users split into two clusters: <strong>Basic Users (70%)</strong> and <strong>Power Users (30%)</strong>. Adjust the price and feature fence of the "Pro" tier. Watch how optimizing the fence forces Power Users to upgrade (Incentive Compatibility), while moving it too far causes them to cannibalize the Basic tier.</p>
+
+<div class="demo-container">
+  <div class="demo-title">Good-Better-Best Optimization</div>
+  
+  <div style="background:var(--light-blue); padding:16px; border-radius:8px; margin-bottom:20px; font-size:14px;">
+    <strong>Assumptions:</strong><br>
+    Basic Tier: $20/mo (Fixed)<br>
+    Power User WTP for Premium Feature: $80<br>
+    Basic User WTP for Premium Feature: $10
+  </div>
+
+  <div class="slider-group">
+    <div class="slider-item">
+      <label>Pro Tier Price ($/mo) <span class="slider-val" id="price-val">50</span></label>
+      <input type="range" min="25" max="100" value="50" id="price-slider" oninput="updateTiers()">
+    </div>
+    <div class="slider-item">
+      <label>Premium Feature Included in Basic Tier? <span class="slider-val" id="fence-val">No (Hard Fence)</span></label>
+      <input type="range" min="0" max="1" value="0" id="fence-slider" oninput="updateTiers()">
+    </div>
+  </div>
+  
+  <div style="margin-top:24px;">
+    <div style="font-size:14px; font-weight:600; margin-bottom:8px;">Tier Migration:</div>
+    <div style="display:flex; align-items:center; margin-bottom:8px;">
+      <div style="width:120px; font-size:14px;">Basic Tier ($20)</div>
+      <div style="flex:1; background:#e8e4dc; height:24px; border-radius:4px;"><div id="basic-bar" class="tier-bar" style="background:var(--muted); width:70%;"></div></div>
+      <div style="width:80px; text-align:right; font-family:'JetBrains Mono',monospace;" id="basic-pct">70%</div>
+    </div>
+    <div style="display:flex; align-items:center; margin-bottom:16px;">
+      <div style="width:120px; font-size:14px;">Pro Tier</div>
+      <div style="flex:1; background:#e8e4dc; height:24px; border-radius:4px;"><div id="pro-bar" class="tier-bar" style="background:var(--accent); width:30%;"></div></div>
+      <div style="width:80px; text-align:right; font-family:'JetBrains Mono',monospace;" id="pro-pct">30%</div>
+    </div>
+    
+    <div class="metric-box" style="border-color:var(--accent2); background:#fff;">
+      <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Total Monthly Revenue</div>
+      <div id="rev-result" style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--accent2);">$290,000</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="section" id="code">
+<h2>Part 6: Implementation in Python</h2>
+<p>Here we use `scikit-learn` to perform K-Means clustering on a matrix of conjoint part-worth utilities, identifying the optimal feature-value segments.</p>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; scikit-learn</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> sklearn.cluster <span class="kw">import</span> KMeans
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Load Individual Conjoint Utilities</span>
+<span class="cm"># ============================================</span>
+<span class="cm"># Rows = Users, Columns = WTP ($) for specific features</span>
+df_utilities = pd.<span class="fn">read_csv</span>(<span class="str">'conjoint_part_worths.csv'</span>)
+features = [<span class="str">'core_app_wtp'</span>, <span class="str">'api_access_wtp'</span>, <span class="str">'sso_wtp'</span>, <span class="str">'priority_support_wtp'</span>]
+
+X = df_utilities[features]
+
+<span class="cm"># Standardize the data for K-Means (Crucial step)</span>
+scaler = <span class="fn">StandardScaler</span>()
+X_scaled = scaler.<span class="fn">fit_transform</span>(X)
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Elasticity Segmentation via K-Means</span>
+<span class="cm"># ============================================</span>
+<span class="cm"># We aim to design a Good-Better-Best architecture (K=3)</span>
+kmeans = <span class="fn">KMeans</span>(n_clusters=<span class="num">3</span>, random_state=<span class="num">42</span>, n_init=<span class="num">10</span>)
+df_utilities[<span class="str">'Tier_Segment'</span>] = kmeans.<span class="fn">fit_predict</span>(X_scaled)
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Profile the Segments to Design Fences</span>
+<span class="cm"># ============================================</span>
+<span class="cm"># Look at the mean WTP for each feature within each cluster</span>
+segment_profiles = df_utilities.<span class="fn">groupby</span>(<span class="str">'Tier_Segment'</span>)[features].<span class="fn">mean</span>()
+segment_sizes = df_utilities.<span class="fn">groupby</span>(<span class="str">'Tier_Segment'</span>).<span class="fn">size</span>()
+
+<span class="fn">print</span>(<span class="str">"--- Cluster WTP Profiles ($) ---"</span>)
+<span class="fn">print</span>(segment_profiles.<span class="fn">round</span>(<span class="num">2</span>))
+<span class="fn">print</span>(<span class="str">"\n--- Cluster Sizes ---"</span>)
+<span class="fn">print</span>(segment_sizes)
+
+<span class="cm"># Interpretation Strategy:</span>
+<span class="cm"># If Segment 2 has highly elevated WTP for 'sso_wtp', </span>
+<span class="cm"># SSO becomes the primary hard fence for the "Best" tier.</span></pre>
+</div>
+</div>
+
+<div class="section" id="playbook">
+<h2>Part 7: Your Week 25 Playbook</h2>
+
+<table class="comp-table">
+  <thead><tr><th>Strategic Question</th><th>Analytical Approach</th></tr></thead>
+  <tbody>
+    <tr><td>"What features go in which tier?"</td><td>Run Conjoint + Clustering. Features with high variance in utility across segments make the best fences.</td></tr>
+    <tr><td>"Why aren't people upgrading to Pro?"</td><td>Check Incentive Compatibility. Your Basic tier likely offers too much surplus. You must degrade the Basic tier (tighten the fence).</td></tr>
+    <tr><td>"How many tiers should we have?"</td><td>Evaluate the sum of squared errors (Elbow method) in K-Means. Typically, 3 or 4 tiers capture 90% of available consumer surplus without causing choice paralysis.</td></tr>
+  </tbody>
+</table>
+
+<h3>Common Pitfalls to Avoid</h3>
+
+<div class="callout danger">
+  <div class="callout-label">Top Tiering Errors</div>
+  <p><strong>1. The "Kitchen Sink" Top Tier.</strong> Throwing every feature into the top tier increases the cost to serve and dilutes messaging. Tiers should be tailored to specific buyer personas (clusters), not just "more stuff."</p>
+  <p><strong>2. Fencing Core Value.</strong> Never put the core value proposition of your product behind a paywall in a freemium or entry tier. Fence the <em>scaling</em> vectors (usage, admin rights, integrations), not the "Aha!" moment.</p>
+</div>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+  <div class="timeline-step">
+    <h4>Day 1-2: Understand Incentive Compatibility</h4>
+    <p>Review the mathematics of Consumer Surplus. Map out the surplus equations for your current product tiers. Are your higher tiers actually a worse deal mathematically for high-value users?</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 3-4: Build the Elasticity Segments</h4>
+    <p>Take simulated conjoint utility data and run `sklearn.cluster.KMeans`. Profile the clusters to find the natural "fence" features.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 5: Map the Features</h4>
+    <p>Perform Feature-Value Mapping. Assign specific features to specific tiers ensuring that the target cluster for that tier has the highest WTP for those features.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 6-7: Write Your Executive Brief</h4>
+    <p>Draft a memo to the Product team: "Our conjoint clustering reveals that 25% of our users value SSO at $100+/mo, but it is currently included in our $49 Pro tier. By moving SSO to a new $149 Enterprise tier, we maintain Incentive Compatibility for SMBs while capturing $X in unmonetized surplus from corporate buyers."</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="week24_freemium_conversion.html">&larr; Week 24: Freemium Conversion</a>
+  <a href="week26_cross_selling.html">Week 26: Cross-Selling Probability &rarr;</a>
+</div>
+</div>
+
+</main>
+
+<script>
+// Nav scroll highlighting
+const navLinks=document.querySelectorAll('.nav-link');const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});
+
+// Interactive Tier Migration Simulator
+function updateTiers(){
+  const proPrice = parseInt(document.getElementById('price-slider').value);
+  const isFenceLeaky = parseInt(document.getElementById('fence-slider').value); // 0 = Hard Fence (Premium in Pro only), 1 = Leaky Fence (Premium in Basic)
+  
+  document.getElementById('price-val').textContent = proPrice;
+  document.getElementById('fence-val').textContent = isFenceLeaky === 1 ? "Yes (Leaky Fence)" : "No (Hard Fence)";
+
+  const totalUsers = 10000;
+  const basicUserCount = 7000; // 70%
+  const powerUserCount = 3000; // 30%
+
+  const basicPrice = 20;
+  
+  // Power User Utilities
+  const powerWTP_Core = 40;
+  const powerWTP_Premium = 80;
+  
+  // Basic User Utilities
+  const basicWTP_Core = 30;
+  const basicWTP_Premium = 10;
+
+  let basicUsersInPro = 0;
+  let basicUsersInBasic = 0;
+  let powerUsersInPro = 0;
+  let powerUsersInBasic = 0;
+
+  // Evaluate Basic Users
+  let basic_SurplusPro = (basicWTP_Core + basicWTP_Premium) - proPrice;
+  let basic_SurplusBasic = basicWTP_Core - basicPrice;
+  if (isFenceLeaky === 1) basic_SurplusBasic += basicWTP_Premium; // They get premium in basic
+
+  if (basic_SurplusPro > basic_SurplusBasic && basic_SurplusPro >= 0) {
+      basicUsersInPro = basicUserCount;
+  } else if (basic_SurplusBasic >= 0) {
+      basicUsersInBasic = basicUserCount;
+  }
+
+  // Evaluate Power Users
+  let power_SurplusPro = (powerWTP_Core + powerWTP_Premium) - proPrice;
+  let power_SurplusBasic = powerWTP_Core - basicPrice;
+  if (isFenceLeaky === 1) power_SurplusBasic += powerWTP_Premium;
+
+  if (power_SurplusPro > power_SurplusBasic && power_SurplusPro >= 0) {
+      powerUsersInPro = powerUserCount;
+  } else if (power_SurplusBasic >= 0) {
+      powerUsersInBasic = powerUserCount;
+  }
+
+  const totalBasic = basicUsersInBasic + powerUsersInBasic;
+  const totalPro = basicUsersInPro + powerUsersInPro;
+  
+  const pctBasic = ((totalBasic / totalUsers) * 100).toFixed(0);
+  const pctPro = ((totalPro / totalUsers) * 100).toFixed(0);
+  
+  const revenue = (totalBasic * basicPrice) + (totalPro * proPrice);
+
+  document.getElementById('basic-bar').style.width = pctBasic + "%";
+  document.getElementById('pro-bar').style.width = pctPro + "%";
+  document.getElementById('basic-pct').textContent = pctBasic + "%";
+  document.getElementById('pro-pct').textContent = pctPro + "%";
+  
+  document.getElementById('rev-result').textContent = "$" + revenue.toLocaleString();
+  
+  // Visual feedback for cannibalization
+  if (isFenceLeaky === 1 && proPrice > 20) {
+      document.getElementById('pro-bar').style.background = "var(--muted)";
+  } else {
+      document.getElementById('pro-bar').style.background = "var(--accent)";
+  }
+}
+// Initialize
+updateTiers();
+</script>
+</body>
+</html>

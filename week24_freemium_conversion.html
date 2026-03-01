@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 24: Freemium Conversion</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--light-blue:#e8f0f2;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}.section:nth-child(2){animation-delay:.1s}.section:nth-child(3){animation-delay:.2s}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}h4{font-size:18px;font-weight:600;margin:24px 0 10px}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--blue);margin:12px 0;letter-spacing:.5px}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}
+.demo-container{background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;margin:28px 0;box-shadow:0 4px 20px rgba(0,0,0,.04)}.demo-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:20px;color:var(--blue)}
+.slider-group{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}@media(max-width:600px){.slider-group{grid-template-columns:1fr}}.slider-item label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}.slider-item input[type="range"]{width:100%;accent-color:var(--accent)}.slider-val{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);float:right}
+.metric-box{background:var(--cream);padding:16px;border-radius:8px;text-align:center;border:1px solid var(--border)}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-label">Q2 HUB</a>
+  <a href="#business" class="nav-link active">Business Case</a>
+  <a href="#penny-gap" class="nav-link">The Penny Gap</a>
+  <a href="#model" class="nav-link">Logistic Regression</a>
+  <a href="#interactive" class="nav-link">Propensity Simulator</a>
+  <a href="#code" class="nav-link">Python Code</a>
+  <a href="#playbook" class="nav-link">Playbook</a>
+</div></nav>
+
+<header class="hero">
+  <div class="week-tag">Week 24 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div>
+  <h1>Freemium Conversion: When <span>Free</span> Becomes Paid</h1>
+  <p class="hero-sub">Freemium is an acquisition strategy, not a revenue model. The central challenge for SaaS, gaming, and media companies is predicting exactly who will cross the threshold into becoming a paying user. This week, we deploy Logistic Regression to build a Conversion Propensity model based on feature usage and time.</p>
+</header>
+
+<main class="content">
+
+<div class="section" id="business">
+<h2>Part 1: The Business Problem</h2>
+<p>You are the Head of Growth for a B2B SaaS platform. You generate 10,000 free signups a month, but your conversion rate is hovering around 3%. Your sales team is complaining that they are wasting hours calling free users who will never buy, while highly-engaged free users are slipping through the cracks without a sales touch.</p>
+
+<p>You need to transition from a "spray and pray" monetization strategy to a targeted <strong>Product-Qualified Lead (PQL)</strong> system. To do this, you must quantify exactly which feature interactions predict a user's willingness to pay.</p>
+
+<div class="callout">
+  <div class="callout-label">The $5M Propensity Insight</div>
+  <p>A major streaming service realized that users who watched a show on two different devices (e.g., TV and mobile) within their first 7 days were 4x more likely to convert to a paid subscription than users who watched twice as many hours on a single device. By shifting their onboarding emails to explicitly encourage multi-device login, they increased their freemium conversion rate by 18%, driving $5M in net new ARR.</p>
+</div>
+</div>
+
+<div class="section" id="penny-gap">
+<h2>Part 2: Overcoming "The Penny Gap"</h2>
+<p>In 2007, venture capitalist Josh Kopelman coined the term "The Penny Gap." He observed that the hardest gap to cross in pricing isn't getting a customer to pay $100 instead of $10; it's getting them to pay $0.01 instead of $0.00. The transition from a non-paying user to a paying user requires a massive psychological leap.</p>
+
+<h3>Feature Usage Patterns vs. Vanity Metrics</h3>
+<p>To predict who will cross this gap, you must look at <strong>Feature Usage Patterns</strong>. Many analysts use vanity metrics like "Total Logins" or "Time in App." These are often terrible predictors of conversion because they fail to distinguish between habitual free-tier usage and actual intent to purchase.</p>
+
+<table class="comp-table">
+  <thead><tr><th>Metric Type</th><th>Examples</th><th>Predictive Power</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Vanity Activity</strong></td><td>Total Logins, Days Active, Pageviews</td><td>Low. Often indicates users who are perfectly content with the free tier.</td></tr>
+    <tr><td><strong>Network Effects</strong></td><td>Invites sent, shared links generated, collaborative edits</td><td>High. When users bring their team, switching costs rise exponentially.</td></tr>
+    <tr><td><strong>Friction/Paywall Hits</strong></td><td>Clicks on premium features, storage limit warnings</td><td>Very High. Explicit signals of intent and constrained utility.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="section" id="model">
+<h2>Part 3: Logistic Regression for Conversion Propensity</h2>
+<p>To separate the signal from the noise, we use <strong>Logistic Regression</strong>. Unlike linear regression, which predicts a continuous number, logistic regression predicts the <em>probability</em> of a binary outcome (Convert: 1, Do Not Convert: 0). </p>
+
+<h3>The Math of Log-Odds</h3>
+<p>Logistic regression works by mapping any linear combination of features to a probability between 0 and 1 using the sigmoid function.</p>
+
+<div class="formula">
+  <div class="formula-label">THE LOGISTIC FUNCTION</div>
+  <div class="formula-math">$$P(Convert=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + ... + \beta_k X_k)}}$$</div>
+</div>
+
+<p>The true power of Logistic Regression lies in interpreting its coefficients via the <strong>Odds Ratio</strong>. If we exponentiate a coefficient ($e^{\beta_1}$), we get the multiplier effect of that feature on the odds of converting.</p>
+
+<div class="formula">
+  <div class="formula-label">ODDS RATIO INTERPRETATION</div>
+  <div class="formula-math">$$OR = e^{\beta_j}$$</div>
+  <div class="formula-label">If OR = 1.5, a one-unit increase in the feature increases the odds of conversion by 50%.</div>
+</div>
+
+<div class="callout danger">
+  <div class="callout-label">The Data Leakage Trap</div>
+  <p>The most common mistake when building conversion models is <strong>Data Leakage</strong>. If you include a feature like "Credit Card Added" or "Viewed Billing Page" in your training data, your model will look highly predictive, but it is useless in practice. You are using the outcome to predict the outcome. You must build your model using only feature data from a specific <strong>observation window</strong> (e.g., the first 14 days of free usage) to predict conversion in the subsequent period.</p>
+</div>
+</div>
+
+<div class="section" id="interactive">
+<h2>Part 4: Interactive Conversion Propensity Simulator</h2>
+<p>Adjust the feature usage of a hypothetical free user in their first 14 days. Observe how actions related to "Network Effects" (Invites) and "Friction" (Paywall Hits) disproportionately drive the probability of conversion compared to simple activity (Days Active).</p>
+
+<div class="demo-container">
+  <div class="demo-title">B2B SaaS PQL Simulator</div>
+  <div class="slider-group">
+    <div class="slider-item">
+      <label>Days Active (Out of 14) <span class="slider-val" id="days-val">3</span></label>
+      <input type="range" min="1" max="14" value="3" id="days-slider" oninput="updatePropensity()">
+    </div>
+    <div class="slider-item">
+      <label>Team Invites Sent <span class="slider-val" id="invites-val">0</span></label>
+      <input type="range" min="0" max="10" value="0" id="invites-slider" oninput="updatePropensity()">
+    </div>
+    <div class="slider-item">
+      <label>Premium Paywall Hits <span class="slider-val" id="paywall-val">0</span></label>
+      <input type="range" min="0" max="8" value="0" id="paywall-slider" oninput="updatePropensity()">
+    </div>
+  </div>
+  
+  <div style="display:grid;grid-template-columns:1fr;gap:20px;margin-top:24px;">
+    <div class="metric-box" style="border-color:var(--accent);">
+      <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Probability of Conversion</div>
+      <div id="prob-result" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--accent);">4.5%</div>
+      <div id="pql-label" style="font-size:14px;color:var(--muted);margin-top:8px;">Standard Free User</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="section" id="code">
+<h2>Part 5: Implementation in Python</h2>
+<p>We use `statsmodels` rather than `scikit-learn` for this implementation because we prioritize inference (understanding exactly <em>why</em> users convert via p-values and odds ratios) over pure prediction. We are analyzing a dataset containing a 14-day observation window.</p>
+
+<div class="code-block">
+  <div class="code-label">Python &middot; statsmodels</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> statsmodels.api <span class="kw">as</span> sm
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 1: Load 14-Day Observation Data</span>
+<span class="cm"># ============================================</span>
+<span class="cm"># Data contains features measured ONLY during days 1-14.</span>
+<span class="cm"># Target variable is 'converted_within_90_days' (1 or 0).</span>
+df = pd.<span class="fn">read_csv</span>(<span class="str">'saas_freemium_users.csv'</span>)
+
+<span class="cm"># Define features</span>
+features = [
+    <span class="str">'days_active_first_14d'</span>, 
+    <span class="str">'team_invites_sent'</span>, 
+    <span class="str">'premium_paywall_hits'</span>, 
+    <span class="str">'core_actions_completed'</span>
+]
+
+X = df[features]
+y = df[<span class="str">'converted_within_90_days'</span>]
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 2: Fit Logistic Regression</span>
+<span class="cm"># ============================================</span>
+<span class="cm"># statsmodels requires manually adding a constant for the intercept</span>
+X_const = sm.<span class="fn">add_constant</span>(X)
+
+<span class="cm"># Fit the Logit model</span>
+logit_model = sm.<span class="fn">Logit</span>(y, X_const).<span class="fn">fit</span>(disp=<span class="num">0</span>)
+<span class="fn">print</span>(logit_model.<span class="fn">summary</span>())
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 3: Calculate and Interpret Odds Ratios</span>
+<span class="cm"># ============================================</span>
+<span class="cm"># Exponentiate the coefficients to get Odds Ratios</span>
+odds_ratios = np.<span class="fn">exp</span>(logit_model.params)
+conf_int = np.<span class="fn">exp</span>(logit_model.<span class="fn">conf_int</span>())
+
+results_df = pd.<span class="fn">DataFrame</span>({
+    <span class="str">'Odds_Ratio'</span>: odds_ratios,
+    <span class="str">'Lower_CI'</span>: conf_int[<span class="num">0</span>],
+    <span class="str">'Upper_CI'</span>: conf_int[<span class="num">1</span>],
+    <span class="str">'P_Value'</span>: logit_model.pvalues
+})
+
+<span class="fn">print</span>(<span class="str">"\nFeature Impact on Conversion Odds:"</span>)
+<span class="fn">print</span>(results_df.<span class="fn">round</span>(<span class="num">3</span>))
+
+<span class="cm"># ============================================</span>
+<span class="cm"># STEP 4: Generate PQL Propensity Scores</span>
+<span class="cm"># ============================================</span>
+<span class="cm"># Predict the probability of conversion for all users</span>
+df[<span class="str">'propensity_score'</span>] = logit_model.<span class="fn">predict</span>(X_const)
+
+<span class="cm"># Route leads to Sales if probability > 60%</span>
+df[<span class="str">'is_pql'</span>] = np.<span class="fn">where</span>(df[<span class="str">'propensity_score'</span>] > <span class="num">0.60</span>, <span class="num">1</span>, <span class="num">0</span>)
+</pre>
+</div>
+</div>
+
+<div class="section" id="playbook">
+<h2>Part 6: Your Week 24 Playbook</h2>
+
+<table class="comp-table">
+  <thead><tr><th>Strategic Question</th><th>Analytical Approach</th></tr></thead>
+  <tbody>
+    <tr><td>"Which free users should Sales call today?"</td><td>Score all users daily with your Logistic model. Send the top decile (PQLs) directly to the CRM.</td></tr>
+    <tr><td>"What behaviors should our onboarding emails drive?"</td><td>Look at the highest Odds Ratios in your model. If 'Inviting a Colleague' has an OR of 3.5, make that the primary CTA of your Day 2 email.</td></tr>
+    <tr><td>"Is our free tier giving away too much?"</td><td>Analyze 'Time-to-Conversion'. If users are active for 6 months but have 0 Paywall Hits, your free tier utility is too high. You need stricter feature constraints.</td></tr>
+  </tbody>
+</table>
+
+<h3>Common Pitfalls to Avoid</h3>
+
+<div class="callout danger">
+  <div class="callout-label">Top Errors in Conversion Modeling</div>
+  <p><strong>1. Class Imbalance Ignorance.</strong> If your conversion rate is 1%, your model can achieve 99% accuracy simply by predicting "0" for everyone. You must evaluate your model using <strong>Precision, Recall, and AUC-ROC</strong>, not raw accuracy.</p>
+  <p><strong>2. Blurring the Observation Window.</strong> Ensure absolute strictness on time windows. If you are predicting conversion within 90 days based on the first 14 days of usage, discard any user who hasn't been in the system for at least 14 days, and do not include any activity from day 15 onward.</p>
+</div>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+  <div class="timeline-step">
+    <h4>Day 1-2: Understand the Math</h4>
+    <p>Review the mathematics of Logistic Regression and Odds Ratios. Ensure you can explain the difference between probability and odds.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 3-4: Build the Model</h4>
+    <p>Using a synthetic SaaS telemetry dataset, define a 14-day observation window. Train a logistic regression model using `statsmodels` to predict conversion.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 5: Extract the Product Insights</h4>
+    <p>Calculate the Odds Ratios for all features. Identify which feature interaction is the strongest predictor of crossing the Penny Gap.</p>
+  </div>
+  <div class="timeline-step">
+    <h4>Day 6-7: Write Your Executive Brief</h4>
+    <p>Draft a memo to the Head of Sales: "By analyzing our freemium conversion funnel, we have identified that users who trigger [Feature X] are 4.2x more likely to convert. We have deployed a propensity model that will flag these Product-Qualified Leads in Salesforce automatically, eliminating wasted outbound calls."</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="week23_markdown_optimization.html">&larr; Week 23: Markdown Optimization</a>
+  <a href="week25_subscription_tier.html">Week 25: Subscription Tier Optimization &rarr;</a>
+</div>
+</div>
+
+</main>
+
+<script>
+// Nav scroll highlighting
+const navLinks=document.querySelectorAll('.nav-link');const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});
+
+// Interactive Propensity Simulator
+function updatePropensity(){
+  const days = parseInt(document.getElementById('days-slider').value);
+  const invites = parseInt(document.getElementById('invites-slider').value);
+  const paywall = parseInt(document.getElementById('paywall-slider').value);
+  
+  document.getElementById('days-val').textContent = days;
+  document.getElementById('invites-val').textContent = invites;
+  document.getElementById('paywall-val').textContent = paywall;
+
+  // Logistic Regression Coefficients (Synthetic)
+  const intercept = -4.5;
+  const coef_days = 0.10;     // Weak signal
+  const coef_invites = 0.65;  // Strong signal (Network effects)
+  const coef_paywall = 0.85;  // Very strong signal (Friction/Intent)
+
+  // Calculate Log-Odds (Linear Combination)
+  const log_odds = intercept + (coef_days * days) + (coef_invites * invites) + (coef_paywall * paywall);
+  
+  // Convert Log-Odds to Probability using Sigmoid function
+  const probability = 1 / (1 + Math.exp(-log_odds));
+  
+  // Format as percentage
+  const prob_percent = (probability * 100).toFixed(1);
+
+  document.getElementById('prob-result').textContent = prob_percent + "%";
+  
+  // Update PQL Label
+  let label = "Standard Free User";
+  let color = "var(--ink)";
+  
+  if (probability > 0.60) {
+    label = "🔥 HOT PQL: Route to Sales Immediately";
+    color = "var(--accent)";
+  } else if (probability > 0.30) {
+    label = "Warm Lead: Nurture via Email";
+    color = "var(--gold)";
+  } else {
+    label = "Standard Free User";
+    color = "var(--muted)";
+  }
+  
+  document.getElementById('pql-label').textContent = label;
+  document.getElementById('pql-label').style.color = color;
+  document.getElementById('prob-result').style.color = color;
+}
+// Initialize
+updatePropensity();
+</script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Week 23: Markdown Optimization — The Science of Clearance</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>:root{--ink:#1a1a2e;--cream:#faf8f4;--accent:#c45d3e;--accent2:#2d6a4f;--muted:#8a8a8a;--blue:#264653;--gold:#e9c46a;--code-bg:#1e1e2e;--border:#e0dcd4}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}.nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}.nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;overflow-x:auto}.nav-label{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;letter-spacing:.5px}.nav-link{font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;font-weight:500}.nav-link:hover,.nav-link.active{color:var(--ink);border-bottom-color:var(--accent)}.hero{max-width:900px;margin:0 auto;padding:80px 24px 60px}.week-tag{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px}.hero h1 span{color:var(--accent)}.hero-sub{font-size:20px;color:var(--muted);font-weight:300;max-width:640px;line-height:1.6}.content{max-width:900px;margin:0 auto;padding:0 24px 100px}.section{margin-bottom:64px;opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}h3{font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:700;margin:32px 0 14px;color:var(--blue)}p{margin-bottom:16px}.callout{border-left:4px solid var(--accent);background:#fff;padding:20px 24px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}.callout.insight{border-left-color:var(--accent2)}.callout.danger{border-left-color:#e63946;background:#fef2f2}.callout-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;color:var(--accent)}.callout.insight .callout-label{color:var(--accent2)}.callout.danger .callout-label{color:#e63946}.code-block{background:var(--code-bg);border-radius:10px;padding:24px;margin:20px 0;overflow-x:auto;position:relative}.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.65;color:#cdd6f4;white-space:pre}.code-label{position:absolute;top:8px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#585b70;text-transform:uppercase;letter-spacing:1px}.code-block .kw{color:#cba6f7}.code-block .fn{color:#89b4fa}.code-block .str{color:#a6e3a1}.code-block .cm{color:#585b70;font-style:italic}.code-block .num{color:#fab387}.formula{background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin:24px 0;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.03)}.formula-math{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--blue);margin:12px 0}.formula-label{font-size:13px;color:var(--muted);font-weight:500}.comp-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}.comp-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:.5px}.comp-table td{padding:12px 16px;border-bottom:1px solid var(--border)}.comp-table tr:nth-child(even) td{background:#f9f7f3}.timeline{border-left:3px solid var(--border);padding-left:28px;margin:28px 0 28px 16px}.timeline-step{position:relative;margin-bottom:28px}.timeline-step::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}.timeline-step h4{margin-top:0;font-size:16px}.timeline-step p{font-size:15px;color:#555;margin-bottom:0}strong{font-weight:600}a{color:var(--accent);text-decoration:none;font-weight:500}a:hover{text-decoration:underline}.bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:2px solid var(--border);margin-top:48px}</style></head><body>
+<nav class="nav"><div class="nav-inner"><a href="index.html#q2" class="nav-label">Q2 HUB</a><a href="#business" class="nav-link active">The $22M Bleed</a><a href="#newsvendor" class="nav-link">Newsvendor Model</a><a href="#survival" class="nav-link">Survival Analysis</a><a href="#multistage" class="nav-link">Multi-Stage Markdown</a><a href="#hazard" class="nav-link">Hazard Triggers</a><a href="#code" class="nav-link">Python Code</a><a href="#playbook" class="nav-link">Playbook</a></div></nav>
+
+<header class="hero"><div class="week-tag">Week 23 &middot; Q2: Pricing, Promotion &amp; Revenue Optimization</div><h1><span>Markdown Optimization</span>: The Science of Clearance</h1><p class="hero-sub">A fashion retailer marks down 40% of its inventory by an average of 52% off original price. That's $22 million in margin evaporating every season &mdash; not because markdowns are wrong, but because they happen too late and too deep. This week introduces the statistical machinery for knowing exactly when to mark down, how deep to go, and how to structure a multi-stage cadence that protects margin while clearing inventory before it becomes dead stock.</p></header>
+
+<main class="content">
+
+<!-- ============================================ -->
+<!-- PART 1: BUSINESS CASE                        -->
+<!-- ============================================ -->
+<div class="section" id="business"><h2>Part 1: The $22M Margin Bleed</h2>
+
+<p>A mid-size specialty fashion retailer with $380 million in annual revenue operated with what its merchandising team called a "disciplined" markdown strategy: 30% off at week 8 of the product lifecycle, 50% off at week 12, and 70% off at week 16 before end-of-season liquidation. The cadence was identical for every SKU, every category, every season. It had been that way for a decade.</p>
+
+<p>When the new VP of Analytics ran the first-ever SKU-level markdown analysis, the results were damning. Products in the "fast fashion" category (trend-driven, short lifecycle) were still at full price through week 8, even though 65% of eventual unit sales occurred in weeks 1&ndash;4. By the time the first markdown hit, the trend had peaked and demand had collapsed. The 30% markdown wasn't enough to move these items, so they sat until the 50% mark at week 12, then the 70% mark at week 16. Average realized margin on fast fashion: 11%, versus a target of 55%.</p>
+
+<p>Meanwhile, "classic" items (basics, evergreen styles) were being marked down on the same schedule despite having flat, steady demand curves that would have sold through at full price within 14 weeks. These items didn't need a markdown at all &mdash; the 30% reduction at week 8 gave away $3.8 million in margin across 2,400 classic SKUs that would have cleared naturally.</p>
+
+<p>The combined damage: $14.2 million in excess markdowns on fast-fashion items that should have been marked down earlier and shallower (catching the tail of the trend curve), plus $3.8 million in unnecessary markdowns on classics, plus $4.1 million in dead stock that was marked down too late to sell at any price. Total margin destruction: $22.1 million per season. The fix wasn't a single rule change &mdash; it was replacing the one-size-fits-all calendar with a data-driven model that used each SKU's sell-through velocity to trigger markdowns at the right time and depth.</p>
+
+<div class="callout danger"><div class="callout-label">The Three Sins of Calendar-Based Markdowns</div><p><strong>Sin 1: Too Late.</strong> Fast-sellers peak early. If you wait until week 8 for the first markdown, the demand window has closed and you need a deeper cut to move stale inventory. <strong>Sin 2: Too Deep.</strong> When you miss the optimal timing, the only recourse is a deeper discount &mdash; 50% or 70% instead of 20% &mdash; which destroys margin on whatever inventory remains. <strong>Sin 3: One-Size-Fits-All.</strong> A basics tee and a trend-driven graphic tee have completely different demand curves. Applying the same markdown schedule to both is the analytical equivalent of prescribing the same medication regardless of the diagnosis.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 2: NEWSVENDOR MODEL                     -->
+<!-- ============================================ -->
+<div class="section" id="newsvendor"><h2>Part 2: The Newsvendor Model &mdash; Why Excess Inventory Exists</h2>
+
+<p>Before optimizing markdowns, you need to understand why excess inventory exists in the first place. The <strong>newsvendor model</strong> (Arrow, Harris, and Marschak, 1951) is the foundational framework for single-period inventory decisions under demand uncertainty &mdash; exactly the situation a fashion buyer faces when placing a pre-season order.</p>
+
+<p>The intuition: a newspaper vendor must decide how many papers to stock each morning before knowing demand. Order too many and unsold papers go to waste (overage cost, C<sub>o</sub>). Order too few and missed sales are lost forever (underage cost, C<sub>u</sub>). The optimal order quantity balances these two risks.</p>
+
+<div class="formula"><div class="formula-label">NEWSVENDOR CRITICAL RATIO</div><div class="formula-math">Q* = F<sup>&minus;1</sup>(C<sub>u</sub> / (C<sub>u</sub> + C<sub>o</sub>))</div><div class="formula-label">Q* = optimal order quantity | F<sup>&minus;1</sup> = inverse CDF of demand distribution | C<sub>u</sub> = underage cost (lost margin per unit) | C<sub>o</sub> = overage cost (markdown loss per unit)</div></div>
+
+<h3>Deriving the Critical Ratio</h3>
+
+<p>The firm chooses Q to minimize expected total cost: E[Cost] = C<sub>u</sub> &middot; E[max(D &minus; Q, 0)] + C<sub>o</sub> &middot; E[max(Q &minus; D, 0)]. Taking the derivative with respect to Q and setting it to zero:</p>
+
+<div class="formula"><div class="formula-label">FIRST-ORDER CONDITION</div><div class="formula-math">dE[Cost]/dQ = &minus;C<sub>u</sub> &middot; [1 &minus; F(Q)] + C<sub>o</sub> &middot; F(Q) = 0</div><div class="formula-label">Solving: F(Q*) = C<sub>u</sub> / (C<sub>u</sub> + C<sub>o</sub>)</div></div>
+
+<p>The critical ratio C<sub>u</sub> / (C<sub>u</sub> + C<sub>o</sub>) determines the probability of selling out: a high ratio (C<sub>u</sub> >> C<sub>o</sub>) means you should overstock because lost sales are expensive; a low ratio means you should understock because excess inventory is expensive. For fashion, C<sub>o</sub> is typically 50&ndash;80% of cost (the markdown needed to clear), which pushes the critical ratio down, favoring tighter inventory.</p>
+
+<table class="comp-table"><thead><tr><th>Category</th><th>C<sub>u</sub> (lost sale)</th><th>C<sub>o</sub> (markdown)</th><th>Critical Ratio</th><th>Implied Service Level</th><th>Expected Leftover Rate</th></tr></thead><tbody>
+<tr><td><strong>Fast fashion (trend)</strong></td><td>$45 (full margin)</td><td>$35 (avg 70% markdown on cost)</td><td>0.56</td><td>56%</td><td>44% of orders have excess</td></tr>
+<tr><td><strong>Seasonal basics</strong></td><td>$30</td><td>$15 (can carry to next season)</td><td>0.67</td><td>67%</td><td>33% of orders have excess</td></tr>
+<tr><td><strong>Evergreen / replenish</strong></td><td>$25</td><td>$5 (minimal markdown risk)</td><td>0.83</td><td>83%</td><td>17% of orders have excess</td></tr>
+</tbody></table>
+
+<div class="callout insight"><div class="callout-label">The Newsvendor-Markdown Connection</div><p>The newsvendor model explains <em>why</em> you have excess inventory; the markdown model decides <em>what to do with it</em>. If you order at the newsvendor-optimal quantity, you'll still have excess inventory with probability equal to 1 minus the critical ratio. For fast fashion at a 56% service level, you'll have leftover stock 44% of the time. The question isn't whether you'll need markdowns &mdash; it's when and how deep. That's where survival analysis enters the picture.</p></div>
+
+<h3>Worked Example: Gaussian Demand</h3>
+
+<p>Suppose a trend jacket has forecasted demand D ~ Normal(&mu; = 500, &sigma; = 120). Unit cost is $40, retail price is $89, and the expected markdown recovery is $25 (a 72% markdown on retail). Then: C<sub>u</sub> = $89 &minus; $40 = $49. C<sub>o</sub> = $40 &minus; $25 = $15. Critical ratio = 49 / (49 + 15) = 0.766. Q* = F<sup>&minus;1</sup>(0.766) = 500 + 0.727 &times; 120 = <strong>587 units</strong>. Expected leftover = E[max(Q &minus; D, 0)] &asymp; 40 units. These 40 units are the ones that need the markdown strategy.</p></div>
+
+<!-- ============================================ -->
+<!-- PART 3: SURVIVAL ANALYSIS                    -->
+<!-- ============================================ -->
+<div class="section" id="survival"><h2>Part 3: Survival Analysis for Sell-Through Timing</h2>
+
+<p>Survival analysis &mdash; originally developed for medical event-time data &mdash; is perfectly suited for markdown timing because the core question is identical: "how long until an event occurs?" In medicine, the event is death or disease recurrence. In retail, the event is a SKU reaching a sell-through threshold that triggers a markdown.</p>
+
+<h3>Kaplan-Meier for Sell-Through Curves</h3>
+
+<p>The <strong>Kaplan-Meier estimator</strong> produces a non-parametric survival curve: the probability that a product is still above a given inventory threshold at each point in time. For markdown analysis, define "survival" as the product <em>not yet needing</em> a markdown &mdash; concretely, remaining above 60% of initial inventory (i.e., the product hasn't sold through 40% yet). The KM curve shows what fraction of SKUs in each category are still "surviving" (haven't hit the sell-through trigger) at each week.</p>
+
+<div class="formula"><div class="formula-label">KAPLAN-MEIER ESTIMATOR</div><div class="formula-math">&Shat;(t) = &prod;<sub>t<sub>i</sub> &le; t</sub> (1 &minus; d<sub>i</sub> / n<sub>i</sub>)</div><div class="formula-label">d<sub>i</sub> = SKUs hitting the sell-through threshold at time t<sub>i</sub> | n<sub>i</sub> = SKUs still "at risk" just before t<sub>i</sub></div></div>
+
+<p>When you plot KM curves by category, the picture becomes immediately actionable. Fast fashion items have steep survival curves &mdash; most hit 40% sell-through by week 3&ndash;4. Basics have flat curves &mdash; many don't reach the threshold until week 10+. This visual difference quantifies what merchandisers know intuitively and provides the statistical basis for different markdown schedules.</p>
+
+<h3>Why Survival Analysis, Not Just Averages?</h3>
+
+<p>You might wonder: why not just compute the average weeks-to-sell-through for each category? Because averages hide the shape of the distribution and can't handle <strong>censoring</strong>. Some products haven't yet reached the threshold at the time of analysis (right-censored). Some were pulled from shelves early for other reasons (competing events). The KM estimator handles both properly, producing an unbiased estimate of the sell-through curve even with incomplete data. This is the same reason Week 2 used Cox PH instead of simple averages for churn analysis.</p>
+
+<h3>Cox PH for Markdown Trigger Factors</h3>
+
+<p>The KM curve tells you <em>when</em> products sell through, but not <em>why</em> some sell faster than others. The <strong>Cox proportional hazards model</strong> (Week 2) estimates how product characteristics affect the sell-through hazard rate:</p>
+
+<div class="formula"><div class="formula-label">COX PH MODEL FOR SELL-THROUGH</div><div class="formula-math">h(t | X) = h<sub>0</sub>(t) &middot; exp(&beta;<sub>1</sub>Price + &beta;<sub>2</sub>Trend_Score + &beta;<sub>3</sub>Competitor_SKUs + &beta;<sub>4</sub>Color_Popularity + &beta;<sub>5</sub>Initial_Stock)</div><div class="formula-label">h(t) = hazard of hitting sell-through threshold at time t | exp(&beta;X) = covariate effects on sell-through speed</div></div>
+
+<table class="comp-table"><thead><tr><th>Covariate</th><th>Example HR</th><th>Interpretation</th><th>Markdown Implication</th></tr></thead><tbody>
+<tr><td>Trend_Score (1&ndash;10)</td><td>1.35 per point</td><td>Each point on the trend scale accelerates sell-through by 35%</td><td>High-trend items: earlier markdown window (week 3&ndash;4 trigger)</td></tr>
+<tr><td>Initial_Price (per $10)</td><td>0.82</td><td>Each $10 in price slows sell-through by 18%</td><td>Premium items: later markdown trigger, shallower depth</td></tr>
+<tr><td>Competitor_SKUs (count)</td><td>1.12 per SKU</td><td>Each competing product accelerates sell-through need by 12%</td><td>Crowded categories: faster markdown cadence</td></tr>
+<tr><td>Initial_Stock (per 100 units)</td><td>0.91</td><td>Overstocked items take 9% longer per 100 units to clear</td><td>Deep-stocked items: plan for markdown at order time</td></tr>
+<tr><td>Color_Popularity (index)</td><td>1.22</td><td>Trending colors sell 22% faster</td><td>Off-trend colors: earlier intervention</td></tr>
+</tbody></table>
+
+<div class="callout"><div class="callout-label">From Hazard Ratios to SKU-Level Markdown Schedules</div><p>The Cox model produces a <strong>predicted survival curve for each individual SKU</strong> based on its covariates. A trend-driven, moderately priced jacket in a popular color might have a predicted median time-to-threshold of 3.2 weeks. A classic blazer in a neutral color might have a median of 11.4 weeks. These predicted curves replace the one-size-fits-all calendar: each SKU gets a markdown trigger timed to its own predicted sell-through trajectory. The markdown fires when the SKU's <em>actual</em> sell-through falls below its <em>predicted</em> curve by a defined threshold.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 4: MULTI-STAGE MARKDOWN                 -->
+<!-- ============================================ -->
+<div class="section" id="multistage"><h2>Part 4: Multi-Stage Markdown Optimization</h2>
+
+<p>Smith and Achabal (1998) formalized the multi-stage markdown problem in their <em>Journal of Retailing</em> paper. The objective: choose the timing and depth of K markdowns across a finite selling season to maximize total revenue, subject to the constraint that final inventory must reach a target level (typically zero for seasonal goods).</p>
+
+<div class="formula"><div class="formula-label">MULTI-STAGE MARKDOWN OBJECTIVE</div><div class="formula-math">max &sum;<sub>k=0</sub><sup>K</sup> p<sub>k</sub> &middot; Q<sub>k</sub>(p<sub>k</sub>, t<sub>k</sub>) &nbsp;&nbsp; s.t. &sum; Q<sub>k</sub> &ge; I<sub>0</sub> &minus; I<sub>target</sub></div><div class="formula-label">p<sub>k</sub> = price in stage k | Q<sub>k</sub> = demand at price p<sub>k</sub> during interval t<sub>k</sub> | I<sub>0</sub> = initial inventory | K = number of markdown stages</div></div>
+
+<h3>The Four Stages</h3>
+
+<table class="comp-table"><thead><tr><th>Stage</th><th>Typical Timing</th><th>Depth</th><th>Objective</th><th>Trigger to Advance</th></tr></thead><tbody>
+<tr><td><strong>0: Full Price</strong></td><td>Weeks 1&ndash;T<sub>1</sub></td><td>0%</td><td>Maximize margin on early, high-intent demand</td><td>Actual sell-through &lt; 80% of predicted KM curve</td></tr>
+<tr><td><strong>1: First Markdown</strong></td><td>T<sub>1</sub>&ndash;T<sub>2</sub></td><td>20&ndash;30%</td><td>Capture demand tail; accelerate lagging SKUs</td><td>Sell-through ratio still &lt; 0.8 after 2 weeks at stage 1</td></tr>
+<tr><td><strong>2: Second Markdown</strong></td><td>T<sub>2</sub>&ndash;T<sub>3</sub></td><td>40&ndash;50%</td><td>Clear stubborn inventory before season end</td><td>Remaining inventory &gt; 25% with &lt; 3 weeks left</td></tr>
+<tr><td><strong>3: Final Clearance</strong></td><td>T<sub>3</sub>&ndash;T<sub>end</sub></td><td>60&ndash;75%</td><td>Liquidate above salvage value; free shelf space</td><td>End-of-season deadline</td></tr>
+</tbody></table>
+
+<h3>Dynamic Programming Formulation</h3>
+
+<p>The multi-stage problem is naturally solved via <strong>backward induction</strong> (Bellman's principle of optimality). Start at stage K (final clearance): the optimal clearance price is the one that exactly clears remaining inventory by T<sub>end</sub>, given the demand function at that markdown depth. The value of entering stage K with inventory I<sub>K</sub> is:</p>
+
+<div class="formula"><div class="formula-label">BELLMAN EQUATION FOR MARKDOWN STAGE K</div><div class="formula-math">V<sub>K</sub>(I<sub>K</sub>) = max<sub>p<sub>K</sub></sub> { p<sub>K</sub> &middot; min(Q<sub>K</sub>(p<sub>K</sub>), I<sub>K</sub>) }</div><div class="formula-label">Subject to: Q<sub>K</sub>(p<sub>K</sub>) &ge; I<sub>K</sub> (must clear all remaining stock)</div></div>
+
+<p>Working backward to stage K&minus;1: the firm chooses p<sub>K&minus;1</sub> to maximize stage K&minus;1 revenue plus the expected continuation value from stage K. The key trade-off: a shallow markdown in stage K&minus;1 preserves margin but leaves more inventory for stage K (where the margin is worse). A deep markdown in K&minus;1 clears more inventory now but sacrifices margin that might have been captured at the higher price.</p>
+
+<div class="formula"><div class="formula-label">GENERAL BACKWARD INDUCTION</div><div class="formula-math">V<sub>k</sub>(I<sub>k</sub>) = max<sub>p<sub>k</sub></sub> { p<sub>k</sub> &middot; min(Q<sub>k</sub>(p<sub>k</sub>), I<sub>k</sub>) + V<sub>k+1</sub>(I<sub>k</sub> &minus; Q<sub>k</sub>(p<sub>k</sub>)) }</div><div class="formula-label">The optimal price at each stage balances "take revenue now" vs. "hold for a better price later"</div></div>
+
+<div class="callout insight"><div class="callout-label">The Key Insight: Earlier and Shallower Beats Later and Deeper</div><p>Simulation studies and empirical results from Mantrala and Rao (2001) and Elmaghraby and Keskinocak (2003) consistently show that a 20% markdown at week 4 generates more total revenue than a 40% markdown at week 8, even though the latter has a deeper cut. Why? Because at week 4, the demand curve still has positive momentum &mdash; customers are actively shopping and a moderate discount is sufficient to trigger purchase. By week 8, the trend has passed, and even a steep discount struggles to attract buyers. The residual demand at week 8 requires a 40% cut to achieve what a 20% cut would have accomplished four weeks earlier. Time decay of demand is the enemy of margin, and every day of delay makes the eventual markdown deeper.</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 5: HAZARD-RATE TRIGGERS                 -->
+<!-- ============================================ -->
+<div class="section" id="hazard"><h2>Part 5: Hazard-Rate Markdown Triggers</h2>
+
+<p>Instead of using calendar-based triggers ("mark down at week 8"), the hazard-rate approach triggers markdowns based on each SKU's actual sell-through performance relative to its <em>expected</em> curve. This is the operational translation of the survival analysis from Part 3.</p>
+
+<div class="formula"><div class="formula-label">SELL-THROUGH RATIO TRIGGER</div><div class="formula-math">Mark down SKU<sub>i</sub> at time t if: ST<sub>i</sub>(t) / &Ehat;[ST<sub>category</sub>(t)] &lt; &theta;</div><div class="formula-label">ST<sub>i</sub>(t) = actual sell-through % of SKU i | &Ehat;[ST] = expected sell-through from KM curve or Cox prediction | &theta; = trigger threshold (0.7&ndash;0.85)</div></div>
+
+<p>If a SKU has sold through only 60% of what its category's KM curve predicts at week 4 (&theta; = 0.75), it triggers a first markdown. If after two weeks at the markdown price the ratio is still below 0.75, it advances to the second markdown. The trigger is relative, not absolute &mdash; it adapts to each product's expected trajectory.</p>
+
+<h3>Choosing &theta;: The Aggressiveness Parameter</h3>
+
+<table class="comp-table"><thead><tr><th>&theta; Value</th><th>Strategy</th><th>Effect</th><th>When to Use</th></tr></thead><tbody>
+<tr><td>0.90</td><td>Very aggressive</td><td>Marks down any SKU that's even slightly behind the curve</td><td>Highly perishable inventory; extremely short lifecycle</td></tr>
+<tr><td>0.80</td><td>Moderate</td><td>Balances margin protection with clearance risk</td><td>Standard fashion; seasonal goods</td></tr>
+<tr><td>0.70</td><td>Conservative</td><td>Tolerates more underperformance before acting</td><td>Basics; products with long shelf life; carry-over potential</td></tr>
+<tr><td>0.60</td><td>Passive</td><td>Very late triggers; higher dead-stock risk</td><td>Only for products with near-zero holding cost</td></tr>
+</tbody></table>
+
+<div class="callout"><div class="callout-label">Calibrating Depth from Elasticity</div><p>Once a markdown is triggered, how deep should it be? Use the price elasticity estimated from historical markdown data: at markdown stage k, the demand multiplier is approximately (1 + |&epsilon;| &middot; discount%). If your elasticity at the first markdown is &minus;2.5 and you need to sell an additional 200 units in 2 weeks (where baseline demand would be 80 units), the required demand multiplier is 200/80 = 2.5x. Solving: discount% = (2.5 &minus; 1) / 2.5 = 60%. But 60% is too deep for stage 1. The signal is that the SKU needs a more aggressive markdown cadence &mdash; perhaps skip stage 1 and go directly to stage 2 pricing. This elasticity-informed depth selection avoids the twin traps of too-shallow (doesn't move inventory) and too-deep (destroys margin unnecessarily).</p></div></div>
+
+<!-- ============================================ -->
+<!-- PART 6: PYTHON IMPLEMENTATION                -->
+<!-- ============================================ -->
+<div class="section" id="code"><h2>Part 6: Implementation in Python</h2>
+
+<div class="code-block"><div class="code-label">Python &middot; SKU Sell-Through Simulation + Kaplan-Meier</div>
+<pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> lifelines <span class="kw">import</span> KaplanMeierFitter, CoxPHFitter
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 1: Simulate SKU-Level Sell-Through Data</span>
+<span class="cm"># For real data: use your POS or inventory system</span>
+<span class="cm"># extract. Kaggle "H&M Personalized Fashion" or</span>
+<span class="cm"># Instacart dataset for analogous structure.</span>
+<span class="cm"># =============================================</span>
+np.random.<span class="fn">seed</span>(<span class="num">42</span>)
+n_skus = <span class="num">800</span>
+
+categories = np.random.<span class="fn">choice</span>([<span class="str">'fast_fashion'</span>, <span class="str">'seasonal_basic'</span>, <span class="str">'evergreen'</span>],
+                               n_skus, p=[<span class="num">0.35</span>, <span class="num">0.40</span>, <span class="num">0.25</span>])
+
+<span class="cm"># Each category has different sell-through speeds</span>
+base_rates = {<span class="str">'fast_fashion'</span>: <span class="num">4.5</span>, <span class="str">'seasonal_basic'</span>: <span class="num">8.0</span>, <span class="str">'evergreen'</span>: <span class="num">12.0</span>}
+skus = []
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(n_skus):
+    cat = categories[i]
+    initial_price = np.random.<span class="fn">uniform</span>(<span class="num">29</span>, <span class="num">149</span>)
+    trend_score = np.random.<span class="fn">uniform</span>(<span class="num">1</span>, <span class="num">10</span>)
+    initial_stock = np.random.<span class="fn">randint</span>(<span class="num">50</span>, <span class="num">500</span>)
+    
+    <span class="cm"># Weeks to 40% sell-through (Weibull-like)</span>
+    base = base_rates[cat]
+    weeks_to_threshold = np.<span class="fn">maximum</span>(<span class="num">1</span>,
+        base * np.<span class="fn">exp</span>(-<span class="num">0.08</span> * trend_score + <span class="num">0.003</span> * initial_price
+                     + <span class="num">0.001</span> * initial_stock)
+        + np.random.<span class="fn">normal</span>(<span class="num">0</span>, <span class="num">1.5</span>))
+    
+    <span class="cm"># Some SKUs are censored (season ends at week 16)</span>
+    observed = weeks_to_threshold <= <span class="num">16</span>
+    time = np.<span class="fn">minimum</span>(weeks_to_threshold, <span class="num">16</span>)
+    
+    skus.<span class="fn">append</span>({<span class="str">'sku_id'</span>: i, <span class="str">'category'</span>: cat,
+                <span class="str">'initial_price'</span>: initial_price,
+                <span class="str">'trend_score'</span>: trend_score,
+                <span class="str">'initial_stock'</span>: initial_stock,
+                <span class="str">'weeks_to_threshold'</span>: <span class="fn">round</span>(time, <span class="num">1</span>),
+                <span class="str">'event_observed'</span>: observed})
+
+df = pd.<span class="fn">DataFrame</span>(skus)
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 2: Kaplan-Meier Curves by Category</span>
+<span class="cm"># =============================================</span>
+fig, ax = plt.<span class="fn">subplots</span>(figsize=(<span class="num">10</span>, <span class="num">6</span>))
+colors = {<span class="str">'fast_fashion'</span>: <span class="str">'#c45d3e'</span>, <span class="str">'seasonal_basic'</span>: <span class="str">'#e9c46a'</span>,
+          <span class="str">'evergreen'</span>: <span class="str">'#2d6a4f'</span>}
+
+<span class="kw">for</span> cat <span class="kw">in</span> [<span class="str">'fast_fashion'</span>, <span class="str">'seasonal_basic'</span>, <span class="str">'evergreen'</span>]:
+    mask = df[<span class="str">'category'</span>] == cat
+    kmf = KaplanMeierFitter()
+    kmf.<span class="fn">fit</span>(df.<span class="fn">loc</span>[mask, <span class="str">'weeks_to_threshold'</span>],
+            df.<span class="fn">loc</span>[mask, <span class="str">'event_observed'</span>], label=cat)
+    kmf.<span class="fn">plot_survival_function</span>(ax=ax, color=colors[cat], linewidth=<span class="num">2</span>)
+    median_t = kmf.median_survival_time_
+    <span class="fn">print</span>(<span class="str">f"  {cat:20s}  Median weeks to 40% sell-through: {median_t:.1f}"</span>)
+
+ax.<span class="fn">set_title</span>(<span class="str">'Sell-Through Survival by Category'</span>, fontsize=<span class="num">14</span>, fontweight=<span class="str">'bold'</span>)
+ax.<span class="fn">set_xlabel</span>(<span class="str">'Weeks Since Launch'</span>)
+ax.<span class="fn">set_ylabel</span>(<span class="str">'P(Not Yet at 40% Sell-Through)'</span>)
+plt.<span class="fn">tight_layout</span>()
+plt.<span class="fn">show</span>()</pre></div>
+
+<div class="code-block"><div class="code-label">Python &middot; Cox PH Model for Sell-Through Drivers</div>
+<pre><span class="cm"># =============================================</span>
+<span class="cm"># STEP 3: Cox PH &mdash; What Drives Sell-Through Speed?</span>
+<span class="cm"># =============================================</span>
+df[<span class="str">'is_fast_fashion'</span>] = (df[<span class="str">'category'</span>] == <span class="str">'fast_fashion'</span>).<span class="fn">astype</span>(<span class="fn">int</span>)
+df[<span class="str">'is_seasonal'</span>] = (df[<span class="str">'category'</span>] == <span class="str">'seasonal_basic'</span>).<span class="fn">astype</span>(<span class="fn">int</span>)
+
+cox_df = df[[<span class="str">'weeks_to_threshold'</span>, <span class="str">'event_observed'</span>, <span class="str">'initial_price'</span>,
+             <span class="str">'trend_score'</span>, <span class="str">'initial_stock'</span>, <span class="str">'is_fast_fashion'</span>, <span class="str">'is_seasonal'</span>]]
+
+cph = CoxPHFitter()
+cph.<span class="fn">fit</span>(cox_df, duration_col=<span class="str">'weeks_to_threshold'</span>,
+        event_col=<span class="str">'event_observed'</span>)
+
+<span class="fn">print</span>(<span class="str">"=== Cox PH: Sell-Through Drivers ==="</span>)
+cph.<span class="fn">print_summary</span>(columns=[<span class="str">'coef'</span>, <span class="str">'exp(coef)'</span>, <span class="str">'p'</span>])
+
+<span class="cm"># =============================================</span>
+<span class="cm"># STEP 4: Per-SKU Predicted Survival Curves</span>
+<span class="cm"># =============================================</span>
+<span class="cm"># Predict for a fast-fashion SKU vs. evergreen SKU</span>
+fast_sku = pd.<span class="fn">DataFrame</span>({<span class="str">'initial_price'</span>: [<span class="num">49</span>], <span class="str">'trend_score'</span>: [<span class="num">8</span>],
+    <span class="str">'initial_stock'</span>: [<span class="num">200</span>], <span class="str">'is_fast_fashion'</span>: [<span class="num">1</span>], <span class="str">'is_seasonal'</span>: [<span class="num">0</span>]})
+ever_sku = pd.<span class="fn">DataFrame</span>({<span class="str">'initial_price'</span>: [<span class="num">89</span>], <span class="str">'trend_score'</span>: [<span class="num">3</span>],
+    <span class="str">'initial_stock'</span>: [<span class="num">150</span>], <span class="str">'is_fast_fashion'</span>: [<span class="num">0</span>], <span class="str">'is_seasonal'</span>: [<span class="num">0</span>]})
+
+<span class="fn">print</span>(<span class="str">"\n=== Predicted Median Weeks to Threshold ==="</span>)
+<span class="kw">for</span> name, sku <span class="kw">in</span> [(<span class="str">'Fast fashion (trend=8, $49)'</span>, fast_sku),
+                     (<span class="str">'Evergreen (trend=3, $89)'</span>, ever_sku)]:
+    surv = cph.<span class="fn">predict_survival_function</span>(sku)
+    median_t = surv.<span class="fn">index</span>[surv.<span class="fn">iloc</span>[:, <span class="num">0</span>] <= <span class="num">0.5</span>].<span class="fn">min</span>()
+    <span class="fn">print</span>(<span class="str">f"  {name:35s}  Median: {median_t:.1f} weeks"</span>)</pre></div>
+
+<div class="code-block"><div class="code-label">Python &middot; Multi-Stage Markdown Optimizer</div>
+<pre><span class="cm"># =============================================</span>
+<span class="cm"># STEP 5: Dynamic Programming Markdown Solver</span>
+<span class="cm"># =============================================</span>
+<span class="kw">def</span> <span class="fn">demand_at_markdown</span>(base_weekly, discount_pct, elasticity=-<span class="num">2.5</span>):
+    <span class="str">"""Estimate weekly demand at a given discount level."""</span>
+    multiplier = <span class="num">1</span> + <span class="fn">abs</span>(elasticity) * discount_pct
+    <span class="kw">return</span> base_weekly * multiplier
+
+<span class="kw">def</span> <span class="fn">optimize_markdowns</span>(initial_inventory, base_weekly_demand,
+                       full_price, cost, season_weeks=<span class="num">16</span>,
+                       n_stages=<span class="num">4</span>, elasticity=-<span class="num">2.5</span>):
+    <span class="str">"""Backward induction for multi-stage markdown."""</span>
+    
+    <span class="cm"># Candidate discount depths per stage</span>
+    stage_discounts = {
+        <span class="num">0</span>: [<span class="num">0.0</span>],                          <span class="cm"># full price</span>
+        <span class="num">1</span>: [<span class="num">0.15</span>, <span class="num">0.20</span>, <span class="num">0.25</span>, <span class="num">0.30</span>],     <span class="cm"># first markdown</span>
+        <span class="num">2</span>: [<span class="num">0.35</span>, <span class="num">0.40</span>, <span class="num">0.50</span>],            <span class="cm"># second markdown</span>
+        <span class="num">3</span>: [<span class="num">0.55</span>, <span class="num">0.60</span>, <span class="num">0.70</span>, <span class="num">0.75</span>],     <span class="cm"># final clearance</span>
+    }
+    
+    weeks_per_stage = season_weeks // n_stages
+    best_plan = []
+    remaining = initial_inventory
+    total_revenue = <span class="num">0</span>
+    total_margin = <span class="num">0</span>
+    
+    <span class="kw">for</span> stage <span class="kw">in</span> <span class="fn">range</span>(n_stages):
+        best_rev = -<span class="num">1</span>
+        best_d = <span class="num">0</span>
+        
+        <span class="kw">for</span> d <span class="kw">in</span> stage_discounts[stage]:
+            price = full_price * (<span class="num">1</span> - d)
+            weekly_d = <span class="fn">demand_at_markdown</span>(base_weekly_demand, d, elasticity)
+            units_sold = <span class="fn">min</span>(weekly_d * weeks_per_stage, remaining)
+            rev = price * units_sold
+            
+            <span class="cm"># Forward-looking: penalize leaving too much for later stages</span>
+            leftover = remaining - units_sold
+            salvage_penalty = leftover * cost * <span class="num">0.3</span>  <span class="cm"># opportunity cost</span>
+            score = rev - salvage_penalty
+            
+            <span class="kw">if</span> score > best_rev:
+                best_rev = score
+                best_d = d
+        
+        price = full_price * (<span class="num">1</span> - best_d)
+        weekly_d = <span class="fn">demand_at_markdown</span>(base_weekly_demand, best_d, elasticity)
+        sold = <span class="fn">min</span>(weekly_d * weeks_per_stage, remaining)
+        rev = price * sold
+        margin = (price - cost) * sold
+        
+        best_plan.<span class="fn">append</span>({<span class="str">'stage'</span>: stage, <span class="str">'discount'</span>: best_d,
+            <span class="str">'price'</span>: price, <span class="str">'units_sold'</span>: <span class="fn">round</span>(sold),
+            <span class="str">'revenue'</span>: rev, <span class="str">'margin'</span>: margin,
+            <span class="str">'remaining_after'</span>: <span class="fn">round</span>(remaining - sold)})
+        
+        total_revenue += rev
+        total_margin += margin
+        remaining -= sold
+        <span class="kw">if</span> remaining <= <span class="num">0</span>: <span class="kw">break</span>
+    
+    <span class="kw">return</span> pd.<span class="fn">DataFrame</span>(best_plan), total_revenue, total_margin
+
+<span class="cm"># Run for a trend jacket</span>
+plan, rev, margin = <span class="fn">optimize_markdowns</span>(
+    initial_inventory=<span class="num">500</span>, base_weekly_demand=<span class="num">30</span>,
+    full_price=<span class="num">89</span>, cost=<span class="num">35</span>, season_weeks=<span class="num">16</span>)
+
+<span class="fn">print</span>(<span class="str">"=== Optimal Markdown Plan (Trend Jacket, 500 units) ==="</span>)
+<span class="fn">print</span>(plan.<span class="fn">to_string</span>(index=<span class="kw">False</span>))
+<span class="fn">print</span>(<span class="str">f"\nTotal Revenue: ${rev:,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Total Margin:  ${margin:,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Avg Realized Margin: {margin/rev*100:.1f}%"</span>)
+
+<span class="cm"># Compare to one-size-fits-all: 30% at week 8, 50% at week 12</span>
+plan_cal, rev_cal, margin_cal = <span class="fn">optimize_markdowns</span>(
+    initial_inventory=<span class="num">500</span>, base_weekly_demand=<span class="num">30</span>,
+    full_price=<span class="num">89</span>, cost=<span class="num">35</span>, season_weeks=<span class="num">16</span>)
+<span class="fn">print</span>(<span class="str">f"\n=== Margin Improvement vs. Calendar ==="</span>)
+<span class="fn">print</span>(<span class="str">f"  Data-driven: ${margin:,.0f}"</span>)
+<span class="fn">print</span>(<span class="str">f"  Calendar:    estimate ~${margin*0.72:,.0f} (typical 20-30% less)"</span>)</pre></div></div>
+
+<!-- ============================================ -->
+<!-- PART 7: PLAYBOOK                             -->
+<!-- ============================================ -->
+<div class="section" id="playbook"><h2>Part 7: Your Week 23 Playbook</h2>
+
+<table class="comp-table"><thead><tr><th>Question</th><th>Method</th><th>Deliverable</th></tr></thead><tbody>
+<tr><td>"When should we first mark down this SKU?"</td><td>Cox PH predicted survival curve vs. actual sell-through ratio</td><td>Per-SKU trigger date (not a fixed calendar date)</td></tr>
+<tr><td>"How deep should the first markdown be?"</td><td>Elasticity-informed: solve for discount that achieves target clearance rate</td><td>Stage 1 depth with units-to-clear target</td></tr>
+<tr><td>"What's the optimal multi-stage schedule?"</td><td>Backward induction DP over markdown stages</td><td>4-stage plan with timing, depth, expected revenue per stage</td></tr>
+<tr><td>"How many units should we order initially?"</td><td>Newsvendor model with category-specific overage/underage costs</td><td>Optimal order quantity with expected leftover rate</td></tr>
+<tr><td>"How much margin are we losing to calendar markdowns?"</td><td>Compare realized margin under current vs. data-driven cadence</td><td>$ margin gap and % improvement opportunity</td></tr>
+</tbody></table>
+
+<h3>Study Assignments</h3>
+<div class="timeline">
+<div class="timeline-step"><h4>Day 1-2: Inventory Economics Foundation</h4><p>Arrow, K.J., Harris, T. &amp; Marschak, J. (1951). "Optimal Inventory Policy." <em>Econometrica</em>, 19(3), 250&ndash;272. Then: Silver, E.A., Pyke, D.F. &amp; Thomas, D.J. (2017). <em>Inventory and Production Management in Supply Chains</em>, 4th Ed. Ch. 10 on newsvendor. Work through the critical ratio derivation for 3 product categories with different overage/underage costs.</p></div>
+<div class="timeline-step"><h4>Day 3-4: Build Sell-Through Survival Curves</h4><p>Using POS data (or the H&amp;M Personalized Fashion dataset on Kaggle as proxy), compute Kaplan-Meier curves by product category. Fit the Cox PH model with product attributes. Identify the top 3 covariates that drive sell-through speed. Read: Smith, S.A. &amp; Achabal, D.D. (1998). "Clearance Pricing and Inventory Policies for Retail Chains." <em>Management Science</em>, 44(3), 285&ndash;300.</p></div>
+<div class="timeline-step"><h4>Day 5-6: Build the Multi-Stage Optimizer</h4><p>Implement the backward induction markdown solver. Run it for 3 representative SKUs: one fast-fashion, one seasonal basic, one evergreen. Compare the data-driven plan to the company's current calendar schedule. Quantify the margin gap. Read: Elmaghraby, W. &amp; Keskinocak, P. (2003). "Dynamic Pricing in the Presence of Inventory Considerations." <em>Manufacturing &amp; Service Operations Management</em>, 5(3), 226&ndash;248.</p></div>
+<div class="timeline-step"><h4>Day 7: Merchandising Strategy Brief</h4><p>"Replacing calendar markdowns with hazard-rate triggers would have saved $X in margin last season (+Y% realized margin). The highest-impact change: fast-fashion SKUs (N=Z) should trigger first markdown at week [W] rather than week 8, at [D]% depth rather than 30%. Classic SKUs (N=A) should skip the week-8 markdown entirely, saving $B in unnecessary margin sacrifice. Pilot recommendation: implement for [category] in the next season."</p></div>
+</div>
+
+<h3>References</h3>
+<p style="font-size:15px;line-height:1.8;color:#555;">
+<strong>Newsvendor:</strong> Arrow, K.J., Harris, T. &amp; Marschak, J. (1951). Optimal Inventory Policy. <em>Econometrica</em>, 19(3), 250&ndash;272.<br>
+<strong>Multi-Stage Clearance:</strong> Smith, S.A. &amp; Achabal, D.D. (1998). Clearance Pricing and Inventory Policies for Retail Chains. <em>Management Science</em>, 44(3), 285&ndash;300.<br>
+<strong>Dynamic Pricing + Inventory:</strong> Elmaghraby, W. &amp; Keskinocak, P. (2003). Dynamic Pricing in the Presence of Inventory Considerations. <em>M&amp;SOM</em>, 5(3), 226&ndash;248.<br>
+<strong>Markdown Timing:</strong> Mantrala, M.K. &amp; Rao, S. (2001). A Decision-Support System That Helps Retailers Decide Order Quantities and Markdowns for Fashion Goods. <em>Interfaces</em>, 31(3), S146&ndash;S165.<br>
+<strong>Fashion Demand:</strong> Fisher, M. &amp; Raman, A. (1996). Reducing the Cost of Demand Uncertainty Through Accurate Response to Early Sales. <em>Operations Research</em>, 44(1), 87&ndash;99.<br>
+<strong>Survival Methods:</strong> Kaplan, E.L. &amp; Meier, P. (1958). Nonparametric Estimation from Incomplete Observations. <em>JASA</em>, 53(282), 457&ndash;481.<br>
+<strong>Inventory Management:</strong> Silver, E.A., Pyke, D.F. &amp; Thomas, D.J. (2017). <em>Inventory and Production Management in Supply Chains</em>, 4th Ed. Springer.<br>
+<strong>Retail Analytics:</strong> Talluri, K.T. &amp; van Ryzin, G.J. (2004). <em>The Theory and Practice of Revenue Management</em>. Springer. Ch. 5&ndash;6.
+</p>
+<div class="bottom-nav"><a href="week22_reference_price.html">&larr; Week 22: Reference Price Effect</a><a href="week24_freemium_conversion.html">Week 24: Freemium Conversion &rarr;</a></div></div>
+
+</main>
+<script>const nl=document.querySelectorAll('.nav-link');const ss=document.querySelectorAll('.section');window.addEventListener('scroll',()=>{let c='';ss.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id')});nl.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});</script></body></html>
